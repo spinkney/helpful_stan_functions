@@ -41,7 +41,7 @@
                   (1 - 2 * theta) / theta * log_temp);
   }
   
-    vector gumbel_copula_vector(vector u, vector v, real theta) {
+    real gumbel_copula_vector(vector u, vector v, real theta) {
     
     int N = num_elements(u);
     vector[N] out;
@@ -69,6 +69,6 @@
       }
     }
     
-    return out;
+    return sum(out);
   }
   
