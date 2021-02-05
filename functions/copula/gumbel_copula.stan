@@ -41,13 +41,13 @@
                   (1 - 2 * theta) / theta * log_temp);
   }
   
-    vector gumbel_copula_vector(real[] u, real[] v, real theta) {
+    vector gumbel_copula_vector(vector u, vector v, real theta) {
     
     int N = num_elements(u);
     vector[N] out;
-    vector[N] neg_log_u = - log(to_vector(u)); 
+    vector[N] neg_log_u = - log(u); 
     vector[N] log_neg_log_u = log(neg_log_u);
-    vector[N] neg_log_v = -log(to_vector(v)); 
+    vector[N] neg_log_v = -log(v); 
     vector[N] log_neg_log_v = log(neg_log_v);
     vector[N] log_temp;
     real theta_m1 = theta - 1;
