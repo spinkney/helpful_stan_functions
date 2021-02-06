@@ -28,3 +28,4 @@ vignettes/*.pdf
 .Renviron
 *.exe
 data.csv
+.DS_Store
