@@ -18,7 +18,7 @@ mod_out <- mod$sample(
   data = list(N = N,
               x = x[, 1],
               y = x[, 2],
-              is_vector = 0),
+              is_vector = 1),
   chains = 2,
   adapt_delta = 0.8,
   parallel_chains = 2,
@@ -26,5 +26,4 @@ mod_out <- mod$sample(
   iter_sampling = 1000
 )
 
-y <- scale(x)
 

@@ -41,6 +41,28 @@
                   (1 - 2 * theta) / theta * log_temp);
   }
   
+  
+  
+  /* Gumbel copula vectorized log density
+   *
+   * Copywrite Sean Pinkney
+   * Feb. 5, 2021 
+   *
+   * Archimedean family of Gumbel with parametric generator
+   *        exp(−t^1/θ), t ∈ [0, ∞]
+   * with θ ∈ [1, ∞). The range of admissible Kendall’s tau, 
+   * as well as that of the upper taildependence coefficient, is [0,1). 
+   * Note that this copula does not allow for lower tail dependence.
+   * 
+   * https://cran.r-project.org/web/packages/copula/copula.pdf
+   * "copula" R package in the copFamilies documentation accessed Feb. 5, 2021
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param theta Real number >= 1, will throw otherwise
+   * @param log density
+   */
+  
     real gumbel_copula_vector(vector u, vector v, real theta) {
     
     int N = num_elements(u);

@@ -17,10 +17,10 @@ parameters {
 model {
   if(is_vector == 0){
     for (n in 1:N)
-    target += normal_copula(Phi(x_std[n]),
-                            Phi(y_std[n]), rho);
+    target += normal_copula(inv_Phi(Phi(x_std[n])),
+                            inv_Phi(Phi(y_std[n])), rho);
   } else {
-    target += normal_copula_vector(Phi(x_std),
-                                   Phi(y_std), rho);
+    target += normal_copula_vector(inv_Phi(Phi(x_std)),
+                                   inv_Phi(Phi(y_std)), rho);
   }
 }
