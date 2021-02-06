@@ -26,8 +26,7 @@ x <- rMvdc(N, gMvd2)
 mod_out <- mod$sample(
   data = list(N = N,
               x = x[, 1],
-              y = x[, 2],
-              is_vector = 1),
+              y = x[, 2]),
   chains = 2,
   adapt_delta = 0.8,
   parallel_chains = 2,
