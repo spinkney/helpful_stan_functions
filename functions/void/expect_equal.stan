@@ -1,6 +1,6 @@
   /* Expect equal real
    *
-   * Copywrite Rok Češnovar
+   * Copywrite Rok Češnovar, 2021
    *
    * @param expected Real number
    * @param actual Real number 
@@ -13,7 +13,7 @@ void expect_equal_real(real expected, real actual, real tol) {
 
   /* Expect equal vector
    *
-   * Copywrite Rok Češnovar
+   * Copywrite Rok Češnovar, 2021
    *
    * @param expected Vector
    * @param actual Vector
