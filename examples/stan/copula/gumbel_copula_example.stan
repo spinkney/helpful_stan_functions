@@ -5,7 +5,6 @@ data {
   int<lower=0> N;
   vector[N] x;
   vector[N] y;
-  int is_vector;
 }
 parameters {
   real mu[2];

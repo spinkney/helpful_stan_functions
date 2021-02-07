@@ -1,7 +1,7 @@
 library(cmdstanr)
 library(copula)
 
-fp <- file.path("./examples/stan/copula/normal_copula_test.stan")
+fp <- file.path("./examples/stan/copula/normal_copula_example.stan")
 mod <- cmdstan_model(fp, include_paths = "./functions/copula", 
                      force_recompile = T)
 
