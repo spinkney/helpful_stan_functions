@@ -6,21 +6,33 @@ data {
   vector[N] x;
   vector[N] y;
   int is_vector;
-}
-transformed data {
-  vector[N] x_std = (x - mean(x)) / sd(x);
-  vector[N] y_std = (y - mean(y)) / sd(y);
+  
 }
 parameters {
+  real mu[2];
+  real<lower=0> sigma[2];
   real<lower=-1, upper=1> rho;
 }
 model {
+  target += normal_lpdf(x | mu[1], sigma[1]);
+  target += gumbel_lpdf(y | mu[2], sigma[2]);
+
   if(is_vector == 0){
     for (n in 1:N)
-    target += normal_copula(inv_Phi(Phi(x_std[n])),
-                            inv_Phi(Phi(y_std[n])), rho);
+         target += normal_copula(inv_Phi(normal_cdf(x[n], mu[1], sigma[1])),
+                                 inv_Phi(gumbel_cdf(y[n], mu[2], sigma[2])), rho);
+                              
   } else {
-    target += normal_copula_vector(inv_Phi(Phi(x_std)),
-                                   inv_Phi(Phi(y_std)), rho);
+    
+     vector[N] x_p;
+     vector[N] y_p;
+      
+      for (n in 1:N){
+        x_p[n] = inv_Phi(normal_cdf(x[n], mu[1], sigma[1]));
+        y_p[n] = inv_Phi(gumbel_cdf(y[n], mu[2], sigma[2]));
+      }
+    
+    target += normal_copula_vector(x_p, y_p, rho);
   }
+
 }
