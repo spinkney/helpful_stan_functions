@@ -55,6 +55,7 @@ real normal_copula_vector(vector u, vector v, real rho){
    * @param rho Real number [-1, 1]
    * @param log density
    */
+<<<<<<< HEAD
 real multi_normal_copula(matrix u, matrix L){
    int K = rows(L);
    int N = cols(u);
@@ -81,3 +82,12 @@ real multi_normal_copula(matrix u, matrix L){
 // 
 //    return inv_sqrt_det_log - 0.5 * ;
 // }
+=======
+real multi_normal_copula(vector u, matrix L){
+   int K = rows(L);
+   real inv_sqrt_det_log = 1 / sum(diagonal(L));
+   matrix[K, K] L_inv1m = add_diag(chol2inv(L), rep_vector(-1.0, K));
+
+   return inv_sqrt_det_log - 0.5 * quad_form_sym(L_inv1m, u);
+}
+>>>>>>> 9a4322f00b99cf67d6ec2f512197c229cf676560

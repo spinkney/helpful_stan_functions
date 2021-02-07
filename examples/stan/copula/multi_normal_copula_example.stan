@@ -24,9 +24,15 @@ model {
     y[n, 2] = inv_Phi(gumbel_cdf(x[n, 2], mu[2], sigma[2]));
     y[n, 3] = inv_Phi(lognormal_cdf(x[n, 3], mu[3], sigma[3]));
     y[n, 4] = inv_Phi(weibull_cdf(x[n, 4], sigma[4], sigma[5]));
+<<<<<<< HEAD
   }
   
    target += multi_normal_copula(y', L);
+=======
+    
+    target += multi_normal_copula(y[n]', L);
+  }
+>>>>>>> 9a4322f00b99cf67d6ec2f512197c229cf676560
 }
 generated quantities {
   matrix[K, K] Sigma = multiply_lower_tri_self_transpose(L);
