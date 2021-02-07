@@ -44,3 +44,21 @@ real normal_copula_vector(vector u, vector v, real rho){
   
   return a1 * x / a2 - N * a3;
 }
+
+  /* Multi-Normal copula log density
+   *
+   * Copywrite Sean Pinkney, Feb. 7, 2021
+   *
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param rho Real number [-1, 1]
+   * @param log density
+   */
+real multi_normal_copula(vector u, matrix L){
+   int K = rows(L);
+   real inv_sqrt_det_log = 1 / sum(diagonal(L));
+   matrix[K, K] L_inv1m = add_diag(chol2inv(L), rep_vector(-1.0, K));
+
+   return inv_sqrt_det_log - 0.5 * quad_form_sym(L_inv1m, u);
+}
