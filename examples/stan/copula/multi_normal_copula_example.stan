@@ -16,23 +16,17 @@ model {
   target += gumbel_lpdf(x[, 2] | mu[2], sigma[2]);
   target += lognormal_lpdf(x[, 3] | mu[3], sigma[3]);
   target += weibull_lpdf(x[, 4] | sigma[4], sigma[5]);
-
-  matrix[N, K] y;
   
-  for (n in 1:N){
-    y[n, 1] = inv_Phi(normal_cdf(x[n, 1], mu[1], sigma[1]));
-    y[n, 2] = inv_Phi(gumbel_cdf(x[n, 2], mu[2], sigma[2]));
-    y[n, 3] = inv_Phi(lognormal_cdf(x[n, 3], mu[3], sigma[3]));
-    y[n, 4] = inv_Phi(weibull_cdf(x[n, 4], sigma[4], sigma[5]));
-<<<<<<< HEAD
+  {
+    matrix[K, N] y;
+    for (n in 1:N){
+      y[1, n] = inv_Phi(normal_cdf(x[n, 1], mu[1], sigma[1]));
+      y[2, n] = inv_Phi(gumbel_cdf(x[n, 2], mu[2], sigma[2]));
+      y[3, n] = inv_Phi(lognormal_cdf(x[n, 3], mu[3], sigma[3]));
+      y[4, n] = inv_Phi(weibull_cdf(x[n, 4], sigma[4], sigma[5]));
+    }
+    y ~ multi_normal_copula(L);
   }
-  
-   target += multi_normal_copula(y', L);
-=======
-    
-    target += multi_normal_copula(y[n]', L);
-  }
->>>>>>> 9a4322f00b99cf67d6ec2f512197c229cf676560
 }
 generated quantities {
   matrix[K, K] Sigma = multiply_lower_tri_self_transpose(L);

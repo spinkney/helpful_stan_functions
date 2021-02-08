@@ -31,3 +31,4 @@ mod_out <- mod$sample(
 
 mod_out$summary("Sigma")
 p2P(c(0.4,0.2,-0.8, -0.3, 0.15, -0.5))
+
