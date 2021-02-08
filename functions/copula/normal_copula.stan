@@ -76,3 +76,26 @@ real multi_normal_copula_lpdf(matrix u, matrix L){
 // 
 //    return -N * inv_sqrt_det_log - 0.5 * acc;
 // }
+
+  /* Bivariate Normal Copula cdf
+   *
+   * Copywrite Sean Pinkney, Feb. 8, 2021
+   *
+   * @param u Vector size 2
+   * @param rho Real on [-1, 1]
+   * @param cumulative density
+   */
+real bivariate_normal_copula_cdf(vector u, real rho){
+   real a = 1 / sqrt(1 - square(rho));
+   real avg_uv = mean(u);
+   real pu = inv_Phi(u[1]);
+   real pv = inv_Phi(u[2]);
+   real alpha_u = a * (pv / pu - rho);
+   real alpha_v = a * (pu / pv - rho);
+   real d = 0;
+   
+   if ( u[1] < 0.5 && u[2] >= 0.5 || u[1] >= 0.5 && u[2] < 0.5 )
+      d = 0.5;
+   
+   return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;
+}
