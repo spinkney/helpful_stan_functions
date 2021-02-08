@@ -23,10 +23,10 @@
     real inv_k = inv(k);
     
     if (k < 0 && max(y - ymin) / sigma > -inv_k)
-      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma)
+      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
     
     if (sigma <= 0)
-      reject("sigma <= 0; found sigma = ", sigma)
+      reject("sigma <= 0; found sigma = ", sigma);
     
     if (fabs(k) > 1e-15)
       return -(1 + inv_k) * sum(log1p((y - ymin) * (k / sigma))) - N * log(sigma);
@@ -49,10 +49,10 @@
     real inv_k = inv(k);
     
     if (k < 0 && max(y - ymin) / sigma > -inv_k)
-      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma)
+      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
     
     if (sigma<=0)
-      reject("sigma <= 0; found sigma = ", sigma)
+      reject("sigma <= 0; found sigma = ", sigma);
     
     if (fabs(k) > 1e-15)
       return exp(sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma))))));
@@ -75,10 +75,10 @@
     real inv_k = inv(k);
     
     if (k < 0 && max(y - ymin) / sigma > -inv_k)
-      reject("k<0 and max(y-ymin)/sigma > -1/k; found k, sigma = ", k, sigma)
+      reject("k<0 and max(y-ymin)/sigma > -1/k; found k, sigma = ", k, sigma);
     
     if (sigma<=0)
-      reject("sigma<=0; found sigma = ", sigma)
+      reject("sigma<=0; found sigma = ", sigma);
     
     if (fabs(k) > 1e-15)
       return sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma)))));
@@ -100,11 +100,11 @@
   real gpareto_lccdf(vector y, real ymin, real k, real sigma) {
     real inv_k = inv(k);
     
-    if (k < 0 && max(y - ymin) / sigma > -inv_k)
-      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma)
+    if (k < 0 && max(y - ymin) / sigma > -inv_k);
+      reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
     
     if (sigma <= 0)
-      reject("sigma <= 0; found sigma = ", sigma)
+      reject("sigma <= 0; found sigma = ", sigma);
     
     if (fabs(k) > 1e-15)
       return (-inv_k) * sum(log1p((y - ymin) * (k / sigma)));
@@ -124,7 +124,7 @@
    */
   real gpareto_rng(real ymin, real k, real sigma) {
     if (sigma <= 0)
-      reject("sigma <= 0; found sigma = ", sigma)
+      reject("sigma <= 0; found sigma = ", sigma);
     
     if (fabs(k) > 1e-15)
       return ymin + (uniform_rng(0, 1)^-k - 1) * sigma / k;
