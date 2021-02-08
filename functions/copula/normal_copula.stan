@@ -49,9 +49,8 @@ real normal_copula_vector(vector u, vector v, real rho){
    *
    * Copywrite Sean Pinkney, Feb. 8, 2021
    *
-   * @param u Real number on (0,1], not checked but function will return NaN
-   * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number [-1, 1]
+   * @param u Matrix
+   * @param L Cholesky factor matrix
    * @param log density
    */
 
