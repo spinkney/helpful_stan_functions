@@ -44,3 +44,36 @@ real normal_copula_vector(vector u, vector v, real rho){
   
   return a1 * x / a2 - N * a3;
 }
+
+  /* Multi-Normal Cholesky copula log density
+   *
+   * Copywrite Sean Pinkney, Feb. 8, 2021
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param rho Real number [-1, 1]
+   * @param log density
+   */
+
+real multi_normal_copula_lpdf(matrix u, matrix L){
+   int K = rows(u);
+   int N = cols(u);
+   real inv_sqrt_det_log = sum(log(diagonal(L)));
+   matrix[K, N] x = mdivide_left_tri_low(L, u);
+
+   return -N * inv_sqrt_det_log - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));
+}
+
+// slow version
+// real multi_normal_copula_lpdf(matrix u, matrix L){
+//    int K = rows(L);
+//    int N = cols(u);
+//    real inv_sqrt_det_log = sum(log(diagonal(L)));
+//    matrix[K, K] L_inv1m = add_diag(chol2inv(L), rep_vector(-1.0, K));
+//    real acc = 0;
+//    
+//    for (n in 1:N)
+//       acc += quad_form(L_inv1m, u[, n]);
+// 
+//    return -N * inv_sqrt_det_log - 0.5 * acc;
+// }
