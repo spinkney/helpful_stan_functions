@@ -10,13 +10,14 @@ transformed data {
   int K = N * (N - 1) / 2;
 }
 parameters {
-  vector[K] theta;
-  real<lower=0> sigma;
+  vector<lower = -pi(), upper = pi()>[K] theta;
 }
 transformed parameters {
   matrix[N, N] R_hat = multiply_lower_tri_self_transpose(angle2chol(angle_vec2angle_mat(theta, N)));
 }
 model {
-  theta ~ std_normal();
-  to_vector(R) ~ normal(to_vector(R_hat), sigma);
+  vector[N] R_vec = to_vector(R);
+  vector[N] R_hat_vec = to_vector(R_hat);
+  squared_distance(R_vec, R_hat_vec) ~ chi_square(1);
+  target += sum(log(fabs(2 * (R_vec - R_hat_vec))));
 }
