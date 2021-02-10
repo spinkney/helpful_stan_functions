@@ -16,6 +16,7 @@ mod_out <- mod$sample(
   data = list(N = 3,
               R = T),
   chains = 2,
+  seed = 23421,
   parallel_chains = 2,
   iter_warmup = 600,
   iter_sampling = 600
