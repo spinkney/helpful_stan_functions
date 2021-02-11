@@ -47,9 +47,9 @@ functions {
     // if c_{i, 1} = 0 then cos(\theta_{i, 1}) = 0
     // acos(0) = \theta_{i, 1} = pi / 2
      if (is_nan(angle_raw[i, 1]) == 1) {
-       inv_mat[i, 1] = 0.0001;
-       angle[i, 1] = pi() / 2 + 0.0001;
-     } else inv_mat[i, 1] = cos(angle[i, 1] + 0.0001);
+       inv_mat[i, 1] = 0;
+       angle[i, 1] = pi() / 2;
+     } else inv_mat[i, 1] = cos(angle[i, 1]);
    
     if (i > 2) {
       for (j in 2:(i - 1)) {
@@ -63,7 +63,7 @@ functions {
            angle[i, j] = acos( cos_theta );
            
         }
-        inv_mat[i, j] = cos(angle[i, j] + 0.0001) * prod_sines + 0.0001;
+        inv_mat[i, j] = cos(angle[i, j]) * prod_sines;
       }
     }
     inv_mat[i, i] = prod(sin(angle[i, 1:(i - 1)]));
@@ -98,8 +98,8 @@ model {
   // log_absd_jacs 
   // sin(theta) is always > 0 since theta in (0, pi)
   // because of this the diagonal of L is always > 0 also
- //  target += 2 * sum(log(sin(lower_elements(theta_mat, K))));            // angle2chol
-//   target += N * log(2) + m * diagonal(log(L));   // cholesky tcrossprod
+  // target += 2 * sum(log(sin(diagonal(theta_mat))));            // angle2chol
+   target += N * log(2) + m * diagonal(log(L));   // cholesky tcrossprod
    if (is_symmetric == 1)
     lower_elements(R, K) ~ normal(lower_elements(R_hat, K), 0.001);
     else to_vector(R) ~ normal(to_vector(R_hat), 0.001);
