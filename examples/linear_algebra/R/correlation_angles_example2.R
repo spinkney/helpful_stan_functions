@@ -82,7 +82,7 @@ mod_out <- mod$sample(
   #seed = 23421,
   adapt_delta = 0.9,
   max_treedepth = 10,
-  parallel_chains = 2,
+  parallel_chains = 4,
   iter_warmup = 200,
   iter_sampling = 200
 )

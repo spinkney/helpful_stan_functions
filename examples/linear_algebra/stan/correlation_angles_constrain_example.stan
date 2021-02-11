@@ -57,12 +57,10 @@ functions {
         real cos_theta;
         if (is_nan(angle_raw[i, j]) == 1) {
           cos_theta = -(dot_product(inv_mat[j, 1:j - 1], inv_mat[i, 1:j - 1]) ) / ( inv_mat[j, j] * prod_sines );
-            if ( cos_theta < -1 ) cos_theta = 0;
-             else if( cos_theta > 1) cos_theta = 1;
-           
-           angle[i, j] = acos( cos_theta );
-           
-        }
+            if ( cos_theta < -1 || cos_theta > 1 ) reject("cos_theta is ", cos_theta, " and must be in [-1, 1]"); // cos_theta = 0;
+           // else if( cos_theta > 1) cos_theta = 1;
+            angle[i, j] = acos( cos_theta );
+          }
         inv_mat[i, j] = cos(angle[i, j]) * prod_sines;
       }
     }
