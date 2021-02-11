@@ -1,4 +1,4 @@
-  /* Angle matrix to Cholesky correlation
+ /* Angle matrix to Cholesky correlation
    *
    * Copywrite Sean Pinkney, Feb. 10, 2021
    *
@@ -12,7 +12,7 @@
    */
 matrix angle2chol (matrix angle_mat){
   int N = rows(angle_mat);
-  matrix[N, N] inv_mat = identity_matrix(N);
+  matrix[N, N] inv_mat;
     
   inv_mat[, 1] = cos(angle_mat[, 1]);
   
@@ -39,11 +39,13 @@ matrix angle2chol (matrix angle_mat){
    */
 matrix angle_vec2angle_mat (vector angle, int K) {
   int N = num_elements(angle);
-  matrix[K, K] mat = add_diag(identity_matrix(K), rep_vector(-1, K));
+  matrix[K, K] mat;
   int count = K;
   int pos = 1;
-    
+
+  mat[K, K] = 0;
   for (k in 1:K - 1){
+    mat[k, k] = 0;
     count -= 1;
     mat[k + 1:K, k] = segment(angle, pos, count);
     pos += count;
@@ -51,4 +53,3 @@ matrix angle_vec2angle_mat (vector angle, int K) {
     
   return mat;
 }
-
