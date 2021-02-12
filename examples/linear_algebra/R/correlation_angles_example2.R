@@ -80,11 +80,11 @@ mod_out <- mod$sample(
   chains = 2,
   #init = 0,
   #seed = 23421,
-  adapt_delta = 0.9,
-  max_treedepth = 10,
+  #adapt_delta = 0.8,
+  #max_treedepth = 10,
   parallel_chains = 4,
-  iter_warmup = 200,
-  iter_sampling = 200
+  iter_warmup = 400,
+  iter_sampling = 400
 )
 
 N <- nrow(test_mat)
@@ -93,9 +93,13 @@ chol(test_mat)
 
 mod_out <- mod$optimize(
   data = list(N = nrow(test_mat),
-              R = as.matrix(test_mat))
-)
-round(matrix(mod_out$summary("R_out")$mean,nrow(test_mat), nrow(test_mat)), 3)
+                      R = test_mat,
+                      is_symmetric = 1,
+                      Z = sum(where_zero),
+                      K = ( nrow(test_mat) * (nrow(test_mat) - 1 )) / 2,
+                      where_zero = where_zero ))
+
+round(matrix(mod_out$summary("R_out")$estimate,nrow(test_mat), nrow(test_mat)), 3)
 
 mod_out <- mod$sample(
   data = list(N = nrow(test_mat),
