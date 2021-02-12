@@ -89,6 +89,9 @@ mod_out <- mod$sample(
 
 N <- nrow(test_mat)
 
+round(matrix(mod_out$summary("R_out")$mean,nrow(test_mat), nrow(test_mat)), 3)
+
+
 chol(test_mat)
 
 mod_out <- mod$optimize(

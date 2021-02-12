@@ -12,7 +12,23 @@ functions {
     }
     return out;
   }
-
+  
+   vector lower_elements_constrain(matrix M, int A){
+    int n = rows(M);
+    int counter = 1;
+    vector[A] out;
+ 
+    for (i in 2:n){
+      for (j in 1:(i - 1)) {
+        if(M[i, j] > 0){
+         out[counter] = M[i, j];
+         counter += 1;
+        }
+      }
+    }
+    return out;
+  }
+  
  matrix build_angle_mat (vector where_zero, vector angle_raw, int K) {
   int N = num_elements(where_zero);
   matrix[K, K] mat;
@@ -96,7 +112,7 @@ model {
   // log_absd_jacs 
   // sin(theta) is always > 0 since theta in (0, pi)
   // because of this the diagonal of L is always > 0 also
-  // target += 2 * sum(log(sin(diagonal(theta_mat))));            // angle2chol
+   target += 2 * sum(log(sin(lower_elements_constrain(theta_mat, K - Z))));            // angle2chol
    target += N * log(2) + m * diagonal(log(L));   // cholesky tcrossprod
    if (is_symmetric == 1)
     lower_elements(R, K) ~ normal(lower_elements(R_hat, K), 0.001);
