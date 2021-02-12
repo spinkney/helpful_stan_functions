@@ -1,7 +1,7 @@
 library(cmdstanr)
 
 # Compile model
-fp <- file.path("../../stan/interpolation/interp_1d_linear_example.stan")
+fp <- file.path("../stan/interp_1d_linear_example.stan")
 inc_paths <- file.path("../../../functions/interpolation/")
 model <- cmdstan_model(fp, include_paths = inc_paths, force_recompile = T)
 
