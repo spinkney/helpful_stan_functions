@@ -54,13 +54,13 @@ vector[] interp_1d_cubic(vector[] y, data real[] x, data real[] x_out,
     // Hermite basis functions
     h = x[right] - x[left];
     w = (x_out[j] - x[left]) / h;
-    h00 = 2.0*w^3 - 3.0*w^2 + 1.0;
-    h10 = w^3 - 2.0*w^2 + w;
-    h01 = -2.0*w^3 + 3.0*w^2;
-    h11 = w^3 -w^2;
+    h00 = 2.0 * w^3 - 3.0 * w^2 + 1.0;
+    h10 = w^3 - 2.0 * w^2 + w;
+    h01 = -2.0 * w^3 + 3.0 * w^2;
+    h11 = w^3 - w^2;
     
     // Compute interpolation
-    y_out[j] = h00*y[left] + h10*h*f_left + h01*y[right] + h11*h*f_right;
+    y_out[j] = h00 * y[left] + h10 * h * f_left + h01 * y[right] + h11 * h * f_right;
   }
   return(y_out);
 }
