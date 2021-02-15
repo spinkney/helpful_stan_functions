@@ -12,7 +12,8 @@ data {
 }
 
 parameters {
-  real theta;
+  real theta; // dummy parameter, because at least one param needed to
+  // sample model with cmdstanr
 }
 
 model {
