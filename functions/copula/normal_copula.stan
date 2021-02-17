@@ -22,7 +22,7 @@ real normal_copula(real u, real v, real rho) {
 
   /* Normal copula log density vectorized
    *
-   * Copyright Sean Pinkney, Feb. 6, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * Meyer, Christian. "The Bivariate Normal Copula." 
    * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
@@ -47,7 +47,7 @@ real normal_copula_vector(vector u, vector v, real rho){
 
   /* Multi-Normal Cholesky copula log density
    *
-   * Copyright Sean Pinkney, Feb. 8, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * @param u Matrix
    * @param L Cholesky factor matrix
@@ -65,7 +65,7 @@ real multi_normal_copula_lpdf(matrix u, matrix L){
 
   /* Bivariate Normal Copula cdf
    *
-   * Copyright Sean Pinkney, Feb. 8, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * @param u Vector size 2
    * @param rho Real on [-1, 1]

@@ -1,6 +1,6 @@
   /* Lower triangular elements
    *
-   * Copyright Sean Pinkney, Feb. 10, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * @param mat Matrix
    * @param K Int if mat is size N x N then \n

@@ -1,6 +1,6 @@
   /* Angle matrix to Cholesky correlation
    *
-   * Copyright Sean Pinkney, Feb. 10, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * Peter J. Rousseeuw & Geert Molenberghs (1993) 
    * Transformation of non positive semidefinite correlation matrices, 
@@ -30,7 +30,7 @@ matrix angle2chol (matrix angle_mat){
 
   /* Angle vector to angle matrix
    *
-   * Copyright Sean Pinkney, Feb. 10, 2021
+   * Copyright 2021, Sean Pinkney
    *
    * @param angle Vector of angles length of the number of elements of the lower triangle elemements n/
      of the output angle matrix. If the size of the output matrix is K x K then the n/
