@@ -1,6 +1,6 @@
   /* Clayton copula log density
    *
-   * Copywrite Andre Pfeuffer, Sean Pinkney
+   * Copyright Andre Pfeuffer, Sean Pinkney
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ
    * Accessed and modified Feb. 5, 2021 
    *

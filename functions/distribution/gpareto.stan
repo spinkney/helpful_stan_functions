@@ -1,6 +1,6 @@
    /* Generalized Pareto log density
    *
-   * Copywrite Aki Vehtari
+   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
@@ -36,7 +36,7 @@
   
   /* Generalized Pareto cumulative density function
    *
-   * Copywrite Aki Vehtari
+   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
@@ -62,7 +62,7 @@
   
   /* Generalized Pareto log cumulative density function
    *
-   * Copywrite Aki Vehtari
+   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
@@ -88,7 +88,7 @@
   
   /* Generalized Pareto log complementary cumulative density function
    *
-   * Copywrite Aki Vehtari
+   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
@@ -114,7 +114,7 @@
   
   /* Generalized Pareto rng function
    *
-   * Copywrite Aki Vehtari
+   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
