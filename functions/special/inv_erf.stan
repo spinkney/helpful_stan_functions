@@ -11,7 +11,7 @@
    * @param return inverse error result
    */
  real inv_erf (real x) {
-    if (is_nan(x) || is_infinite(x) || x < 0 || x > 1)
+    if (is_nan(x) || is_inf(x) || x < 0 || x > 1)
       reject("inv_erf: x must be finite and between 0 and 1; ",
            "found x = ", x);
            
