@@ -1,6 +1,6 @@
   /* Normal copula log density
    *
-   * Copywrite Andre Pfeuffer, Sean Pinkney
+   * Copyright Andre Pfeuffer, Sean Pinkney
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ
    * Accessed and modified Feb. 5, 2021 
    *
@@ -22,7 +22,7 @@ real normal_copula(real u, real v, real rho) {
 
   /* Normal copula log density vectorized
    *
-   * Copywrite Sean Pinkney, Feb. 6, 2021
+   * Copyright Sean Pinkney, Feb. 6, 2021
    *
    * Meyer, Christian. "The Bivariate Normal Copula." 
    * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
@@ -47,7 +47,7 @@ real normal_copula_vector(vector u, vector v, real rho){
 
   /* Multi-Normal Cholesky copula log density
    *
-   * Copywrite Sean Pinkney, Feb. 8, 2021
+   * Copyright Sean Pinkney, Feb. 8, 2021
    *
    * @param u Matrix
    * @param L Cholesky factor matrix
@@ -63,23 +63,9 @@ real multi_normal_copula_lpdf(matrix u, matrix L){
    return -N * inv_sqrt_det_log - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));
 }
 
-// slow version
-// real multi_normal_copula_lpdf(matrix u, matrix L){
-//    int K = rows(L);
-//    int N = cols(u);
-//    real inv_sqrt_det_log = sum(log(diagonal(L)));
-//    matrix[K, K] L_inv1m = add_diag(chol2inv(L), rep_vector(-1.0, K));
-//    real acc = 0;
-//    
-//    for (n in 1:N)
-//       acc += quad_form(L_inv1m, u[, n]);
-// 
-//    return -N * inv_sqrt_det_log - 0.5 * acc;
-// }
-
   /* Bivariate Normal Copula cdf
    *
-   * Copywrite Sean Pinkney, Feb. 8, 2021
+   * Copyright Sean Pinkney, Feb. 8, 2021
    *
    * @param u Vector size 2
    * @param rho Real on [-1, 1]

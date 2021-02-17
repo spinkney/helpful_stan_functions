@@ -1,6 +1,6 @@
    /* Inverse error function
    *
-   * Copywrite Sean Pinkney, Feb. 2021
+   * Copyright Sean Pinkney, Feb. 2021
    *
    * Giles, Mike. (2012). "Approximating the Erfinv Function."
    * GPU Computing Gems Jade Edition. 10.1016/B978-0-12-385963-1.00010-1. 

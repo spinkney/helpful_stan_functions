@@ -1,6 +1,6 @@
    /* Lognormal Inverse CDF
    *
-   * Copywrite Sean Pinkney, Feb. 2021
+   * Copyright Sean Pinkney, Feb. 2021
    *
    * icdf(x) = exp(μ + √2 σ inv_erf(2p - 1))
    *         = exp(μ + σ Φ^{−1}(x))

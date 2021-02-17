@@ -1,6 +1,6 @@
   /* Gumbel copula log density
    *
-   * Copywrite Ben Goodrich
+   * Copyright Ben Goodrich
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ
    * Accessed Feb. 5, 2021 
    *
