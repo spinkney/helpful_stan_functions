@@ -8,6 +8,8 @@ functions {
     return dydt;
   }
 #include interp_1d_cubic.stan
+#include odeint_euler.stan
+#include odeint_midpoint.stan
 #include odeint_rk4.stan
 }
 
@@ -32,7 +34,11 @@ parameters {
 }
 
 transformed parameters {
-  vector[2] y_grid[num_steps + 1] = odeint_rk4(t0, y0, h, num_steps,
+  vector[2] y_rk4[num_steps + 1] = odeint_rk4(t0, y0, h, num_steps,
+      theta, x_r, x_i);
+  vector[2] y_mdp[num_steps + 1] = odeint_midpoint(t0, y0, h, num_steps,
+      theta, x_r, x_i);
+  vector[2] y_eul[num_steps + 1] = odeint_euler(t0, y0, h, num_steps,
       theta, x_r, x_i);
 }
 
