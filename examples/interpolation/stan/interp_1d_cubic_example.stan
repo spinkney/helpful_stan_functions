@@ -1,6 +1,5 @@
 functions {
-  vector derivative_fun(real t, vector y, vector theta, 
-      data real[] x_r, data int[] x_i) {
+  vector derivative_fun(real t, vector y, data int[] a0, vector theta) {
     return(cos(theta[1]*y));
   }
 #include interp_1d_cubic.stan
@@ -17,8 +16,7 @@ data {
 }
 
 transformed data {
-  real x_r[0];
-  int x_i[0];
+  int a0[0];
 }
 
 parameters {
@@ -26,7 +24,7 @@ parameters {
 }
 
 transformed parameters {
-  vector[D] y_out[N_out] = interp_1d_cubic(y, x, x_out, theta, x_r, x_i);
+  vector[D] y_out[N_out] = interp_1d_cubic(y, x, x_out, a0, theta);
 }
 
 model {

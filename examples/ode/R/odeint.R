@@ -7,15 +7,21 @@ inc2 <- file.path("../../../functions/ode/")
 inc_paths <- c(inc1, inc2)
 model <- cmdstan_model(fp, include_paths = inc_paths, force_recompile = T)
 
-# Create test data
-t_data <- seq(0.1, 15, by = 0.1)
+# Load test data
+dat <- readRDS("test_data.rds")
+P <- 80
+t_data <- dat$t_data[1:P]
+y_data <- dat$y_data[1:P,]
 N <- length(t_data)
-y_data <- array(0, c(N, 2))
-y0 <- c(1, 2)
-t_grid <- c(0, t_data)
+
+# Set initial state
+y0 <- c(1,2)
+t0 <- 0
+h <- 0.37
+num_steps <- ceiling(max(t_data)/h)
 stan_data <- list(
-  N = N, t_data = t_data, y_data = y_data, y0 = y0, t_grid = t_grid,
-  h = 0.1, num_steps = length(t_data)
+  N = N, t_data = t_data, y_data = y_data, y0 = y0, t0 = t0,
+  h = h, num_steps = num_steps
 )
 
 # Run model
@@ -36,23 +42,36 @@ get_output <- function(fit, name, chain_idx, draw_idx) {
 }
 
 # Plot one draw
-j <- 100
+t_grid <- seq(0, num_steps*h, by = h)
+j <- 1
+y_grid_rk4 <- get_output(fit, "y_grid_rk4", 1, j)
+y_grid_eul <- get_output(fit, "y_grid_eul", 1, j)
+y_grid_mid <- get_output(fit, "y_grid_mid", 1, j)
 y_rk4 <- get_output(fit, "y_rk4", 1, j)
 y_eul <- get_output(fit, "y_eul", 1, j)
-y_mid <- get_output(fit, "y_mdp", 1, j)
+y_mid <- get_output(fit, "y_mid", 1, j)
+y_bdf <- get_output(fit, "y_bdf", 1, j)
 
 par(mfrow = c(2, 1))
-cols <- c("steelblue", "orange", "firebrick3")
+par(mar = c(2.25,4,1,1))
+cols <- c("black", "steelblue", "orange", "firebrick3")
 for (j in 1:2) {
-  plot(t_data, y_data[, j], "n",
-    xlim = c(0, 15), ylim = c(0, 4),
+  plot(t_data, y_data[, j], col = "gray", pch = 20,
+    xlim = c(0, max(t_data)), ylim = c(0, 3.6),
     xlab = "t", ylab = paste0("y", j)
   )
-  lines(t_grid, y_eul[, j], col = cols[1] , lwd = 2)
-  lines(t_grid, y_mid[, j], col = cols[2], lwd = 2)
-  lines(t_grid, y_rk4[, j], col = cols[3], lty = 2, lwd = 2)
+  points(t_grid, y_grid_eul[, j], col = cols[2], pch = 20)
+  points(t_grid, y_grid_mid[, j], col = cols[3], pch = 20)
+  points(t_grid, y_grid_rk4[, j], col = cols[4], pch = 20)
+  lines(t_data, y_bdf[, j], col = cols[1])
+  lines(t_data, y_eul[, j], col = cols[2])
+  lines(t_data, y_mid[, j], col = cols[3])
+  lines(t_data, y_rk4[, j], col = cols[4], lty = 2)
+  if (j == 1) {
+    legend(
+      x = 0.5, y = 3.5, lty = c(1, 1, 1, 2), lwd = 2, col = cols,
+      legend = c("bdf", "euler", "midpoint", "rk4")
+    )
+  }
 }
-legend(
-  x = 0.5, y =4, lty = c(1, 1, 2), lwd = 2, col = cols,
-  legend = c("euler", "midpoint", "rk4")
-)
+
