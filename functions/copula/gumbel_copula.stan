@@ -1,13 +1,20 @@
-  /* Gumbel copula log density
+  /** @addtogroup gumbel Gumbel Copula Functions
+   * \ingroup copula
+   *  @{ */
+   
+ /** 
+   * Gumbel Copula Log Density
    *
    * Copyright Ben Goodrich
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ
    * Accessed Feb. 5, 2021 
    *
    * Archimedean family of Gumbel with parametric generator
-   *        exp(−t^1/θ), t ∈ [0, ∞]
-   * with θ ∈ [1, ∞). The range of admissible Kendall’s tau, 
-   * as well as that of the upper taildependence coefficient, is [0,1). 
+   *  \f[
+          \exp(-t^{1/\theta}), t \in [0, \infty] 
+      \f]
+   * with \f$\theta \in [1, \infty)\f$. The range of admissible Kendall’s tau, 
+   * as well as that of the upper taildependence coefficient, is \f$[0,1)\f$. 
    * Note that this copula does not allow for lower tail dependence.
    * 
    * https://cran.r-project.org/web/packages/copula/copula.pdf
@@ -18,7 +25,7 @@
    * @param theta Real number >= 1, will throw otherwise
    * @param log density
    */
-  real gumbel_copula(real u, real v, real theta) {
+  real gumbel_copula_lpdf(real u, real v, real theta) {
     
     real neg_log_u = -log(u); 
     real log_neg_log_u = log(neg_log_u);
@@ -41,4 +48,5 @@
                   (1 - 2 * theta) / theta * log_temp);
   }
   
+  /** @} */
   

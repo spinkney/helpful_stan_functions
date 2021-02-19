@@ -1,8 +1,15 @@
-  /* Normal copula log density
+  /** @addtogroup normal Normal Copula Functions
+   * \ingroup copula
+   *  @{ */
+   
+ /**
+   * Normal copula log density
    *
-   * Copyright Andre Pfeuffer, Sean Pinkney
-   * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ
+   * Copyright Andre Pfeuffer, Sean Pinkney 2017, 2021 \n
+   * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
    * Accessed and modified Feb. 5, 2021 
+   *
+   * \f$x = 100\f$
    *
    * Meyer, Christian. "The Bivariate Normal Copula." 
    * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
@@ -11,16 +18,17 @@
    * @param u Real number on (0,1], not checked but function will return NaN
    * @param v Real number on (0,1], not checked but function will return NaN
    * @param rho Real number [-1, 1]
-   * @param log density
+   * @return log density
    */
-real normal_copula(real u, real v, real rho) {
+real normal_copula_lpdf(real u, real v, real rho) {
   real rho_sq = square(rho);
   
   return (0.5 * rho * (-2. * u * v + square(u) * rho + square(v) * rho)) /
       (-1. + rho_sq) - 0.5 * log1m(rho_sq);
 }
 
-  /* Normal copula log density vectorized
+ /**
+   * Normal copula log density vectorized
    *
    * Copyright 2021, Sean Pinkney
    *
@@ -33,7 +41,7 @@ real normal_copula(real u, real v, real rho) {
    * @param rho Real number [-1, 1]
    * @param log density
    */
-real normal_copula_vector(vector u, vector v, real rho){
+real normal_copula_vector_lpdf(vector u, vector v, real rho){
    int N = num_elements(u);
    real rho_sq = square(rho);
    
@@ -45,7 +53,8 @@ real normal_copula_vector(vector u, vector v, real rho){
   return a1 * x / a2 - N * a3;
 }
 
-  /* Multi-Normal Cholesky copula log density
+ /**
+   * Multi-Normal Cholesky copula log density
    *
    * Copyright 2021, Sean Pinkney
    *
@@ -63,7 +72,8 @@ real multi_normal_copula_lpdf(matrix u, matrix L){
    return -N * inv_sqrt_det_log - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));
 }
 
-  /* Bivariate Normal Copula cdf
+ /**
+   * Bivariate Normal Copula cdf
    *
    * Copyright 2021, Sean Pinkney
    *
@@ -85,3 +95,5 @@ real bivariate_normal_copula_cdf(vector u, real rho){
    
    return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;
 }
+
+ /** @} */

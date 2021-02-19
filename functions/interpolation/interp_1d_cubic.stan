@@ -1,11 +1,24 @@
+  /** \defgroup interpolation Interpolation Functions
+  *
+  * Interpolation is a type of estimation, a method of constructing new data points within the range of a discrete set of known data points.
+  *
+  **/
+  
+  /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
+   *
+   *  DETAILED DESCRIPTION GOES HERE 
+   *
+   * \ingroup interpolation
+   *  @{ */
 
-  /* 1d interpolation using cubic Hermite splines
+ /** 
+  * 1d interpolation using cubic Hermite splines
   *
   * Useful for interpolating solutions of autonomous ODEs. Assumes that
   * derivative_fun() is defined in the functions block before this function.
   * It must have signature
   *
-  * vector derivative_fun(real t, vector y, int[] a0, vector a1);
+  *   vector derivative_fun(real t, vector y, int[] a0, vector a1);
   *  
   * i.e. same as what can be used with ODE solvers (see
   * https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html
@@ -14,7 +27,7 @@
   *
   * Info: https://en.wikipedia.org/wiki/Cubic_Hermite_spline
   *
-  * Author: Juho Timonen
+  * @author Juho Timonen
   *
   * @param y array of D-vectors, length N_in
   * @param x incresing array of reals, length N_in
@@ -65,3 +78,5 @@ vector[] interp_1d_cubic(vector[] y, data real[] x, data real[] x_out,
   }
   return(y_out);
 }
+
+ /** @} */
