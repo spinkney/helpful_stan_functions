@@ -7,6 +7,9 @@
 # Unignore all dirs
 !*/
 
+*.un~
+*.swp
+
 # History files
 .Rhistory
 .Rapp.history
