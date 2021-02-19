@@ -10,9 +10,9 @@
    * Accessed Feb. 5, 2021 
    *
    * Archimedean family of Gumbel with parametric generator
-   *        exp(−t^1/θ), t ∈ [0, ∞]
-   * with θ ∈ [1, ∞). The range of admissible Kendall’s tau, 
-   * as well as that of the upper taildependence coefficient, is [0,1). 
+   *        \f$$ \exp(−t^{1/\theta}), t \in [0, \infty] \f$$
+   * with \f$\theta \in [1, \infty)\f$. The range of admissible Kendall’s tau, 
+   * as well as that of the upper taildependence coefficient, is \f$[0,1)\f$. 
    * Note that this copula does not allow for lower tail dependence.
    * 
    * https://cran.r-project.org/web/packages/copula/copula.pdf

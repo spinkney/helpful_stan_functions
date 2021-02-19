@@ -5,10 +5,15 @@
    * Accessed Feb. 6, 2021 
    *
    * The Generalized Pareto distribution is defined as
-   * p(y | u, σ, k) = (1 / σ) * (1 + k * ( (y − u) / σ))^( (1/k) − 1) if k ≠ 0
-   *                  (1 / σ) * exp( (y − u) / σ) if k = 0,
-   * where u is a lower bound parameter, σ is a scale parameter,
-   * k is a shape parameter, and y is the data restricted to the range (u,inf) 
+   * \f$$
+         p(y|u,\sigma,k)=
+               \begin{cases}
+                \frac{1}{\sigma}\left(1+k\left(\frac{y-u}{\sigma}\right)\right)^{-\frac{1}{k}-1}, & k\neq 0 \\
+                \frac{1}{\sigma}\exp\left(\frac{y-u}{\sigma}\right), & k = 0,
+               \end{cases}
+      \f$$
+   * where \f$u\f$ is a lower bound parameter, \f$\sigma\f$ is a scale parameter,
+   * \f$k\f$ is a shape parameter, and \f$ y \f$ is the data restricted to the range \f$(u,\infty)\f$ 
    * (see, e.g., https://en.wikipedia.org/wiki/Generalized_Pareto_distribution 
    * for cdf and random number generation)
    *

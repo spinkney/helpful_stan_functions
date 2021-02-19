@@ -5,6 +5,9 @@
   **/
   
   /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
+   *
+   *  DETAILED DESCRIPTION GOES HERE 
+   *
    * \ingroup interpolation
    *  @{ */
 
