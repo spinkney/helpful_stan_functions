@@ -6,12 +6,24 @@
   *
   **/
   
-  /** @addtogroup clayton  Clayton Copula Functions
+  /** @addtogroup clayton Clayton Copula Functions
+   *
+   * The Clayton copula is defined as 
+   * \f[
+   *      C(u,v) = (u^{-\theta} + v^{-\theta} - 1)^{-1/\theta}
+   * \f]
+   * for \f$0 < \theta < \infty\f$. 
+   * 
    * \ingroup copula
    *  @{ */
    
   /** 
    * Clayton Bivariate Copula Log Density
+   *
+   * The probability density function is defined as
+   * \f[
+   *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = (\theta + 1)(uv)^{-(\theta + 1)}(u^{-\theta} + v^{-\theta} - 1)^{-\frac{2 \theta + 1}{\theta}}
+   * \f]
    *
    * Copyright Andre Pfeuffer, Sean Pinkney \n
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n

@@ -9,7 +9,7 @@
 
 *.un~
 *.swp
-
+doc/
 # History files
 .Rhistory
 .Rapp.history
