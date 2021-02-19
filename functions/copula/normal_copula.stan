@@ -1,8 +1,20 @@
-  /* Normal copula log density
+  /**
+   * @file normal_copula.stan
+   */
+
+ /**
+   * Normal copula log density
    *
+<<<<<<< Updated upstream
    * Copyright Andre Pfeuffer, Sean Pinkney
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ
+=======
+   * Copyright Andre Pfeuffer, Sean Pinkney 2017, 2021 \n
+   * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
+>>>>>>> Stashed changes
    * Accessed and modified Feb. 5, 2021 
+   *
+   * \f$x = 100\f$
    *
    * Meyer, Christian. "The Bivariate Normal Copula." 
    * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
@@ -11,7 +23,7 @@
    * @param u Real number on (0,1], not checked but function will return NaN
    * @param v Real number on (0,1], not checked but function will return NaN
    * @param rho Real number [-1, 1]
-   * @param log density
+   * @return log density
    */
 real normal_copula(real u, real v, real rho) {
   real rho_sq = square(rho);

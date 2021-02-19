@@ -1,4 +1,4 @@
-  /* Clayton copula log density
+  /** Clayton copula log density
    *
    * Copyright Andre Pfeuffer, Sean Pinkney
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ
