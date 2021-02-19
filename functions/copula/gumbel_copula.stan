@@ -1,4 +1,9 @@
-  /* Gumbel copula log density
+  /** @addtogroup gumbel Gumbel Copula Functions
+   * \ingroup copula
+   *  @{ */
+   
+ /** 
+   * Gumbel Copula Log Density
    *
    * Copyright Ben Goodrich
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ
@@ -18,7 +23,7 @@
    * @param theta Real number >= 1, will throw otherwise
    * @param log density
    */
-  real gumbel_copula(real u, real v, real theta) {
+  real gumbel_copula_lpdf(real u, real v, real theta) {
     
     real neg_log_u = -log(u); 
     real log_neg_log_u = log(neg_log_u);
@@ -41,4 +46,5 @@
                   (1 - 2 * theta) / theta * log_temp);
   }
   
+  /** @} */
   

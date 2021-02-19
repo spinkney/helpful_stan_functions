@@ -1,18 +1,28 @@
+  /** \defgroup interpolation Interpolation Functions
+  *
+  * Interpolation is a type of estimation, a method of constructing new data points within the range of a discrete set of known data points.
+  *
+  **/
+  
+  /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
+   * \ingroup interpolation
+   *  @{ */
 
-  /* 1d interpolation using cubic Hermite splines
+ /** 
+  * 1d interpolation using cubic Hermite splines
   *
   * Useful for interpolating solutions of autonomous ODEs. Assumes that
   * derivative_fun() is defined in the functions block before this function.
   * It must have signature
   *
-  * vector derivative_fun(real t, vector y, vector theta, data real[] x_r, 
-  *     data int[] x_i),
+  *     vector derivative_fun(real t, vector y, vector theta, data real[] x_r, 
+  *      data int[] x_i),
   *  
   * i.e. same as what can be used with ODE solvers, but it shouldn't actually
   * use the t argument. 
   * Info: https://en.wikipedia.org/wiki/Cubic_Hermite_spline
   *
-  * Author: Juho Timonen
+  * @author Juho Timonen
   *
   * @param y array of D-vectors, length N_in
   * @param x incresing array of reals, length N_in
@@ -64,3 +74,5 @@ vector[] interp_1d_cubic(vector[] y, data real[] x, data real[] x_out,
   }
   return(y_out);
 }
+
+ /** @} */

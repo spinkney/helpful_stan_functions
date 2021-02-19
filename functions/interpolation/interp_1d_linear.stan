@@ -1,6 +1,11 @@
-  /* Linear 1d interpolation
+  /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
+   * \ingroup interpolation
+   *  @{ */
+ 
+  /**
+  * Linear 1d interpolation
   *
-  * Author: Juho Timonen
+  * @author Juho Timonen
   *
   * @param y array of D-vectors, length N_in
   * @param x incresing array of reals, length N_in
