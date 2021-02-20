@@ -23,11 +23,11 @@
    *
    * The copula is defined \f$0 < \theta < \infty\f$
    *
-   * @param u Real number on (0,1], not checked but function will return NaN
-   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param u Real number on \f$(0,1]\f$, not checked but function will return NaN
+   * @param v Real number on \f$(0,1]\f$, not checked but function will return NaN
    * @param theta Real number on (0, Inf)
    * @return log density
-   * @throws reject if theta <= 0
+   * @throws reject if theta \f$\le 0\f$
    */
 real clayton_copula_lpdf(real u, real v, real theta) {
     if(theta <= 0.0) 

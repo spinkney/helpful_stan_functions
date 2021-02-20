@@ -1,18 +1,29 @@
-   /* Lognormal Inverse CDF
+  /** @addtogroup icdf Inverse Cumulative Distribution Functions
    *
-   * Copyright Sean Pinkney, Feb. 2021
+   * These functions calculate the inverse CDF given a quantile.
    *
-   * icdf(x) = exp(μ + √2 σ inv_erf(2p - 1))
-   *         = exp(μ + σ Φ^{−1}(x))
-   *
-   *  because
-   *  Φ(x)= 1 / (2 * pi) * ∫ e^{t^2} dt = 0.5 + 0.5 * erf(x / √2)
-   *  => Φ^{−1}(x) = √2 inv_erf(2x − 1)
+   * \ingroup icdf
+   *  @{ */
+
+  /** 
+   * **Lognormal Inverse CDF**
    * 
-   * @param p Real on [0,1]
-   * @param mu Real (-∞, +∞)
-   * @param sigma Real (0, +∞)
-   * @param return inverse error result
+   * \f{aligned}{
+   *  F^{-1}(x) &= \exp(\mu + \sqrt{2} \sigma \text{inv_erf}(2p - 1)) \\
+   *         &= \exp(\mu + \sigma \Phi^{−1}(x))
+   * \f}
+   *  because
+   *  \f{aligned}{
+        \Phi(x) &= 1 / (2 * \pi) * \int e^{t^2} \; dt = 0.5 + 0.5 \, \text{erf}(x / \sqrt{2})
+   *  \implies \Phi^{−1}(x) &= \sqrt{2} \, \text{inv_erf}(2x − 1)
+   * \f}
+   
+   * @author Sean Pinkney
+   * @param p Real on \f$[0,\,1]\f$
+   * @param mu Real \f$(-\infty, +\infty)\f$
+   * @param sigma Real \f$(0, +\infty)\f$
+   * @return inverse CDF value
+   * @throws reject if \f$ p \notin [0, 1] \f$ 
    */
 real lognormal_icdf (real p, real mu, real sigma){
    if (is_nan(p) || p < 0 || p > 1)
@@ -27,3 +38,5 @@ real lognormal_icdf (real p, real mu, real sigma){
            
     return exp( mu + sigma * inv_Phi(p) );
   }
+  
+ /** @} */
