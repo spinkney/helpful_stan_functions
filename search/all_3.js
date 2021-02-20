@@ -4,5 +4,6 @@ var searchData=
   ['clayton_5fcopula_2estan_5',['clayton_copula.stan',['../clayton__copula_8stan.html',1,'']]],
   ['clayton_5fcopula_5flpdf_6',['clayton_copula_lpdf',['../group__clayton.html#ga901911ebe018357f13bbb74424d79db1',1,'clayton_copula.stan']]],
   ['copula_20functions_7',['Copula Functions',['../group__copula.html',1,'']]],
-  ['correlation_5fangles_2estan_8',['correlation_angles.stan',['../correlation__angles_8stan.html',1,'']]]
+  ['copula_5fdefinition_2estan_8',['copula_definition.stan',['../copula__definition_8stan.html',1,'']]],
+  ['correlation_5fangles_2estan_9',['correlation_angles.stan',['../correlation__angles_8stan.html',1,'']]]
 ];
