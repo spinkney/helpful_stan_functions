@@ -1,11 +1,4 @@
-  /** @addtogroup icdf Inverse Cumulative Distribution Functions
-   *
-   * These functions calculate the inverse CDF given a quantile.
-   *
-   * \ingroup icdf
-   *  @{ */
-
-  /** 
+  /** @ingroup icdf
    * **Lognormal Inverse CDF**
    * 
    * \f{aligned}{
@@ -39,4 +32,3 @@ real lognormal_icdf (real p, real mu, real sigma){
     return exp( mu + sigma * inv_Phi(p) );
   }
   
- /** @} */
