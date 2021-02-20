@@ -3,16 +3,16 @@
    *  @{ */
  
   /**
-  * Linear 1d interpolation
+  * **Linear 1d interpolation**
   *
   * @author Juho Timonen
   *
-  * @param y array of D-vectors, length N_in
-  * @param x incresing array of reals, length N_in
-  * @param x_out increasing array of reals, length N_out, values 
-  * must be in (min(x), max(x)]
-  * @return array of D-vectors, length N_out, corresponding to
-  * interpolated values y_out
+  * @param y array of D-vectors, length `N_in`
+  * @param x incresing array of reals, length `N_in`
+  * @param x_out increasing array of reals, length `N_out`, values 
+  * must be in \f$(\min(x), \max(x)]\f$
+  * @return array of D-vectors, length `N_out`, corresponding to
+  * interpolated values `y_out`
   */
 vector[] interp_1d_linear(vector[] y, data real[] x, data real[] x_out){
   int left = 1;

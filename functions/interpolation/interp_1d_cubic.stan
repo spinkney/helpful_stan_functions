@@ -1,44 +1,48 @@
   /** \defgroup interpolation Interpolation Functions
   *
-  * Interpolation is a type of estimation, a method of constructing new data points within the range of a discrete set of known data points.
+  * Interpolation is a type of estimation, a method of constructing new data
+  * points within the range of a discrete set of known data points.
   *
   **/
   
   /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
    *
-   *  DETAILED DESCRIPTION GOES HERE 
+   * These functions perform interpolation one dimension at a time.
    *
    * \ingroup interpolation
    *  @{ */
 
  /** 
-  * 1d interpolation using cubic Hermite splines
+  * **1d interpolation using cubic Hermite splines**
   *
-  * Useful for interpolating solutions of autonomous ODEs. Assumes that
-  * derivative_fun() is defined in the functions block before this function.
-  * It must have signature
+  * The interpolated value \f$y = g(x)\f$ is given by a cubic polynomial 
+  * \f$g\f$, defined uniquely by four values \f$y_0 = g(x_0)\f$, 
+  * \f$y_1 = g(x_1)\f$, \f$f_0 = g'(x_0)\f$, and \f$f_1 = g'(x_1)\f$, where
+  * \f$x_0 < x \leq x_1\f$. Assumes that
+  * `derivative_fun()`, which evaluates \f$g'(x)\f$, is defined in th
+  * functions block before this function. It must have signature
   *
-  *     vector derivative_fun(real t, vector y, vector theta, data real[] x_r, 
-  *      data int[] x_i),
+  *   `vector derivative_fun(real t, vector y, int[] a0, vector a1)`
   *  
-  * i.e. same as what can be used with ODE solvers, but it shouldn't actually
-  * use the t argument. 
+  * i.e. same as what can be used with the [Stan ODE solvers](https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html)
+  * but it shouldn't actually use the t argument. It will be always called
+  * with `t = 0.0`.
+  *
   * Info: https://en.wikipedia.org/wiki/Cubic_Hermite_spline
   *
   * @author Juho Timonen
   *
-  * @param y array of D-vectors, length N_in
-  * @param x incresing array of reals, length N_in
-  * @param x_out increasing array of reals, length N_out, values 
-  * must be in (min(x), max(x)]
-  * @param theta parameter vector given to derivative_fun()
-  * @param x_r array of real inputs given to derivative_fun()
-  * @param x_i array of integer inputs given to derivative_fun()
-  * @return array of D-vectors, length N_out, corresponding to
-  * interpolated values y_out
+  * @param y array of D-vectors, length `N_in`
+  * @param x incresing array of reals, length `N_in`
+  * @param x_out increasing array of reals, length `N_out`, values 
+  * must be in \f$(\min(x), \max(x)]\f$
+  * @param a0 array of integer inputs given to `derivative_fun()`
+  * @param theta parameter vector given to `derivative_fun()`
+  * @return array of D-vectors, length `N_out`, corresponding to
+  * interpolated values `y_out`
   */
 vector[] interp_1d_cubic(vector[] y, data real[] x, data real[] x_out,
-    vector theta, data real[] x_r, data int[] x_i){
+    int[] a0, vector theta){
   int left = 1;
   int right = 1;
   real h = 0.0;
@@ -61,8 +65,8 @@ vector[] interp_1d_cubic(vector[] y, data real[] x, data real[] x_out,
     }
     
     // Evaluate derivatives
-    f_left = derivative_fun(0.0, y[left], theta, x_r, x_i);
-    f_right = derivative_fun(0.0, y[right], theta, x_r, x_i);
+    f_left = derivative_fun(0.0, y[left], a0, theta);
+    f_right = derivative_fun(0.0, y[right], a0, theta);
     
     // Hermite basis functions
     h = x[right] - x[left];

@@ -28,6 +28,7 @@ fit <- model$sample(
 
 # Plot data (black dots) and interpolation (blue line) and points
 # where to interpolate from (red dots)
+par(mfrow = c(1,1))
 plot(x_out, y_data, "n", xlim = c(0, 10))
 points(x, y, pch = 16, col = "red")
 points(x_out, y_data, pch = 20)
