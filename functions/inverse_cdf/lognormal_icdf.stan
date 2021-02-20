@@ -7,9 +7,11 @@
    * \f}
    *  because
    *  \f{aligned}{
-        \Phi(x) &= 1 / (2 * \pi) * \int e^{t^2} \; dt = 0.5 + 0.5 \, \text{erf}(x / \sqrt{2})  \\
-   *  \implies \Phi^{−1}(x) &= \sqrt{2} \, \text{inv_erf}(2x − 1)
+   *    \Phi(x) &= \frac{1}{2\pi} \int_{-\infty}^x e^{-t^2}dt \\ 
+   *      &= \frac{1}{2} + \frac{1}{2}\text{erf}\bigg( \frac{x}{\sqrt{2}} \bigg)
    * \f}
+   * implies that
+   * \f$ \Phi^{-1}(x) = \sqrt{2} \, \text{inv_erf}(2x - 1) \f$.
    
    * @author Sean Pinkney
    * @param p Real on \f$[0,\,1]\f$
