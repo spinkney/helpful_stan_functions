@@ -1,7 +1,7 @@
 library(cmdstanr)
 library(copula)
 
-fp <- file.path("./examples/stan/copula/clayton_copula_example.stan")
+fp <- file.path("./examples/copula/stan/clayton_copula_example.stan")
 mod <- cmdstan_model(fp, include_paths = "./functions/copula")
 
 clayton_mod <- claytonCopula(1.37, dim=2)

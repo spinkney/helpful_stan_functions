@@ -3,7 +3,7 @@ library(copula)
 library(ExtDist)
 library(VGAM)
 
-fp <- file.path("./examples/stan/copula/multi_normal_copula_example.stan")
+fp <- file.path("./examples/copula/stan/multi_normal_copula_example.stan")
 mod <- cmdstan_model(fp, include_paths = "./functions/copula", 
                      force_recompile = T)
 
