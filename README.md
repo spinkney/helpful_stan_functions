@@ -1,6 +1,9 @@
-# <img src="pretty/helpful_logo.png" alt="drawing" width="70"/> Unoffical Stan UDF Repo 
+<p align="center">
+<img src="pretty/helpful_logo2.png" alt="drawing" width="250"/>
+ </p>
+# Unoffical Stan UDF Repo 
 
-A home for all the **U**ser **D**efined **F**unctions that the Stan community uses or finds useful that haven't made their way into Stan-math.
+A home for all the **U**ser **D**efined **F**unctions that the Stan community uses or finds useful that haven't made their way into Stan-math. This is Stan with batteries included!
 
 There are three main directories. A UDF must be defined in the `functions` directory. There must be at least an example or a test that goes along with the UDF.
 
