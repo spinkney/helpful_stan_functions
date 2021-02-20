@@ -1,16 +1,13 @@
-
-  /* Explicit midpoint method
+  /** @addtogroup fixed_step Fixed-step solvers
   *
-  * Assumes that derivative_fun() is defined in the functions block before
-  * this function. It must have signature
+  * \ingroup odeint
+  *  @{ */
+  
+  /**
+  * Explicit midpoint method
   *
-  *   vector derivative_fun(real t, vector y, int[] a0, vector a1);
-  *  
-  * i.e. same as what can be used with ODE solvers (see
-  * https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html
-  * ).
-  *
-  * Author: Juho Timonen
+  * Info: https://en.wikipedia.org/wiki/Midpoint_method
+  * @author Juho Timonen
   *
   * @param t0 initial time
   * @param y0 initial state, D-vector

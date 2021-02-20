@@ -1,27 +1,31 @@
-/** \defgroup odeint Ordinary differential equation (ODE) integration functions
+  /** \defgroup odeint ODE solvers
   *
-  *  These are explicit fixed-step ODE integrators, which first evaluate the
-  *  solution at an equispaced grid of time points, and then interpolate to
-  *  the desired output time points. The functions assumes that derivative_fun(),
-  *  which is the system function of the ODE, is defined earlier in the functions block.
-  *  It must have signature
+  * Numerical ODE (ordinary differential equation) integration functions.
+  *
+  **/
+  
+  /** @addtogroup fixed_step Fixed-step solvers
+  *
+  * These are explicit fixed-step ODE integrators, which first evaluate the
+  * solution at an equispaced grid of time points, and then interpolate to
+  * the desired output time points. The functions assumes that 
+  * derivative_fun(), which is the system function of the ODE, is defined
+  * earlier in the functions block. It must have signature
   *
   *   vector derivative_fun(real t, vector y, int[] a0, vector a1);
   *  
   * i.e. same as what can be used with ODE solvers (see
   * https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html
   * ).
-**/
-  
-/** @addtogroup odeint Forward Euler method
-  *
-  *  DETAILED DESCRIPTION GOES HERE 
   *
   * \ingroup odeint
   *  @{ */
-  * 
+  
+  /** 
+  * Forward Euler method
   *
-  * Author: Juho Timonen
+  * Info: https://en.wikipedia.org/wiki/Euler_method
+  * @author Juho Timonen
   *
   * @param t0 initial time
   * @param y0 initial state, D-vector
@@ -47,4 +51,4 @@ vector[] odeint_euler(real t0, vector y0, data real h, data int num_steps,
   return(y);
 }
 
-/** @} */
+ /** @} */
