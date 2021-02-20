@@ -34,5 +34,5 @@ Tests are simpler than examples and do not contain data. The program is run with
 
 ## Autodocumentation with `doxygen`
 
-All the `function` files must conform to `javadoc` style documentation. Although `doxygen` will run with a few other styles, this style will be enforced so that all the code is consistently written. 
+All the `function` files must conform to `javadoc` style documentation. Although `doxygen` will run with a few other styles, this style will be enforced so that all the code is consistently written. See more at [how to use doxygen documentation for the project?](https://spinkney.github.io/helpful_stan_functions/doxygen_doc.html).
 
