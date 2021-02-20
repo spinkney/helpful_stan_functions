@@ -122,8 +122,9 @@ Functions</h2></td></tr>
 \begin{aligned} F^{-1}(x) &amp;= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\ &amp;= \exp(\mu + \sigma \, \Phi^{−1}(x)) \end{aligned}
 </p>
 <p> because </p><p class="formulaDsp">
-\begin{aligned} \Phi(x) &amp;= 1 / (2 * \pi) * \int e^{t^2} \; dt = 0.5 + 0.5 \, \text{erf}(x / \sqrt{2}) \\ \implies \Phi^{−1}(x) &amp;= \sqrt{2} \, \text{inv_erf}(2x − 1) \end{aligned}
+\begin{aligned} \Phi(x) &amp;= \frac{1}{2\pi} \int_{-\infty}^x e^{-t^2}dt \\ &amp;= \frac{1}{2} + \frac{1}{2}\text{erf}\bigg( \frac{x}{\sqrt{2}} \bigg) \end{aligned}
 </p>
+<p> implies that \( \Phi^{-1}(x) = \sqrt{2} \, \text{inv_erf}(2x - 1) \).</p>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
