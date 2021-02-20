@@ -7,7 +7,7 @@
    * \f}
    *  because
    *  \f{aligned}{
-        \Phi(x) &= 1 / (2 * \pi) * \int e^{t^2} \; dt = 0.5 + 0.5 \, \text{erf}(x / \sqrt{2})
+        \Phi(x) &= 1 / (2 * \pi) * \int e^{t^2} \; dt = 0.5 + 0.5 \, \text{erf}(x / \sqrt{2})  \\
    *  \implies \Phi^{−1}(x) &= \sqrt{2} \, \text{inv_erf}(2x − 1)
    * \f}
    
