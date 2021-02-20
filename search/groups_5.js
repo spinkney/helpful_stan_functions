@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normal_20copula_20functions_79',['Normal Copula Functions',['../group__normal.html',1,'']]]
+  ['interpolation_20functions_93',['Interpolation Functions',['../group__interpolation.html',1,'']]]
 ];

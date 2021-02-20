@@ -77,16 +77,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gadfabfb2f306a71faea2ce2f8fa1331ee"><td class="memItemLeft" align="right" valign="top">vector[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__d__interpolation.html#gadfabfb2f306a71faea2ce2f8fa1331ee">interp_1d_cubic</a> (vector[] y, data real[] x, data real[] x_out, vector theta, data real[] x_r, data int[] x_i)</td></tr>
-<tr class="separator:gadfabfb2f306a71faea2ce2f8fa1331ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c65a5015692dff3ac5c0a26a3883152"><td class="memItemLeft" align="right" valign="top">vector[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__d__interpolation.html#ga4c65a5015692dff3ac5c0a26a3883152">interp_1d_cubic</a> (vector[] y, data real[] x, data real[] x_out, int[] a0, vector theta)</td></tr>
+<tr class="separator:ga4c65a5015692dff3ac5c0a26a3883152"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga972ac11c0acfdeee69c3ffcd2a3bc61a"><td class="memItemLeft" align="right" valign="top">vector[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__d__interpolation.html#ga972ac11c0acfdeee69c3ffcd2a3bc61a">interp_1d_linear</a> (vector[] y, data real[] x, data real[] x_out)</td></tr>
 <tr class="separator:ga972ac11c0acfdeee69c3ffcd2a3bc61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>DETAILED DESCRIPTION GOES HERE </p>
+<p>These functions perform interpolation one dimension at a time. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gadfabfb2f306a71faea2ce2f8fa1331ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gadfabfb2f306a71faea2ce2f8fa1331ee">&#9670;&nbsp;</a></span>interp_1d_cubic()</h2>
+<a id="ga4c65a5015692dff3ac5c0a26a3883152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c65a5015692dff3ac5c0a26a3883152">&#9670;&nbsp;</a></span>interp_1d_cubic()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,20 +112,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int[]&#160;</td>
+          <td class="paramname"><em>a0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">vector&#160;</td>
-          <td class="paramname"><em>theta</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">data real[]&#160;</td>
-          <td class="paramname"><em>x_r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">data int[]&#160;</td>
-          <td class="paramname"><em>x_i</em>&#160;</td>
+          <td class="paramname"><em>theta</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -134,23 +128,23 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>1d interpolation using cubic Hermite splines</p>
-<p>Useful for interpolating solutions of autonomous ODEs. Assumes that derivative_fun() is defined in the functions block before this function. It must have signature </p><pre class="fragment">vector derivative_fun(real t, vector y, vector theta, data real[] x_r, 
- data int[] x_i),
-</pre><p> i.e. same as what can be used with ODE solvers, but it shouldn't actually use the t argument. Info: <a href="https://en.wikipedia.org/wiki/Cubic_Hermite_spline">https://en.wikipedia.org/wiki/Cubic_Hermite_spline</a></p>
+<p><b>1d interpolation using cubic Hermite splines</b></p>
+<p>The interpolated value \(y = g(x)\) is given by a cubic polynomial \(g\), defined uniquely by four values \(y_0 = g(x_0)\), \(y_1 = g(x_1)\), \(f_0 = g&#39;(x_0)\), and \(f_1 = g&#39;(x_1)\), where \(x_0 &lt; x \leq x_1\). Assumes that <code>derivative_fun()</code>, which evaluates \(g&#39;(x)\), is defined in th functions block before this function. It must have signature</p>
+<p><code>vector derivative_fun(real t, vector y, int[] a0, vector a1)</code></p>
+<p>i.e. same as what can be used with the <a href="https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html">Stan ODE solvers</a> but it shouldn't actually use the t argument. It will be always called with <code>t = 0.0</code>.</p>
+<p>Info: <a href="https://en.wikipedia.org/wiki/Cubic_Hermite_spline">https://en.wikipedia.org/wiki/Cubic_Hermite_spline</a></p>
 <dl class="section author"><dt>Author</dt><dd>Juho Timonen</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">y</td><td>array of D-vectors, length N_in </td></tr>
-    <tr><td class="paramname">x</td><td>incresing array of reals, length N_in </td></tr>
-    <tr><td class="paramname">x_out</td><td>increasing array of reals, length N_out, values must be in (min(x), max(x)] </td></tr>
-    <tr><td class="paramname">theta</td><td>parameter vector given to derivative_fun() </td></tr>
-    <tr><td class="paramname">x_r</td><td>array of real inputs given to derivative_fun() </td></tr>
-    <tr><td class="paramname">x_i</td><td>array of integer inputs given to derivative_fun() </td></tr>
+    <tr><td class="paramname">y</td><td>array of D-vectors, length <code>N_in</code> </td></tr>
+    <tr><td class="paramname">x</td><td>incresing array of reals, length <code>N_in</code> </td></tr>
+    <tr><td class="paramname">x_out</td><td>increasing array of reals, length <code>N_out</code>, values must be in \((\min(x), \max(x)]\) </td></tr>
+    <tr><td class="paramname">a0</td><td>array of integer inputs given to <code>derivative_fun()</code> </td></tr>
+    <tr><td class="paramname">theta</td><td>parameter vector given to <code>derivative_fun()</code> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>array of D-vectors, length N_out, corresponding to interpolated values y_out </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>array of D-vectors, length <code>N_out</code>, corresponding to interpolated values <code>y_out</code> </dd></dl>
 
 </div>
 </div>
@@ -185,17 +179,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Linear 1d interpolation</p>
+<p><b>Linear 1d interpolation</b></p>
 <dl class="section author"><dt>Author</dt><dd>Juho Timonen</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">y</td><td>array of D-vectors, length N_in </td></tr>
-    <tr><td class="paramname">x</td><td>incresing array of reals, length N_in </td></tr>
-    <tr><td class="paramname">x_out</td><td>increasing array of reals, length N_out, values must be in (min(x), max(x)] </td></tr>
+    <tr><td class="paramname">y</td><td>array of D-vectors, length <code>N_in</code> </td></tr>
+    <tr><td class="paramname">x</td><td>incresing array of reals, length <code>N_in</code> </td></tr>
+    <tr><td class="paramname">x_out</td><td>increasing array of reals, length <code>N_out</code>, values must be in \((\min(x), \max(x)]\) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>array of D-vectors, length N_out, corresponding to interpolated values y_out </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>array of D-vectors, length <code>N_out</code>, corresponding to interpolated values <code>y_out</code> </dd></dl>
 
 </div>
 </div>
