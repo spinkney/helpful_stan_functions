@@ -1,4 +1,4 @@
-# Unoffical Stan UDF Repo
+# <img src="pretty/helpful_logo.png" alt="drawing" width="70"/> Unoffical Stan UDF Repo 
 
 A home for all the **U**ser **D**efined **F**unctions that the Stan community uses or finds useful that haven't made their way into Stan-math.
 
