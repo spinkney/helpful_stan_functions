@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['lognormal_5ficdf_35',['lognormal_icdf',['../lognormal__icdf_8stan.html#a4ecd7df27b5a93b9dd899b4c15636c0c',1,'lognormal_icdf.stan']]],
-  ['lognormal_5ficdf_2estan_36',['lognormal_icdf.stan',['../lognormal__icdf_8stan.html',1,'']]],
-  ['lower_5fele_37',['lower_ele',['../triangular_8stan.html#affec613f8198505bcdf91ee4284be1e1',1,'triangular.stan']]]
+  ['mainpage_2estan_37',['mainpage.stan',['../mainpage_8stan.html',1,'']]],
+  ['multi_5fnormal_5fcopula_5flpdf_38',['multi_normal_copula_lpdf',['../group__normal.html#ga2aac932cd087e9111ca72c895ee6fbe0',1,'normal_copula.stan']]]
 ];
