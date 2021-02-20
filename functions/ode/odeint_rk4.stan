@@ -1,10 +1,10 @@
-  /** @addtogroup fixed_step Fixed-step solvers
+  /** @addtogroup fixed_step Explicit fixed-step methods
   *
   * \ingroup odeint
   *  @{ */
   
   /** 
-  * Fourth-order Runge-Kutta method
+  * **Fourth-order Runge-Kutta method**
   *
   * Info: https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods
   * @author Juho Timonen
@@ -13,9 +13,9 @@
   * @param y0 initial state, D-vector
   * @param h step size (positive)
   * @param num_steps number of steps to take
-  * @param a0 array of integer inputs given to derivative_fun()
-  * @param theta parameter vector given to derivative_fun()
-  * @return array of D-vectors, length equal to num_steps + 1
+  * @param a0 array of integer inputs given to `derivative_fun()`
+  * @param theta parameter vector given to `derivative_fun()`
+  * @return array of D-vectors, length equal to `num_steps + 1`
   */
 vector[] odeint_rk4(real t0, vector y0, data real h, data int num_steps,
     int[] a0, vector theta){
