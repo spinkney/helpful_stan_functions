@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['interp_5f1d_5fcubic_25',['interp_1d_cubic',['../group__d__interpolation.html#ga4c65a5015692dff3ac5c0a26a3883152',1,'interp_1d_cubic.stan']]],
-  ['interp_5f1d_5fcubic_2estan_26',['interp_1d_cubic.stan',['../interp__1d__cubic_8stan.html',1,'']]],
-  ['interp_5f1d_5flinear_27',['interp_1d_linear',['../group__d__interpolation.html#ga972ac11c0acfdeee69c3ffcd2a3bc61a',1,'interp_1d_linear.stan']]],
-  ['interp_5f1d_5flinear_2estan_28',['interp_1d_linear.stan',['../interp__1d__linear_8stan.html',1,'']]],
-  ['interpolation_20functions_29',['Interpolation Functions',['../group__interpolation.html',1,'']]],
-  ['inv_5ferf_30',['inv_erf',['../inv__erf_8stan.html#a3d254497bd04ee837661a923dff361ba',1,'inv_erf.stan']]],
-  ['inv_5ferf_2estan_31',['inv_erf.stan',['../inv__erf_8stan.html',1,'']]]
+  ['gpareto_2estan_17',['gpareto.stan',['../gpareto_8stan.html',1,'']]],
+  ['gpareto_5fcdf_18',['gpareto_cdf',['../gpareto_8stan.html#adb5b249ce4e98ed827f1cd9bbf9e7304',1,'gpareto.stan']]],
+  ['gpareto_5flccdf_19',['gpareto_lccdf',['../gpareto_8stan.html#ac64a24b23c765ac040774a703803d752',1,'gpareto.stan']]],
+  ['gpareto_5flcdf_20',['gpareto_lcdf',['../gpareto_8stan.html#af4816f19433e30db65c8f2474910b3b0',1,'gpareto.stan']]],
+  ['gpareto_5flpdf_21',['gpareto_lpdf',['../gpareto_8stan.html#aac27cb067f0e9caf422a1cfeceb46e1e',1,'gpareto.stan']]],
+  ['gpareto_5frng_22',['gpareto_rng',['../gpareto_8stan.html#a883e8f1ab20e463badc20671e4e9a57c',1,'gpareto.stan']]],
+  ['gumbel_20copula_20functions_23',['Gumbel Copula Functions',['../group__gumbel.html',1,'']]],
+  ['gumbel_5fcopula_2estan_24',['gumbel_copula.stan',['../gumbel__copula_8stan.html',1,'']]],
+  ['gumbel_5fcopula_5flpdf_25',['gumbel_copula_lpdf',['../group__gumbel.html#ga6590db476c4f85fbf9040d32b3b1a353',1,'gumbel_copula.stan']]]
 ];

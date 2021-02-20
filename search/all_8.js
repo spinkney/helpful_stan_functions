@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['lognormal_5ficdf_32',['lognormal_icdf',['../lognormal__icdf_8stan.html#a4ecd7df27b5a93b9dd899b4c15636c0c',1,'lognormal_icdf.stan']]],
-  ['lognormal_5ficdf_2estan_33',['lognormal_icdf.stan',['../lognormal__icdf_8stan.html',1,'']]],
-  ['lower_5fele_34',['lower_ele',['../triangular_8stan.html#affec613f8198505bcdf91ee4284be1e1',1,'triangular.stan']]]
+  ['how_20to_20draw_20circle_3f_26',['How to draw circle?',['../drawing_circle_page.html',1,'index']]],
+  ['how_20to_20draw_20rectangle_3f_27',['How to draw rectangle?',['../drawing_rectangle_page.html',1,'index']]]
 ];
