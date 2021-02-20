@@ -1,6 +1,7 @@
 <p align="center">
-<img src="pretty/helpful_logo2.png" alt="drawing" width="250"/>
+<img src="pretty/helpful_logo2_crop.png" alt="drawing" width="250"/>
  </p>
+
 # Unoffical Stan UDF Repo 
 
 A home for all the **U**ser **D**efined **F**unctions that the Stan community uses or finds useful that haven't made their way into Stan-math. This is Stan with batteries included!
