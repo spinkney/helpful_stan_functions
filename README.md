@@ -32,7 +32,7 @@ Contains a directory for the `stan` file example that calls the UDF function in 
 
 Tests are simpler than examples and do not contain data. The program is run with stans `fixed_param` algorithm. The `void` functions such as `expect_equal` will be called to compare to the expected output.
 
-### autodocumentation with `doxygen`
+## Autodocumentation with `doxygen`
 
 All the `function` files must conform to `javadoc` style documentation. Although `doxygen` will run with a few other styles, this style will be enforced so that all the code is consistently written. 
 
