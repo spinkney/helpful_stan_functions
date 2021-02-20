@@ -6,7 +6,7 @@
 
 # Unignore all dirs
 !*/
-*.R~
+
 *.un~
 *.swp
 doc/
