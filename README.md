@@ -28,9 +28,9 @@ If you would like to add an example script, a sufficient example will simulate d
 
 #### `test`
 
-Contains a directory for the `stan` file example that calls the UDF function in the functions directory and the language (e.g. R) to run the test. 
+Contains a directory for the `stan` file example that calls the UDF function in the functions directory and the language (e.g. R) to run the test. The naming convention in the test directories follows the same style as in the `examples` directory but with `_test` attached to each file.
 
-Tests are simpler than examples and do not contain data. The program is run with stans `fixed_param` algorithm. The `void` functions such as `expect_equal` will be called to compare to the expected output.
+Tests are simpler than examples and do not contain data. The program is run with stans `fixed_param` algorithm. The `unit_test` functions such as `expect_equal` will be called to compare to the expected output.
 
 ## Autodocumentation with `doxygen`
 
