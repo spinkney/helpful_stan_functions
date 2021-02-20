@@ -2,8 +2,8 @@
    * **Lognormal Inverse CDF**
    * 
    * \f{aligned}{
-   *  F^{-1}(x) &= \exp(\mu + \sqrt{2} \sigma \text{inv_erf}(2p - 1)) \\
-   *         &= \exp(\mu + \sigma \Phi^{−1}(x))
+   *  F^{-1}(x) &= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\
+   *         &= \exp(\mu + \sigma \, \Phi^{−1}(x))
    * \f}
    *  because
    *  \f{aligned}{
