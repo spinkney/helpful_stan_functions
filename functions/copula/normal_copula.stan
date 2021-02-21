@@ -62,11 +62,10 @@ real normal_copula_vector_lpdf(vector u, vector v, real rho){
    * \f{aligned}{
    *    c(\mathbf{u}) &= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\
    *                   &= \frac{1}{\sqrt{\det L}} \exp \Bigg(-\frac{1}{2} 
-   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}^T
+   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}^T
    *                              (L^{-1} - I)
-   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}
-   *                              \Bigg)
-   *\f}
+   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}
+   *                              \Bigg) \f}
    *
    * @copyright Sean Pinkney, 2021
    *
