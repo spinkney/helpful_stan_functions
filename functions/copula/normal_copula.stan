@@ -10,11 +10,11 @@
    *  \frac{2\rho \Phi^{-1}(u) \Phi^{-1}(v) - \rho^2 (\Phi^{-1}(u)^2 + \Phi^{-1}(v)^2)}{2 (1 - \rho^2)}\bigg)
    * \f]
    *
-   *  Meyer, Christian. "The Bivariate Normal Copula." 
-   * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
+   *  Meyer, Christian. "The Bivariate Normal Copula." \n
+   * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3. \n
    * accessed Feb. 6, 2021.
    *
-   * @copyright Andre Pfeuffer, Sean Pinkney 2017, 2021
+   * @copyright Andre Pfeuffer, Sean Pinkney 2017, 2021 \n
    * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
    * Accessed and modified Feb. 5, 2021 
    *
@@ -33,10 +33,10 @@ real normal_copula_lpdf(real u, real v, real rho) {
  /**
    * Normal copula log density vectorized
    *
-   * Copyright 2021, Sean Pinkney
+   * @copyright Sean Pinkney, 2021
    *
-   * Meyer, Christian. "The Bivariate Normal Copula." 
-   * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
+   * Meyer, Christian. "The Bivariate Normal Copula." \n
+   * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3. \n
    * accessed Feb. 6, 2021.
    *
    * @param u Real number on (0,1], not checked but function will return NaN
