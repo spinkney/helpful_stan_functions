@@ -64,11 +64,24 @@ real normal_copula_vector_lpdf(vector u, vector v, real rho){
    *
    * \f{aligned}{
    *    c(\mathbf{u}) &= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\
-   *                   &= \frac{1}{\sqrt{\det L}} \exp \Bigg(-\frac{1}{2} 
+   *                  &= \frac{1}{\sqrt{\det \Sigma}} \exp \Bigg(-\frac{1}{2} 
    *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}^T
-   *                              (L^{-1} - I)
+   *                              (\Sigma^{-1} - I)
    *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}
-   *                              \Bigg) \f}
+   *                              \Bigg) \\
+   *                  &=  \frac{1}{\sqrt{\det \Sigma}} \exp \bigg(-\frac{1}{2}(A^T\Sigma^{-1}A - A^TA) \bigg)\f}
+   * where 
+   * \f[
+   *    A = \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}.
+   *  \f]
+   * Note that \f$\det \Sigma  = |LL^T| = |L |^2 = \big(\prod_{i=1}^d L_{i,i}\big)^2\f$ so \f$\sqrt{\det \Sigma} = \prod_{i=1}^d L_{i,i}\f$
+   * and 
+   * 
+   *\f{aligned}{
+   *  c(\mathbf{u}) &= \Bigg(\prod_{i=1}^d L_{i,i}\Bigg)^{-1} \exp \bigg(-\frac{1}{2}(A^T(LL^T)^{-1}A - A^TA)\bigg) \\
+   *                &=  \Bigg(\prod_{i=1}^d L_{i,i}\Bigg)^{-1} \exp \bigg(-\frac{1}{2}\big((L^{-1}A)^TL^{-1}A - A^TA\big)\bigg) 
+     \f}
+   * where \f$X = L^{-1}A\f$ can be solved with \code{.cpp} X = mdivide_left_tri_low(L, A)\endcode.
    *
    * @copyright Sean Pinkney, 2021
    *
