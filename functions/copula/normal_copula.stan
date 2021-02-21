@@ -1,4 +1,7 @@
   /** @addtogroup normal Normal Copula Functions
+   *
+   * The normal copula is an elliptical copula  over the unit cube \f$[0,\,1]^d \f$.
+   *
    * \ingroup copula
    *  @{ */
    
