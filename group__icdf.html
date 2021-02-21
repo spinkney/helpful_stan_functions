@@ -119,7 +119,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p><b>Lognormal Inverse CDF</b></p>
 <p class="formulaDsp">
-\begin{aligned} F^{-1}(x) &amp;= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\ &amp;= \exp(\mu + \sigma \, \Phi^{−1}(x)) \end{aligned}
+\begin{aligned} F^{-1}(p) &amp;= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\ &amp;= \exp(\mu + \sigma \, \Phi^{−1}(x)) \end{aligned}
 </p>
 <p> because </p><p class="formulaDsp">
 \begin{aligned} \Phi(x) &amp;= \frac{1}{2\pi} \int_{-\infty}^x e^{-t^2}dt \\ &amp;= \frac{1}{2} + \frac{1}{2}\text{erf}\bigg( \frac{x}{\sqrt{2}} \bigg) \end{aligned}
