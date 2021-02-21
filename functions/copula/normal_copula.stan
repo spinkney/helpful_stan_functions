@@ -5,19 +5,22 @@
  /**
    * Normal copula log density
    *
-   * Copyright Andre Pfeuffer, Sean Pinkney 2017, 2021 \n
-   * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
-   * Accessed and modified Feb. 5, 2021 
+   * \f[
+   *   c(u,\,v;\, \rho) = \frac{1}{\sqrt{1 - \rho^2}} \exp \bigg(
+   *  \frac{2\rho \Phi^{-1}(u) \Phi^{-1}(v) - \rho^2 (\Phi^{-1}(u)^2 + \Phi^{-1}(v)^2)}{2 (1 - \rho^2)}\bigg)
+   * \f]
    *
-   * \f$x = 100\f$
-   *
-   * Meyer, Christian. "The Bivariate Normal Copula." 
+   *  Meyer, Christian. "The Bivariate Normal Copula." 
    * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3.
    * accessed Feb. 6, 2021.
    *
+   * @copyright Andre Pfeuffer, Sean Pinkney 2017, 2021
+   * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
+   * Accessed and modified Feb. 5, 2021 
+   *
    * @param u Real number on (0,1], not checked but function will return NaN
    * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number [-1, 1]
+   * @param rho Real number (-1, 1)
    * @return log density
    */
 real normal_copula_lpdf(real u, real v, real rho) {
@@ -38,8 +41,8 @@ real normal_copula_lpdf(real u, real v, real rho) {
    *
    * @param u Real number on (0,1], not checked but function will return NaN
    * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number [-1, 1]
-   * @param log density
+   * @param rho Real number (-1, 1)
+   * @return log density
    */
 real normal_copula_vector_lpdf(vector u, vector v, real rho){
    int N = num_elements(u);
@@ -56,11 +59,20 @@ real normal_copula_vector_lpdf(vector u, vector v, real rho){
  /**
    * Multi-Normal Cholesky copula log density
    *
-   * Copyright 2021, Sean Pinkney
+   * \f{aligned}{
+   *    c(\mathbf{u}) &= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\
+   *                   &= \frac{1}{\sqrt{\det L}} \exp \Bigg(-\frac{1}{2} 
+   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}^T
+   *                              (L^{-1} - I)
+   *                              \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}
+   *                              \Bigg)
+   *\f}
+   *
+   * @copyright Sean Pinkney, 2021
    *
    * @param u Matrix
    * @param L Cholesky factor matrix
-   * @param log density
+   * @return log density
    */
 
 real multi_normal_copula_lpdf(matrix u, matrix L){
@@ -75,11 +87,15 @@ real multi_normal_copula_lpdf(matrix u, matrix L){
  /**
    * Bivariate Normal Copula cdf
    *
-   * Copyright 2021, Sean Pinkney
+   * Meyer, Christian. "The Bivariate Normal Copula." \n
+   * arXiv preprint arXiv:0912.2816 (2009). Eqn 3.11. \n
+   * accessed Feb. 6, 2021.
+   *
+   * @copyright Sean Pinkney, 2021
    *
    * @param u Vector size 2
-   * @param rho Real on [-1, 1]
-   * @param cumulative density
+   * @param rho Real on (-1, 1)
+   * @return cumulative density
    */
 real bivariate_normal_copula_cdf(vector u, real rho){
    real a = 1 / sqrt(1 - square(rho));
