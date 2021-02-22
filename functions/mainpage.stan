@@ -1,11 +1,12 @@
 /*! \mainpage Stan UDF Documentation
  *
- * Welcome to the unoffical Stan User Defined Functions project!
+ * Welcome to the unofficial Stan User Defined Functions project! Stan with batteries included!
+ *
  * There are numerous examples of functions written by the Stan community
  * on the forum, the old google forum, and public repositories. The wealth of
  * information, however, is not organized and can be hard to find. Secondly,
  * because of resource constraints, many of these functions may never make 
- * it in to the offical Stan project but are contiuously re-written because
+ * it in to the official Stan project but are continuously re-written because
  * people find them useful. This project attempts to gather those functions and
  * show example usage.
  * 
