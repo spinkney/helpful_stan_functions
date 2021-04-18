@@ -36,6 +36,12 @@
    * \f] 
    * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \f$
    * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[1]) \f$.
+   *
+   * The final realizations of the truncated multivariate normal vector is given by
+   *
+   * \f[
+   *   \mathbf{r} = mu + L \Phi^{-1}(\mathbf{v}).
+   * \f]
    * 
    * \ingroup multivariate
    *  @{ */
