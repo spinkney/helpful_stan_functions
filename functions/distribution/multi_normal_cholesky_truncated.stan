@@ -5,9 +5,10 @@
    * Cholesky factor defined by \f$ \text{Chol}(\Sigma) = LL^T \f$. 
    *
    * The following derivation first appeared in an unpublished manuscript by Ben Goodrich, circa 2017.
+   *
    *  Let a \f$ k \f$-vector random variable \f$ \mathbf{y} \f$ be distributed multivariate normal then  
    *  \f[
-   *     \mathbf{y} \stackrel{d}{=} = \mathbf{\mu} + \mathbf{Lz(u)},
+   *     \mathbf{y} \stackrel{d}{=} \mathbf{\mu} + \mathbf{Lz(u)},
    *  \f]
    * where \f$ \mathbf{u} \f$ is a vector of uniform variates on \f$[0, 1]\f$ and 
    * \f$ \mathbf{z(u)} = \Phi^{-1}(\mathbf{u}) \f$. 
