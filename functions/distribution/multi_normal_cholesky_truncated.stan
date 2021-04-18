@@ -18,24 +18,24 @@
    * a Jacobian adjustment due to the transformation of a uniform variate from
    * \f$[0, 1]\f$ to the constrained space.   
    *
-   * Given realiziations of \f$ \mathbf{u} = u_1, \ldots, u_k \f$ and
+   * Given realiziations of the uniform variate \f$ \mathbf{u} = u_1, \ldots, u_k \f$ and a
    * \f$ k \f$-array of length-2 vector bounds 
    * 
    * \f[
    *    \mathbf{b[lb, ub]} = [lb_1, ub_1], \ldots, [lb_k, ub_k], 
    * \f]
    *
-   * we solve for the valid space to draw the uniform variate. That is,
+   * we constrain \f$ \mathbf{u} \f$ to lie within the given bounds. That is,
    * for each \f$ k \f$ a lower and upper bound must satisfy 
    * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \f$.
    * The random variate \f$ \mathbf{u} \f$ is then constrained to fall
    * within those bounds. That is the new
    * uniform variate \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
    * \f[
-   *    v_k = u_k^*[1] + (u_k^*[2] - u_k^*[2]) u_k.
+   *    v_k = u_k^*[1] + (u_k^*[2] - u_k^*[1]) u_k.
    * \f] 
-   * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \f$
-   * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[2]) \f$.
+   * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \f$
+   * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[1]) \f$.
    * 
    * \ingroup multivariate
    *  @{ */
