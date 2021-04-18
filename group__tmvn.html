@@ -108,9 +108,10 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>The truncated multivariate normal with mean vector \( \mu \) and variance-covariance matrix \( \Sigma \). Additionally, \( L \) is the Cholesky factor defined by \( \text{Chol}(\Sigma) = LL^T \).</p>
-<p>The following derivation first appeared in an unpublished manuscript by Ben Goodrich, circa 2017. Let a \( k \)-vector random variable \( \mathbf{y} \) be distributed multivariate normal then <br  />
+<p>The following derivation first appeared in an unpublished manuscript by Ben Goodrich, circa 2017.</p>
+<p>Let a \( k \)-vector random variable \( \mathbf{y} \) be distributed multivariate normal then <br  />
  </p><p class="formulaDsp">
-\[ \mathbf{y} \stackrel{d}{=} = \mathbf{\mu} + \mathbf{Lz(u)}, \]
+\[ \mathbf{y} \stackrel{d}{=} \mathbf{\mu} + \mathbf{Lz(u)}, \]
 </p>
 <p> where \( \mathbf{u} \) is a vector of uniform variates on \([0, 1]\) and \( \mathbf{z(u)} = \Phi^{-1}(\mathbf{u}) \).</p>
 <p>Using the above definition, we may partition the standard uniform line so that the constaints are satisfied, however, we must supply a Jacobian adjustment due to the transformation of a uniform variate from \([0, 1]\) to the constrained space. <br  />
