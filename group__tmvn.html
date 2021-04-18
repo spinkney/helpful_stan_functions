@@ -90,10 +90,23 @@ $(document).ready(function(){initNavTree('group__tmvn.html',''); initResizable()
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Truncated Multivariate Normal Functions</div>  </div>
+<div class="title">Truncated Multivariate Normal Functions<div class="ingroups"><a class="el" href="group__multivariate.html">Multivariate Distributions</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga410a62b317befea7a30c079292d142f0"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a> (vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</td></tr>
+<tr class="separator:ga410a62b317befea7a30c079292d142f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5f97f79d524abf4ecf3e532a3dfb812"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tmvn.html#gaa5f97f79d524abf4ecf3e532a3dfb812">multi_normal_cholesky_truncated_rng</a> (vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</td></tr>
+<tr class="separator:gaa5f97f79d524abf4ecf3e532a3dfb812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c9f3672e2ad840066dae356576cb137"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__tmvn.html#ga7c9f3672e2ad840066dae356576cb137">multi_normal_cholesky_truncated_lp</a> (vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</td></tr>
+<tr class="separator:ga7c9f3672e2ad840066dae356576cb137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>The truncated multivariate normal with mean vector \( \mu \) and variance-covariance matrix \( \Sigma \). Additionally, \( L \) is the Cholesky factor defined by \( \text{Chol}(\Sigma) = LL^T \).</p>
 <p>The following derivation first appeared in an unpublished manuscript by Ben Goodrich, circa 2017. Let a \( k \)-vector random variable \( \mathbf{y} \) be distributed multivariate normal then <br  />
  </p><p class="formulaDsp">
@@ -106,7 +119,224 @@ $(document).ready(function(){initNavTree('group__tmvn.html',''); initResizable()
 <p class="formulaDsp">
 \[ \mathbf{b[lb, ub]} = [lb_1, ub_1], \ldots, [lb_k, ub_k], \]
 </p>
-<p>we solve for the valid space to draw the uniform variate. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1})$. The random variate \) mathbf{u} \( is then constrained to fall within those bounds. That is the new uniform variate \) v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \( by \f[ v_k = u_k^*[1] + (u_k^*[2] - u_k^*[2]) u_k. \f] Which implies that \) \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \( and the absolute value of the log Jacobian is \)\ln(u_k^*[2] - u_k^*[2]) </p>
+<p>we solve for the valid space to draw the uniform variate. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \). The random variate \( mathbf{u} \) is then constrained to fall within those bounds. That is the new uniform variate \( v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \) by </p><p class="formulaDsp">
+\[ v_k = u_k^*[1] + (u_k^*[2] - u_k^*[2]) u_k. \]
+</p>
+<p> Which implies that \( \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \) and the absolute value of the log Jacobian is \(\ln(u_k^*[2] - u_k^*[2]) \). </p>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga7c9f3672e2ad840066dae356576cb137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c9f3672e2ad840066dae356576cb137">&#9670;&nbsp;</a></span>multi_normal_cholesky_truncated_lp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void multi_normal_cholesky_truncated_lp </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb_ind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub_ind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Truncated Multivariate Increment Log-Probability</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 <br  />
+<a href="https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ">https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ</a> <br  />
+Accessed and modified Apr. 18, 2021</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+
+</div>
+</div>
+<a id="ga410a62b317befea7a30c079292d142f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga410a62b317befea7a30c079292d142f0">&#9670;&nbsp;</a></span>multi_normal_cholesky_truncated_lpdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real multi_normal_cholesky_truncated_lpdf </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb_ind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub_ind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Truncated Multivariate Log Probability Density</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 <br  />
+<a href="https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ">https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ</a> <br  />
+Accessed and modified Apr. 18, 2021</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+
+</div>
+</div>
+<a id="gaa5f97f79d524abf4ecf3e532a3dfb812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa5f97f79d524abf4ecf3e532a3dfb812">&#9670;&nbsp;</a></span>multi_normal_cholesky_truncated_rng()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector multi_normal_cholesky_truncated_rng </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>L</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>lb_ind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>ub_ind</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Truncated Multivariate Random Number Generator</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 <br  />
+<a href="https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ">https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ</a> <br  />
+Accessed and modified Apr. 18, 2021</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
