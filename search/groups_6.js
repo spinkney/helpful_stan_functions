@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normal_20copula_20functions_107',['Normal Copula Functions',['../group__normal.html',1,'']]]
+  ['multivariate_20distributions_119',['Multivariate Distributions',['../group__multivariate.html',1,'']]]
 ];

@@ -14,6 +14,8 @@ var files_dup =
     [ "inv_erf.stan", "inv__erf_8stan.html", "inv__erf_8stan" ],
     [ "lognormal_icdf.stan", "lognormal__icdf_8stan.html", "lognormal__icdf_8stan" ],
     [ "mainpage.stan", "mainpage_8stan.html", null ],
+    [ "multi_normal_cholesky_truncated.stan", "multi__normal__cholesky__truncated_8stan.html", "multi__normal__cholesky__truncated_8stan" ],
+    [ "multivariate_definition.stan", "multivariate__definition_8stan.html", null ],
     [ "normal_copula.stan", "normal__copula_8stan.html", "normal__copula_8stan" ],
     [ "odeint_euler.stan", "odeint__euler_8stan.html", "odeint__euler_8stan" ],
     [ "odeint_midpoint.stan", "odeint__midpoint_8stan.html", "odeint__midpoint_8stan" ],
