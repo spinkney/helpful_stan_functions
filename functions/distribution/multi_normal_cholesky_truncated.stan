@@ -40,7 +40,7 @@
    * The final realizations of the truncated multivariate normal vector is given by
    *
    * \f[
-   *   \mathbf{r} = mu + L \Phi^{-1}(\mathbf{v}).
+   *   \mathbf{r} = \mu + L \Phi^{-1}(\mathbf{v}).
    * \f]
    * 
    * \ingroup multivariate
