@@ -26,7 +26,7 @@
    *
    * we solve for the valid space to draw the uniform variate. That is,
    * for each \f$ k \f$ a lower and upper bound must satisfy 
-   * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1})$.
+   * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \f$.
    * The random variate \f$ mathbf{u} \f$ is then constrained to fall
    * within those bounds. That is the new
    * uniform variate \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
