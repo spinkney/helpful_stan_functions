@@ -119,7 +119,7 @@ Functions</h2></td></tr>
 <p class="formulaDsp">
 \[ \mathbf{b[lb, ub]} = [lb_1, ub_1], \ldots, [lb_k, ub_k], \]
 </p>
-<p>we solve for the valid space to draw the uniform variate. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \). The random variate \( mathbf{u} \) is then constrained to fall within those bounds. That is the new uniform variate \( v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \) by </p><p class="formulaDsp">
+<p>we solve for the valid space to draw the uniform variate. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \). The random variate \( \mathbf{u} \) is then constrained to fall within those bounds. That is the new uniform variate \( v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \) by </p><p class="formulaDsp">
 \[ v_k = u_k^*[1] + (u_k^*[2] - u_k^*[2]) u_k. \]
 </p>
 <p> Which implies that \( \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \) and the absolute value of the log Jacobian is \(\ln(u_k^*[2] - u_k^*[2]) \). </p>
@@ -185,13 +185,16 @@ Functions</h2></td></tr>
 Accessed and modified Apr. 18, 2021</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+    <tr><td class="paramname">u</td><td>Vector number on [0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">mu</td><td>Vector </td></tr>
+    <tr><td class="paramname">L</td><td>Cholesky Factor Corr </td></tr>
+    <tr><td class="paramname">lb</td><td>Vector of lower bounds </td></tr>
+    <tr><td class="paramname">ub</td><td>Vector of upper bounds </td></tr>
+    <tr><td class="paramname">lb_ind</td><td>Vector indicator if there is an lower bound </td></tr>
+    <tr><td class="paramname">ub_ind</td><td>Vector indicator if there is an upper bound </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
 
 </div>
 </div>
@@ -256,9 +259,13 @@ Accessed and modified Apr. 18, 2021</dd></dl>
 Accessed and modified Apr. 18, 2021</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+    <tr><td class="paramname">u</td><td>Vector number on [0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">mu</td><td>Vector </td></tr>
+    <tr><td class="paramname">L</td><td>Cholesky Factor Corr </td></tr>
+    <tr><td class="paramname">lb</td><td>Vector of lower bounds </td></tr>
+    <tr><td class="paramname">ub</td><td>Vector of upper bounds </td></tr>
+    <tr><td class="paramname">lb_ind</td><td>Vector indicator if there is an lower bound </td></tr>
+    <tr><td class="paramname">ub_ind</td><td>Vector indicator if there is an upper bound </td></tr>
   </table>
   </dd>
 </dl>
@@ -327,13 +334,17 @@ Accessed and modified Apr. 18, 2021</dd></dl>
 Accessed and modified Apr. 18, 2021</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">rho</td><td>Real number (-1, 1) </td></tr>
+    <tr><td class="paramname">u</td><td>Vector number on [0,1], not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">mu</td><td>Vector </td></tr>
+    <tr><td class="paramname">L</td><td>Cholesky Factor Corr </td></tr>
+    <tr><td class="paramname">lb</td><td>Vector of lower bounds </td></tr>
+    <tr><td class="paramname">ub</td><td>Vector of upper bounds </td></tr>
+    <tr><td class="paramname">lb_ind</td><td>Vector indicator if there is an lower bound </td></tr>
+    <tr><td class="paramname">ub_ind</td><td>Vector indicator if there is an upper bound </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>vector of truncated random normal variates </dd></dl>
 
 </div>
 </div>
