@@ -27,7 +27,7 @@
    * we solve for the valid space to draw the uniform variate. That is,
    * for each \f$ k \f$ a lower and upper bound must satisfy 
    * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \f$.
-   * The random variate \f$ mathbf{u} \f$ is then constrained to fall
+   * The random variate \f$ \mathbf{u} \f$ is then constrained to fall
    * within those bounds. That is the new
    * uniform variate \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
    * \f[
@@ -46,9 +46,13 @@
    * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
    * Accessed and modified Apr. 18, 2021 
    *
-   * @param u Real number on (0,1], not checked but function will return NaN
-   * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number (-1, 1)
+   * @param u Vector number on [0,1], not checked but function will return NaN
+   * @param mu Vector
+   * @param L Cholesky Factor Corr
+   * @param lb Vector of lower bounds
+   * @param ub Vector of upper bounds
+   * @param lb_ind Vector indicator if there is an lower bound
+   * @param ub_ind Vector indicator if there is an upper bound
    * @return log density
    */
 
@@ -96,11 +100,15 @@
    * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
    * Accessed and modified Apr. 18, 2021 
    *
-   * @param u Real number on (0,1], not checked but function will return NaN
-   * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number (-1, 1)
-   * @return log density
-   */  
+   * @param u Vector number on [0,1], not checked but function will return NaN
+   * @param mu Vector
+   * @param L Cholesky Factor Corr
+   * @param lb Vector of lower bounds
+   * @param ub Vector of upper bounds
+   * @param lb_ind Vector indicator if there is an lower bound
+   * @param ub_ind Vector indicator if there is an upper bound
+   * @return vector of truncated random normal variates
+   */
      
   vector multi_normal_cholesky_truncated_rng(vector u, 
                                              vector mu, 
@@ -144,10 +152,13 @@
    * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
    * Accessed and modified Apr. 18, 2021 
    *
-   * @param u Real number on (0,1], not checked but function will return NaN
-   * @param v Real number on (0,1], not checked but function will return NaN
-   * @param rho Real number (-1, 1)
-   * @return log density
+    * @param u Vector number on [0,1], not checked but function will return NaN
+   * @param mu Vector
+   * @param L Cholesky Factor Corr
+   * @param lb Vector of lower bounds
+   * @param ub Vector of upper bounds
+   * @param lb_ind Vector indicator if there is an lower bound
+   * @param ub_ind Vector indicator if there is an upper bound
    */     
   void multi_normal_cholesky_truncated_lp(vector u, 
                                           vector mu, 
