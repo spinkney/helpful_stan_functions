@@ -29,12 +29,12 @@
    * for each \f$ k \f$ a lower and upper bound must satisfy 
    * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \f$.
    * The random variate \f$ \mathbf{u} \f$ is then constrained to fall
-   * within those bounds. That is the new
-   * uniform variate \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
+   * within those bounds. The new uniform variate is constrained
+   * to lie within the given bounds \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
    * \f[
    *    v_k = u_k^*[1] + (u_k^*[2] - u_k^*[1]) u_k.
    * \f] 
-   * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \f$
+   * This implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \f$
    * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[1]) \f$.
    *
    * The final realizations of the truncated multivariate normal vector is given by
