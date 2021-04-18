@@ -120,10 +120,10 @@ Functions</h2></td></tr>
 <p class="formulaDsp">
 \[ \mathbf{b[lb, ub]} = [lb_1, ub_1], \ldots, [lb_k, ub_k], \]
 </p>
-<p>we constrain \( \mathbf{u} \) to lie within the given bounds. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \). The random variate \( \mathbf{u} \) is then constrained to fall within those bounds. That is the new uniform variate \( v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \) by </p><p class="formulaDsp">
+<p>we constrain \( \mathbf{u} \) to lie within the given bounds. That is, for each \( k \) a lower and upper bound must satisfy \( u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1}) \). The random variate \( \mathbf{u} \) is then constrained to fall within those bounds. The new uniform variate is constrained to lie within the given bounds \( v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \) by </p><p class="formulaDsp">
 \[ v_k = u_k^*[1] + (u_k^*[2] - u_k^*[1]) u_k. \]
 </p>
-<p> Which implies that \( \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \) and the absolute value of the log Jacobian is \(\ln(u_k^*[2] - u_k^*[1]) \).</p>
+<p> This implies that \( \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[1]) \) and the absolute value of the log Jacobian is \(\ln(u_k^*[2] - u_k^*[1]) \).</p>
 <p>The final realizations of the truncated multivariate normal vector is given by</p>
 <p class="formulaDsp">
 \[ \mathbf{r} = \mu + L \Phi^{-1}(\mathbf{v}). \]
