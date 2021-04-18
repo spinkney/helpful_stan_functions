@@ -1,0 +1,186 @@
+  /** @addtogroup tmvn Truncated Multivariate Normal Functions
+   *
+   * The truncated multivariate normal with mean vector \f$ \mu \f$ and 
+   * variance-covariance matrix \f$ \Sigma \f$. Additionally, \f$ L \f$ is the 
+   * Cholesky factor defined by \f$ \text{Chol}(\Sigma) = LL^T \f$. 
+   *
+   * The following derivation first appeared in an unpublished manuscript by Ben Goodrich, circa 2017.
+   *  Let a \f$ k \f$-vector random variable \f$ \mathbf{y} \f$ be distributed multivariate normal then  
+   *  \f[
+   *     \mathbf{y} \stackrel{d}{=} = \mathbf{\mu} + \mathbf{Lz(u)},
+   *  \f]
+   * where \f$ \mathbf{u} \f$ is a vector of uniform variates on \f$[0, 1]\f$ and 
+   * \f$ \mathbf{z(u)} = \Phi^{-1}(\mathbf{u}) \f$. 
+   
+   * Using the above definition, we may partition the standard
+   * uniform line so that the constaints are satisfied, however, we must supply
+   * a Jacobian adjustment due to the transformation of a uniform variate from
+   * \f$[0, 1]\f$ to the constrained space.   
+   *
+   * Given realiziations of \f$ \mathbf{u} = u_1, \ldots, u_k \f$ and
+   * \f$ k \f$-array of length-2 vector bounds 
+   * 
+   * \f[
+   *    \mathbf{b[lb, ub]} = [lb_1, ub_1], \ldots, [lb_k, ub_k], 
+   * \f]
+   *
+   * we solve for the valid space to draw the uniform variate. That is,
+   * for each \f$ k \f$ a lower and upper bound must satisfy 
+   * \f$ u_k^* = \Phi(b_k - \mu_k + L_{k, 1:k-1} z_{k - 1})$.
+   * The random variate \f$ mathbf{u} \f$ is then constrained to fall
+   * within those bounds. That is the new
+   * uniform variate \f$ v_k \sim \mathcal{U}(u_k^*[1], u_k^*[2]) \f$ by
+   * \f[
+   *    v_k = u_k^*[1] + (u_k^*[2] - u_k^*[2]) u_k.
+   * \f] 
+   * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \f$
+   * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[2]) \f$.
+   * \ingroup multivariate
+   *  @{ */
+   
+ /**
+   * Truncated Multivariate Log Probability Density
+   *
+   * @copyright Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 \n
+   * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
+   * Accessed and modified Apr. 18, 2021 
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param rho Real number (-1, 1)
+   * @return log density
+   */
+
+  real multi_normal_cholesky_truncated_lpdf(vector u, 
+                                            vector mu, 
+                                            matrix L, 
+                                            vector lb, 
+                                            vector ub, 
+                                            vector lb_ind, 
+                                            vector ub_ind) {
+      int K = rows(u); 
+      vector[K] z;
+      real lp = 0;
+      
+      for ( k in 1:K ) {
+        // if kth u is unbounded
+        // else kth u has at least one bound
+        if ( lb_ind[k] == 0 && ub_ind[k] == 0 )  z[k] = inv_Phi(u[k]);
+          else { 
+            int km1 = k - 1;
+            real v; 
+            real z_star;
+            real logd;
+            row_vector [2] log_ustar = [negative_infinity(), 0];           // [-Inf, 0] = log([0,1])
+            real constrain = mu[k] + ((k > 1) ? L[k, 1:km1] * head(z, km1) : 0);
+            
+            // obtain log of upper and lower bound (if applicable)
+            if ( lb_ind[k] == 1 ) log_ustar[1] = normal_lcdf( ( lb[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+            if ( ub_ind[k] == 1 ) log_ustar[2] = normal_lcdf( ( ub[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+          
+            // update log gradient and z  
+            logd  = log_diff_exp(log_ustar[2], log_ustar[1]);
+            v     = exp( log_sum_exp( log_ustar[1], log(u[k]) + logd ) );    // v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])
+            z[k]  = inv_Phi(v);                                              // z ~ TN
+            lp   += logd;                                                    // increment by log gradient
+          }
+        }
+      return lp;
+     }
+     
+ /**
+   * Truncated Multivariate Random Number Generator
+   *
+   * @copyright Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 \n
+   * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
+   * Accessed and modified Apr. 18, 2021 
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param rho Real number (-1, 1)
+   * @return log density
+   */  
+     
+  vector multi_normal_cholesky_truncated_rng(vector u, 
+                                             vector mu, 
+                                             matrix L, 
+                                             vector lb, 
+                                             vector ub, 
+                                             vector lb_ind, 
+                                             vector ub_ind) {
+      int K = rows(u); 
+      vector[K] z;
+
+      for ( k in 1:K ) {
+        // if kth u is unbounded
+        // else kth u has at least one bound
+        if ( lb_ind[k] == 0 && ub_ind[k] == 0 )  z[k] = inv_Phi(u[k]);
+          else { 
+            int km1 = k - 1;
+            real v; 
+            real z_star;
+            real logd;
+            row_vector [2] log_ustar = [negative_infinity(), 0];           // [-Inf, 0] = log([0,1])
+            real constrain = mu[k] + ((k > 1) ? L[k, 1:km1] * head(z, km1) : 0);
+            
+            // obtain log of upper and lower bound (if applicable)
+            if ( lb_ind[k] == 1 ) log_ustar[1] = normal_lcdf( ( lb[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+            if ( ub_ind[k] == 1 ) log_ustar[2] = normal_lcdf( ( ub[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+          
+            // update log gradient and z  
+            logd    = log_diff_exp(log_ustar[2], log_ustar[1]);
+            v       = exp( log_sum_exp( log_ustar[1], log(u[k]) + logd ) );    // v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])
+            z[k]    = inv_Phi(v);                                              // z ~ TN
+          }
+        }
+      return mu + L * z;
+     }
+
+   /**
+   * Truncated Multivariate Increment Log-Probability
+   *
+   * @copyright Ben Goodrich, Ethan Alt, Sean Pinkney 2017, 2021, 2021 \n
+   * https://groups.google.com/g/stan-users/c/GuWUJogum1o/m/LvxjlUBnBwAJ \n
+   * Accessed and modified Apr. 18, 2021 
+   *
+   * @param u Real number on (0,1], not checked but function will return NaN
+   * @param v Real number on (0,1], not checked but function will return NaN
+   * @param rho Real number (-1, 1)
+   * @return log density
+   */     
+  void multi_normal_cholesky_truncated_lp(vector u, 
+                                          vector mu, 
+                                          matrix L, 
+                                          vector lb, 
+                                          vector ub, 
+                                          vector lb_ind, 
+                                          vector ub_ind) {
+      int K = rows(u); 
+      vector[K] z;
+ 
+      for ( k in 1:K ) {
+        // if kth u is unbounded
+        // else kth u has at least one bound
+        if ( lb_ind[k] == 0 && ub_ind[k] == 0 )  z[k] = inv_Phi(u[k]);
+          else { 
+            int km1 = k - 1;
+            real v; 
+            real z_star;
+            real logd;
+            row_vector [2] log_ustar = [negative_infinity(), 0];           // [-Inf, 0] = log([0,1])
+            real constrain = mu[k] + ((k > 1) ? L[k, 1:km1] * head(z, km1) : 0);
+            
+            // obtain log of upper and lower bound (if applicable)
+            if ( lb_ind[k] == 1 ) log_ustar[1] = normal_lcdf( ( lb[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+            if ( ub_ind[k] == 1 ) log_ustar[2] = normal_lcdf( ( ub[k] - constrain ) / L[k, k] | 0.0, 1.0 );
+          
+            // update log gradient and z  
+            logd    = log_diff_exp(log_ustar[2], log_ustar[1]);
+            v       = exp( log_sum_exp( log_ustar[1], log(u[k]) + logd ) );    // v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])
+            z[k]    = inv_Phi(v);                                              // z ~ TN
+            target += logd;                                                    // increment by log gradient
+          }
+        }
+     }
+
+ /** @} */
