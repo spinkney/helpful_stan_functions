@@ -35,6 +35,7 @@
    * \f] 
    * Which implies that \f$ \frac{\partial u_k}{\partial v_k} = (u_k^*[2] - u_k^*[2]) \f$
    * and the absolute value of the log Jacobian is \f$\ln(u_k^*[2] - u_k^*[2]) \f$.
+   * 
    * \ingroup multivariate
    *  @{ */
    
