@@ -1,0 +1,369 @@
+  /** @addtogroup mixed_copula Mixed Discrete-Continuous Gaussian Copula Functions
+   *
+   * The mixed-discrete normal copula. The method is from  
+   * Smith, Michael & Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. 
+   * Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983. 
+   *
+   * \ingroup copula
+   *  @{ */
+   
+
+#include multi_normal_cholesky_truncated.stan
+
+ /**
+   * Normal marginal
+   *
+   * Standardized normal marginal for mixed continuous-discrete Gaussian
+   * copula.
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param y Real[] Array
+   * @param mu_glm Row vector
+   * @param sigma Real[] Array
+   * @param J Integer
+   * @return Vector in [0, 1] of continuous outcome
+   */
+ vector normal_marginal (real[] y, row_vector mu_glm, real[] sigma, int J) {
+     vector[J] u;
+     
+     for (j in 1:J)
+        u[j] = Phi_approx( ( y[j] - mu_glm[j] ) / sigma[j] );
+      
+     return u;
+  }
+ 
+  /**
+   * Bernoulli marginal
+   *
+   * Bernoulli marginal for mixed continuous-discrete Gaussian
+   * copula. 
+   *
+   * The lb and ub:
+   *    if y == 0, upper bound at inv_Phi( y, mu )
+   *    if y == 1, lower bound at inv_Phi( y - 1, mu )  
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param y int[] Array of integers
+   * @param mu_glm Row vector
+   * @param J Integer
+   * @return Vector in [0, 1] of continuous outcome
+   */     
+  vector[] bernoulli_marginal (int[] y, row_vector mu_glm, int J) {
+   vector[J] b[2];
+     
+   for (j in 1:J) {
+     if (y[j] == 0) {
+       b[1, j] = negative_infinity();
+       b[2, j] = inv_Phi( bernoulli_cdf( 0, mu_glm[j] ) );
+     } else {
+       b[1, j] = inv_Phi( bernoulli_cdf( 0, mu_glm[j] ) );
+       b[2, j] = positive_infinity();
+      }
+   }
+   
+   return b;
+  }
+
+  /**
+   * Poisson marginal
+   *
+   * Poisson marginal for mixed continuous-discrete Gaussian
+   * copula. 
+   *
+   * The lb and ub:
+   *      Always upper bound at inv_Phi( y, mu )
+   *      If y != 0, lower bound at inv_Phi(y-1, mu) 
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param y int[] Array of integers
+   * @param mu_glm Row vector
+   * @param J Integer
+   * @return Vector in [0, 1] of continuous outcome
+   */  
+ vector[] poisson_marginal (int[] y, row_vector mu_glm, int J) {
+   vector[J] b[2];
+     
+   for (j in 1:J) {
+     b[2, j] = inv_Phi( poisson_cdf( y[j], mu_glm[j] ) );
+     if (y[j] > 0) b[1, j] = inv_Phi( poisson_cdf( y[j] - 1, mu_glm[j] ) );
+   }
+   
+   return b;
+  }
+ 
+   /**
+   * Mixed Copula Special Log-Probability Function
+   *
+   * This is potentially faster when there are many margins. However,
+   * it is slower with few margins.
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param Yn real[,] 2d-Array of Normal depended variates
+   * @param Yb int[,] 2d-Array of Bernoulli dependent variates
+   * @param Yp int[,] 2d-Array of Poisson dependent variates
+   * @param uraw_b Vector of standard uniform variates for Bernoulli margins
+   * @param uraw_p Vector of standard uniform variates for Poisson margins
+   * @param mu_glm Matrix of GLM means
+   * @param sigma Vector of standard deviations for Gaussian variables
+   * @param L Cholesky Factor Correlation 
+   * @param bounds_ind Matrix giving whether there is an lower([1]) or upper([2]) bound
+   * @param tmvn_mu Vector of means for the Multivariate (Truncated) Gaussian, almost always 0
+   * @param J Integer array specifying the number of margins for each distribution
+   * @param N Integer number of observations
+   * @return Real log-probability 
+   */    
+ real mixed_cop_sp_lp(real[,] Yn,
+                    int[,] Yb,
+                    int[,] Yp,
+                    vector[] uraw_b,
+                    vector[] uraw_p,
+                    matrix mu_glm,
+                    real[] sigma,
+                    matrix L,
+                    matrix[] bounds_ind,
+                    vector tmvn_mu,
+                    int[] J, int N
+  ) {
+    real lp = 0;
+    int J_all = sum(J);
+    vector[J[2]] bb[2];
+    vector[J[2]] bp[2];
+    
+    vector[J_all] u;        // latent variables
+    vector[J_all] lb;
+    vector[J_all] ub;
+    
+    // loop through independent observations
+    for ( i in 1:N ) {
+      // get indicators of upper/lower bound
+      vector[J_all] lb_ind = col(bounds_ind[1], i);
+      vector[J_all] ub_ind = col(bounds_ind[2], i);
+
+      int pos = 1;
+
+      if (J[1] > 0) {
+        u[pos:J[1]] = normal_marginal(Yn[i], head(mu_glm[i], J[1]), sigma, J[1]);
+        lb[pos:J[1]] = rep_vector(negative_infinity(), J[1]);
+        ub[pos:J[1]] = rep_vector(positive_infinity(), J[1]);
+        pos += J[1];
+      }
+
+      if (J[2] > 0) {
+        bb = bernoulli_marginal(Yb[i], segment(mu_glm[i], pos, J[2]), J[2]);
+        u[pos:J[1] + J[2]] =  to_vector(uraw_b[1:J[2], i]);
+        lb[pos:J[1] + J[2]] = bb[1];
+        ub[pos:J[1] + J[2]] = bb[2];
+
+        pos += J[2];
+      }
+
+      if (J[3] > 0){
+        bp = poisson_marginal(Yp[i], segment(mu_glm[i], pos, J[3]), J[3]);
+
+        u[pos:J_all] = to_vector(uraw_p[1:J[3], i]);
+        lb[pos:J_all] = bp[1];
+        ub[pos:J_all] = bp[2];
+      }
+      
+     lp += multi_normal_cholesky_truncated_lpdf(u | tmvn_mu, L, lb, ub, lb_ind, ub_ind);
+    }
+    return lp;
+  }
+  
+  /**
+   * Mixed Copula Log-Probability Function
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param Yn real[,] 2d-Array of Normal depended variates
+   * @param Yb int[,] 2d-Array of Bernoulli dependent variates
+   * @param Yp int[,] 2d-Array of Poisson dependent variates
+   * @param uraw_b Vector of standard uniform variates for Bernoulli margins
+   * @param uraw_p Vector of standard uniform variates for Poisson margins
+   * @param mu_glm Matrix of GLM means
+   * @param sigma Vector of standard deviations for Gaussian variables
+   * @param L Cholesky Factor Correlation 
+   * @param bounds_ind Matrix giving whether there is an lower([1]) or upper([2]) bound
+   * @param tmvn_mu Vector of means for the Multivariate (Truncated) Gaussian, almost always 0
+   * @param J Integer array specifying the number of margins for each distribution
+   * @param N Integer number of observations
+   * @return Real log-probability 
+   */  
+  real mixed_cop_lp(
+    real[,] Yn, int[,] Yb, int[,] Yp, vector[] uraw_b, vector[] uraw_p, matrix mu_glm, real[] sigma, matrix L, matrix[] bounds_ind,
+    vector tmvn_mu,
+    int[] J, int N
+  ) {
+    real lp         = 0;
+    int J_all = sum(J);
+    
+    // loop through independent observations
+    for ( i in 1:N ) {
+      vector[J_all] u;                                       // latent variables
+      vector[J_all] lb = rep_vector(negative_infinity(), J_all); // initialize lower bounds to -inf
+      vector[J_all] ub = rep_vector(positive_infinity(), J_all); // initialize upper bounds to +inf
+      
+      // get indicators of upper/lower bound
+      vector[J_all] lb_ind = col(bounds_ind[1], i);
+      vector[J_all] ub_ind = col(bounds_ind[2], i);
+      
+      int j  = 0;    // counter for 1:J
+      int jn = 0;    // counter for 1:Jn
+      int jb = 0;    // counter for 1:Jb
+      int jp = 0;    // counter for 1:Jp
+      
+      // for normal; increment by log likelihood and obtain u|y deterministically
+      while ( jn < J[1] ) {
+        real z_ij;
+        jn += 1;
+        j  += 1;
+        z_ij    = ( Yn[i,jn] - mu_glm[i,j] ) / sigma[jn];
+        u[j]    = Phi_approx(z_ij);
+      }
+      
+      // for Bernoulli, u|y is random and must update lb and ub:
+      //    if y == 0, upper bound at inv_Phi( y, mu )
+      //    if y == 1, lower bound at inv_Phi(y-1, mu)  (y-1 == 0).
+      while ( jb < J[2] ) {
+        jb   += 1;
+        j    += 1;
+        u[j]  = uraw_b[jb, i];
+        if ( Yb[i,jb] == 0 )
+          ub[j] = inv_Phi( bernoulli_cdf( 0, mu_glm[i,j] ) );
+        else
+          lb[j] = inv_Phi( bernoulli_cdf( 0, mu_glm[i,j] ) );
+      }
+      
+      // for Poisson, u|y is random and must update lb and ub:
+      //    Always upper bound at inv_Phi( y, mu )
+      //    If y != 0, lower bound at inv_Phi(y-1, mu)
+      while (jp < J[3]) {
+        int y_ij;
+        real mu_ij;
+        jp  += 1;
+        j   += 1;
+        u[j]  = uraw_p[jp, i];
+        y_ij  = Yp[i,jp];
+        mu_ij = mu_glm[i,j];
+        ub[j] = inv_Phi( poisson_cdf( y_ij, mu_ij ) );
+        if ( y_ij > 0 ) {
+          lb[j] = inv_Phi( poisson_cdf( y_ij - 1, mu_ij ) );
+        }
+      }
+      lp += multi_normal_cholesky_truncated_lpdf(u | tmvn_mu, L, lb, ub, lb_ind, ub_ind);
+    }   // end i loop
+    return lp;
+  }
+  
+  
+    
+  //-----------------------------------------------------------------
+  // Get GLM means
+  //
+  //    * @param beta long vector of regression coefs for all outcomes
+  //    * @param X      concatenated design matrices
+  //    * @param Jn     number of normal outcomes
+  //    * @param Jb     number of bernoulli outcomes
+  //    * @param Jp     number of poisson outcomes
+  //    * @param J      total number of outcomes
+  //    * @param N      number of observations
+  //    * @param Kj     J-dim integer vector giving number of covariates per variable
+  //    * @param Xindx  Xindx Jx2 matrix giivng start and end indices of X for design matrix
+  //
+  //    * @return NxJ matrix of GLM means
+  //----------------------------------------------------------------
+
+  
+  /**
+   * Get GLM means
+   *
+   * @copyright Ethan Alt, Sean Pinkney 2021 \n
+   *
+   * @param beta Vector of regression coefficients
+   * @param X Matrix concatenated design matrix across all margins
+   * @param J Integer array specifying the number of margins for each distribution
+   * @param Kj Integer array of the number of covariates for each margin
+   * @return Matrix mean outcome matrix from marginal GLMs 
+   */
+  matrix get_means(
+    vector beta, matrix X, int[] J, int[] Kj) {
+    int N = rows(X);
+    matrix[N, num_elements(J)] mu;
+    int pos = 1;
+    int outcome = 1;
+    
+    if (J[1] > 0) {
+      mu[:, outcome] = block(X, 1, 1, N, Kj[1]) * segment(beta, 1, Kj[1]);
+      pos += Kj[1];
+      outcome += 1;
+    }
+    
+    if (J[2] > 0) {
+      mu[:, outcome] = inv_logit( block(X, 1, pos, N, Kj[2]) * segment(beta, pos, Kj[2]) );
+      pos += Kj[2];
+      outcome += 1;
+    }
+    
+    if (J[3] > 0) 
+      mu[:, outcome] = exp( block(X, 1, pos, N, Kj[3]) * segment(beta, pos, Kj[3]) );
+    
+    return(mu);
+  }
+  
+ /**
+   * Get Bound Indicators
+   *
+   * @copyright Ethan Alt 2021 \n
+   *
+   * @param Yn Real 2d-array of normal outcomes
+   * @param Yb Integer 2d-array of Bernoulli outcomes
+   * @param Yp Integer 2d-array of Poisson outcomes
+   * @param N Integer number of observations
+   * @param Jn number of normal outcomes
+   * @param Jb number of bernoulli outcomes
+   * @param Jp number of poisson outcomes
+   * @param J  total number of outcomes
+   * @return N x J x 2 array indicating whether there is a lower/upper bound.
+   */
+  matrix[] get_bounds_indicator(real[,] Yn, int[,] Yb, 
+                                int[,] Yp, int N, int Jn, int Jb, int Jp, int J) {
+    matrix[J,N] lb_ind = rep_matrix(0, J, N);    // initialize to no lower bound
+    matrix[J,N] ub_ind = rep_matrix(0, J, N);    // initialize to no upper bound
+    matrix[J,N] out[2];                          // output is a 2-dim array of JxN matrices
+    int j  = Jn;                                 // counter over J (normal outcomes are unbounded)
+    int jb = 0;                                  // counter over Jb
+    int jp = 0;                                  // counter over Jp
+    // loop over binomial variables (if any)
+    //     upper bound if y == 0 
+    //     lower bound if y == 1
+    while ( jb < Jb ) {
+      jb += 1;
+      j  += 1;
+      for ( i in 1:N ) {
+        if ( Yb[i,jb] == 0 )
+          ub_ind[j,i] = 1;
+        else
+          lb_ind[j,i] = 1;
+      }
+    }
+    // loop over poisson variables (if any)
+    //      always upper bound
+    //      lower bound for y > 0
+    while ( jp < Jp ) {
+      jp += 1;
+      j  += 1;
+      for ( i in 1:N ) {
+        ub_ind[j,i] = 1;
+        if ( Yp[i,jp] > 0 )
+          lb_ind[j,i] = 1;
+      }
+    }
+    out[1] = lb_ind;
+    out[2] = ub_ind;
+    return out;
+  }
+ /** @} */
