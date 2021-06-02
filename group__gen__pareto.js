@@ -1,4 +1,4 @@
-var gpareto_8stan =
+var group__gen__pareto =
 [
     [ "gpareto_cdf", "group__gen__pareto.html#gadb5b249ce4e98ed827f1cd9bbf9e7304", null ],
     [ "gpareto_lccdf", "group__gen__pareto.html#gac64a24b23c765ac040774a703803d752", null ],
