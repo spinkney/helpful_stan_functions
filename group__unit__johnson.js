@@ -1,4 +1,4 @@
-var unit__johnson__su_8stan =
+var group__unit__johnson =
 [
     [ "unit_johnson_cdf", "group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197", null ],
     [ "unit_johnson_lccdf", "group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1", null ],
