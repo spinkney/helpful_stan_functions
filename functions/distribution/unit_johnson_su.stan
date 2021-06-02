@@ -12,7 +12,7 @@
    * The Unit Johnson SU distribution is defined as
    * \f[
    *      p(y \mid \mu,\sigma) =
-   *            \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
+   *            \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
    *   \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
    * restricted to the positive reals, \f$\mathcal{R}^+\f$. 
