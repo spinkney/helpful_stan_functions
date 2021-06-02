@@ -1,5 +1,5 @@
   /**
-   * \ingroup copula
+   * \ingroup univariate
    *  @{ */
    
   /**
