@@ -1,6 +1,9 @@
-   /* Generalized Pareto log density
+  /** @addtogroup gen_pareto Generalized Pareto Distribution Functions
+      * \ingroup univariate
+   *  @{ */
+   
+  /** Generalized Pareto log density
    *
-   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
@@ -17,6 +20,7 @@
    * (see, e.g., https://en.wikipedia.org/wiki/Generalized_Pareto_distribution 
    * for cdf and random number generation)
    *
+   * @copyright Aki Vehtari
    * @param y Vector on (u,Inf)
    * @param ymin Real on [0,Inf) the lower bound of data y
    * @param k Real shape parameter
@@ -39,12 +43,12 @@
       return -sum(y - ymin) / sigma - N * log(sigma); // limit k->0
   }
   
-  /* Generalized Pareto cumulative density function
+  /** Generalized Pareto cumulative density function
    *
-   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
+   * @copyright Aki Vehtari
    * @param y Vector on (u,Inf)
    * @param ymin Real on [0,Inf) the lower bound of data y
    * @param k Real shape parameter
@@ -65,12 +69,12 @@
       return exp(sum(log1m_exp(-(y - ymin) / sigma))); // limit k->0
   }
   
-  /* Generalized Pareto log cumulative density function
+  /** Generalized Pareto log cumulative density function
    *
-   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
+   * @copyright Aki Vehtari
    * @param y Vector on (u,Inf)
    * @param ymin Real on [0,Inf) the lower bound of data y
    * @param k Real shape parameter
@@ -91,12 +95,12 @@
       return sum(log1m_exp(-(y - ymin) / sigma)); // limit k->0
   }
   
-  /* Generalized Pareto log complementary cumulative density function
+  /** Generalized Pareto log complementary cumulative density function
    *
-   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
+   * @copyright Aki Vehtari
    * @param y Vector on (u,Inf)
    * @param ymin Real on [0,Inf) the lower bound of data y
    * @param k Real shape parameter
@@ -117,12 +121,12 @@
       return -sum(y - ymin) / sigma; // limit k->0
   }
   
-  /* Generalized Pareto rng function
+  /** Generalized Pareto rng function
    *
-   * Copyright Aki Vehtari
    * https://mc-stan.org/users/documentation/case-studies/gpareto_functions.html
    * Accessed Feb. 6, 2021 
    *
+   * @copyright Aki Vehtari
    * @param ymin Real on [0,Inf) the lower bound of data y
    * @param k Real shape parameter
    * @param sigma Real on (0,Inf) scale parameter
@@ -136,3 +140,4 @@
     else
       return ymin - sigma * log(uniform_rng(0, 1)); // limit k->0
   }
+  /** @} */
