@@ -21,5 +21,8 @@ var files_dup =
     [ "odeint_euler.stan", "odeint__euler_8stan.html", "odeint__euler_8stan" ],
     [ "odeint_midpoint.stan", "odeint__midpoint_8stan.html", "odeint__midpoint_8stan" ],
     [ "odeint_rk4.stan", "odeint__rk4_8stan.html", "odeint__rk4_8stan" ],
-    [ "triangular.stan", "triangular_8stan.html", "triangular_8stan" ]
+    [ "triangular.stan", "triangular_8stan.html", "triangular_8stan" ],
+    [ "unit_johnson_su.stan", "unit__johnson__su_8stan.html", "unit__johnson__su_8stan" ],
+    [ "unit_johnson_su_icdf.stan", "unit__johnson__su__icdf_8stan.html", "unit__johnson__su__icdf_8stan" ],
+    [ "univariate_definition.stan", "univariate__definition_8stan.html", null ]
 ];

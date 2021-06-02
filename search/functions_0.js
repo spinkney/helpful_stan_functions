@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['angle2chol_94',['angle2chol',['../correlation__angles_8stan.html#abad0f24500b6469472e496cd95acd180',1,'correlation_angles.stan']]],
-  ['angle_5fvec2angle_5fmat_95',['angle_vec2angle_mat',['../correlation__angles_8stan.html#abe2b8ad3b6e1a7872697a7d0ff6b2888',1,'correlation_angles.stan']]]
+  ['angle2chol_107',['angle2chol',['../correlation__angles_8stan.html#abad0f24500b6469472e496cd95acd180',1,'correlation_angles.stan']]],
+  ['angle_5fvec2angle_5fmat_108',['angle_vec2angle_mat',['../correlation__angles_8stan.html#abe2b8ad3b6e1a7872697a7d0ff6b2888',1,'correlation_angles.stan']]]
 ];
