@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['clayton_5fcopula_2estan_82',['clayton_copula.stan',['../clayton__copula_8stan.html',1,'']]],
-  ['copula_5fdefinition_2estan_83',['copula_definition.stan',['../copula__definition_8stan.html',1,'']]],
-  ['correlation_5fangles_2estan_84',['correlation_angles.stan',['../correlation__angles_8stan.html',1,'']]]
+  ['clayton_5fcopula_2estan_72',['clayton_copula.stan',['../clayton__copula_8stan.html',1,'']]],
+  ['copula_5fdefinition_2estan_73',['copula_definition.stan',['../copula__definition_8stan.html',1,'']]],
+  ['correlation_5fangles_2estan_74',['correlation_angles.stan',['../correlation__angles_8stan.html',1,'']]]
 ];
