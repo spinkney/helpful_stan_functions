@@ -12,7 +12,7 @@
    * The Unit Johnson SU distribution is defined as
    * \f[
    *      p(y \mid \mu,\sigma) =
-   *            \frac{\sigma}{y (1 - y) \sqrt(1 + \text{logit}(y)^2)}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
+   *            \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
    *   \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
    * restricted to the positive reals, \f$\mathcal{R}^+\f$. 
@@ -58,7 +58,7 @@
    * The Unit Johnson SU cumulative is defined as
    * \f[
          F(y \mid \mu,\sigma) =
-              \Phi(\mu + \sigma \sigma \sinh^{-1}(\text{logit}(y)) )
+              \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
       \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
    * restricted to the positive reals, \f$\mathbb{R}^+\f$. 
@@ -80,7 +80,7 @@
    * The Unit Johnson SU complementary cumulative distribution is defined as
    * \f[
          S(y \mid \mu,\sigma) =
-              1 - \Phi(\mu + \sigma \sigma \sinh^{-1}(\text{logit}(y)) )
+              1 - \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
       \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
    * restricted to the positive reals, \f$\mathbb{R}^+\f$. 
@@ -104,7 +104,7 @@
          x &= \sinh^{-1}\bigg(\frac{\Phi^{-1}(u) - \mu}{\sigma}\bigg) \\
          y &= \text{inv_logit}(x)
       \f}
-   * where \f$ x \sim \text{Johnson } S_U(\mu, \sigma\f$ \f$ y \sim \text{UJ}S_U{\mu, \sigma}\f$.
+   * where \f$ x \sim \text{Johnson }S_U(\mu, \sigma)\f$ and \f$ y \sim UJS_U(\mu, \sigma)\f$.
    *
    * @copyright Sean Pinkney, 2021 
    * @author Sean Pinkney
