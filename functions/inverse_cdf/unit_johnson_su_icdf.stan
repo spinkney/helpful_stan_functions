@@ -2,7 +2,7 @@
    * Unit Johnson SU Inverse CDF
    * 
    * \f{aligned}{
-   *  F^{-1}(u, \, \mu, \, \sigma) &= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(u) - mu}{\sigma}\bigg) \bigg]\\
+   *  F^{-1}(u, \, \mu, \, \sigma) &= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(u) - \mu}{\sigma}\bigg) \bigg]\\
    * \f}
    *
    * @author Sean Pinkney

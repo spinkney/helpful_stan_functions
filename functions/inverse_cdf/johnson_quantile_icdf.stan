@@ -1,0 +1,235 @@
+  /** @addtogroup johnson_quantile_icdf Johnson Quantile Parameterized Distributions (J-QPD) functions
+   *
+   * The distribution is defined for outcomes bounded between the open (0, 1) interval. 
+   * It is described in detail at Gündüz, S., & Korkmaz, M. Ç. (2020). 
+   * A New Unit Distribution Based On The Unbounded Johnson Distribution 
+   * Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3),
+   * 471-490. https://doi.org/10.18187/pjsor.v16i3.3421.
+   *
+   * \ingroup icdf
+   *  @{ */
+  
+  /**
+   *    Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments
+   *
+   * \f{aligned}{
+   *      F^{-1}(u, l, x_\alpha) = 
+   *            l + \theta \exp(\lambda \sinh(\sinh_{-1}(\delta \Phi^{-1}(u) + \sinh^{-1}(nc\delta))))
+   *
+   *   \f}
+   * where 
+   * \f{aligned}{
+   *      c &= \Phi^{-1}(1 - \alpha), \\
+   *      L &= \log(x_\alpha - l), \\
+   *      B &= \log(x_{0.5} - l), \\
+   *      H &= \log(x_{1-\alpha} - l), \\
+   *      n &= \text{sgn}(L + H - 2B) \\
+   *      \theta &= 
+   *            \begin{cases}
+   *               x_alpha - 1, \, n = 1 \\
+   *               x_{0.5} - l, \, n = 0 \\
+   *               x_{1-\alpha} - 1, \, n = -1 
+   *             \end{cases}, \\
+   *     \delta &= \frac{1}{c}\sinh\bigg( \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)} \bigg) \bigg), \\
+   *     \lambda &= \frac{1}{\delta c}\min(H - B, \, B - L).
+   *  \f}
+   *
+   *  See equation 9 of
+   *  http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf
+   *   
+   *  @copyright Ben Goodrich, 2020
+   *  @param p real cumulative probability
+   *  @param alpha fixed proportion of distribution below quantiles[1]
+   *  @param lower_bound real lower bound to the random variable
+   *  @param quantiles vector of size three ordered quantiles
+   *  @return real number greater than lower_bound
+   *  @throws reject if \f$ p \notin [0, 1] \f$ 
+   *  @throws reject if \f$ \alpha \notin [0, 1] \f$
+   *  @throws reject if quantiles \f$ != 3\f$  
+   */
+  real JQPDS_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
+    if (p < 0 || p > 1)         reject("p must be between 0 and 1");
+    if (alpha < 0 || alpha > 1) reject("alpha must be between 0 and 1");
+    if (rows(quantiles) != 3)   reject("quantiles must have three elements");
+    if (in_order({lower_bound, quantiles[1], quantiles[2], 
+                  quantiles[3], positive_infinity()})) {
+      real c = inv_Phi(1 - alpha);
+      vector[3] quantiles_ = quantiles - lower_bound;
+      real L = log(quantiles_[1]);
+      real B = log(quantiles_[2]);
+      real H = log(quantiles_[3]);
+      real HmL = H - L;
+      real denom = fmin(B - L, H - B);
+      real numer = sinh(acosh(0.5 * HmL / denom));
+      real delta = numer / c;
+      real lambda = denom / numer;
+      real LHm2B = L + H - 2 * B;
+      real k = sqrt(1 + square(numer));
+      real n;
+      real theta;
+      real z;
+      if (LHm2B < 0) {
+        n = -1;
+        theta = quantiles_[3];
+        z = inv_Phi(p);
+      } else if (LHm2B > 0) {
+        n = 1;
+        theta = quantiles_[1];
+        z = inv_Phi(p);
+      } else { // LHm2B = 0 -> removable discontinuity
+        real sigma = delta != 0 ? lambda * delta : (H - B) / c;
+        theta = quantiles_[2];
+        return lower_bound + theta * exp(sigma * inv_Phi(p));
+      }
+      // return lower_bound + theta * exp(lambda * sinh(asinh(delta * z) + asinh(n * numer)));
+      // http://www.metalogdistributions.com/images/J-QPD_Parameterizations.pdf section 1.2
+      return lower_bound + theta * 
+        exp(lambda * delta * (k * z + n * c * sqrt(1 + square(delta * z))));
+    }
+    return not_a_number(); // never reaches
+  }
+
+ /**
+  *   Inverse CDF of the J-QPD-S-II semi-bounded distribution, which lacks moments
+  *   
+  * \f{aligned}{
+   *      F^{-1}(u, l, x_\alpha) = 
+   *            l + \theta \exp(\lambda \sinh(\delta \Phi^{-1}(u) + nc))
+   *   \f}
+   * where 
+   * \f{aligned}{
+   *      c &= \Phi^{-1}(1 - \alpha), \\
+   *      L &= \log(x_\alpha - l), \\
+   *      B &= \log(x_{0.5} - l), \\
+   *      H &= \log(x_{1-\alpha} - l), \\
+   *      n &= \text{sgn}(L + H - 2B) \\
+   *      \theta &= 
+   *            \begin{cases}
+   *               x_alpha - 1, \, n = 1 \\
+   *               x_{0.5} - l, \, n = 0 \\
+   *               x_{1-\alpha} - 1, \, n = -1 
+   *             \end{cases}, \\
+   *     \delta &= \frac{1}{c} \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)}  \bigg), \\
+   *     \lambda &= \frac{1}{\sinh(\delta c)}\min(H - B, \, B - L).
+   *  \f}
+   *  See equation 14 of
+   *   http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf
+   *   It is the limit of the J-QPD-B distribution as the upper bound diverges.
+   *   
+   *  @copyright Ben Goodrich, 2020
+   *  @param p real cumulative probability
+   *  @param alpha fixed proportion of distribution below quantiles[1]
+   *  @param lower_bound real lower bound to the random variable
+   *  @param quantiles vector of size three ordered quantiles
+   *  @return real number greater than lower_bound
+   *  @throws reject if \f$ p \notin [0, 1] \f$ 
+   *  @throws reject if \f$ \alpha \notin [0, 1] \f$
+   *  @throws reject if quantiles \f$ != 3\f$ 
+   */
+  real JQPDS2_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
+    if (p < 0 || p > 1)         reject("p must be between 0 and 1");
+    if (alpha < 0 || alpha > 1) reject("alpha must be between 0 and 1");
+    if (rows(quantiles) != 3)   reject("quantiles must have three elements");
+    if (in_order({lower_bound, quantiles[1], quantiles[2], 
+                  quantiles[3], positive_infinity()})) {
+      real c = inv_Phi(1 - alpha);
+      vector[3] quantiles_ = quantiles - lower_bound;
+      real L = log(quantiles_[1]);
+      real B = log(quantiles_[2]);
+      real H = log(quantiles_[3]);
+      real HmL = H - L;
+      real denom = fmin(B - L, H - B);
+      real temp = acosh(0.5 * HmL / denom);
+      real delta = temp * inv(c);
+      real lambda = denom * inv(sinh(temp));
+      real LHm2B = L + H - 2 * B;
+      real n;
+      real theta;
+      if (LHm2B < 0) {
+        n = -1;
+        theta = quantiles_[3];
+      } else if (LHm2B > 0) {
+        n = 1;
+        theta = quantiles_[1];
+      } else { // LHm2B = 0 -> removable discontinuity
+        return lower_bound + quantiles[2] * exp(lambda * sinh(delta * inv_Phi(p)));
+      }
+      return lower_bound + theta * exp(lambda * sinh(delta * (inv_Phi(p) + n * c)));
+    }
+    return not_a_number(); // never reaches
+  }
+
+  /**
+   * Inverse CDF of the J-QPD-B bounded distribution
+   *   
+   * \f{aligned}{
+   *      F^{-1}(p, u, l, x_\alpha) = 
+   *            l + (u - l)\theta \Phi(\xi + \lambda \sinh(\delta \Phi^{-1}(p) + nc))
+   *   \f}
+   * where 
+   * \f{aligned}{
+   *      c &= \Phi^{-1}(1 - \alpha), \\
+   *      L &= \Phi^{-1}\bigg( \frac{x_\alpha - l}{u - l} \bigg), \\
+   *      B &= \Phi^{-1}\bigg( \frac{ x_{0.5} - l}{u - l} \bigg), \\
+   *      H &= \Phi^{-1}\bigg( \frac{x_{1-\alpha} - l}{u - l} \bigg), \\
+   *      n &= \text{sgn}(L + H - 2B) \\
+   *      \theta &= 
+   *            \begin{cases}
+   *               L, \, n = 1 \\
+   *               B, \, n = 0 \\
+   *               H, \, n = -1 
+   *             \end{cases}, \\
+   *     \delta &= \frac{1}{c} \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)}  \bigg), \\
+   *     \lambda &= \frac{H - L}{\sinh(2\delta c)}.
+   *  \f}
+   *
+   *   See equation 7 of
+   *   http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf
+   *  
+   * @copyright Ben Goodrich, 2020
+   * @param p real cumulative probability
+   * @param alpha fixed proportion of distribution below quantiles[1]
+   * @param bounds vector of size two containing the lower and upper bounds
+   * @param quantiles vector of size three ordered quantiles
+   * @return real number greater than lower_bound
+   * @throws reject if \f$ p \notin [0, 1] \f$ 
+   * @throws reject if bounds \f$ != 2 \f$ 
+   * @throws reject if \f$ \alpha \notin [0, 1] \f$
+   * @throws reject if quantiles \f$ != 3\f$ 
+   */
+  real JQPDB_icdf(real p, row_vector bounds, data real alpha, vector quantiles) {
+    if (cols(bounds) != 2)      reject("bounds must have two elements");
+    if (bounds[2] == positive_infinity()) {
+      return JQPDS2_icdf(p, alpha, bounds[1], quantiles);
+    }
+    if (p < 0 || p > 1)         reject("p must be between 0 and 1");
+    if (alpha < 0 || alpha > 1) reject("alpha must be between 0 and 1");
+    if (rows(quantiles) != 3)   reject("quantiles must have three elements");
+    if (in_order({bounds[1], quantiles[1], quantiles[2], quantiles[3], bounds[2]})) {
+      real c = inv_Phi(1 - alpha);
+      real l = bounds[1];
+      real u = bounds[2];
+      real uml = u - l;
+      real L = inv_Phi( (quantiles[1] - l) / uml );
+      real B = inv_Phi( (quantiles[2] - l) / uml );
+      real H = inv_Phi( (quantiles[3] - l) / uml );
+      real HmL = H - L;
+      real delta = acosh(0.5 * HmL / fmin(B - L, H - B)) / c;
+      real lambda = HmL / sinh(2 * delta * c);
+      real LHm2B = L + H - 2 * B;
+      real n;
+      real zeta;
+      if (LHm2B < 0) {
+        n = -1;
+        zeta = H;
+      } else if (LHm2B > 0) {
+        n = 1;
+        zeta = L;
+      } else { // LHm2B = 0 -> removable discontinuity
+        return l + uml * Phi(B + 0.5 * HmL / c * inv_Phi(p));
+      }
+      return l + uml * Phi(zeta + lambda * sinh(delta * (inv_Phi(p) + n * c)));
+    }
+    return not_a_number(); // never reached
+  }
+   /** @} */
