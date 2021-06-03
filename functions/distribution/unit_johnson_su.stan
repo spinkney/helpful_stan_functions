@@ -38,7 +38,7 @@
    * The Unit Johnson SU distribution is defined as
    * \f[
          F(y \mid \mu,\sigma) =
-              \Phi(\mu + \sigma \sigma \sinh^{-1}(\text{logit}(y)) )
+              \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
       \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
    * restricted to the positive reals, \f$\mathbb{R}^+\f$. 

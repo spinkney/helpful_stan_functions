@@ -1,16 +1,14 @@
   /** @addtogroup johnson_quantile_icdf Johnson Quantile Parameterized Distributions (J-QPD) functions
    *
-   * The distribution is defined for outcomes bounded between the open (0, 1) interval. 
-   * It is described in detail at Gündüz, S., & Korkmaz, M. Ç. (2020). 
-   * A New Unit Distribution Based On The Unbounded Johnson Distribution 
-   * Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3),
-   * 471-490. https://doi.org/10.18187/pjsor.v16i3.3421.
+   * Christopher C. Hadlock, J. Eric Bickel
+   * The Generalized Johnson Quantile-Parameterized Distribution System. 
+   * Decision Analysis 16 (1) 67-85 https://doi.org/10.1287/deca.2018.0376
    *
    * \ingroup icdf
    *  @{ */
   
   /**
-   *    Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments
+   *  Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments
    *
    * \f{aligned}{
    *      F^{-1}(p, l, x_\alpha) = 
