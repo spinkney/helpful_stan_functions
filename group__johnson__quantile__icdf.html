@@ -216,10 +216,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Inverse CDF of the J-QPD-S-II semi-bounded distribution, which lacks moments</p>
 <p class="formulaDsp">
-\begin{aligned} F^{-1}(u, l, x_\alpha) = l + \theta \exp(\lambda \sinh(\delta \Phi^{-1}(u) + nc)) \end{aligned}
+\begin{aligned} F^{-1}(p, l, x_\alpha) = l + \theta \exp(\lambda \sinh(\delta \Phi^{-1}(p) + nc)) \end{aligned}
 </p>
 <p> where </p><p class="formulaDsp">
-\begin{aligned} c &amp;= \Phi^{-1}(1 - \alpha), \\ L &amp;= \log(x_\alpha - l), \\ B &amp;= \log(x_{0.5} - l), \\ H &amp;= \log(x_{1-\alpha} - l), \\ n &amp;= \text{sgn}(L + H - 2B) \\ \theta &amp;= \begin{cases} x_alpha - 1, \, n = 1 \\ x_{0.5} - l, \, n = 0 \\ x_{1-\alpha} - 1, \, n = -1 \end{cases}, \\ \delta &amp;= \frac{1}{c} \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)} \bigg), \\ \lambda &amp;= \frac{1}{\sinh(\delta c)}\min(H - B, \, B - L). \end{aligned}
+\begin{aligned} c &amp;= \Phi^{-1}(1 - \alpha), \\ L &amp;= \log(x_\alpha - l), \\ B &amp;= \log(x_{0.5} - l), \\ H &amp;= \log(x_{1-\alpha} - l), \\ n &amp;= \text{sgn}(L + H - 2B) \\ \theta &amp;= \begin{cases} x_\alpha - 1, \, n = 1 \\ x_{0.5} - l, \, n = 0 \\ x_{1-\alpha} - 1, \, n = -1 \end{cases}, \\ \delta &amp;= \frac{1}{c} \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)} \bigg), \\ \lambda &amp;= \frac{1}{\sinh(\delta c)}\min(H - B, \, B - L). \end{aligned}
 </p>
 <p> See equation 14 of <a href="http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf">http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf</a> It is the limit of the J-QPD-B distribution as the upper bound diverges.</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich, 2020 </dd></dl>
@@ -283,10 +283,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments</p>
 <p class="formulaDsp">
-\begin{aligned} F^{-1}(u, l, x_\alpha) = l + \theta \exp(\lambda \sinh(\sinh_{-1}(\delta \Phi^{-1}(u) + \sinh^{-1}(nc\delta)))) \end{aligned}
+\begin{aligned} F^{-1}(p, l, x_\alpha) = l + \theta \exp(\lambda \sinh(\sinh_{-1}(\delta \Phi^{-1}(p) + \sinh^{-1}(nc\delta)))) \end{aligned}
 </p>
 <p> where </p><p class="formulaDsp">
-\begin{aligned} c &amp;= \Phi^{-1}(1 - \alpha), \\ L &amp;= \log(x_\alpha - l), \\ B &amp;= \log(x_{0.5} - l), \\ H &amp;= \log(x_{1-\alpha} - l), \\ n &amp;= \text{sgn}(L + H - 2B) \\ \theta &amp;= \begin{cases} x_alpha - 1, \, n = 1 \\ x_{0.5} - l, \, n = 0 \\ x_{1-\alpha} - 1, \, n = -1 \end{cases}, \\ \delta &amp;= \frac{1}{c}\sinh\bigg( \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)} \bigg) \bigg), \\ \lambda &amp;= \frac{1}{\delta c}\min(H - B, \, B - L). \end{aligned}
+\begin{aligned} c &amp;= \Phi^{-1}(1 - \alpha), \\ L &amp;= \log(x_\alpha - l), \\ B &amp;= \log(x_{0.5} - l), \\ H &amp;= \log(x_{1-\alpha} - l), \\ n &amp;= \text{sgn}(L + H - 2B) \\ \theta &amp;= \begin{cases} x_\alpha - 1, \, n = 1 \\ x_{0.5} - l, \, n = 0 \\ x_{1-\alpha} - 1, \, n = -1 \end{cases}, \\ \delta &amp;= \frac{1}{c}\sinh\bigg( \cosh^{-1}\bigg(\frac{H - L}{2\min(B-L, \, H-B)} \bigg) \bigg), \\ \lambda &amp;= \frac{1}{\delta c}\min(H - B, \, B - L). \end{aligned}
 </p>
 <p>See equation 9 of <a href="http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf">http://metalogdistributions.com/images/Johnson_Quantile-Parameterized_Distributions.pdf</a></p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich, 2020 </dd></dl>

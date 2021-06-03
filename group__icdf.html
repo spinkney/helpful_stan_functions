@@ -107,8 +107,8 @@ Modules</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ga4ecd7df27b5a93b9dd899b4c15636c0c"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga4ecd7df27b5a93b9dd899b4c15636c0c">lognormal_icdf</a> (real p, real mu, real sigma)</td></tr>
 <tr class="separator:ga4ecd7df27b5a93b9dd899b4c15636c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga06be3106ee6a7a093d57706c36426876"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga06be3106ee6a7a093d57706c36426876">unit_johnson_icdf</a> (real u, real mu, real sigma)</td></tr>
-<tr class="separator:ga06be3106ee6a7a093d57706c36426876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4eebabf26d36a26f267c459600a08802"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga4eebabf26d36a26f267c459600a08802">unit_johnson_icdf</a> (real p, real mu, real sigma)</td></tr>
+<tr class="separator:ga4eebabf26d36a26f267c459600a08802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>In probability and statistics, the inverse cumulative distribution function, sometimes called a quantile function is, associated with a probability distribution of a random variable, specifies the value of the random variable such that the probability of the variable being less than or equal to that value equals the given probability. <br  />
@@ -173,8 +173,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga06be3106ee6a7a093d57706c36426876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga06be3106ee6a7a093d57706c36426876">&#9670;&nbsp;</a></span>unit_johnson_icdf()</h2>
+<a id="ga4eebabf26d36a26f267c459600a08802"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4eebabf26d36a26f267c459600a08802">&#9670;&nbsp;</a></span>unit_johnson_icdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +183,7 @@ Functions</h2></td></tr>
           <td class="memname">real unit_johnson_icdf </td>
           <td>(</td>
           <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>u</em>, </td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -206,12 +206,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Unit Johnson SU Inverse CDF</p>
 <p class="formulaDsp">
-\begin{aligned} F^{-1}(u, \, \mu, \, \sigma) &amp;= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(u) - \mu}{\sigma}\bigg) \bigg]\\ \end{aligned}
+\begin{aligned} F^{-1}(p, \, \mu, \, \sigma) &amp;= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(p) - \mu}{\sigma}\bigg) \bigg]\\ \end{aligned}
 </p>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
     <tr><td class="paramname">mu</td><td>Real \((-\infty, +\infty)\) </td></tr>
     <tr><td class="paramname">sigma</td><td>Real \((0, +\infty)\) </td></tr>
   </table>
