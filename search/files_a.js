@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['unit_5fjohnson_5fsu_2estan_106',['unit_johnson_su.stan',['../unit__johnson__su_8stan.html',1,'']]],
-  ['unit_5fjohnson_5fsu_5ficdf_2estan_107',['unit_johnson_su_icdf.stan',['../unit__johnson__su__icdf_8stan.html',1,'']]],
-  ['univariate_5fdefinition_2estan_108',['univariate_definition.stan',['../univariate__definition_8stan.html',1,'']]]
+  ['odeint_5feuler_2estan_115',['odeint_euler.stan',['../odeint__euler_8stan.html',1,'']]],
+  ['odeint_5fmidpoint_2estan_116',['odeint_midpoint.stan',['../odeint__midpoint_8stan.html',1,'']]],
+  ['odeint_5frk4_2estan_117',['odeint_rk4.stan',['../odeint__rk4_8stan.html',1,'']]]
 ];

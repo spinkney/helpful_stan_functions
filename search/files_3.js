@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['gpareto_2estan_89',['gpareto.stan',['../gpareto_8stan.html',1,'']]],
-  ['gumbel_5fcopula_2estan_90',['gumbel_copula.stan',['../gumbel__copula_8stan.html',1,'']]]
+  ['frank_5fcopula_2estan_99',['frank_copula.stan',['../frank__copula_8stan.html',1,'']]]
 ];

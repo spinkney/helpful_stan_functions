@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ode_20solvers_161',['ODE solvers',['../group__odeint.html',1,'']]]
+  ['logical_20functions_20for_20arrays_177',['Logical functions for arrays',['../group__logical__array.html',1,'']]]
 ];

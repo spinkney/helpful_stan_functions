@@ -91,12 +91,18 @@ $(document).ready(function(){initNavTree('group__icdf.html',''); initResizable()
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Inverse Cumulative Distribution Functions</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__johnson__quantile__icdf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__johnson__quantile__icdf.html">Johnson Quantile Parameterized Distributions (J-QPD) functions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga4ecd7df27b5a93b9dd899b4c15636c0c"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga4ecd7df27b5a93b9dd899b4c15636c0c">lognormal_icdf</a> (real p, real mu, real sigma)</td></tr>
@@ -200,7 +206,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Unit Johnson SU Inverse CDF</p>
 <p class="formulaDsp">
-\begin{aligned} F^{-1}(u, \, \mu, \, \sigma) &amp;= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(u) - mu}{\sigma}\bigg) \bigg]\\ \end{aligned}
+\begin{aligned} F^{-1}(u, \, \mu, \, \sigma) &amp;= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(u) - \mu}{\sigma}\bigg) \bigg]\\ \end{aligned}
 </p>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>

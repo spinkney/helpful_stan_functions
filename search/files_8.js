@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['odeint_5feuler_2estan_102',['odeint_euler.stan',['../odeint__euler_8stan.html',1,'']]],
-  ['odeint_5fmidpoint_2estan_103',['odeint_midpoint.stan',['../odeint__midpoint_8stan.html',1,'']]],
-  ['odeint_5frk4_2estan_104',['odeint_rk4.stan',['../odeint__rk4_8stan.html',1,'']]]
+  ['mainpage_2estan_110',['mainpage.stan',['../mainpage_8stan.html',1,'']]],
+  ['mixed_5fcopula_2estan_111',['mixed_copula.stan',['../mixed__copula_8stan.html',1,'']]],
+  ['multi_5fnormal_5fcholesky_5ftruncated_2estan_112',['multi_normal_cholesky_truncated.stan',['../multi__normal__cholesky__truncated_8stan.html',1,'']]],
+  ['multivariate_5fdefinition_2estan_113',['multivariate_definition.stan',['../multivariate__definition_8stan.html',1,'']]]
 ];

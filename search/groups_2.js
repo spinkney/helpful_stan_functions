@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['explicit_20fixed_2dstep_20methods_152',['Explicit fixed-step methods',['../group__fixed__step.html',1,'']]]
+  ['clayton_20copula_20functions_168',['Clayton Copula Functions',['../group__clayton.html',1,'']]],
+  ['copula_20functions_169',['Copula Functions',['../group__copula.html',1,'']]]
 ];

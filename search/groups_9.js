@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['truncated_20multivariate_20normal_20functions_162',['Truncated Multivariate Normal Functions',['../group__tmvn.html',1,'']]]
+  ['mixed_20discrete_2dcontinuous_20gaussian_20copula_20functions_178',['Mixed Discrete-Continuous Gaussian Copula Functions',['../group__mixed__copula.html',1,'']]],
+  ['multivariate_20distributions_179',['Multivariate Distributions',['../group__multivariate.html',1,'']]]
 ];

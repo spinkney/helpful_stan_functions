@@ -1,5 +1,6 @@
 var modules =
 [
+    [ "Array Operation Functions", "group__array.html", "group__array" ],
     [ "Copula Functions", "group__copula.html", "group__copula" ],
     [ "Multivariate Distributions", "group__multivariate.html", "group__multivariate" ],
     [ "Univariate Distribution Functions", "group__univariate.html", "group__univariate" ],

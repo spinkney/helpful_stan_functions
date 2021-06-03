@@ -1,5 +1,6 @@
 var files_dup =
 [
+    [ "array_ops_definition.stan", "array__ops__definition_8stan.html", null ],
     [ "clayton_copula.stan", "clayton__copula_8stan.html", "clayton__copula_8stan" ],
     [ "copula_definition.stan", "copula__definition_8stan.html", null ],
     [ "correlation_angles.stan", "correlation__angles_8stan.html", "correlation__angles_8stan" ],
@@ -12,6 +13,8 @@ var files_dup =
     [ "interp_1d_linear.stan", "interp__1d__linear_8stan.html", "interp__1d__linear_8stan" ],
     [ "interpolation_definition.stan", "interpolation__definition_8stan.html", null ],
     [ "inv_erf.stan", "inv__erf_8stan.html", "inv__erf_8stan" ],
+    [ "johnson_quantile_icdf.stan", "johnson__quantile__icdf_8stan.html", "johnson__quantile__icdf_8stan" ],
+    [ "logical_array.stan", "logical__array_8stan.html", "logical__array_8stan" ],
     [ "lognormal_icdf.stan", "lognormal__icdf_8stan.html", "lognormal__icdf_8stan" ],
     [ "mainpage.stan", "mainpage_8stan.html", null ],
     [ "mixed_copula.stan", "mixed__copula_8stan.html", "mixed__copula_8stan" ],

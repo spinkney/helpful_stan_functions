@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mixed_20discrete_2dcontinuous_20gaussian_20copula_20functions_158',['Mixed Discrete-Continuous Gaussian Copula Functions',['../group__mixed__copula.html',1,'']]],
-  ['multivariate_20distributions_159',['Multivariate Distributions',['../group__multivariate.html',1,'']]]
+  ['interpolation_20functions_174',['Interpolation Functions',['../group__interpolation.html',1,'']]],
+  ['inverse_20cumulative_20distribution_20functions_175',['Inverse Cumulative Distribution Functions',['../group__icdf.html',1,'']]]
 ];

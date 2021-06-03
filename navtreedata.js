@@ -39,7 +39,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"clayton__copula_8stan.html"
+"array__ops__definition_8stan.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

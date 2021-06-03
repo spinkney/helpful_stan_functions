@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['lognormal_5ficdf_42',['lognormal_icdf',['../group__icdf.html#ga4ecd7df27b5a93b9dd899b4c15636c0c',1,'lognormal_icdf.stan']]],
-  ['lognormal_5ficdf_2estan_43',['lognormal_icdf.stan',['../lognormal__icdf_8stan.html',1,'']]],
-  ['lower_5fele_44',['lower_ele',['../triangular_8stan.html#affec613f8198505bcdf91ee4284be1e1',1,'triangular.stan']]]
+  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_45',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__quantile__icdf.html',1,'']]],
+  ['johnson_5fquantile_5ficdf_2estan_46',['johnson_quantile_icdf.stan',['../johnson__quantile__icdf_8stan.html',1,'']]],
+  ['jqpdb_5ficdf_47',['JQPDB_icdf',['../group__johnson__quantile__icdf.html#gadb1bb60d59a9e07c282fb792123c4d8a',1,'johnson_quantile_icdf.stan']]],
+  ['jqpds2_5ficdf_48',['JQPDS2_icdf',['../group__johnson__quantile__icdf.html#ga183cedcb00bb35733e4322503ff7213d',1,'johnson_quantile_icdf.stan']]],
+  ['jqpds_5ficdf_49',['JQPDS_icdf',['../group__johnson__quantile__icdf.html#ga0e1d5261f7de468ea304b582591090e6',1,'johnson_quantile_icdf.stan']]]
 ];

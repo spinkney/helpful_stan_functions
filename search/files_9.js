@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['triangular_2estan_105',['triangular.stan',['../triangular_8stan.html',1,'']]]
+  ['normal_5fcopula_2estan_114',['normal_copula.stan',['../normal__copula_8stan.html',1,'']]]
 ];

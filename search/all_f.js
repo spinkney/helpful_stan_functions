@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['triangular_2estan_71',['triangular.stan',['../triangular_8stan.html',1,'']]],
-  ['truncated_20multivariate_20normal_20functions_72',['Truncated Multivariate Normal Functions',['../group__tmvn.html',1,'']]]
+  ['stan_20udf_20documentation_80',['Stan UDF Documentation',['../index.html',1,'']]]
 ];

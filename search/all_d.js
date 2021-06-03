@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['poisson_5fmarginal_69',['poisson_marginal',['../group__mixed__copula.html#ga3fee2198e779462966f7981371336970',1,'mixed_copula.stan']]]
+  ['ode_20solvers_72',['ODE solvers',['../group__odeint.html',1,'']]],
+  ['odeint_5feuler_73',['odeint_euler',['../group__fixed__step.html#ga3ec8fa6ef1ee5b726c9c9f6c95fc6f29',1,'odeint_euler.stan']]],
+  ['odeint_5feuler_2estan_74',['odeint_euler.stan',['../odeint__euler_8stan.html',1,'']]],
+  ['odeint_5fmidpoint_75',['odeint_midpoint',['../group__fixed__step.html#gaba5b3bef4d52f98a21db029436d83bd7',1,'odeint_midpoint.stan']]],
+  ['odeint_5fmidpoint_2estan_76',['odeint_midpoint.stan',['../odeint__midpoint_8stan.html',1,'']]],
+  ['odeint_5frk4_77',['odeint_rk4',['../group__fixed__step.html#gac74c5da9363070d83dd681a4abf92b61',1,'odeint_rk4.stan']]],
+  ['odeint_5frk4_2estan_78',['odeint_rk4.stan',['../odeint__rk4_8stan.html',1,'']]]
 ];

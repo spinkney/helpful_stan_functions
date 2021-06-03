@@ -111,7 +111,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga8d145db9da7348a01b8f35ca806ef3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The distribution is described in detail at Gündüz, S., &amp; Korkmaz, M. Ç. (2020). A New Unit Distribution Based On The Unbounded Johnson Distribution Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3), 471-490. <a href="https://doi.org/10.18187/pjsor.v16i3.3421">https://doi.org/10.18187/pjsor.v16i3.3421</a>. </p>
+<p>The distribution is defined for outcomes bounded between the open (0, 1) interval. It is described in detail at Gündüz, S., &amp; Korkmaz, M. Ç. (2020). A New Unit Distribution Based On The Unbounded Johnson Distribution Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3), 471-490. <a href="https://doi.org/10.18187/pjsor.v16i3.3421">https://doi.org/10.18187/pjsor.v16i3.3421</a>. </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7ac9730c4a0dc628910e7dfafb416197"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7ac9730c4a0dc628910e7dfafb416197">&#9670;&nbsp;</a></span>unit_johnson_cdf()</h2>
@@ -297,14 +297,14 @@ Functions</h2></td></tr>
 <p>The Unit Johnson SU distribution is defined as </p><p class="formulaDsp">
 \[ p(y \mid \mu,\sigma) = \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) ) \]
 </p>
-<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathcal{R}^+\).</p>
+<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathbb{R}^+\).</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Vector </td></tr>
     <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0,Inf) scale parameter </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real (0, Inf) scale parameter </td></tr>
   </table>
   </dd>
 </dl>
@@ -347,7 +347,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0,Inf) scale parameter </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real (0, Inf) scale parameter </td></tr>
   </table>
   </dd>
 </dl>

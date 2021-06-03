@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frank_5fcopula_2estan_88',['frank_copula.stan',['../frank__copula_8stan.html',1,'']]]
+  ['expect_5fequal_2estan_98',['expect_equal.stan',['../expect__equal_8stan.html',1,'']]]
 ];

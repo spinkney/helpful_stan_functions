@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['lognormal_5ficdf_128',['lognormal_icdf',['../group__icdf.html#ga4ecd7df27b5a93b9dd899b4c15636c0c',1,'lognormal_icdf.stan']]],
-  ['lower_5fele_129',['lower_ele',['../triangular_8stan.html#affec613f8198505bcdf91ee4284be1e1',1,'triangular.stan']]]
+  ['jqpdb_5ficdf_142',['JQPDB_icdf',['../group__johnson__quantile__icdf.html#gadb1bb60d59a9e07c282fb792123c4d8a',1,'johnson_quantile_icdf.stan']]],
+  ['jqpds2_5ficdf_143',['JQPDS2_icdf',['../group__johnson__quantile__icdf.html#ga183cedcb00bb35733e4322503ff7213d',1,'johnson_quantile_icdf.stan']]],
+  ['jqpds_5ficdf_144',['JQPDS_icdf',['../group__johnson__quantile__icdf.html#ga0e1d5261f7de468ea304b582591090e6',1,'johnson_quantile_icdf.stan']]]
 ];

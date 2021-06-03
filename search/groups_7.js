@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normal_20copula_20functions_160',['Normal Copula Functions',['../group__normal.html',1,'']]]
+  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_176',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__quantile__icdf.html',1,'']]]
 ];

@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['icdf_5fdefinition_2estan_91',['icdf_definition.stan',['../icdf__definition_8stan.html',1,'']]],
-  ['interp_5f1d_5fcubic_2estan_92',['interp_1d_cubic.stan',['../interp__1d__cubic_8stan.html',1,'']]],
-  ['interp_5f1d_5flinear_2estan_93',['interp_1d_linear.stan',['../interp__1d__linear_8stan.html',1,'']]],
-  ['interpolation_5fdefinition_2estan_94',['interpolation_definition.stan',['../interpolation__definition_8stan.html',1,'']]],
-  ['inv_5ferf_2estan_95',['inv_erf.stan',['../inv__erf_8stan.html',1,'']]]
+  ['gpareto_2estan_100',['gpareto.stan',['../gpareto_8stan.html',1,'']]],
+  ['gumbel_5fcopula_2estan_101',['gumbel_copula.stan',['../gumbel__copula_8stan.html',1,'']]]
 ];
