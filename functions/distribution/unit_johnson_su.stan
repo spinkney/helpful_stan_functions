@@ -1,6 +1,7 @@
   /** @addtogroup unit_johnson Unit Johnson SU distribution functions
    *
-   * The distribution is described in detail at Gündüz, S., & Korkmaz, M. Ç. (2020). 
+   * The distribution is defined for outcomes bounded between the open (0, 1) interval. 
+   * It is described in detail at Gündüz, S., & Korkmaz, M. Ç. (2020). 
    * A New Unit Distribution Based On The Unbounded Johnson Distribution 
    * Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3),
    * 471-490. https://doi.org/10.18187/pjsor.v16i3.3421.
@@ -15,13 +16,13 @@
    *            \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) )
    *   \f]
    * where \f$\mu\f$ is the location parameter defined on the \f$\mathbb{R}\f$ and \f$\sigma\f$ is a scale parameter,
-   * restricted to the positive reals, \f$\mathcal{R}^+\f$. 
+   * restricted to the positive reals, \f$\mathbb{R}^+\f$. 
    *
    * @copyright Sean Pinkney, 2021 
    * @author Sean Pinkney
    * @param x Vector 
    * @param mu Real 
-   * @param sigma Real (0,Inf) scale parameter
+   * @param sigma Real (0, Inf) scale parameter
    * @return log probability
    */
   real unit_johnson_lpdf (vector x, real mu, real sigma){
@@ -109,7 +110,7 @@
    * @copyright Sean Pinkney, 2021 
    * @author Sean Pinkney
    * @param mu Real 
-   * @param sigma Real (0,Inf) scale parameter
+   * @param sigma Real (0, Inf) scale parameter
    * @return realization of Unit Johhson SU with given mu and sigma
    */
   real unit_johnson_rng (real mu, real sigma) {
