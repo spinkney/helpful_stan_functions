@@ -13,8 +13,8 @@
    *    Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments
    *
    * \f{aligned}{
-   *      F^{-1}(u, l, x_\alpha) = 
-   *            l + \theta \exp(\lambda \sinh(\sinh_{-1}(\delta \Phi^{-1}(u) + \sinh^{-1}(nc\delta))))
+   *      F^{-1}(p, l, x_\alpha) = 
+   *            l + \theta \exp(\lambda \sinh(\sinh_{-1}(\delta \Phi^{-1}(p) + \sinh^{-1}(nc\delta))))
    *
    *   \f}
    * where 
@@ -26,7 +26,7 @@
    *      n &= \text{sgn}(L + H - 2B) \\
    *      \theta &= 
    *            \begin{cases}
-   *               x_alpha - 1, \, n = 1 \\
+   *               x_\alpha - 1, \, n = 1 \\
    *               x_{0.5} - l, \, n = 0 \\
    *               x_{1-\alpha} - 1, \, n = -1 
    *             \end{cases}, \\
@@ -93,8 +93,8 @@
   *   Inverse CDF of the J-QPD-S-II semi-bounded distribution, which lacks moments
   *   
   * \f{aligned}{
-   *      F^{-1}(u, l, x_\alpha) = 
-   *            l + \theta \exp(\lambda \sinh(\delta \Phi^{-1}(u) + nc))
+   *      F^{-1}(p, l, x_\alpha) = 
+   *            l + \theta \exp(\lambda \sinh(\delta \Phi^{-1}(p) + nc))
    *   \f}
    * where 
    * \f{aligned}{
@@ -105,7 +105,7 @@
    *      n &= \text{sgn}(L + H - 2B) \\
    *      \theta &= 
    *            \begin{cases}
-   *               x_alpha - 1, \, n = 1 \\
+   *               x_\alpha - 1, \, n = 1 \\
    *               x_{0.5} - l, \, n = 0 \\
    *               x_{1-\alpha} - 1, \, n = -1 
    *             \end{cases}, \\
