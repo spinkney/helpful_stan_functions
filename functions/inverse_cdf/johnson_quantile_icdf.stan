@@ -45,7 +45,7 @@
    *  @return real number greater than lower_bound
    *  @throws reject if \f$ p \notin [0, 1] \f$ 
    *  @throws reject if \f$ \alpha \notin [0, 1] \f$
-   *  @throws reject if quantiles \f$ != 3\f$  
+   *  @throws reject if quantiles \f$ \ne 3\f$  
    */
   real JQPDS_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
     if (p < 0 || p > 1)         reject("p must be between 0 and 1");
@@ -124,7 +124,7 @@
    *  @return real number greater than lower_bound
    *  @throws reject if \f$ p \notin [0, 1] \f$ 
    *  @throws reject if \f$ \alpha \notin [0, 1] \f$
-   *  @throws reject if quantiles \f$ != 3\f$ 
+   *  @throws reject if quantiles \f$ \ne 3\f$ 
    */
   real JQPDS2_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
     if (p < 0 || p > 1)         reject("p must be between 0 and 1");
@@ -193,7 +193,7 @@
    * @param quantiles vector of size three ordered quantiles
    * @return real number greater than lower_bound
    * @throws reject if \f$ p \notin [0, 1] \f$ 
-   * @throws reject if bounds \f$ != 2 \f$ 
+   * @throws reject if bounds \f$ \ne 2 \f$ 
    * @throws reject if \f$ \alpha \notin [0, 1] \f$
    * @throws reject if quantiles \f$ != 3\f$ 
    */
