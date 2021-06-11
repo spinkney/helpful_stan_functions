@@ -10,5 +10,6 @@ var searchData=
   ['interpolation_5fdefinition_2estan_41',['interpolation_definition.stan',['../interpolation__definition_8stan.html',1,'']]],
   ['inv_5ferf_42',['inv_erf',['../inv__erf_8stan.html#a3d254497bd04ee837661a923dff361ba',1,'inv_erf.stan']]],
   ['inv_5ferf_2estan_43',['inv_erf.stan',['../inv__erf_8stan.html',1,'']]],
-  ['inverse_20cumulative_20distribution_20functions_44',['Inverse Cumulative Distribution Functions',['../group__icdf.html',1,'']]]
+  ['inv_5ferf_5fnsqrt_44',['inv_erf_nsqrt',['../inv__erf_8stan.html#a33132970dd1c67785771c3af2dcad1ee',1,'inv_erf.stan']]],
+  ['inverse_20cumulative_20distribution_20functions_45',['Inverse Cumulative Distribution Functions',['../group__icdf.html',1,'']]]
 ];
