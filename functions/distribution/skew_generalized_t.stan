@@ -100,48 +100,22 @@
     real z2 = beta(2.0 / p, q - 1.0 / p);
     real v = q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) ) ;
     real m = 2 * v * sigma * lambda * q^(1.0/p) * z2 / z1;
-	  real r = x - mu + m;
-	
-	  real lambda_new;
-	  real r_new;
-	  
-	  if (r > 0) {
-	    lambda_new = -lambda;
-	    r_new = -r;
-	  } else {
-	    lambda_new = lambda;
-	    r_new = r;
-	  }
-	  
-	  return  log(0.5) + log( (1 - lambda_new) + (lambda_new - 1) * beta_cdf(1 / ( 1 + q * (sigma * (1-lambda_new)/(-r_new) )^p) | 1 / p, q) );
+    real r = x - mu + m;
+    real lambda_new;
+    real r_new;
+    
+    if (r > 0) {
+      lambda_new = -lambda;
+      r_new = -r;
+    } else {
+      lambda_new = lambda;
+      r_new = r;
+    }
+    
+    return  log(0.5) + log( (1 - lambda_new) + (lambda_new - 1) * beta_cdf(1 / ( 1 + q * (sigma * (1-lambda_new)/(-r_new) )^p) | 1 / p, q) );
 }
 
- real skewed_generalized_icdf (real p, real mu, real sigma, real lambda, real p, real q) 
- {
-    real z1 = beta(1.0 / p, q);
-    real z2 = beta(2.0 / p, q - 1.0 / p);
-    real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );
-    real prob; = p > 0.5 * (1 - lambda) ? 1 - p : p;
-    real lam; =  p > 0.5 * (1 - lambda) ? -lambda : lambda;
-    real out;
-    
-    if (p > 0.5 * (1 - lambda)) {
-      prob = 1 - p;
-      lam = -lambda;
-     // need ibeta_inv from boost see 
-     // https://github.com/mborland/math/blob/a058883c71174be7fe87c0a2d79e86c0310e0ffb/include/boost/math/distributions/beta.hpp#L494 
-      out = -( v * (lam - 1) * (1 / ( q * stats::qbeta(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p) );
-    } else {
-      prob = p;
-      lam = lambda;
-     // need ibeta_inv from boost see 
-     // https://github.com/mborland/math/blob/a058883c71174be7fe87c0a2d79e86c0310e0ffb/include/boost/math/distributions/beta.hpp#L494 
-     out = v * (lam - 1) * (1 / ( q * stats::qbeta(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p);
-    }
-	
-	out += mu - (2 * sigma * lambda * q^(1/p) * beta(2/p, q - 1/p) ) / beta(1/p, q);
-	return(out)
-}
+
  real skewed_generalized_icdf (real p, real mu, real sigma, real lambda, real p, real q) 
  {
     real z1 = beta(1.0 / p, q);
