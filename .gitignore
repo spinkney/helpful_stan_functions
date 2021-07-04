@@ -47,3 +47,4 @@ html/
 latex/
 
 
+*.stan~
