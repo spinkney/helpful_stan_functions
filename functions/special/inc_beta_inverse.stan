@@ -113,7 +113,7 @@
   }
     
   //  Solve for X by a modified Newton-Raphson method,
-  //  using the function BETAIN.
+  //  using the function inc_beta.
 
   r = 1.0 - pp;
   t = 1.0 - qq;
