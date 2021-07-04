@@ -9,6 +9,7 @@ var files_dup =
     [ "gpareto.stan", "gpareto_8stan.html", "gpareto_8stan" ],
     [ "gumbel_copula.stan", "gumbel__copula_8stan.html", "gumbel__copula_8stan" ],
     [ "icdf_definition.stan", "icdf__definition_8stan.html", null ],
+    [ "inc_beta_inverse.stan", "inc__beta__inverse_8stan.html", "inc__beta__inverse_8stan" ],
     [ "interp_1d_cubic.stan", "interp__1d__cubic_8stan.html", "interp__1d__cubic_8stan" ],
     [ "interp_1d_linear.stan", "interp__1d__linear_8stan.html", "interp__1d__linear_8stan" ],
     [ "interpolation_definition.stan", "interpolation__definition_8stan.html", null ],
