@@ -1,0 +1,181 @@
+  /* Inverse incomplete beta bunction
+   *
+   * Author:
+   * Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas.
+   * C++ version by John Burkard
+   * Stan version by Sean Pinkney, July 2021
+   *
+   * Modified from the C++ version by John Burkardt at
+   * https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html
+   * file asa109.cpp
+   *
+   * GW Cran, KJ Martin, GE Thomas,
+   * Remark AS R19 and Algorithm AS 109:
+   * A Remark on Algorithms AS 63: 
+   * The Incomplete Beta Integral and AS 64:
+   * Inverse of the Incomplete Beta Integeral, Applied Statistics,
+   * Volume 26, Number 1, 1977, pages 111-114.  
+   * 
+   * @param p Real
+   * @param q Real
+   * @param x Real in [0, 1]
+   * @return inverse incomlete beta result
+   */
+ real inc_beta_inverse (real p, real q, real x) {
+    real a;
+    real acu;
+    real adj;
+    real fpu;
+    real g;
+    real h;
+    real iex;
+    int indx;
+    real pp;
+    real prev;
+    real qq;
+    real r;
+    real s;
+    real sae = -30.0;
+    real sq;
+    real t;
+    real tx;
+    real value = x;
+    real w;
+    real xin;
+    real y;
+    real yprev;
+    
+    real lbeta_val = lbeta(p, q);
+    
+    fpu = pow ( 10.0, sae );
+    
+    if (is_nan(x) || is_inf(x) || x < 0 || x > 1)
+      reject("inc_beta_inverse: x must be finite and between 0 and 1; ",
+          "found x = ", x);
+    
+    if (p <= 0.0) 
+      reject("inc_beta_inverse: p must be > 0; ",
+          "found p = ", p);
+   
+    if (q <= 0.0)
+      reject("inc_beta_inverse: q must be > 0; ",
+          "found q = ", q);
+          
+    //  If the answer is easy to determine, return immediately.
+    if ( x == 0.0 )
+      return value;
+
+    if ( x == 1.0 ) 
+      return value;
+  
+  //  Change tail if necessary.
+  if ( 0.5 < x) {
+    a = 1.0 - x;
+    pp = q;
+    qq = p;
+    indx = 1;
+  } else {
+    a = x;
+    pp = p;
+    qq = q;
+    indx = 0;
+  }
+  
+  //  Calculate the initial approximation.
+  r = sqrt( -log( square(a) ) );
+  y = r - ( 2.30753 + 0.27061 * r ) 
+    / ( 1.0 + ( 0.99229 + 0.04481 * r ) * r );
+
+  if ( 1.0 < pp && 1.0 < qq ) {
+    r = ( square(y) - 3.0 ) / 6.0;
+    s = 1.0 / ( pp + pp - 1.0 );
+    t = 1.0 / ( qq + qq - 1.0 );
+    h = 2.0 / ( s + t );
+    w = y * sqrt( h + r ) / h - ( t - s ) 
+      * ( r + 5.0 / 6.0 - 2.0 / ( 3.0 * h ) );
+    value = pp / ( pp + qq * exp( w + w ) );
+  } else {
+    r = qq + qq;
+    t = 1.0 / ( 9.0 * qq );
+    t = r * pow( 1.0 - t + y * sqrt(t), 3 );
+
+    if ( t <= 0.0 ) {
+      value = 1.0 - exp( ( log( ( 1.0 - a ) * qq) + lbeta_val ) / qq );
+    } else {
+      t = ( 4.0 * pp + r - 2.0 ) / t;
+
+      if ( t <= 1.0 ) {
+        value = exp( ( log( a * pp ) + lbeta_val ) / pp );
+      } else {
+        value = 1.0 - 2.0 / ( t + 1.0 );
+      }
+    }
+  }
+    
+  //  Solve for X by a modified Newton-Raphson method,
+  //  using the function BETAIN.
+
+  r = 1.0 - pp;
+  t = 1.0 - qq;
+  yprev = 0.0;
+  sq = 1.0;
+  prev = 1.0;
+
+  if ( value < 0.0001 )
+    value = 0.0001;
+
+  if ( 0.9999 < value )
+    value = 0.9999;
+
+  iex = fmax( - 5.0 / pp / pp - 1.0 / pow( a, 0.2 ) - 13.0, sae );
+
+  acu = pow( 10.0, iex );
+  
+  // Iteration loop.
+  while(1) {
+    y = inc_beta(pp, qq, value);
+
+    xin = value;
+    y = ( y - a ) * exp( lbeta_val + r * log( xin ) + t * log( 1.0 - xin ) );
+
+    if ( y * yprev <= 0.0 )
+      prev = fmax( sq, fpu );
+
+    g = 1.0;
+
+    while(1) {
+      while(1) {
+        adj = g * y;
+        sq = square(adj);
+
+        if ( sq < prev ) {
+          tx = value - adj;
+          if ( 0.0 <= tx && tx <= 1.0 ) break;
+        }
+        g = g / 3.0;
+      }
+
+    //  Check whether the current estimate is acceptable.
+    //  The change "VALUE = TX" was suggested by Ivan Ukhov.
+      if ( prev <= acu || y * y <= acu ) {
+        value = tx;
+        if ( indx == 1 ) value = 1.0 - value;
+        return value;
+      }
+
+      if ( tx != 0.0 && tx != 1.0 ) break;
+
+      g = g / 3.0;
+    }
+
+    if ( tx == value ) break;
+
+    value = tx;
+    yprev = y;
+  }
+
+  if ( indx == 1 ) value = 1.0 - value;
+
+  return value;
+  }
+
