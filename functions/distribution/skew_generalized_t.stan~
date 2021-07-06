@@ -105,12 +105,13 @@
     real r_new;
     
     if (r > 0) {
-	    lambda_new = -lambda;
-	    r_new = -r;
-	  } else {
-	    lambda_new = lambda;
-	    r_new = r;
-	  }
+      lambda_new = -lambda;
+      r_new = -r;
+    } else {
+      lambda_new = lambda;
+      r_new = r;
+    }
+    
     return  log(0.5) + log( (1 - lambda_new) + (lambda_new - 1) * beta_cdf(1 / ( 1 + q * (sigma * (1-lambda_new)/(-r_new) )^p) | 1 / p, q) );
 }
 
