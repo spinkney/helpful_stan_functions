@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['unit_20johnson_20su_20distribution_20functions_189',['Unit Johnson SU distribution functions',['../group__unit__johnson.html',1,'']]],
-  ['univariate_20distribution_20functions_190',['Univariate Distribution Functions',['../group__univariate.html',1,'']]]
+  ['truncated_20multivariate_20normal_20functions_202',['Truncated Multivariate Normal Functions',['../group__tmvn.html',1,'']]]
 ];
