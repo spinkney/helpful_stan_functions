@@ -1,7 +1,7 @@
 #include special/inc_beta_inverse.stan
 
   /** @ingroup icdf
-   * Skewed generalized inverse CDF
+   * Skewed generalized T inverse CDF
    *
    * 
    * For more information, please see @ref skew_generalized_t.
@@ -16,7 +16,7 @@
    * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
    * @return log probability
    */
- real skewed_generalized_icdf (real p, real mu, real sigma, real lambda, real p, real q) {
+ real skewed_generalized_t_icdf (real p, real mu, real sigma, real lambda, real p, real q) {
     real z1 = beta(1.0 / p, q);
     real z2 = beta(2.0 / p, q - 1.0 / p);
     real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );
