@@ -4,7 +4,7 @@
    * Skewed generalized inverse CDF
    *
    * 
-   * For more information, please see @ref skew_generalized_t/
+   * For more information, please see @ref skew_generalized_t.
    *
    * @copyright Sean Pinkney, 2021 
    * @author Sean Pinkney

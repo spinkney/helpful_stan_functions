@@ -35,7 +35,7 @@
    * f_{SGT}(x; \mu, \sigma, \lambda, p, q) = \frac{p}{2 v \sigma  q^{1/p} B(\frac{1}{p},q)
    * \left(\frac{| x-\mu + m |^p}{q (v \sigma)^p (\lambda sign(x-\mu + m)+1)^p}+1\right)^{\frac{1}{p}+q}}
    * \f]
-   * where  \f$B\f$ is the [[beta function]], \f$\mu$ is the location parameter, \f$\sigma > 0\f$
+   * where  \f$B\f$ is the beta function, \f$ \mu \f$ is the location parameter, \f$\sigma > 0\f$
    * is the scale parameter, \f$-1 < \lambda < 1\f$ is the skewness parameter, and \f$p > 0\f$ and 
    * \f$q > 0\f$ are the parameters that control the kurtosis. \f$m\f$ and \f$v\f$ are not parameter sigma  
    * but functions of the other parameters that are used here to scale or shift the distribution 
