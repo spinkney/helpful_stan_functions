@@ -153,7 +153,29 @@ Functions</h2></td></tr>
 <p class="formulaDsp">
 \[ f_{SGT}(x; \mu, \sigma, \lambda, p, q) = \frac{p}{2 v \sigma q^{1/p} B(\frac{1}{p},q) \left(\frac{| x-\mu + m |^p}{q (v \sigma)^p (\lambda sign(x-\mu + m)+1)^p}+1\right)^{\frac{1}{p}+q}} \]
 </p>
-<p> where \(B\) is the [[beta function]], \(\mu$ is the location parameter, \)\sigma &gt; 0 \( is the scale parameter, \)-1 &lt; \lambda &lt; 1 \( is the skewness parameter, and \)p &gt; 0 \( and \)@_fakenlq &gt; 0 \( are the parameters that control the kurtosis. \)m \( and \)v \( are not parameter sigma but functions of the other parameters that are used here to scale or shift the distribution appropriately to match the various parameterizations of this distribution. In the original parameterization Theodossiou of the skewed generalized t distribution, \f[ m = \frac{2 v \sigma \lambda q^{\frac{1}{p}} B(\frac{2}{p},q-\frac{1}{p})}{B(\frac{1}{p},q)} \f] and \f[ v = \frac{q^{-\frac{1}{p}}}{\sqrt{ (3 \lambda^2 + 1) \frac{ B ( \frac{3}{p}, q - \frac{2}{p} )}{B (\frac{1}{p}, q )} -4 \lambda^2 \frac{B ( \frac{2}{p}, q - \frac{1}{p} )^2}{ B (\frac{1}{p}, q )^2}}}. \f] @copyright Sean Pinkney, 2021 @author Sean Pinkney @param x Vector @param mu Real @param sigma Real \)\in (0, \infty) \( scale parameter @param lambda Real \)-1 &lt; \lambda &lt; 1 \( @param p Real \)\in (0, \infty) \( kurtosis parameter @param q Real \)\in (0, \infty) </p>
+<p> where \(B\) is the beta function, \( \mu \) is the location parameter, \(\sigma &gt; 0\) is the scale parameter, \(-1 &lt; \lambda &lt; 1\) is the skewness parameter, and \(p &gt; 0\) and \(q &gt; 0\) are the parameters that control the kurtosis. \(m\) and \(v\) are not parameter sigma <br  />
+ but functions of the other parameters that are used here to scale or shift the distribution appropriately to match the various parameterizations of this distribution.</p>
+<p>In the original parameterization Theodossiou of the skewed generalized t distribution, </p><p class="formulaDsp">
+\[ m = \frac{2 v \sigma \lambda q^{\frac{1}{p}} B(\frac{2}{p},q-\frac{1}{p})}{B(\frac{1}{p},q)} \]
+</p>
+<p> and </p><p class="formulaDsp">
+\[ v = \frac{q^{-\frac{1}{p}}}{\sqrt{ (3 \lambda^2 + 1) \frac{ B ( \frac{3}{p}, q - \frac{2}{p} )}{B (\frac{1}{p}, q )} -4 \lambda^2 \frac{B ( \frac{2}{p}, q - \frac{1}{p} )^2}{ B (\frac{1}{p}, q )^2}}}. \]
+</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Vector </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
 
 </div>
 </div>
