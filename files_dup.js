@@ -26,6 +26,7 @@ var files_dup =
     [ "odeint_midpoint.stan", "odeint__midpoint_8stan.html", "odeint__midpoint_8stan" ],
     [ "odeint_rk4.stan", "odeint__rk4_8stan.html", "odeint__rk4_8stan" ],
     [ "skew_generalized_t.stan", "skew__generalized__t_8stan.html", "skew__generalized__t_8stan" ],
+    [ "skewed_generalized_t_icdf.stan", "skewed__generalized__t__icdf_8stan.html", "skewed__generalized__t__icdf_8stan" ],
     [ "special_definition.stan", "special__definition_8stan.html", null ],
     [ "triangular.stan", "triangular_8stan.html", "triangular_8stan" ],
     [ "unit_johnson_su.stan", "unit__johnson__su_8stan.html", "unit__johnson__su_8stan" ],

@@ -103,8 +103,6 @@ Functions</h2></td></tr>
 <tr class="separator:gaf9794f9e779f2354aa8390d5fec3ce86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad2bea362601fb9aef75f73199a3b73df"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a> (real x, real mu, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:gad2bea362601fb9aef75f73199a3b73df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3129a6a3ecae8a7a80dd2cde95d3d6d7"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga3129a6a3ecae8a7a80dd2cde95d3d6d7">skewed_generalized_icdf</a> (real p, real mu, real sigma, real lambda, real p, real q)</td></tr>
-<tr class="separator:ga3129a6a3ecae8a7a80dd2cde95d3d6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>From the sgt R package Carter Davis (2015). sgt: Skewed Generalized T Distribution Tree. R package version 2.0. <a href="https://CRAN.R-project.org/package=sgt">https://CRAN.R-project.org/package=sgt</a></p>
@@ -156,58 +154,6 @@ Functions</h2></td></tr>
 \[ f_{SGT}(x; \mu, \sigma, \lambda, p, q) = \frac{p}{2 v \sigma q^{1/p} B(\frac{1}{p},q) \left(\frac{| x-\mu + m |^p}{q (v \sigma)^p (\lambda sign(x-\mu + m)+1)^p}+1\right)^{\frac{1}{p}+q}} \]
 </p>
 <p> where \(B\) is the [[beta function]], \(\mu$ is the location parameter, \)\sigma &gt; 0 \( is the scale parameter, \)-1 &lt; \lambda &lt; 1 \( is the skewness parameter, and \)p &gt; 0 \( and \)@_fakenlq &gt; 0 \( are the parameters that control the kurtosis. \)m \( and \)v \( are not parameter sigma but functions of the other parameters that are used here to scale or shift the distribution appropriately to match the various parameterizations of this distribution. In the original parameterization Theodossiou of the skewed generalized t distribution, \f[ m = \frac{2 v \sigma \lambda q^{\frac{1}{p}} B(\frac{2}{p},q-\frac{1}{p})}{B(\frac{1}{p},q)} \f] and \f[ v = \frac{q^{-\frac{1}{p}}}{\sqrt{ (3 \lambda^2 + 1) \frac{ B ( \frac{3}{p}, q - \frac{2}{p} )}{B (\frac{1}{p}, q )} -4 \lambda^2 \frac{B ( \frac{2}{p}, q - \frac{1}{p} )^2}{ B (\frac{1}{p}, q )^2}}}. \f] @copyright Sean Pinkney, 2021 @author Sean Pinkney @param x Vector @param mu Real @param sigma Real \)\in (0, \infty) \( scale parameter @param lambda Real \)-1 &lt; \lambda &lt; 1 \( @param p Real \)\in (0, \infty) \( kurtosis parameter @param q Real \)\in (0, \infty) </p>
-
-</div>
-</div>
-<a id="ga3129a6a3ecae8a7a80dd2cde95d3d6d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3129a6a3ecae8a7a80dd2cde95d3d6d7">&#9670;&nbsp;</a></span>skewed_generalized_icdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real skewed_generalized_icdf </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>lambda</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>q</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>

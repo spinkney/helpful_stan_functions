@@ -107,6 +107,8 @@ Modules</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ga4ecd7df27b5a93b9dd899b4c15636c0c"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga4ecd7df27b5a93b9dd899b4c15636c0c">lognormal_icdf</a> (real p, real mu, real sigma)</td></tr>
 <tr class="separator:ga4ecd7df27b5a93b9dd899b4c15636c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3129a6a3ecae8a7a80dd2cde95d3d6d7"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga3129a6a3ecae8a7a80dd2cde95d3d6d7">skewed_generalized_icdf</a> (real p, real mu, real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:ga3129a6a3ecae8a7a80dd2cde95d3d6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4eebabf26d36a26f267c459600a08802"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__icdf.html#ga4eebabf26d36a26f267c459600a08802">unit_johnson_icdf</a> (real p, real mu, real sigma)</td></tr>
 <tr class="separator:ga4eebabf26d36a26f267c459600a08802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -170,6 +172,75 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ga3129a6a3ecae8a7a80dd2cde95d3d6d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3129a6a3ecae8a7a80dd2cde95d3d6d7">&#9670;&nbsp;</a></span>skewed_generalized_icdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real skewed_generalized_icdf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Skewed generalized inverse CDF</p>
+<p>For more information, please see <a class="el" href="group__skew__generalized__t.html">Skew Generalized T distribution functions</a>/</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
 
 </div>
 </div>
