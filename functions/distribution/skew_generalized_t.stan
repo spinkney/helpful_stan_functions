@@ -1,4 +1,6 @@
-  /** @addtogroup skew_generalized_t Skew Generalized T distribution functions
+  #include special/inc_beta_inverse.stan
+
+ /** @addtogroup skew_generalized_t Skew Generalized T distribution functions
    *
    * From the sgt R package 
    * Carter Davis (2015). sgt: Skewed Generalized T Distribution Tree. R package version 2.0. 
@@ -128,18 +130,15 @@
     if (p > 0.5 * (1 - lambda)) {
       prob = 1 - p;
       lam = -lambda;
-     // need ibeta_inv from boost see 
-     // https://github.com/mborland/math/blob/a058883c71174be7fe87c0a2d79e86c0310e0ffb/include/boost/math/distributions/beta.hpp#L494 
-      out = -( v * (lam - 1) * (1 / ( q * stats::qbeta(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p) );
+      out = -( v * (lam - 1) * (1 / ( q * inc_beta_inverse(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p) );
     } else {
       prob = p;
       lam = lambda;
-     // need ibeta_inv from boost see 
-     // https://github.com/mborland/math/blob/a058883c71174be7fe87c0a2d79e86c0310e0ffb/include/boost/math/distributions/beta.hpp#L494 
-     out = v * (lam - 1) * (1 / ( q * stats::qbeta(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p);
+     out = v * (lam - 1) * (1 / ( q * inc_beta_inverse(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p);
     }
 	
 	out += mu - (2 * sigma * lambda * q^(1/p) * beta(2/p, q - 1/p) ) / beta(1/p, q);
-	return(out)
+	
+  return out;
 }
  /** @} */

@@ -1,4 +1,4 @@
-  /* Inverse incomplete beta bunction
+ /** @addtogroup special Inverse incomplete beta bunction
    *
    * Author:
    * Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas.
@@ -16,12 +16,12 @@
    * Inverse of the Incomplete Beta Integeral, Applied Statistics,
    * Volume 26, Number 1, 1977, pages 111-114.  
    * 
+   * @param x Real in [0, 1]
    * @param p Real
    * @param q Real
-   * @param x Real in [0, 1]
    * @return inverse incomlete beta result
    */
- real inc_beta_inverse (real p, real q, real x) {
+ real inc_beta_inverse (real x, real p, real q) {
     real a;
     real acu;
     real adj;
