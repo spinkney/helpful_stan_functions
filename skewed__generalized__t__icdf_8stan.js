@@ -1,4 +1,4 @@
 var skewed__generalized__t__icdf_8stan =
 [
-    [ "skewed_generalized_icdf", "group__icdf.html#ga3129a6a3ecae8a7a80dd2cde95d3d6d7", null ]
+    [ "skewed_generalized_t_icdf", "group__icdf.html#ga9cb1964e68fcdef5a87fd095f2772650", null ]
 ];
