@@ -1,9 +1,11 @@
 var files_dup =
 [
     [ "array_ops_definition.stan", "array__ops__definition_8stan.html", null ],
+    [ "cholesky_corr_constrain.stan", "cholesky__corr__constrain_8stan.html", "cholesky__corr__constrain_8stan" ],
     [ "clayton_copula.stan", "clayton__copula_8stan.html", "clayton__copula_8stan" ],
     [ "copula_definition.stan", "copula__definition_8stan.html", null ],
     [ "correlation_angles.stan", "correlation__angles_8stan.html", "correlation__angles_8stan" ],
+    [ "correlation_definition.stan", "correlation__definition_8stan.html", null ],
     [ "expect_equal.stan", "expect__equal_8stan.html", "expect__equal_8stan" ],
     [ "frank_copula.stan", "frank__copula_8stan.html", "frank__copula_8stan" ],
     [ "gpareto.stan", "gpareto_8stan.html", "gpareto_8stan" ],
