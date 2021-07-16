@@ -22,6 +22,7 @@ var files_dup =
     [ "mainpage.stan", "mainpage_8stan.html", null ],
     [ "mixed_copula.stan", "mixed__copula_8stan.html", "mixed__copula_8stan" ],
     [ "multi_normal_cholesky_truncated.stan", "multi__normal__cholesky__truncated_8stan.html", "multi__normal__cholesky__truncated_8stan" ],
+    [ "multi_wallenius_hypergeometric.stan", "multi__wallenius__hypergeometric_8stan.html", "multi__wallenius__hypergeometric_8stan" ],
     [ "multivariate_definition.stan", "multivariate__definition_8stan.html", null ],
     [ "normal_copula.stan", "normal__copula_8stan.html", "normal__copula_8stan" ],
     [ "odeint_euler.stan", "odeint__euler_8stan.html", "odeint__euler_8stan" ],
