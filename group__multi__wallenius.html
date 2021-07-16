@@ -106,9 +106,9 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>The probability mass function of the multivariate Wallenius' hypergeometric distribution is given by </p><p class="formulaDsp">
-\[ f(\mathbf{x} | \mathbf{m}, \mathbf{\omega}) \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t\,,&lt;/math&gt;&lt;br /&gt;where &lt;math&gt; D=\boldsymbol{\omega}\cdot (\mathbf{m}-\mathbf{x}) = \sum_{i=1}^c \omega_i(m_i-x_i) \]
+\[ f(\mathbf{x} \mid \mathbf{m}, \mathbf{\omega}) \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t \]
 </p>
-<p> where \( \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \) is the size of each $c$ group of the population. The population is given by \( N = \sum_{i=1}^c m_i \) where the realizations from each group is given by \( \mathbf{x} \). The weights of each group are contained in the \(c\)-sized simplex \( \mathbf{\omega} \). Where \( D = \mathbf{\omega} \cdot (\mathbf{m} \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i) \). </p>
+<p> where \( \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \) is the size of each $c$ group of the population. The population is given by \( N = \sum_{i=1}^c m_i \) where the realizations from each group is given by \( \mathbf{x} \). The weights of each group are contained in the \(c\)-sized simplex \( \mathbf{\omega} \). Where \( D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i) \). </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga58ca639c1c6668ed5619ea008dd0a13a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga58ca639c1c6668ed5619ea008dd0a13a">&#9670;&nbsp;</a></span>multi_wallenius_integral()</h2>
