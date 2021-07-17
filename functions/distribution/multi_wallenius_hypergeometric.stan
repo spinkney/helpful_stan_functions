@@ -19,7 +19,7 @@
    * Multivariate Wallenius' Noncentral Hypergeometric Integral
    *
    * \f[
-   *     I(t \mid \mathbf{\omega}, D) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+   *     I(t \mid \mathbf{\omega}, D) = \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
    * \f]
    *
    * @copyright Sean Pinkney 2021 
