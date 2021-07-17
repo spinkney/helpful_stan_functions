@@ -2,19 +2,25 @@
    *
    * The probability mass function of the multivariate Wallenius' hypergeometric distribution is given by
    *  \f[
-   *    f(\mathbf{x} \mid \mathbf{m}, \mathbf{\omega}) \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+   *    f(\mathbf{x} \mid \mathbf{m}, \mathbf{\omega}) = \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
    *  \f]
-   * where \f$ \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \f$ is the size of each $c$ group
+   * where \f$ \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \f$ is the size of each \f$c\f$ group
    * of the population. The population is given by \f$ N = \sum_{i=1}^c m_i \f$ where the realizations
    * from each group is given by \f$ \mathbf{x} \f$. The weights of each group are contained in the \f$c\f$-sized
-   * simplex \f$ \mathbf{\omega} \f$. Where \f$ D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c 
-   * \omega_i(m_i - x_i) \f$. 
+   * simplex \f$ \mathbf{\omega} \f$ and \f$ D \f$ is
+   * \f[
+   *     D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i). 
+   * \f] 
    * 
    * \ingroup multivariate
    *  @{ */
 
    /**
    * Multivariate Wallenius' Noncentral Hypergeometric Integral
+   *
+   * \f[
+   *     I(t \mid \mathbf{\omega}, D) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+   * \f]
    *
    * @copyright Sean Pinkney 2021 
    *
