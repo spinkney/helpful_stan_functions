@@ -1,28 +1,38 @@
    /** @addtogroup multi_skewed_elliptical Multivariate Skewed Elliptical Distribution Functions
    *
-   * The probability density function of the multivariate skewed t distribution is given by
+   * The multivariate skew elliptical distributions take the form
    *  \f[
-   *    f(\mathbf{x} \mid \mathbf{\mu}, \mathbf{\omega}) \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+   *    f(\mathbf{y} \mid \mathbf{\mu}, \mathbf{\Sigma}, \mathbf{\lambda}) =
+   *     2 f_g^k(\mathbf{y}) F_g_{q(\mathbf{y})}(\mathbf{\lambda})^T (\mathbf{y - \mu})
    *  \f]
-   * where \f$ \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \f$ is the size of each $c$ group
-   * of the population. The population is given by \f$ N = \sum_{i=1}^c m_i \f$ where the realizations
-   * from each group is given by \f$ \mathbf{x} \f$. The weights of each group are contained in the \f$c\f$-sized
-   * simplex \f$ \mathbf{\omega} \f$. Where \f$ D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c 
-   * \omega_i(m_i - x_i) \f$. 
-   * 
+   * where \f$ f_g^k(\mathbf{y}) \f$ is the pdf of the \f$k\f$-th marginal from the
+   * elliptical class of dsitributions. These distributions are characterized by
+   * the density generator function \f$ g^k(u), \, u /ge 0 \f$ such that
+   * \f[
+   *   \int_0^\infty u^{k/2 - 1} g^k(u) du = \frac{\Gamma(k/2)}{\pi^{k/2}} 
+   * \f] and the pdf is of the following form
+   * \f[
+   *   f_{\mu, \Sigma}(x) = |\Sigma |^{-1/2} g^k((x - \mu)\Sigma^{-1} (x - mu)).
+   * \f]
+   *
    * \ingroup multivariate
    *  @{ */
 
    /**
    * Multivariate Skewed T Distribution
    *
+   *  The density is defined as
+   * \f[
+   *  f_z(z) = 2 * t_d(z \mid \Omega, \nu) T \bigg( \alpha^T z \sqrt{\frac{\nu + d}{\nu + z^T \Omega^{-1} z}} \mid \nu + d \bigg)
+   * \f]
+   * where \f$ T(\cdot \mid \rho) \f$ denotes the univariate Student's \f$ t \f$ distribution on \f$ \rho \f$ d.f. 
    * @copyright Sean Pinkney 2021 
    *
-   * @param t Real number on [0,1]
-   * @param xc 
-   * @param theta Array of real parameters
-   * @param x_r Array of data (real) 
-   * @param x_i Array of data (integer)
+   * @param z Matrix
+   * @param L Cholesky factor of correlation matrix 
+   * @param sigma Vector real \f$ > 0 \f$
+   * @param lambda Vector
+   * @param nu real \f$ > 0 \f$
    * @return integrand
    */
   real multi_skewed_t_lpdf(matrix z, matrix L, vector sigma, vector lambda, real nu) {
