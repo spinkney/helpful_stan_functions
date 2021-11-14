@@ -1,7 +1,7 @@
 library(cmdstanr)
-fp <- file.path("examples/inverse_cdf/stan/lognormal_icdf_example.stan")
+fp <- file.path("examples/inverse_cdf/stan/lognormal_qf_example.stan")
 mod <- cmdstan_model(fp,  
-                     include_paths = "./functions/inverse_cdf")
+                     include_paths = "./functions/qf")
 
 log_norm_loc <- function (mu, sigma) {
   log(mu^2 / sqrt(mu^2 + sigma^2))

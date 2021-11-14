@@ -1,12 +1,12 @@
 functions {
-  #include lognormal_icdf.stan
+  #include lognormal_qf.stan
   
   real lognormal_trunc_rng(real mu, real sigma, real lb, real ub){
     real p_ub = lognormal_cdf(ub, mu, sigma);
     real p_lb = lognormal_cdf(lb, mu, sigma);
     real p = uniform_rng(p_lb, p_ub);
     
-    return lognormal_icdf(p, mu, sigma);
+    return lognormal_qf(p, mu, sigma);
   }
 }
 data {
