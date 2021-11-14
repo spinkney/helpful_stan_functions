@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['johnson_5fquantile_5ficdf_2estan_0',['johnson_quantile_icdf.stan',['../johnson__quantile__icdf_8stan.html',1,'']]]
+  ['johnson_5fqf_2estan_0',['johnson_qf.stan',['../johnson__qf_8stan.html',1,'']]]
 ];

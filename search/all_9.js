@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_0',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__quantile__icdf.html',1,'']]],
-  ['johnson_5fquantile_5ficdf_2estan_1',['johnson_quantile_icdf.stan',['../johnson__quantile__icdf_8stan.html',1,'']]],
-  ['jqpdb_5ficdf_2',['JQPDB_icdf',['../group__johnson__quantile__icdf.html#gadb1bb60d59a9e07c282fb792123c4d8a',1,'johnson_quantile_icdf.stan']]],
-  ['jqpds2_5ficdf_3',['JQPDS2_icdf',['../group__johnson__quantile__icdf.html#ga183cedcb00bb35733e4322503ff7213d',1,'johnson_quantile_icdf.stan']]],
-  ['jqpds_5ficdf_4',['JQPDS_icdf',['../group__johnson__quantile__icdf.html#ga0e1d5261f7de468ea304b582591090e6',1,'johnson_quantile_icdf.stan']]]
+  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_0',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__qf.html',1,'']]],
+  ['johnson_5fqf_2estan_1',['johnson_qf.stan',['../johnson__qf_8stan.html',1,'']]],
+  ['jqpdb_5fqf_2',['JQPDB_qf',['../group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f',1,'johnson_qf.stan']]],
+  ['jqpds2_5fqf_3',['JQPDS2_qf',['../group__johnson__qf.html#gaa1bc4b5108969a1de030c3b97c24d0f1',1,'johnson_qf.stan']]],
+  ['jqpds_5fqf_4',['JQPDS_qf',['../group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185',1,'johnson_qf.stan']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jqpdb_5ficdf_0',['JQPDB_icdf',['../group__johnson__quantile__icdf.html#gadb1bb60d59a9e07c282fb792123c4d8a',1,'johnson_quantile_icdf.stan']]],
-  ['jqpds2_5ficdf_1',['JQPDS2_icdf',['../group__johnson__quantile__icdf.html#ga183cedcb00bb35733e4322503ff7213d',1,'johnson_quantile_icdf.stan']]],
-  ['jqpds_5ficdf_2',['JQPDS_icdf',['../group__johnson__quantile__icdf.html#ga0e1d5261f7de468ea304b582591090e6',1,'johnson_quantile_icdf.stan']]]
+  ['jqpdb_5fqf_0',['JQPDB_qf',['../group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f',1,'johnson_qf.stan']]],
+  ['jqpds2_5fqf_1',['JQPDS2_qf',['../group__johnson__qf.html#gaa1bc4b5108969a1de030c3b97c24d0f1',1,'johnson_qf.stan']]],
+  ['jqpds_5fqf_2',['JQPDS_qf',['../group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185',1,'johnson_qf.stan']]]
 ];
