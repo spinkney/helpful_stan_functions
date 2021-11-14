@@ -1,14 +1,14 @@
-  /** @addtogroup johnson_quantile_icdf Johnson Quantile Parameterized Distributions (J-QPD) functions
+  /** @addtogroup johnson_qf Johnson Quantile Parameterized Distributions (J-QPD) functions
    *
    * Christopher C. Hadlock, J. Eric Bickel
    * The Generalized Johnson Quantile-Parameterized Distribution System. 
    * Decision Analysis 16 (1) 67-85 https://doi.org/10.1287/deca.2018.0376
    *
-   * \ingroup icdf
+   * \ingroup qf
    *  @{ */
   
   /**
-   *  Inverse CDF of the J-QPD-S semi-bounded distribution, which has moments
+   *  Quantile function of the J-QPD-S semi-bounded distribution, which has moments
    *
    * \f{aligned}{
    *      F^{-1}(p, l, x_\alpha) = 
@@ -45,7 +45,7 @@
    *  @throws reject if \f$ \alpha \notin [0, 1] \f$
    *  @throws reject if quantiles \f$ \ne 3\f$  
    */
-  real JQPDS_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
+  real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles) {
     if (p < 0 || p > 1)         reject("p must be between 0 and 1");
     if (alpha < 0 || alpha > 1) reject("alpha must be between 0 and 1");
     if (rows(quantiles) != 3)   reject("quantiles must have three elements");
@@ -88,7 +88,7 @@
   }
 
  /**
-  *   Inverse CDF of the J-QPD-S-II semi-bounded distribution, which lacks moments
+  *   Quantile function of the J-QPD-S-II semi-bounded distribution, which lacks moments
   *   
   * \f{aligned}{
    *      F^{-1}(p, l, x_\alpha) = 
@@ -124,7 +124,7 @@
    *  @throws reject if \f$ \alpha \notin [0, 1] \f$
    *  @throws reject if quantiles \f$ \ne 3\f$ 
    */
-  real JQPDS2_icdf(real p, real lower_bound, data real alpha, vector quantiles) {
+  real JQPDS2_qf(real p, real lower_bound, data real alpha, vector quantiles) {
     if (p < 0 || p > 1)         reject("p must be between 0 and 1");
     if (alpha < 0 || alpha > 1) reject("alpha must be between 0 and 1");
     if (rows(quantiles) != 3)   reject("quantiles must have three elements");
@@ -158,7 +158,7 @@
   }
 
   /**
-   * Inverse CDF of the J-QPD-B bounded distribution
+   * Quantile function of the J-QPD-B bounded distribution
    *   
    * \f{aligned}{
    *      F^{-1}(p, u, l, x_\alpha) = 
@@ -195,7 +195,7 @@
    * @throws reject if \f$ \alpha \notin [0, 1] \f$
    * @throws reject if quantiles \f$ != 3\f$ 
    */
-  real JQPDB_icdf(real p, row_vector bounds, data real alpha, vector quantiles) {
+  real JQPDB_qf(real p, row_vector bounds, data real alpha, vector quantiles) {
     if (cols(bounds) != 2)      reject("bounds must have two elements");
     if (bounds[2] == positive_infinity()) {
       return JQPDS2_icdf(p, alpha, bounds[1], quantiles);

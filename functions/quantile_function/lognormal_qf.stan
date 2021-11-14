@@ -1,5 +1,5 @@
-  /** @ingroup icdf
-   * **Lognormal Inverse CDF**
+  /** @ingroup qf
+   * **Lognormal Quantile Function**
    * 
    * \f{aligned}{
    *  F^{-1}(p) &= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\
@@ -20,7 +20,7 @@
    * @return inverse CDF value
    * @throws reject if \f$ p \notin [0, 1] \f$ 
    */
-real lognormal_icdf (real p, real mu, real sigma){
+real lognormal_qf (real p, real mu, real sigma){
    if (is_nan(p) || p < 0 || p > 1)
      reject("lognormal_icdf: p must be between 0 and 1; ",
            "found p = ", p);

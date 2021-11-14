@@ -1,5 +1,5 @@
-  /** @ingroup icdf
-   * Unit Johnson SU Inverse CDF
+  /** @ingroup qf
+   * Unit Johnson SU Quantile Function
    * 
    * \f{aligned}{
    *  F^{-1}(p, \, \mu, \, \sigma) &= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(p) - \mu}{\sigma}\bigg) \bigg]\\
@@ -12,7 +12,7 @@
    * @return inverse CDF value
    * @throws reject if \f$ p \notin [0, 1] \f$ 
    */
-  real unit_johnson_icdf (real p, real mu, real sigma){
+  real unit_johnson_qf (real p, real mu, real sigma){
    if (is_nan(p) || p < 0 || p > 1)
      reject("unit_johnson_icdf: p must be between 0 and 1; ",
            "found p = ", p);
