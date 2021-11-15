@@ -62,7 +62,7 @@
    * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
    * @return log probability
    */
- real skew_generalized_t_lpdf(vector x, real mu, real  sigma  real lambda real p, real q) { 
+ real skew_generalized_t_lpdf(vector x, real mu, real  sigma,  real lambda, real p, real q) { 
     int N = num_elements(x);
     real z1 = beta(1.0 / p, q);
     real z2 = beta(2.0 / p, q - 1.0 / p);
