@@ -33,7 +33,7 @@ If you have a UDF that does not fit in the classification scheme please create a
 
 The examples directory will house an example of each of the functions. The plan is to support many programming languages, however, it is currently all in `R`. 
 
-The directory contains subdirectories for `stan` files and for the programming language that calls the example in Stan. For example, if you are interested in seeing how `lognormal_icdf.stan` can be used then go into the examples directory and traverse down the `inverse_cdf` examples. That is, `examples` -> `inverse_cdf` -> `R` -> `lognormal_icdf_example.R`. 
+The directory contains subdirectories for `stan` files and for the programming language that calls the example in Stan. For example, if you are interested in seeing how `lognormal_qf.stan` can be used then go into the examples directory and traverse down the `quantile_function` examples. That is, `examples` -> `quantile_function` -> `R` -> `lognormal_qf_example.R`. 
 
 All the example file names will be the same name as the function file with `_example` attached to the name. 
 
