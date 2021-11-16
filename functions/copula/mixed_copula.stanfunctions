@@ -7,7 +7,7 @@
  * \ingroup copula
  *  @{ */
 
-#include multi_normal_cholesky_truncated.stan
+#include multi_normal_cholesky_truncated.stanfunctions
 
 /**
   * Normal marginal
