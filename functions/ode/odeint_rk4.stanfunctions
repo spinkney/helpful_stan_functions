@@ -38,5 +38,5 @@ array[] vector odeint_rk4(real t0, vector y0, data real h,
     t = t + h;
   }
   
-  return (y);
+  return y;
 }

@@ -1,5 +1,5 @@
 functions {
-  #include unit_johnson_su.stan
+  #include unit_johnson_su.stanfunctions
 }
 data {
   int<lower=0> N;

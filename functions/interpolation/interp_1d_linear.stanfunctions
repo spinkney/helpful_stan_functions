@@ -33,5 +33,5 @@ array[] vector interp_1d_linear(array[] vector y, data array[] real x,
     w = (x[right] - x_out[j]) / (x[right] - x[left]);
     y_out[j] = w * y[left] + (1 - w) * y[right];
   }
-  return (y_out);
+  return y_out;
 }

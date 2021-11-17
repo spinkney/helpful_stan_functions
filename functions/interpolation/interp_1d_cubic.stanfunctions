@@ -76,7 +76,7 @@ array[] vector interp_1d_cubic(array[] vector y, data array[] real x,
     y_out[j] = h00 * y[left] + h10 * h * f_left + h01 * y[right]
                + h11 * h * f_right;
   }
-  return (y_out);
+  return y_out;
 }
 
 /** @} */

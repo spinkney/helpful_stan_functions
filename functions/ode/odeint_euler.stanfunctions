@@ -47,7 +47,7 @@ array[] vector odeint_euler(real t0, vector y0, data real h,
     y[i + 1] = y[i] + h * derivative_fun(t, y[i], a0, theta);
     t = t + h;
   }
-  return (y);
+  return y;
 }
 
 /** @} */

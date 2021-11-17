@@ -36,5 +36,5 @@ array[] vector odeint_midpoint(real t0, vector y0, data real h,
     t = t + h;
   }
   
-  return (y);
+  return y;
 }

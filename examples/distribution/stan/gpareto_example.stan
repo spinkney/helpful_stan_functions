@@ -1,5 +1,5 @@
 functions {
-  #include gpareto.stan
+  #include gpareto.stanfunctions
 }
 data {
   real ymin;
@@ -12,8 +12,8 @@ transformed data {
   real ymax = max(y);
 }
 parameters {
-  real<lower=0> sigma; 
-  real<lower=-sigma / (ymax - ymin)> k; 
+  real<lower=0> sigma;
+  real<lower=-sigma / (ymax - ymin)> k;
 }
 model {
   y ~ gpareto(ymin, k, sigma);

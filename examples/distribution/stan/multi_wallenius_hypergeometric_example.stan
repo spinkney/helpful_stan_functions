@@ -1,15 +1,15 @@
 functions {
- #include multi_wallenius_hypergeometric.stan
+  #include multi_wallenius_hypergeometric.stanfunctions
 }
 data {
   int<lower=0> N;
   int<lower=0> C;
-  int y[N, C + 1];
+  array[N, C + 1] int y;
   vector[C] m;
   real tol;
 }
 transformed data {
-  real x_r[0];
+  array[0] real x_r;
 }
 parameters {
   simplex[C] probs;

@@ -1,6 +1,6 @@
 functions {
-  #include corr_constrain_lp.stan
-  #include cholesky_corr_constrain_lp.stan
+  #include corr_constrain_lp.stanfunctions
+  #include cholesky_corr_constrain_lp.stanfunctions
 }
  data {
   int K;
