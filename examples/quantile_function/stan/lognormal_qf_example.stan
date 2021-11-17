@@ -1,5 +1,5 @@
 functions {
-  #include lognormal_qf.stan
+  #include lognormal_qf.stanfunctions
   
   real lognormal_trunc_rng(real mu, real sigma, real lb, real ub){
     real p_ub = lognormal_cdf(ub, mu, sigma);
@@ -17,7 +17,7 @@ data {
   real<lower=lb> ub;
 }
 generated quantities {
-  real y_out[N];
+  array[N] real y_out;
 
   for(n in 1:N) 
     y_out[n] = lognormal_trunc_rng(mu, sigma, lb, ub);

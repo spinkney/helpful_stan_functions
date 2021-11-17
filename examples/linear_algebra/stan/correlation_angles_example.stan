@@ -1,6 +1,6 @@
 functions {
- #include correlation_angles.stan
- #include triangular.stan
+ #include correlation_angles.stanfunctions
+ #include triangular.stanfunctions
 }
 data {
   int N;
@@ -18,6 +18,7 @@ transformed parameters {
 model {
   vector[N] R_vec = to_vector(R);
   vector[N] R_hat_vec = to_vector(R_hat);
+  
   squared_distance(R_vec, R_hat_vec) ~ chi_square(1);
   target += sum(log(fabs(2 * (R_vec - R_hat_vec))));
 }
