@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['johnson_5fqf_2estan_0',['johnson_qf.stan',['../johnson__qf_8stan.html',1,'']]]
+  ['univariate_5fdefinition_2estan_0',['univariate_definition.stan',['../univariate__definition_8stan.html',1,'']]]
 ];

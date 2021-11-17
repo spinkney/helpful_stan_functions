@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['frank_5fcopula_2estan_0',['frank_copula.stan',['../frank__copula_8stan.html',1,'']]]
+  ['mainpage_2estan_0',['mainpage.stan',['../mainpage_8stan.html',1,'']]],
+  ['multivariate_5fdefinition_2estan_1',['multivariate_definition.stan',['../multivariate__definition_8stan.html',1,'']]]
 ];
