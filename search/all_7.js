@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['univariate_20distribution_20functions_0',['Univariate Distribution Functions',['../group__univariate.html',1,'']]],
-  ['univariate_5fdefinition_2estan_1',['univariate_definition.stan',['../univariate__definition_8stan.html',1,'']]]
+  ['how_20to_20add_20a_20new_20function_3f_0',['How to add a new function?',['../creating_new.html',1,'index']]],
+  ['how_20to_20use_20doxygen_20documentation_20for_20the_20project_3f_1',['How to use doxygen documentation for the project?',['../doxygen_doc.html',1,'index']]]
 ];

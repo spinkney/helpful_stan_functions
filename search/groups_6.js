@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['univariate_20distribution_20functions_0',['Univariate Distribution Functions',['../group__univariate.html',1,'']]]
+  ['interpolation_20functions_0',['Interpolation Functions',['../group__interpolation.html',1,'']]]
 ];

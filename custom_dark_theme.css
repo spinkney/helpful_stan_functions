@@ -4,7 +4,7 @@
 
 /* TOP MENU */
 .sm-dox {
-	background: #dfe5f2 !important;
+	background: #121212 !important;
 }
 
 .sm-dox a {
@@ -12,9 +12,9 @@
 }
 
 body {
-	background: #282923;
+	background: #b3b3b3;
 	background-image: none;
-	color: #D8D8D8;
+	color: #FFFFFF;
 }
 
 div.fragment, pre.fragment {

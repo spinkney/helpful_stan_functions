@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['special_20probability_20functions_20functions_0',['Special Probability Functions Functions',['../group__special.html',1,'']]]
+  ['generalized_20pareto_20distribution_20functions_0',['Generalized Pareto Distribution Functions',['../group__gen__pareto.html',1,'']]],
+  ['gumbel_20copula_20functions_1',['Gumbel Copula Functions',['../group__gumbel.html',1,'']]]
 ];
