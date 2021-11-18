@@ -19,7 +19,7 @@ body {
 
 div.fragment, pre.fragment {
 	border: 1px solid #000000;
-	background: #181818;
+	background: #212121;
 }
 
 a, a:link, a:visited {
@@ -39,7 +39,7 @@ a.highlighted {
 /*********************************************/
 #main-nav {
 	/* display: none; */
-	border-bottom: 1px solid #181818;
+	border-bottom: 1px solid #212121;
 }
 
 #main-nav .sm-dox {
@@ -62,11 +62,11 @@ a.highlighted {
 
 .sm-dox ul {
 	border: 1px solid #000000;
-	background: #181818;
+	background: #212121;
 }
 
 .directory tr.even {
-	background: #181818;
+	background: #212121;
 }
 
 
@@ -75,7 +75,7 @@ a.highlighted {
 /*********************************************/
 #MSearchSelectWindow {
 	border: 1px solid #000000;
-	background: #181818;
+	background: #212121;
 }
 
 a.selectItem {
@@ -88,7 +88,7 @@ a.SelectItem:hover {
 
 #MSearchResultsWindow {
 	border: 1px solid #000000;
-	background: #181818;
+	background: #212121;
 	color: #67d8ef !important;;
 }
 
@@ -101,7 +101,7 @@ a.SelectItem:hover {
 
 #nav-tree .selected {
 	background-image: none;
-	background: #181818;
+	background: #212121;
 }
 
 /*********************************************/
@@ -125,7 +125,7 @@ dd code {
 /**         Table of Contents (ToC)         **/
 /*********************************************/
 div.toc {
-	background: #181818;
+	background: #212121;
 	border: 1px solid #000000;
 }
 
@@ -138,12 +138,12 @@ div.toc h3 {
 /**              Content table              **/
 /*********************************************/
 table.doxtable tr:nth-child(even) td {
-	background: #181818;
+	background: #212121;
 }
 
 div.header {
 	background: transparent;
-	border-bottom: 1px solid #181818;
+	border-bottom: 1px solid #212121;
 }
 
 /*********************************************/
@@ -176,7 +176,7 @@ div.header {
 	background-image: none;
 	border-right: 1px solid #999999;
 
-	color: #181818;
+	color: #212121;
 }
 
 .tablist a:hover,
@@ -208,7 +208,7 @@ dl.reflist {
 /**               Note, warning             **/
 /*********************************************/
 #docs_list {
-	background: #181818;
+	background: #212121;
 }
 
 #docs_list ul li {
@@ -228,7 +228,7 @@ dl.reflist {
 /**               Resizable UI              **/
 /*********************************************/
 .ui-resizable-e {
-	background: #181818;
+	background: #212121;
 }
 
 /*********************************************/
@@ -307,7 +307,7 @@ span.lineno a {
 /*********************************************/
 .mdescLeft, .mdescRight, .memItemLeft, .memItemRight,
 .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-	background: #181818;
+	background: #212121;
 	color: inherit;
 }
 
@@ -328,12 +328,12 @@ h2.groupheader {
 /**                 Mem items               **/
 /*********************************************/
 .memtitle {
-	background: #181818 !important;
+	background: #212121 !important;
 	border-color: #000000;
 }
 
 .memitem {
-	background: #181818 !important;
+	background: #212121 !important;
 	color: inherit;
 	text-shadow: none;
 }
@@ -367,7 +367,7 @@ td.memItemLeft, td.memItemRight {
 /**                 Footer                  **/
 /*********************************************/
 .titlearea {
-	border-bottom: 1px solid #181818;
+	border-bottom: 1px solid #212121;
 }
 
 /*********************************************/
@@ -381,7 +381,7 @@ td.memItemLeft, td.memItemRight {
 	background: transparent;
 	color: inherit;
 	border: none;
-	border-top: 1px solid #181818;
+	border-top: 1px solid #212121;
 }
 
 .navpath li.footer {
@@ -412,7 +412,7 @@ td.memItemLeft, td.memItemRight {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #181818; 
+	background: #212121; 
 }
 
 /*********************************************/
