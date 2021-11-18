@@ -91,13 +91,214 @@ $(document).ready(function(){initNavTree('group__qf.html',''); initResizable(); 
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#groups">Modules</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Quantile Functions also known as Inverse Cumulative Distribution Functions</div></div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__johnson__qf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__johnson__qf.html">Johnson Quantile Parameterized Distributions (J-QPD) functions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga8684adaa0838edbfa4188a918961b58c"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__qf.html#ga8684adaa0838edbfa4188a918961b58c">lognormal_qf</a> (real p, real mu, real sigma)</td></tr>
+<tr class="separator:ga8684adaa0838edbfa4188a918961b58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabba9d4d3227b92d49fae91c3ca6c6daf"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__qf.html#gabba9d4d3227b92d49fae91c3ca6c6daf">skewed_generalized_t_qf</a> (real p, real mu, real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:gabba9d4d3227b92d49fae91c3ca6c6daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaecfde107e2a63c982b168c6dac4b1782"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__qf.html#gaecfde107e2a63c982b168c6dac4b1782">unit_johnson_qf</a> (real p, real mu, real sigma)</td></tr>
+<tr class="separator:gaecfde107e2a63c982b168c6dac4b1782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >In probability and statistics, the quantile function - also known as <br  />
  an inverse cumulative distribution function - is, associated with a probability distribution of a random variable, specifies the value of the random variable such that the probability of the variable being less than or equal to that value equals the given probability. <br  />
 </p>
 <p >See <a href="https://en.wikipedia.org/wiki/Quantile_function">https://en.wikipedia.org/wiki/Quantile_function</a> for more information. </p>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga8684adaa0838edbfa4188a918961b58c" name="ga8684adaa0838edbfa4188a918961b58c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8684adaa0838edbfa4188a918961b58c">&#9670;&nbsp;</a></span>lognormal_qf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real lognormal_qf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p ><b>Lognormal Quantile Function</b></p>
+<p class="formulaDsp">
+\begin{aligned} F^{-1}(p) &amp;= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\ &amp;= \exp(\mu + \sigma \, \Phi^{−1}(x)) \end{aligned}
+</p>
+<p> because </p><p class="formulaDsp">
+\begin{aligned} \Phi(x) &amp;= \frac{1}{2\pi} \int_{-\infty}^x e^{-t^2}dt \\ &amp;= \frac{1}{2} + \frac{1}{2}\text{erf}\bigg( \frac{x}{\sqrt{2}} \bigg) \end{aligned}
+</p>
+<p> implies that \( \Phi^{-1}(x) = \sqrt{2} \, \text{inv_erf}(2x - 1) \).</p>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">mu</td><td>Real \((-\infty, +\infty)\) </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \((0, +\infty)\) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>inverse CDF value </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if \( p \notin [0, 1] \) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gabba9d4d3227b92d49fae91c3ca6c6daf" name="gabba9d4d3227b92d49fae91c3ca6c6daf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabba9d4d3227b92d49fae91c3ca6c6daf">&#9670;&nbsp;</a></span>skewed_generalized_t_qf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real skewed_generalized_t_qf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Skewed Generalized T Quantile Function</p>
+<p >For more information, please see <a class="el" href="group__skew__generalized__t.html">Skew Generalized T distribution functions</a>.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
+
+</div>
+</div>
+<a id="gaecfde107e2a63c982b168c6dac4b1782" name="gaecfde107e2a63c982b168c6dac4b1782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaecfde107e2a63c982b168c6dac4b1782">&#9670;&nbsp;</a></span>unit_johnson_qf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real unit_johnson_qf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Unit Johnson SU Quantile Function</p>
+<p class="formulaDsp">
+\begin{aligned} F^{-1}(p, \, \mu, \, \sigma) &amp;= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(p) - \mu}{\sigma}\bigg) \bigg]\\ \end{aligned}
+</p>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">mu</td><td>Real \((-\infty, +\infty)\) </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \((0, +\infty)\) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>inverse CDF value </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if \( p \notin [0, 1] \) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
