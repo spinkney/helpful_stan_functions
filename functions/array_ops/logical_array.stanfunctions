@@ -3,7 +3,8 @@
  *  @{ */
 
 /**
-  * Checks whether real numbers are finite and ordered
+  * Checks whether real numbers are finite and ordered.
+  * Code is at [logical_array.stanfunctions](https://github.com/spinkney/helpful_stan_functions/edit/main/functions/array_ops/logical_array.stanfunctions)
   * 
   * @copyright Ben Goodrich 2020
   * @param theta real array of numbers
