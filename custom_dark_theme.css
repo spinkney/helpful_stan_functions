@@ -27,21 +27,13 @@ a, a:link, a:visited {
 }
 
 .highlighted {
-
-    
-        
-          
-    
-
-        
-    
-    @@ -39,7 +39,7 @@ a.highlighted {
-  
 	background: none !important;
 }
+
 a.highlighted {
 	background: none !important;
 }
+
 /*********************************************/
 /**              Top main menu              **/
 /*********************************************/
@@ -51,25 +43,18 @@ a.highlighted {
 }
 
 #main-nav .sm-dox {
-
-    
-        
-          
-    
-
-        
-    
-    @@ -62,11 +62,11 @@ a.highlighted {
-  
 	background: transparent !important;
 }
+
 .sm-dox a {
 	text-shadow: none !important;
 	background: transparent !important;
 }
+
 .sm-dox a:hover {
 	background: #282923 !important;
 }
+
 .sm-dox {
 	text-shadow: none !important;
 	box-shadow: none !important;
@@ -85,16 +70,6 @@ a.highlighted {
 }
 
 
-
-    
-        
-          
-    
-
-        
-    
-    @@ -75,7 +75,7 @@ a.highlighted {
-  
 /*********************************************/
 /**               Top search                **/
 /*********************************************/
@@ -104,18 +79,9 @@ a.highlighted {
 }
 
 a.selectItem {
-
-    
-        
-          
-    
-
-        
-    
-    @@ -88,7 +88,7 @@ a.SelectItem:hover {
-  
 	padding: 3px;
 }
+
 a.SelectItem:hover {
 	background: #282923 !important;
 }
@@ -126,16 +92,6 @@ a.SelectItem:hover {
 	color: #67d8ef !important;;
 }
 
-
-    
-        
-          
-    
-
-        
-    
-    @@ -101,7 +101,7 @@ a.SelectItem:hover {
-  
 /*********************************************/
 /**                Main menu                **/
 /*********************************************/
@@ -149,18 +105,9 @@ a.SelectItem:hover {
 }
 
 /*********************************************/
-
-    
-        
-          
-    
-
-        
-    
-    @@ -125,7 +125,7 @@ dd code {
-  
 /**               Main content              **/
 /*********************************************/
+
 /*********************************************/
 /**               Inline code               **/
 /*********************************************/
@@ -170,8 +117,10 @@ td code,
 dd code {
 	background-color: #000000;
 	border: 1px solid #A8B8D9;
+
 	color: #D8D8D8;
 }
+
 /*********************************************/
 /**         Table of Contents (ToC)         **/
 /*********************************************/
@@ -180,20 +129,11 @@ div.toc {
 	border: 1px solid #000000;
 }
 
-
-    
-        
-          
-    
-
-        
-    
-    @@ -138,12 +138,12 @@ div.toc h3 {
-  
 div.toc h3 {
 	font-size: 150%;
 	color: inherit;
 }
+
 /*********************************************/
 /**              Content table              **/
 /*********************************************/
@@ -207,42 +147,31 @@ div.header {
 }
 
 /*********************************************/
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -176,7 +176,7 @@ div.header {
-  
 /**               Field table               **/
 /*********************************************/
 .fieldtable th {
 	background: #282923;
 	color: inherit;
 }
+
 /*********************************************/
 /**           Memitem and memtitle          **/
 /*********************************************/
 .memdoc {
 	border: 1px solid #A8B8D9;
 }
+
 /*********************************************/
 /**             TOP navigation              **/
 /*********************************************/
 .tabs, .tabs2, .tabs3 {
 	background: #DDDDDD;
 }
+
 .tablist li {
 	background: transparent !important;
 }
+
 .tablist a {
 	background-image: none;
 	border-right: 1px solid #999999;
@@ -251,39 +180,30 @@ div.header {
 }
 
 .tablist a:hover,
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -208,7 +208,7 @@ dl.reflist {
-  
 .tablist li.current a {
 	text-decoration: none;
 	color: #000000;
 	background: #CCCCCC;
 	background-image: none;
 }
+
 /*********************************************/
 /**              H1 in textblocks           **/
 /*********************************************/
+
 /*********************************************/
 /**               Note, warning             **/
 /*********************************************/
+
 /*********************************************/
 /**               Reference list            **/
 /**Similar to warning/note/todo/... messages**/
 /*********************************************/
 dl.reflist {
+
 }
+
+
 /*********************************************/
 /**               Note, warning             **/
 /*********************************************/
@@ -292,25 +212,18 @@ dl.reflist {
 }
 
 #docs_list ul li {
-
-    
-        
-          
-    
-
-        
-    
-    @@ -228,7 +228,7 @@ dl.reflist {
-  
 	border-right: 1px solid #BFBFBF;
 }
+
 #docs_list ul li a {
 	color: #1b1e21;
 }
+
 #docs_list ul li a:hover,
 #docs_list ul li a.docs_current {
 	background: #282923;
 }
+
 /*********************************************/
 /**               Resizable UI              **/
 /*********************************************/
@@ -319,23 +232,9 @@ dl.reflist {
 }
 
 /*********************************************/
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -307,7 +307,7 @@ span.lineno a {
-  
 /**               Download url              **/
 /*********************************************/
+
 /*********************************************/
 /**               Syntax folor              **/
 /*********************************************/
@@ -343,51 +242,66 @@ div.line {
 	background: transparent;
 	color: #d7d7d7;
 }
+
 div.line a {
 	color: inherit;
 }
+
 span.keyword {
 	color: #f92472;
 	font-style: italic;
 }
+
 span.keywordtype {
 	color: #67cfc1;
 	font-style: italic;
 }
+
 span.keywordflow {
 	color: #f92472;
 	font-style: italic;
 }
+
 span.comment {
 	color: #74705a;
 }
+
 span.preprocessor {
 	color: #a6e22b;
 }
+
 span.stringliteral {
 	color: #e7db74;
 }
+
 span.charliteral {
 	color: #e7db74;
 }
+
 span.vhdldigit { 
 	color: #ff00ff;
 }
+
 span.vhdlchar { 
 	color: #000000;
 }
+
 span.vhdlkeyword { 
 	color: #700070;
 }
+
 span.vhdllogic { 
 	color: #ff0000;
 }
+
 span.lineno {
 	background: transparent;
 }
+
 span.lineno a {
 	background: transparent;
 }
+
 /*********************************************/
 /**          Modules/Directory table        **/
 /*********************************************/
@@ -397,26 +311,19 @@ span.lineno a {
 	color: inherit;
 }
 
-
-    
-        
-          
-    
-
-        
-    
-    @@ -328,12 +328,12 @@ h2.groupheader {
-  
 .memtemplate {
 	color: #B4CCF9;
 }
+
 .memSeparator {
 	border: none;
 	background: transparent;
 }
+
 h2.groupheader {
 	color: #67d8ef;
 }
+
 /*********************************************/
 /**                 Mem items               **/
 /*********************************************/
@@ -431,39 +338,31 @@ h2.groupheader {
 	text-shadow: none;
 }
 
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -367,7 +367,7 @@ td.memItemLeft, td.memItemRight {
-  
 .memproto {
 	background: inherit;
 	border-color: #000000;
 	color: inherit;
 	text-shadow: none;
 }
+
 .memproto table td {
 	font-family: monospace, fixed !important;
 }
+
 td.memItemLeft, td.memItemRight {
 	font-family: monospace, fixed;
 }
+
 .paramname, .paramname em {
 	color: #bf5f82;
 }
+
 .memdoc {
 	background: inherit;
 	border-color: #000000;
 }
+
+
 /*********************************************/
 /**                 Footer                  **/
 /*********************************************/
@@ -472,21 +371,12 @@ td.memItemLeft, td.memItemRight {
 }
 
 /*********************************************/
-
-    
-        
-          
-    
-
-        
-    
-    @@ -381,7 +381,7 @@ td.memItemLeft, td.memItemRight {
-  
 /**                 Footer                  **/
 /*********************************************/
 #nav-path {
 	background: transparent;
 }
+
 #nav-path ul {
 	background: transparent;
 	color: inherit;
@@ -495,32 +385,20 @@ td.memItemLeft, td.memItemRight {
 }
 
 .navpath li.footer {
-
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -412,7 +412,7 @@ td.memItemLeft, td.memItemRight {
-  
 	color: inherit;
 }
+
 .navpath li.navelem a {
 	text-shadow: none;
 }
+
 /*********************************************/
 /**             Custom scrollbar            **/
 /*********************************************/
 ::-webkit-scrollbar {
 	width: 10px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
 	border-radius: 10px;
@@ -538,16 +416,6 @@ td.memItemLeft, td.memItemRight {
 }
 
 /*********************************************/
-
-    
-        
-          
-    
-
-        
-    
-    @@ -421,4 +421,4 @@ td.memItemLeft, td.memItemRight {
-  
 /**             Custom scrollbar            **/
 /*********************************************/
 h1.glow, h2.glow, h3.glow,
