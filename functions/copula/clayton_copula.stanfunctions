@@ -17,6 +17,10 @@
  *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = (\theta + 1)(uv)^{-(\theta + 1)}(u^{-\theta} + v^{-\theta} - 1)^{-\frac{2 \theta + 1}{\theta}}
  * \f]
  *
+ * Code: [clayton_copula.stanfunctions](https://github.com/spinkney/helpful_stan_functions/blob/main/functions/copula/clayton_copula.stanfunctions) 
+ * Stan Example: [clayton_copula_example.stan](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/stan/clayton_copula_example.stan)
+ * R: [clayton_example.R](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/R/clayton_example.R)
+ *
  * Copyright Andre Pfeuffer, Sean Pinkney \n
  * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
  * Accessed and modified Feb. 5, 2021 
