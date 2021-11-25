@@ -3,7 +3,7 @@
  * \f[
  *      C(u,v) = -\frac{1}{\omega}\ln \big[1 + \frac{(\exp(-\omega u) - 1)(\exp(-\omega v)-1)}{\exp(-\omega) -1} \big]
  * \f]
- * for \f$0 < \theta < \infty\f$. 
+ * for \f$\omega \in (-\infty, \infty) \ {0}\f$. 
  * 
  * \ingroup copula
  *  @{ */
