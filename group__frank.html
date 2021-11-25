@@ -103,6 +103,10 @@ Functions</h2></td></tr>
 <tr class="separator:gabe632c658443e2fa0169a2ef0dbc39cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p >The Frank copula is defined as </p><p class="formulaDsp">
+\[ C(u,v) = -\frac{1}{\omega}\ln \big[1 + \frac{(\exp(-\omega u) - 1)(\exp(-\omega v)-1)}{\exp(-\omega) -1} \big] \]
+</p>
+<p> for \(0 &lt; \theta &lt; \infty\). </p>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gabe632c658443e2fa0169a2ef0dbc39cf" name="gabe632c658443e2fa0169a2ef0dbc39cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabe632c658443e2fa0169a2ef0dbc39cf">&#9670;&nbsp;</a></span>frank_copula_lpdf()</h2>
@@ -135,6 +139,30 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Frank Bivariate Copula Log Density</p>
+<p >The probability density function is defined as </p><p class="formulaDsp">
+\[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{-\omega (\exp(-\omega) - 1)(\exp(-\omega(u + v)))}{[(\exp(-\omega u) - 1)\exp(-\omega v) - 1) + \exp(-\omega) - 1]^2} \]
+</p>
+<p >Code: <a href="https://github.com/spinkney/helpful_stan_functions/blob/main/functions/copula/frank_copula.stanfunctions">frank_copula.stanfunctions</a> <br  />
+ Copyright Andre Pfeuffer, Sean Pinkney <br  />
+<a href="https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ">https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ</a> <br  />
+Accessed and modified Feb. 5, 2021</p>
+<p >The copula is defined \(0 &lt; \theta &lt; \infty\)</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Real number on \((0,1]\), not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">v</td><td>Real number on \((0,1]\), not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">theta</td><td>Real number on (0, Inf) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if theta \(\le 0\) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
