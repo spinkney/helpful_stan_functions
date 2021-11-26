@@ -2,6 +2,8 @@
  *
  * The normal copula is an elliptical copula over the unit cube \f$[0,\,1]^d \f$.
  *
+ * @include \copula\normal_copula.stanfunctions
+ *
  * \ingroup copula
  *  @{ */
 
