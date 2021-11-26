@@ -105,8 +105,44 @@ Functions</h2></td></tr>
 <tr class="separator:ga5c63a6cac08ee9da5756eff047c5c800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >Original code is in Stan-math <a href="https://github.com/stan-dev/math/blob/develop/stan/math/prim/fun/cholesky_corr_constrain.hpp#L48">https://github.com/stan-dev/math/blob/develop/stan/math/prim/fun/cholesky_corr_constrain.hpp#L48</a> </p>
-<h2 class="groupheader">Function Documentation</h2>
+<p >Original code is in Stan-math <a href="https://github.com/stan-dev/math/blob/develop/stan/math/prim/fun/cholesky_corr_constrain.hpp#L48">https://github.com/stan-dev/math/blob/develop/stan/math/prim/fun/cholesky_corr_constrain.hpp#L48</a></p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__cholesky.html#gadf7cbb994a238f2fd9ad6163f66ec4a6">corr_constrain_lp</a>(vector x) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
+<div class="line">  vector[N] tanh_x = tanh(x);</div>
+<div class="line">  </div>
+<div class="line">  target += sum(log1m(square(tanh_x)));</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> tanh_x;</div>
+<div class="line">}</div>
+<div class="line">matrix <a class="code hl_function" href="group__cholesky.html#ga5c63a6cac08ee9da5756eff047c5c800">cholesky_corr_constrain_lp</a>(vector y, <span class="keywordtype">int</span> K) {</div>
+<div class="line">  <span class="keywordtype">int</span> k_choose_2 = (K * (K - 1)) / 2;</div>
+<div class="line">  vector[k_choose_2] z = <a class="code hl_function" href="group__cholesky.html#gadf7cbb994a238f2fd9ad6163f66ec4a6">corr_constrain_lp</a>(y);</div>
+<div class="line">  matrix[K, K] x = rep_matrix(0, K, K);</div>
+<div class="line">  <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line">  </div>
+<div class="line">  x[1, 1] = 1;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 2 : K) {</div>
+<div class="line">    real sum_sqs;</div>
+<div class="line">    iter += 1;</div>
+<div class="line">    x[i, 1] = z[iter];</div>
+<div class="line">    sum_sqs = square(x[i, 1]);</div>
+<div class="line">    <span class="keywordflow">if</span> (i &gt; 2) {</div>
+<div class="line">      <span class="keywordflow">for</span> (j in 2 : i - 1) {</div>
+<div class="line">        iter += 1;</div>
+<div class="line">        target += 0.5 * log1m(sum_sqs);</div>
+<div class="line">        x[i, j] = z[iter] * sqrt(1.0 - sum_sqs);</div>
+<div class="line">        sum_sqs += square(x[i, j]);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    x[i, i] = sqrt(1.0 - sum_sqs);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> x;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__cholesky_html_ga5c63a6cac08ee9da5756eff047c5c800"><div class="ttname"><a href="group__cholesky.html#ga5c63a6cac08ee9da5756eff047c5c800">cholesky_corr_constrain_lp</a></div><div class="ttdeci">matrix cholesky_corr_constrain_lp(vector y, int K)</div><div class="ttdef"><b>Definition:</b> cholesky_corr_constrain.stanfunctions:39</div></div>
+<div class="ttc" id="agroup__cholesky_html_gadf7cbb994a238f2fd9ad6163f66ec4a6"><div class="ttname"><a href="group__cholesky.html#gadf7cbb994a238f2fd9ad6163f66ec4a6">corr_constrain_lp</a></div><div class="ttdeci">vector corr_constrain_lp(vector x)</div><div class="ttdef"><b>Definition:</b> cholesky_corr_constrain.stanfunctions:20</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga5c63a6cac08ee9da5756eff047c5c800" name="ga5c63a6cac08ee9da5756eff047c5c800"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5c63a6cac08ee9da5756eff047c5c800">&#9670;&nbsp;</a></span>cholesky_corr_constrain_lp()</h2>
 

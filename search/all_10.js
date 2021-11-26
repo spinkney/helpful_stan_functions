@@ -6,7 +6,7 @@ var searchData=
   ['skewed_5fgeneralized_5ft_5flcdf_3',['skewed_generalized_t_lcdf',['../group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df',1,'skew_generalized_t.stanfunctions']]],
   ['skewed_5fgeneralized_5ft_5fqf_4',['skewed_generalized_t_qf',['../group__qf.html#gabba9d4d3227b92d49fae91c3ca6c6daf',1,'skewed_generalized_t_qf.stanfunctions']]],
   ['skewed_5fgeneralized_5ft_5fqf_2estanfunctions_5',['skewed_generalized_t_qf.stanfunctions',['../skewed__generalized__t__qf_8stanfunctions.html',1,'']]],
-  ['special_20probability_20functions_20functions_6',['Special Probability Functions Functions',['../group__special.html',1,'']]],
+  ['special_20probability_20functions_6',['Special probability functions',['../group__special.html',1,'']]],
   ['special_5fdefinition_2estan_7',['special_definition.stan',['../special__definition_8stan.html',1,'']]],
   ['stan_20udf_20documentation_8',['Stan UDF Documentation',['../index.html',1,'']]]
 ];

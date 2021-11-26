@@ -21,7 +21,8 @@ var files_dup =
     [ "cholesky_corr_constrain.stanfunctions", "cholesky__corr__constrain_8stanfunctions.html", "cholesky__corr__constrain_8stanfunctions" ],
     [ "correlation_angles.stanfunctions", "correlation__angles_8stanfunctions.html", "correlation__angles_8stanfunctions" ],
     [ "correlation_definition.stan", "correlation__definition_8stan.html", null ],
-    [ "triangular.stanfunctions", "triangular_8stanfunctions.html", "triangular_8stanfunctions" ],
+    [ "matrix_definition.stan", "matrix__definition_8stan.html", null ],
+    [ "matrix_operations.stanfunctions", "matrix__operations_8stanfunctions.html", "matrix__operations_8stanfunctions" ],
     [ "mainpage.stan", "mainpage_8stan.html", null ],
     [ "odeint_euler.stanfunctions", "odeint__euler_8stanfunctions.html", "odeint__euler_8stanfunctions" ],
     [ "odeint_midpoint.stanfunctions", "odeint__midpoint_8stanfunctions.html", "odeint__midpoint_8stanfunctions" ],
@@ -34,5 +35,6 @@ var files_dup =
     [ "inc_beta_inverse.stanfunctions", "inc__beta__inverse_8stanfunctions.html", "inc__beta__inverse_8stanfunctions" ],
     [ "inv_erf.stanfunctions", "inv__erf_8stanfunctions.html", "inv__erf_8stanfunctions" ],
     [ "special_definition.stan", "special__definition_8stan.html", null ],
-    [ "expect_equal.stanfunctions", "expect__equal_8stanfunctions.html", "expect__equal_8stanfunctions" ]
+    [ "expect_equal.stanfunctions", "expect__equal_8stanfunctions.html", "expect__equal_8stanfunctions" ],
+    [ "unit_test.stan", "unit__test_8stan.html", null ]
 ];

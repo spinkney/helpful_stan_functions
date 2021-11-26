@@ -128,7 +128,115 @@ Functions</h2></td></tr>
 <p class="formulaDsp">
 \[ \mathbf{r} = \mu + L \Phi^{-1}(\mathbf{v}). \]
 </p>
- <h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a>(vector u, vector mu, matrix L,</div>
+<div class="line">                                          vector lb, vector ub,</div>
+<div class="line">                                          vector lb_ind, vector ub_ind) {</div>
+<div class="line">  <span class="keywordtype">int</span> K = rows(u);</div>
+<div class="line">  vector[K] z;</div>
+<div class="line">  real lp = 0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
+<div class="line">    <span class="comment">// if kth u is unbounded</span></div>
+<div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
+<div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
+<div class="line">      z[k] = inv_Phi(u[k]);</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="keywordtype">int</span> km1 = k - 1;</div>
+<div class="line">      real v;</div>
+<div class="line">      real z_star;</div>
+<div class="line">      real logd;</div>
+<div class="line">      row_vector[2] log_ustar = [negative_infinity(), 0]; <span class="comment">// [-Inf, 0] = log([0,1])</span></div>
+<div class="line">      real constrain = mu[k] + ((k &gt; 1) ? L[k, 1 : km1] * head(z, km1) : 0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// obtain log of upper and lower bound (if applicable)</span></div>
+<div class="line">      <span class="keywordflow">if</span> (lb_ind[k] == 1) </div>
+<div class="line">        log_ustar[1] = normal_lcdf((lb[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      <span class="keywordflow">if</span> (ub_ind[k] == 1) </div>
+<div class="line">        log_ustar[2] = normal_lcdf((ub[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// update log gradient and z  </span></div>
+<div class="line">      logd = log_diff_exp(log_ustar[2], log_ustar[1]);</div>
+<div class="line">      v = exp(log_sum_exp(log_ustar[1], log(u[k]) + logd)); <span class="comment">// v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])</span></div>
+<div class="line">      z[k] = inv_Phi(v); <span class="comment">// z ~ TN</span></div>
+<div class="line">      lp += logd; <span class="comment">// increment by log gradient</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> lp;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__tmvn.html#gaa5f97f79d524abf4ecf3e532a3dfb812">multi_normal_cholesky_truncated_rng</a>(vector u, vector mu, matrix L,</div>
+<div class="line">                                           vector lb, vector ub,</div>
+<div class="line">                                           vector lb_ind, vector ub_ind) {</div>
+<div class="line">  <span class="keywordtype">int</span> K = rows(u);</div>
+<div class="line">  vector[K] z;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
+<div class="line">    <span class="comment">// if kth u is unbounded</span></div>
+<div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
+<div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
+<div class="line">      z[k] = inv_Phi(u[k]);</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="keywordtype">int</span> km1 = k - 1;</div>
+<div class="line">      real v;</div>
+<div class="line">      real z_star;</div>
+<div class="line">      real logd;</div>
+<div class="line">      row_vector[2] log_ustar = [negative_infinity(), 0]; <span class="comment">// [-Inf, 0] = log([0,1])</span></div>
+<div class="line">      real constrain = mu[k] + ((k &gt; 1) ? L[k, 1 : km1] * head(z, km1) : 0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// obtain log of upper and lower bound (if applicable)</span></div>
+<div class="line">      <span class="keywordflow">if</span> (lb_ind[k] == 1) </div>
+<div class="line">        log_ustar[1] = normal_lcdf((lb[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      <span class="keywordflow">if</span> (ub_ind[k] == 1) </div>
+<div class="line">        log_ustar[2] = normal_lcdf((ub[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// update log gradient and z  </span></div>
+<div class="line">      logd = log_diff_exp(log_ustar[2], log_ustar[1]);</div>
+<div class="line">      v = exp(log_sum_exp(log_ustar[1], log(u[k]) + logd)); <span class="comment">// v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])</span></div>
+<div class="line">      z[k] = inv_Phi(v); <span class="comment">// z ~ TN</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> mu + L * z;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="group__tmvn.html#ga7c9f3672e2ad840066dae356576cb137">multi_normal_cholesky_truncated_lp</a>(vector u, vector mu, matrix L,</div>
+<div class="line">                                        vector lb, vector ub, vector lb_ind,</div>
+<div class="line">                                        vector ub_ind) {</div>
+<div class="line">  <span class="keywordtype">int</span> K = rows(u);</div>
+<div class="line">  vector[K] z;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
+<div class="line">    <span class="comment">// if kth u is unbounded</span></div>
+<div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
+<div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
+<div class="line">      z[k] = inv_Phi(u[k]);</div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="keywordtype">int</span> km1 = k - 1;</div>
+<div class="line">      real v;</div>
+<div class="line">      real z_star;</div>
+<div class="line">      real logd;</div>
+<div class="line">      row_vector[2] log_ustar = [negative_infinity(), 0]; <span class="comment">// [-Inf, 0] = log([0,1])</span></div>
+<div class="line">      real constrain = mu[k] + ((k &gt; 1) ? L[k, 1 : km1] * head(z, km1) : 0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// obtain log of upper and lower bound (if applicable)</span></div>
+<div class="line">      <span class="keywordflow">if</span> (lb_ind[k] == 1) </div>
+<div class="line">        log_ustar[1] = normal_lcdf((lb[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      <span class="keywordflow">if</span> (ub_ind[k] == 1) </div>
+<div class="line">        log_ustar[2] = normal_lcdf((ub[k] - constrain) / L[k, k] | 0.0, 1.0);</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// update log gradient and z  </span></div>
+<div class="line">      logd = log_diff_exp(log_ustar[2], log_ustar[1]);</div>
+<div class="line">      v = exp(log_sum_exp(log_ustar[1], log(u[k]) + logd)); <span class="comment">// v = ustar[1] + (ustar[2] - ustar[1]) * u[k] ~ U(ustar[1], ustar[2])</span></div>
+<div class="line">      z[k] = inv_Phi(v); <span class="comment">// z ~ TN</span></div>
+<div class="line">      target += logd; <span class="comment">// increment by log gradient</span></div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__tmvn_html_ga410a62b317befea7a30c079292d142f0"><div class="ttname"><a href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:68</div></div>
+<div class="ttc" id="agroup__tmvn_html_ga7c9f3672e2ad840066dae356576cb137"><div class="ttname"><a href="group__tmvn.html#ga7c9f3672e2ad840066dae356576cb137">multi_normal_cholesky_truncated_lp</a></div><div class="ttdeci">void multi_normal_cholesky_truncated_lp(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:170</div></div>
+<div class="ttc" id="agroup__tmvn_html_gaa5f97f79d524abf4ecf3e532a3dfb812"><div class="ttname"><a href="group__tmvn.html#gaa5f97f79d524abf4ecf3e532a3dfb812">multi_normal_cholesky_truncated_rng</a></div><div class="ttdeci">vector multi_normal_cholesky_truncated_rng(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:121</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7c9f3672e2ad840066dae356576cb137" name="ga7c9f3672e2ad840066dae356576cb137"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7c9f3672e2ad840066dae356576cb137">&#9670;&nbsp;</a></span>multi_normal_cholesky_truncated_lp()</h2>
 

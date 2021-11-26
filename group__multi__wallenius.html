@@ -111,7 +111,38 @@ Functions</h2></td></tr>
 <p> where \( \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \) is the size of each \(c\) group of the population. The population is given by \( N = \sum_{i=1}^c m_i \) where the realizations from each group is given by \( \mathbf{x} \). The weights of each group are contained in the \(c\)-sized simplex \( \mathbf{\omega} \) and \( D \) is </p><p class="formulaDsp">
 \[ D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i). \]
 </p>
- <h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>(real t, <span class="comment">// Function argument</span></div>
+<div class="line">                              real xc, array[] real theta,</div>
+<div class="line">                              <span class="comment">// parameters</span></div>
+<div class="line">                              array[] real x_r, <span class="comment">// data (real)</span></div>
+<div class="line">                              array[] <span class="keywordtype">int</span> x_i) {</div>
+<div class="line">  <span class="comment">// data (integer)</span></div>
+<div class="line">  real Dinv = 1 / theta[1];</div>
+<div class="line">  <span class="keywordtype">int</span> Cp1 = num_elements(x_i);</div>
+<div class="line">  <span class="keywordtype">int</span> n = x_i[1];</div>
+<div class="line">  real v = 1;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 2 : Cp1) </div>
+<div class="line">    v *= pow(1 - t ^ (theta[i] * Dinv), x_i[i]);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> v;</div>
+<div class="line">}</div>
+<div class="line">real <a class="code hl_function" href="group__multi__wallenius.html#gac1b1c12f44019e532e76219190c0d96c">multi_wallenius_lpmf</a>(data array[] <span class="keywordtype">int</span> k, vector m, vector p,</div>
+<div class="line">                          data array[] real x_r, data real tol) {</div>
+<div class="line">  <span class="keywordtype">int</span> C = num_elements(m);</div>
+<div class="line">  real D = dot_product(to_row_vector(p), (m - to_vector(k[2 : C + 1])));</div>
+<div class="line">  real lp = log(integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1,</div>
+<div class="line">                             append_array({D}, to_array_1d(p)), x_r, k, tol));</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : C) </div>
+<div class="line">    lp += -log1p(m[i]) - lbeta(m[i] - k[i + 1] + 1, k[i + 1] + 1);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> lp;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__multi__wallenius_html_gaad1c6d45dab33e14585efdd01a763f85"><div class="ttname"><a href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a></div><div class="ttdeci">real multi_wallenius_integral(real t, real xc, array[] real theta, array[] real x_r, array[] int x_i)</div><div class="ttdef"><b>Definition:</b> multi_wallenius_hypergeometric.stanfunctions:36</div></div>
+<div class="ttc" id="agroup__multi__wallenius_html_gac1b1c12f44019e532e76219190c0d96c"><div class="ttname"><a href="group__multi__wallenius.html#gac1b1c12f44019e532e76219190c0d96c">multi_wallenius_lpmf</a></div><div class="ttdeci">real multi_wallenius_lpmf(data array[] int k, vector m, vector p, data array[] real x_r, data real tol)</div><div class="ttdef"><b>Definition:</b> multi_wallenius_hypergeometric.stanfunctions:70</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gaad1c6d45dab33e14585efdd01a763f85" name="gaad1c6d45dab33e14585efdd01a763f85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaad1c6d45dab33e14585efdd01a763f85">&#9670;&nbsp;</a></span>multi_wallenius_integral()</h2>
 

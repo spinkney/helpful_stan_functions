@@ -107,8 +107,141 @@ Functions</h2></td></tr>
 <tr class="separator:ga567ad93bd48cee2a78cf584e0f15d01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >Christopher C. Hadlock, J. Eric Bickel The Generalized Johnson Quantile-Parameterized Distribution System. Decision Analysis 16 (1) 67-85 <a href="https://doi.org/10.1287/deca.2018.0376">https://doi.org/10.1287/deca.2018.0376</a> </p>
-<h2 class="groupheader">Function Documentation</h2>
+<p >Christopher C. Hadlock, J. Eric Bickel The Generalized Johnson Quantile-Parameterized Distribution System. Decision Analysis 16 (1) 67-85 <a href="https://doi.org/10.1287/deca.2018.0376">https://doi.org/10.1287/deca.2018.0376</a></p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185">JQPDS_qf</a>(real p, real lower_bound, data real alpha, vector quantiles) {</div>
+<div class="line">  <span class="keywordflow">if</span> (p &lt; 0 || p &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;p must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (alpha &lt; 0 || alpha &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;alpha must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (rows(quantiles) != 3) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;quantiles must have three elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>({lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
+<div class="line">                positive_infinity()})) {</div>
+<div class="line">    real c = inv_Phi(1 - alpha);</div>
+<div class="line">    vector[3] quantiles_ = quantiles - lower_bound;</div>
+<div class="line">    real L = log(quantiles_[1]);</div>
+<div class="line">    real B = log(quantiles_[2]);</div>
+<div class="line">    real H = log(quantiles_[3]);</div>
+<div class="line">    real HmL = H - L;</div>
+<div class="line">    real denom = fmin(B - L, H - B);</div>
+<div class="line">    real numer = sinh(acosh(0.5 * HmL / denom));</div>
+<div class="line">    real delta = numer / c;</div>
+<div class="line">    real lambda = denom / numer;</div>
+<div class="line">    real LHm2B = L + H - 2 * B;</div>
+<div class="line">    real k = sqrt(1 + square(numer));</div>
+<div class="line">    real n;</div>
+<div class="line">    real theta;</div>
+<div class="line">    real z;</div>
+<div class="line">    <span class="keywordflow">if</span> (LHm2B &lt; 0) {</div>
+<div class="line">      n = -1;</div>
+<div class="line">      theta = quantiles_[3];</div>
+<div class="line">      z = inv_Phi(p);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (LHm2B &gt; 0) {</div>
+<div class="line">      n = 1;</div>
+<div class="line">      theta = quantiles_[1];</div>
+<div class="line">      z = inv_Phi(p);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="comment">// LHm2B = 0 -&gt; removable discontinuity</span></div>
+<div class="line">      real sigma = delta != 0 ? lambda * delta : (H - B) / c;</div>
+<div class="line">      theta = quantiles_[2];</div>
+<div class="line">      <span class="keywordflow">return</span> lower_bound + theta * exp(sigma * inv_Phi(p));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="comment">// return lower_bound + theta * exp(lambda * sinh(asinh(delta * z) + asinh(n * numer)));</span></div>
+<div class="line">    <span class="comment">// http://www.metalogdistributions.com/images/J-QPD_Parameterizations.pdf section 1.2</span></div>
+<div class="line">    <span class="keywordflow">return</span> lower_bound</div>
+<div class="line">           + theta</div>
+<div class="line">             * exp(lambda * delta</div>
+<div class="line">                   * (k * z + n * c * sqrt(1 + square(delta * z))));</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> not_a_number(); <span class="comment">// never reaches</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__johnson__qf.html#gaa1bc4b5108969a1de030c3b97c24d0f1">JQPDS2_qf</a>(real p, real lower_bound, data real alpha, vector quantiles) {</div>
+<div class="line">  <span class="keywordflow">if</span> (p &lt; 0 || p &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;p must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (alpha &lt; 0 || alpha &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;alpha must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (rows(quantiles) != 3) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;quantiles must have three elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>({lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
+<div class="line">                positive_infinity()})) {</div>
+<div class="line">    real c = inv_Phi(1 - alpha);</div>
+<div class="line">    vector[3] quantiles_ = quantiles - lower_bound;</div>
+<div class="line">    real L = log(quantiles_[1]);</div>
+<div class="line">    real B = log(quantiles_[2]);</div>
+<div class="line">    real H = log(quantiles_[3]);</div>
+<div class="line">    real HmL = H - L;</div>
+<div class="line">    real denom = fmin(B - L, H - B);</div>
+<div class="line">    real temp = acosh(0.5 * HmL / denom);</div>
+<div class="line">    real delta = temp * inv(c);</div>
+<div class="line">    real lambda = denom * inv(sinh(temp));</div>
+<div class="line">    real LHm2B = L + H - 2 * B;</div>
+<div class="line">    real n;</div>
+<div class="line">    real theta;</div>
+<div class="line">    <span class="keywordflow">if</span> (LHm2B &lt; 0) {</div>
+<div class="line">      n = -1;</div>
+<div class="line">      theta = quantiles_[3];</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (LHm2B &gt; 0) {</div>
+<div class="line">      n = 1;</div>
+<div class="line">      theta = quantiles_[1];</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="comment">// LHm2B = 0 -&gt; removable discontinuity</span></div>
+<div class="line">      <span class="keywordflow">return</span> lower_bound</div>
+<div class="line">             + quantiles[2] * exp(lambda * sinh(delta * inv_Phi(p)));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> lower_bound</div>
+<div class="line">           + theta * exp(lambda * sinh(delta * (inv_Phi(p) + n * c)));</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> not_a_number(); <span class="comment">// never reaches</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f">JQPDB_qf</a>(real p, row_vector bounds, data real alpha, vector quantiles) {</div>
+<div class="line">  <span class="keywordflow">if</span> (cols(bounds) != 2) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;bounds must have two elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (bounds[2] == positive_infinity()) {</div>
+<div class="line">    <span class="keywordflow">return</span> JQPDS2_icdf(p, alpha, bounds[1], quantiles);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">if</span> (p &lt; 0 || p &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;p must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (alpha &lt; 0 || alpha &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;alpha must be between 0 and 1&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (rows(quantiles) != 3) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;quantiles must have three elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>({bounds[1], quantiles[1], quantiles[2], quantiles[3],</div>
+<div class="line">                bounds[2]})) {</div>
+<div class="line">    real c = inv_Phi(1 - alpha);</div>
+<div class="line">    real l = bounds[1];</div>
+<div class="line">    real u = bounds[2];</div>
+<div class="line">    real uml = u - l;</div>
+<div class="line">    real L = inv_Phi((quantiles[1] - l) / uml);</div>
+<div class="line">    real B = inv_Phi((quantiles[2] - l) / uml);</div>
+<div class="line">    real H = inv_Phi((quantiles[3] - l) / uml);</div>
+<div class="line">    real HmL = H - L;</div>
+<div class="line">    real delta = acosh(0.5 * HmL / fmin(B - L, H - B)) / c;</div>
+<div class="line">    real lambda = HmL / sinh(2 * delta * c);</div>
+<div class="line">    real LHm2B = L + H - 2 * B;</div>
+<div class="line">    real n;</div>
+<div class="line">    real zeta;</div>
+<div class="line">    <span class="keywordflow">if</span> (LHm2B &lt; 0) {</div>
+<div class="line">      n = -1;</div>
+<div class="line">      zeta = H;</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (LHm2B &gt; 0) {</div>
+<div class="line">      n = 1;</div>
+<div class="line">      zeta = L;</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      <span class="comment">// LHm2B = 0 -&gt; removable discontinuity</span></div>
+<div class="line">      <span class="keywordflow">return</span> l + uml * Phi(B + 0.5 * HmL / c * inv_Phi(p));</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> l + uml * Phi(zeta + lambda * sinh(delta * (inv_Phi(p) + n * c)));</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> not_a_number(); <span class="comment">// never reached</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__johnson__qf_html_ga567ad93bd48cee2a78cf584e0f15d01f"><div class="ttname"><a href="group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f">JQPDB_qf</a></div><div class="ttdeci">real JQPDB_qf(real p, row_vector bounds, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:212</div></div>
+<div class="ttc" id="agroup__johnson__qf_html_ga6bad55952d6cd49a96fed15ef4b60185"><div class="ttname"><a href="group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185">JQPDS_qf</a></div><div class="ttdeci">real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:50</div></div>
+<div class="ttc" id="agroup__johnson__qf_html_gaa1bc4b5108969a1de030c3b97c24d0f1"><div class="ttname"><a href="group__johnson__qf.html#gaa1bc4b5108969a1de030c3b97c24d0f1">JQPDS2_qf</a></div><div class="ttdeci">real JQPDS2_qf(real p, real lower_bound, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:135</div></div>
+<div class="ttc" id="agroup__logical__array_html_ga2becc165c804319fd033bc82a5c13ff6"><div class="ttname"><a href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a></div><div class="ttdeci">int in_order(array[] real theta)</div><div class="ttdef"><b>Definition:</b> logical_array.stanfunctions:16</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga567ad93bd48cee2a78cf584e0f15d01f" name="ga567ad93bd48cee2a78cf584e0f15d01f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga567ad93bd48cee2a78cf584e0f15d01f">&#9670;&nbsp;</a></span>JQPDB_qf()</h2>
 

@@ -103,8 +103,25 @@ Modules</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >Numerical ODE (ordinary differential equation) integration functions <span class="emoji">&#x1f422;</span>. </p>
-</div><!-- contents -->
+<p >Numerical ODE (ordinary differential equation) integration functions <span class="emoji">&#x1f422;</span>.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29">odeint_euler</a>(real t0, vector y0, data real h,</div>
+<div class="line">                            data <span class="keywordtype">int</span> num_steps, array[] <span class="keywordtype">int</span> a0, vector theta) {</div>
+<div class="line">  <span class="keywordtype">int</span> d = num_elements(y0);</div>
+<div class="line">  array[num_steps + 1] vector[d] y;</div>
+<div class="line">  real t = t0;</div>
+<div class="line">  y[1] = y0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Integrate at grid of time points</span></div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : num_steps) {</div>
+<div class="line">    y[i + 1] = y[i] + h * derivative_fun(t, y[i], a0, theta);</div>
+<div class="line">    t = t + h;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> y;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__fixed__step_html_gae4c015b4a7ba0adf3040bdbfe8170a29"><div class="ttname"><a href="group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29">odeint_euler</a></div><div class="ttdeci">array[] vector odeint_euler(real t0, vector y0, data real h, data int num_steps, array[] int a0, vector theta)</div><div class="ttdef"><b>Definition:</b> odeint_euler.stanfunctions:40</div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

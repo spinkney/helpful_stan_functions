@@ -111,7 +111,86 @@ Functions</h2></td></tr>
 <tr class="separator:ga883e8f1ab20e463badc20671e4e9a57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gen__pareto.html#gaac27cb067f0e9caf422a1cfeceb46e1e">gpareto_lpdf</a>(vector y, real ymin, real k, real sigma) {</div>
+<div class="line">  <span class="comment">// generalised Pareto log pdf</span></div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(y);</div>
+<div class="line">  real inv_k = inv(k);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (k &lt; 0 &amp;&amp; max(y - ymin) / sigma &gt; -inv_k) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;k &lt; 0 and max(y - ymin) / sigma &gt; -1 / k; found k, sigma = &quot;</span>, k, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">    <span class="keywordflow">return</span> -(1 + inv_k) * sum(log1p((y - ymin) * (k / sigma)))</div>
+<div class="line">           - N * log(sigma);</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    <span class="keywordflow">return</span> -sum(y - ymin) / sigma - N * log(sigma); <span class="comment">// limit k-&gt;0</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gen__pareto.html#gadb5b249ce4e98ed827f1cd9bbf9e7304">gpareto_cdf</a>(vector y, real ymin, real k, real sigma) {</div>
+<div class="line">  real inv_k = inv(k);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (k &lt; 0 &amp;&amp; max(y - ymin) / sigma &gt; -inv_k) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;k &lt; 0 and max(y - ymin) / sigma &gt; -1 / k; found k, sigma = &quot;</span>, k, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">    <span class="keywordflow">return</span> exp(sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma))))));</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    <span class="keywordflow">return</span> exp(sum(log1m_exp(-(y - ymin) / sigma))); <span class="comment">// limit k-&gt;0</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gen__pareto.html#gaf4816f19433e30db65c8f2474910b3b0">gpareto_lcdf</a>(vector y, real ymin, real k, real sigma) {</div>
+<div class="line">  real inv_k = inv(k);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (k &lt; 0 &amp;&amp; max(y - ymin) / sigma &gt; -inv_k) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;k&lt;0 and max(y-ymin)/sigma &gt; -1/k; found k, sigma = &quot;</span>, k, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma&lt;=0; found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">    <span class="keywordflow">return</span> sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma)))));</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    <span class="keywordflow">return</span> sum(log1m_exp(-(y - ymin) / sigma)); <span class="comment">// limit k-&gt;0</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gen__pareto.html#gac64a24b23c765ac040774a703803d752">gpareto_lccdf</a>(vector y, real ymin, real k, real sigma) {</div>
+<div class="line">  real inv_k = inv(k);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (k &lt; 0 &amp;&amp; max(y - ymin) / sigma &gt; -inv_k) </div>
+<div class="line">    ;</div>
+<div class="line">  reject(<span class="stringliteral">&quot;k &lt; 0 and max(y - ymin) / sigma &gt; -1 / k; found k, sigma = &quot;</span>, k, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">    <span class="keywordflow">return</span> (-inv_k) * sum(log1p((y - ymin) * (k / sigma)));</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    <span class="keywordflow">return</span> -sum(y - ymin) / sigma; <span class="comment">// limit k-&gt;0</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gen__pareto.html#ga883e8f1ab20e463badc20671e4e9a57c">gpareto_rng</a>(real ymin, real k, real sigma) {</div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">    <span class="keywordflow">return</span> ymin + (uniform_rng(0, 1) ^ -k - 1) * sigma / k;</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    <span class="keywordflow">return</span> ymin - sigma * log(uniform_rng(0, 1)); <span class="comment">// limit k-&gt;0</span></div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__gen__pareto_html_ga883e8f1ab20e463badc20671e4e9a57c"><div class="ttname"><a href="group__gen__pareto.html#ga883e8f1ab20e463badc20671e4e9a57c">gpareto_rng</a></div><div class="ttdeci">real gpareto_rng(real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:139</div></div>
+<div class="ttc" id="agroup__gen__pareto_html_gaac27cb067f0e9caf422a1cfeceb46e1e"><div class="ttname"><a href="group__gen__pareto.html#gaac27cb067f0e9caf422a1cfeceb46e1e">gpareto_lpdf</a></div><div class="ttdeci">real gpareto_lpdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:32</div></div>
+<div class="ttc" id="agroup__gen__pareto_html_gac64a24b23c765ac040774a703803d752"><div class="ttname"><a href="group__gen__pareto.html#gac64a24b23c765ac040774a703803d752">gpareto_lccdf</a></div><div class="ttdeci">real gpareto_lccdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:113</div></div>
+<div class="ttc" id="agroup__gen__pareto_html_gadb5b249ce4e98ed827f1cd9bbf9e7304"><div class="ttname"><a href="group__gen__pareto.html#gadb5b249ce4e98ed827f1cd9bbf9e7304">gpareto_cdf</a></div><div class="ttdeci">real gpareto_cdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:61</div></div>
+<div class="ttc" id="agroup__gen__pareto_html_gaf4816f19433e30db65c8f2474910b3b0"><div class="ttname"><a href="group__gen__pareto.html#gaf4816f19433e30db65c8f2474910b3b0">gpareto_lcdf</a></div><div class="ttdeci">real gpareto_lcdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:87</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gadb5b249ce4e98ed827f1cd9bbf9e7304" name="gadb5b249ce4e98ed827f1cd9bbf9e7304"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gadb5b249ce4e98ed827f1cd9bbf9e7304">&#9670;&nbsp;</a></span>gpareto_cdf()</h2>
 

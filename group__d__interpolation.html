@@ -105,8 +105,78 @@ Functions</h2></td></tr>
 <tr class="separator:gaf1b52e91870caffdf1766eca0c75421f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >These functions perform interpolation one dimension at a time. </p>
-<h2 class="groupheader">Function Documentation</h2>
+<p >These functions perform interpolation one dimension at a time.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__d__interpolation.html#ga04f55d73f3519184cb0756246c4a869e">interp_1d_cubic</a>(array[] vector y, data array[] real x,</div>
+<div class="line">                               data array[] real x_out, array[] <span class="keywordtype">int</span> a0,</div>
+<div class="line">                               vector theta) {</div>
+<div class="line">  <span class="keywordtype">int</span> left = 1;</div>
+<div class="line">  <span class="keywordtype">int</span> right = 1;</div>
+<div class="line">  real h = 0.0;</div>
+<div class="line">  real w = 0.0;</div>
+<div class="line">  <span class="keywordtype">int</span> N_in = size(x);</div>
+<div class="line">  <span class="keywordtype">int</span> N_out = size(x_out);</div>
+<div class="line">  <span class="keywordtype">int</span> D = size(y[1]);</div>
+<div class="line">  vector[D] f_left;</div>
+<div class="line">  vector[D] f_right;</div>
+<div class="line">  real h00;</div>
+<div class="line">  real h10;</div>
+<div class="line">  real h01;</div>
+<div class="line">  real h11;</div>
+<div class="line">  array[N_out] vector[D] y_out;</div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : N_out) {</div>
+<div class="line">    <span class="comment">// Find left and right point indices</span></div>
+<div class="line">    <span class="keywordflow">while</span> (x[right] &lt; x_out[j]) {</div>
+<div class="line">      right = right + 1;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (x[left + 1] &lt; x_out[j]) {</div>
+<div class="line">      left = left + 1;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Evaluate derivatives</span></div>
+<div class="line">    f_left = derivative_fun(0.0, y[left], a0, theta);</div>
+<div class="line">    f_right = derivative_fun(0.0, y[right], a0, theta);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Hermite basis functions</span></div>
+<div class="line">    h = x[right] - x[left];</div>
+<div class="line">    w = (x_out[j] - x[left]) / h;</div>
+<div class="line">    h00 = 2.0 * w ^ 3 - 3.0 * w ^ 2 + 1.0;</div>
+<div class="line">    h10 = w ^ 3 - 2.0 * w ^ 2 + w;</div>
+<div class="line">    h01 = -2.0 * w ^ 3 + 3.0 * w ^ 2;</div>
+<div class="line">    h11 = w ^ 3 - w ^ 2;</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Compute interpolation</span></div>
+<div class="line">    y_out[j] = h00 * y[left] + h10 * h * f_left + h01 * y[right]</div>
+<div class="line">               + h11 * h * f_right;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> y_out;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__d__interpolation_html_ga04f55d73f3519184cb0756246c4a869e"><div class="ttname"><a href="group__d__interpolation.html#ga04f55d73f3519184cb0756246c4a869e">interp_1d_cubic</a></div><div class="ttdeci">array[] vector interp_1d_cubic(array[] vector y, data array[] real x, data array[] real x_out, array[] int a0, vector theta)</div><div class="ttdef"><b>Definition:</b> interp_1d_cubic.stanfunctions:39</div></div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__d__interpolation.html#gaf1b52e91870caffdf1766eca0c75421f">interp_1d_linear</a>(array[] vector y, data array[] real x,</div>
+<div class="line">                                data array[] real x_out) {</div>
+<div class="line">  <span class="keywordtype">int</span> left = 1;</div>
+<div class="line">  <span class="keywordtype">int</span> right = 1;</div>
+<div class="line">  real w = 1.0;</div>
+<div class="line">  <span class="keywordtype">int</span> N_in = size(x);</div>
+<div class="line">  <span class="keywordtype">int</span> N_out = size(x_out);</div>
+<div class="line">  <span class="keywordtype">int</span> D = size(y[1]);</div>
+<div class="line">  array[N_out] vector[D] y_out;</div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : N_out) {</div>
+<div class="line">    <span class="keywordflow">while</span> (x[right] &lt; x_out[j]) {</div>
+<div class="line">      right = right + 1;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (x[left + 1] &lt; x_out[j]) {</div>
+<div class="line">      left = left + 1;</div>
+<div class="line">    }</div>
+<div class="line">    w = (x[right] - x_out[j]) / (x[right] - x[left]);</div>
+<div class="line">    y_out[j] = w * y[left] + (1 - w) * y[right];</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> y_out;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__d__interpolation_html_gaf1b52e91870caffdf1766eca0c75421f"><div class="ttname"><a href="group__d__interpolation.html#gaf1b52e91870caffdf1766eca0c75421f">interp_1d_linear</a></div><div class="ttdeci">array[] vector interp_1d_linear(array[] vector y, data array[] real x, data array[] real x_out)</div><div class="ttdef"><b>Definition:</b> interp_1d_linear.stanfunctions:20</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga04f55d73f3519184cb0756246c4a869e" name="ga04f55d73f3519184cb0756246c4a869e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga04f55d73f3519184cb0756246c4a869e">&#9670;&nbsp;</a></span>interp_1d_cubic()</h2>
 

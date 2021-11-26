@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: Special Probability Functions Functions</title>
+		<title>Helpful Stan Functions: Special probability functions</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Special Probability Functions Functions</div></div>
+  <div class="headertitle"><div class="title">Special probability functions</div></div>
 </div><!--header-->
 <div class="contents">
 <p >Mathematical functions that have established names or notations specifically in the domains of probability and statistics.</p>
@@ -99,7 +99,166 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 <p >Modified from the C++ version by John Burkardt at <a href="https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html">https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html</a> file asa109.cpp</p>
 <p >GW Cran, KJ Martin, GE Thomas, Remark AS R19 and Algorithm AS 109: A Remark on Algorithms AS 63: The Incomplete Beta Integral and AS 64: Inverse of the Incomplete Beta Integeral, Applied Statistics, Volume 26, Number 1, 1977, pages 111-114. <br  />
 </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="inc__beta__inverse_8stanfunctions.html#a060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(real x, real p, real q) {</div>
+<div class="line">  real a;</div>
+<div class="line">  real acu;</div>
+<div class="line">  real adj;</div>
+<div class="line">  real fpu;</div>
+<div class="line">  real g;</div>
+<div class="line">  real h;</div>
+<div class="line">  real iex;</div>
+<div class="line">  <span class="keywordtype">int</span> indx;</div>
+<div class="line">  real pp;</div>
+<div class="line">  real prev;</div>
+<div class="line">  real qq;</div>
+<div class="line">  real r;</div>
+<div class="line">  real s;</div>
+<div class="line">  real sae = -30.0;</div>
+<div class="line">  real sq;</div>
+<div class="line">  real t;</div>
+<div class="line">  real tx;</div>
+<div class="line">  real value = x;</div>
+<div class="line">  real w;</div>
+<div class="line">  real xin;</div>
+<div class="line">  real y;</div>
+<div class="line">  real yprev;</div>
+<div class="line">  </div>
+<div class="line">  real lbeta_val = lbeta(p, q);</div>
+<div class="line">  </div>
+<div class="line">  fpu = pow(10.0, sae);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inc_beta_inverse: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (p &lt;= 0.0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inc_beta_inverse: p must be &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found p = &quot;</span>, p);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (q &lt;= 0.0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inc_beta_inverse: q must be &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found q = &quot;</span>, q);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//  If the answer is easy to determine, return immediately.</span></div>
+<div class="line">  <span class="keywordflow">if</span> (x == 0.0) </div>
+<div class="line">    <span class="keywordflow">return</span> value;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (x == 1.0) </div>
+<div class="line">    <span class="keywordflow">return</span> value;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//  Change tail if necessary.</span></div>
+<div class="line">  <span class="keywordflow">if</span> (0.5 &lt; x) {</div>
+<div class="line">    a = 1.0 - x;</div>
+<div class="line">    pp = q;</div>
+<div class="line">    qq = p;</div>
+<div class="line">    indx = 1;</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    a = x;</div>
+<div class="line">    pp = p;</div>
+<div class="line">    qq = q;</div>
+<div class="line">    indx = 0;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//  Calculate the initial approximation.</span></div>
+<div class="line">  r = sqrt(-log(square(a)));</div>
+<div class="line">  y = r - (2.30753 + 0.27061 * r) / (1.0 + (0.99229 + 0.04481 * r) * r);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (1.0 &lt; pp &amp;&amp; 1.0 &lt; qq) {</div>
+<div class="line">    r = (square(y) - 3.0) / 6.0;</div>
+<div class="line">    s = 1.0 / (pp + pp - 1.0);</div>
+<div class="line">    t = 1.0 / (qq + qq - 1.0);</div>
+<div class="line">    h = 2.0 / (s + t);</div>
+<div class="line">    w = y * sqrt(h + r) / h - (t - s) * (r + 5.0 / 6.0 - 2.0 / (3.0 * h));</div>
+<div class="line">    value = pp / (pp + qq * exp(w + w));</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    r = qq + qq;</div>
+<div class="line">    t = 1.0 / (9.0 * qq);</div>
+<div class="line">    t = r * pow(1.0 - t + y * sqrt(t), 3);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (t &lt;= 0.0) {</div>
+<div class="line">      value = 1.0 - exp((log((1.0 - a) * qq) + lbeta_val) / qq);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      t = (4.0 * pp + r - 2.0) / t;</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">if</span> (t &lt;= 1.0) {</div>
+<div class="line">        value = exp((log(a * pp) + lbeta_val) / pp);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        value = 1.0 - 2.0 / (t + 1.0);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">//  Solve for X by a modified Newton-Raphson method,</span></div>
+<div class="line">  <span class="comment">//  using the function inc_beta.</span></div>
+<div class="line">  </div>
+<div class="line">  r = 1.0 - pp;</div>
+<div class="line">  t = 1.0 - qq;</div>
+<div class="line">  yprev = 0.0;</div>
+<div class="line">  sq = 1.0;</div>
+<div class="line">  prev = 1.0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (value &lt; 0.0001) </div>
+<div class="line">    value = 0.0001;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (0.9999 &lt; value) </div>
+<div class="line">    value = 0.9999;</div>
+<div class="line">  </div>
+<div class="line">  iex = fmax(-5.0 / pp / pp - 1.0 / pow(a, 0.2) - 13.0, sae);</div>
+<div class="line">  </div>
+<div class="line">  acu = pow(10.0, iex);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Iteration loop.</span></div>
+<div class="line">  <span class="keywordflow">while</span> (1) {</div>
+<div class="line">    y = inc_beta(pp, qq, value);</div>
+<div class="line">    </div>
+<div class="line">    xin = value;</div>
+<div class="line">    y = (y - a) * exp(lbeta_val + r * log(xin) + t * log(1.0 - xin));</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (y * yprev &lt;= 0.0) </div>
+<div class="line">      prev = fmax(sq, fpu);</div>
+<div class="line">    </div>
+<div class="line">    g = 1.0;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">      <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        adj = g * y;</div>
+<div class="line">        sq = square(adj);</div>
+<div class="line">        </div>
+<div class="line">        <span class="keywordflow">if</span> (sq &lt; prev) {</div>
+<div class="line">          tx = value - adj;</div>
+<div class="line">          <span class="keywordflow">if</span> (0.0 &lt;= tx &amp;&amp; tx &lt;= 1.0) </div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        g = g / 3.0;</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">//  Check whether the current estimate is acceptable.</span></div>
+<div class="line">      <span class="comment">//  The change &quot;VALUE = TX&quot; was suggested by Ivan Ukhov.</span></div>
+<div class="line">      <span class="keywordflow">if</span> (prev &lt;= acu || y * y &lt;= acu) {</div>
+<div class="line">        value = tx;</div>
+<div class="line">        <span class="keywordflow">if</span> (indx == 1) </div>
+<div class="line">          value = 1.0 - value;</div>
+<div class="line">        <span class="keywordflow">return</span> value;</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">if</span> (tx != 0.0 &amp;&amp; tx != 1.0) </div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line">      </div>
+<div class="line">      g = g / 3.0;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (tx == value) </div>
+<div class="line">      <span class="keywordflow">break</span>;</div>
+<div class="line">    </div>
+<div class="line">    value = tx;</div>
+<div class="line">    yprev = y;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (indx == 1) </div>
+<div class="line">    value = 1.0 - value;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> value;</div>
+<div class="line">}</div>
+<div class="ttc" id="ainc__beta__inverse_8stanfunctions_html_a060fcd6515b67c752a9da49d0cc7f9e6"><div class="ttname"><a href="inc__beta__inverse_8stanfunctions.html#a060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a></div><div class="ttdeci">real inc_beta_inverse(real x, real p, real q)</div><div class="ttdef"><b>Definition:</b> inc_beta_inverse.stanfunctions:26</div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Real in [0, 1] </td></tr>
     <tr><td class="paramname">p</td><td>Real </td></tr>
@@ -107,7 +266,99 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>inverse incomlete beta result </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>inverse incomlete beta result</dd></dl>
+<p>/* Inverse error function</p>
+<p >Copyright Sean Pinkney, Feb. 2021</p>
+<p >Giles, Mike. (2012). "Approximating the Erfinv Function." GPU Computing Gems Jade Edition. 10.1016/B978-0-12-385963-1.00010-1. accessed Feb. 15, 2021. at <a href="https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf">https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf</a></p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="inv__erf_8stanfunctions.html#a3d254497bd04ee837661a923dff361ba">inv_erf</a>(real x) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inv_erf: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">  </div>
+<div class="line">  real w = -log1m(square(x));</div>
+<div class="line">  real s = sqrt(w);</div>
+<div class="line">  real p;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (w &lt; 5.0) {</div>
+<div class="line">    w = w - 2.5;</div>
+<div class="line">    p = 2.81022636e-08;</div>
+<div class="line">    p = fma(p, w, 3.43273939e-07);</div>
+<div class="line">    p = fma(p, w, -3.5233877e-06);</div>
+<div class="line">    p = fma(p, w, -4.39150654e-06);</div>
+<div class="line">    p = fma(p, w, 0.00021858087);</div>
+<div class="line">    p = fma(p, w, -0.00125372503);</div>
+<div class="line">    p = fma(p, w, -0.00417768164);</div>
+<div class="line">    p = fma(p, w, 0.246640727);</div>
+<div class="line">    p = fma(p, w, 1.50140941);</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    w = s - 3.000000;</div>
+<div class="line">    p = -0.000200214257;</div>
+<div class="line">    p = fma(p, w, 0.000100950558);</div>
+<div class="line">    p = fma(p, w, 0.00134934322);</div>
+<div class="line">    p = fma(p, w, -0.00367342844);</div>
+<div class="line">    p = fma(p, w, 0.00573950773);</div>
+<div class="line">    p = fma(p, w, -0.0076224613);</div>
+<div class="line">    p = fma(p, w, 0.00943887047);</div>
+<div class="line">    p = fma(p, w, 1.00167406);</div>
+<div class="line">    p = fma(p, w, 2.83297682);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> p * x;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* Inverse error function no sqrt</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright njuffa, Sean Pinkney, 2021</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Compute the inverse error functions with maximum error of 2.35793 ul</span></div>
+<div class="line"><span class="comment"> * Originally implemented by njuffa and</span></div>
+<div class="line"><span class="comment"> * accessed June 11, 2021 at https://stackoverflow.com/a/49743348 </span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @param x Real number on [0,1]</span></div>
+<div class="line"><span class="comment"> * @param return inverse error result</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line">real <a class="code hl_function" href="inv__erf_8stanfunctions.html#a33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">  </div>
+<div class="line">  real p;</div>
+<div class="line">  real t;</div>
+<div class="line">  t = fma(x, -x, 1.0);</div>
+<div class="line">  t = log(t);</div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(t) &gt; 6.125) {</div>
+<div class="line">    <span class="comment">// maximum ulp error = 2.35793</span></div>
+<div class="line">    p = 3.03697567e-10; <span class="comment">//  0x1.4deb44p-32 </span></div>
+<div class="line">    p = fma(p, t, 2.93243101e-8); <span class="comment">//  0x1.f7c9aep-26 </span></div>
+<div class="line">    p = fma(p, t, 1.22150334e-6); <span class="comment">//  0x1.47e512p-20 </span></div>
+<div class="line">    p = fma(p, t, 2.84108955e-5); <span class="comment">//  0x1.dca7dep-16 </span></div>
+<div class="line">    p = fma(p, t, 3.93552968e-4); <span class="comment">//  0x1.9cab92p-12 </span></div>
+<div class="line">    p = fma(p, t, 3.02698812e-3); <span class="comment">//  0x1.8cc0dep-9 </span></div>
+<div class="line">    p = fma(p, t, 4.83185798e-3); <span class="comment">//  0x1.3ca920p-8 </span></div>
+<div class="line">    p = fma(p, t, -2.64646143e-1); <span class="comment">// -0x1.0eff66p-2 </span></div>
+<div class="line">    p = fma(p, t, 8.40016484e-1); <span class="comment">//  0x1.ae16a4p-1 </span></div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="comment">// maximum ulp error = 2.35002</span></div>
+<div class="line">    p = 5.43877832e-9; <span class="comment">//  0x1.75c000p-28 </span></div>
+<div class="line">    p = fma(p, t, 1.43285448e-7); <span class="comment">//  0x1.33b402p-23 </span></div>
+<div class="line">    p = fma(p, t, 1.22774793e-6); <span class="comment">//  0x1.499232p-20 </span></div>
+<div class="line">    p = fma(p, t, 1.12963626e-7); <span class="comment">//  0x1.e52cd2p-24 </span></div>
+<div class="line">    p = fma(p, t, -5.61530760e-5); <span class="comment">// -0x1.d70bd0p-15 </span></div>
+<div class="line">    p = fma(p, t, -1.47697632e-4); <span class="comment">// -0x1.35be90p-13 </span></div>
+<div class="line">    p = fma(p, t, 2.31468678e-3); <span class="comment">//  0x1.2f6400p-9 </span></div>
+<div class="line">    p = fma(p, t, 1.15392581e-2); <span class="comment">//  0x1.7a1e50p-7 </span></div>
+<div class="line">    p = fma(p, t, -2.32015476e-1); <span class="comment">// -0x1.db2aeep-3 </span></div>
+<div class="line">    p = fma(p, t, 8.86226892e-1); <span class="comment">//  0x1.c5bf88p-1 </span></div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> p * x;</div>
+<div class="line">}</div>
+<div class="ttc" id="ainv__erf_8stanfunctions_html_a33132970dd1c67785771c3af2dcad1ee"><div class="ttname"><a href="inv__erf_8stanfunctions.html#a33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a></div><div class="ttdeci">real inv_erf_nsqrt(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:61</div></div>
+<div class="ttc" id="ainv__erf_8stanfunctions_html_a3d254497bd04ee837661a923dff361ba"><div class="ttname"><a href="inv__erf_8stanfunctions.html#a3d254497bd04ee837661a923dff361ba">inv_erf</a></div><div class="ttdeci">real inv_erf(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:16</div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Real number on [0,1] </td></tr>
+    <tr><td class="paramname">return</td><td>inverse error result </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
