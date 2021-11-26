@@ -9,7 +9,7 @@ var searchData=
   ['interp_5f1d_5flinear_2estanfunctions_6',['interp_1d_linear.stanfunctions',['../interp__1d__linear_8stanfunctions.html',1,'']]],
   ['interpolation_20functions_7',['Interpolation Functions',['../group__interpolation.html',1,'']]],
   ['interpolation_5fdefinition_2estan_8',['interpolation_definition.stan',['../interpolation__definition_8stan.html',1,'']]],
-  ['inv_5ferf_9',['inv_erf',['../group__special.html#ga3d254497bd04ee837661a923dff361ba',1,'inv_erf.stanfunctions']]],
+  ['inv_5ferf_9',['inv_erf',['../inv__erf_8stanfunctions.html#a3d254497bd04ee837661a923dff361ba',1,'inv_erf.stanfunctions']]],
   ['inv_5ferf_2estanfunctions_10',['inv_erf.stanfunctions',['../inv__erf_8stanfunctions.html',1,'']]],
-  ['inv_5ferf_5fnsqrt_11',['inv_erf_nsqrt',['../group__special.html#ga33132970dd1c67785771c3af2dcad1ee',1,'inv_erf.stanfunctions']]]
+  ['inv_5ferf_5fnsqrt_11',['inv_erf_nsqrt',['../inv__erf_8stanfunctions.html#a33132970dd1c67785771c3af2dcad1ee',1,'inv_erf.stanfunctions']]]
 ];
