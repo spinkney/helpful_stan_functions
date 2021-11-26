@@ -97,6 +97,10 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 <table class="memberdecls">
 <tr class="memitem:ga060fcd6515b67c752a9da49d0cc7f9e6"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a> (real x, real p, real q)</td></tr>
 <tr class="separator:ga060fcd6515b67c752a9da49d0cc7f9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3d254497bd04ee837661a923dff361ba"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a> (real x)</td></tr>
+<tr class="separator:ga3d254497bd04ee837661a923dff361ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga33132970dd1c67785771c3af2dcad1ee"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a> (real x)</td></tr>
+<tr class="separator:ga33132970dd1c67785771c3af2dcad1ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >Mathematical functions that have established names or notations specifically in the domains of probability and statistics. </p>
@@ -132,7 +136,7 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
         </tr>
       </table>
 </div><div class="memdoc">
-<p >/* /** Incomplete Beta Inverse</p>
+<p >Incomplete Beta Inverse</p>
 <p >Author: Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas. C++ version by John Burkard Stan version by Sean Pinkney, July 2021</p>
 <p >Modified from the C++ version by John Burkardt at <a href="https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html">https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html</a> file asa109.cpp</p>
 <p >GW Cran, KJ Martin, GE Thomas, Remark AS R19 and Algorithm AS 109: A Remark on Algorithms AS 63: The Incomplete Beta Integral and AS 64: Inverse of the Incomplete Beta Integeral, Applied Statistics, Volume 26, Number 1, 1977, pages 111-114. <br  />
@@ -305,6 +309,135 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>inverse incomlete beta result </dd></dl>
+
+</div>
+</div>
+<a id="ga3d254497bd04ee837661a923dff361ba" name="ga3d254497bd04ee837661a923dff361ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3d254497bd04ee837661a923dff361ba">&#9670;&nbsp;</a></span>inv_erf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real inv_erf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Inverse error function</p>
+<p >Copyright Sean Pinkney, Feb. 2021</p>
+<p >Giles, Mike. (2012). "Approximating the Erfinv Function." GPU Computing Gems Jade Edition. 10.1016/B978-0-12-385963-1.00010-1. accessed Feb. 15, 2021. at <a href="https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf">https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf</a></p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a>(real x) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inv_erf: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">  </div>
+<div class="line">  real w = -log1m(square(x));</div>
+<div class="line">  real s = sqrt(w);</div>
+<div class="line">  real p;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (w &lt; 5.0) {</div>
+<div class="line">    w = w - 2.5;</div>
+<div class="line">    p = 2.81022636e-08;</div>
+<div class="line">    p = fma(p, w, 3.43273939e-07);</div>
+<div class="line">    p = fma(p, w, -3.5233877e-06);</div>
+<div class="line">    p = fma(p, w, -4.39150654e-06);</div>
+<div class="line">    p = fma(p, w, 0.00021858087);</div>
+<div class="line">    p = fma(p, w, -0.00125372503);</div>
+<div class="line">    p = fma(p, w, -0.00417768164);</div>
+<div class="line">    p = fma(p, w, 0.246640727);</div>
+<div class="line">    p = fma(p, w, 1.50140941);</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    w = s - 3.000000;</div>
+<div class="line">    p = -0.000200214257;</div>
+<div class="line">    p = fma(p, w, 0.000100950558);</div>
+<div class="line">    p = fma(p, w, 0.00134934322);</div>
+<div class="line">    p = fma(p, w, -0.00367342844);</div>
+<div class="line">    p = fma(p, w, 0.00573950773);</div>
+<div class="line">    p = fma(p, w, -0.0076224613);</div>
+<div class="line">    p = fma(p, w, 0.00943887047);</div>
+<div class="line">    p = fma(p, w, 1.00167406);</div>
+<div class="line">    p = fma(p, w, 2.83297682);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> p * x;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/*</span></div>
+<div class="line"><span class="comment"> * Inverse error function no sqrt</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Copyright njuffa, Sean Pinkney, 2021</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * Compute the inverse error functions with maximum error of 2.35793 ul</span></div>
+<div class="line"><span class="comment"> * Originally implemented by njuffa and</span></div>
+<div class="line"><span class="comment"> * accessed June 11, 2021 at https://stackoverflow.com/a/49743348 </span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @param x Real number on [0,1]</span></div>
+<div class="line"><span class="comment"> * @param return inverse error result</span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line">real <a class="code hl_function" href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">  </div>
+<div class="line">  real p;</div>
+<div class="line">  real t;</div>
+<div class="line">  t = fma(x, -x, 1.0);</div>
+<div class="line">  t = log(t);</div>
+<div class="line">  <span class="keywordflow">if</span> (fabs(t) &gt; 6.125) {</div>
+<div class="line">    <span class="comment">// maximum ulp error = 2.35793</span></div>
+<div class="line">    p = 3.03697567e-10; <span class="comment">//  0x1.4deb44p-32 </span></div>
+<div class="line">    p = fma(p, t, 2.93243101e-8); <span class="comment">//  0x1.f7c9aep-26 </span></div>
+<div class="line">    p = fma(p, t, 1.22150334e-6); <span class="comment">//  0x1.47e512p-20 </span></div>
+<div class="line">    p = fma(p, t, 2.84108955e-5); <span class="comment">//  0x1.dca7dep-16 </span></div>
+<div class="line">    p = fma(p, t, 3.93552968e-4); <span class="comment">//  0x1.9cab92p-12 </span></div>
+<div class="line">    p = fma(p, t, 3.02698812e-3); <span class="comment">//  0x1.8cc0dep-9 </span></div>
+<div class="line">    p = fma(p, t, 4.83185798e-3); <span class="comment">//  0x1.3ca920p-8 </span></div>
+<div class="line">    p = fma(p, t, -2.64646143e-1); <span class="comment">// -0x1.0eff66p-2 </span></div>
+<div class="line">    p = fma(p, t, 8.40016484e-1); <span class="comment">//  0x1.ae16a4p-1 </span></div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="comment">// maximum ulp error = 2.35002</span></div>
+<div class="line">    p = 5.43877832e-9; <span class="comment">//  0x1.75c000p-28 </span></div>
+<div class="line">    p = fma(p, t, 1.43285448e-7); <span class="comment">//  0x1.33b402p-23 </span></div>
+<div class="line">    p = fma(p, t, 1.22774793e-6); <span class="comment">//  0x1.499232p-20 </span></div>
+<div class="line">    p = fma(p, t, 1.12963626e-7); <span class="comment">//  0x1.e52cd2p-24 </span></div>
+<div class="line">    p = fma(p, t, -5.61530760e-5); <span class="comment">// -0x1.d70bd0p-15 </span></div>
+<div class="line">    p = fma(p, t, -1.47697632e-4); <span class="comment">// -0x1.35be90p-13 </span></div>
+<div class="line">    p = fma(p, t, 2.31468678e-3); <span class="comment">//  0x1.2f6400p-9 </span></div>
+<div class="line">    p = fma(p, t, 1.15392581e-2); <span class="comment">//  0x1.7a1e50p-7 </span></div>
+<div class="line">    p = fma(p, t, -2.32015476e-1); <span class="comment">// -0x1.db2aeep-3 </span></div>
+<div class="line">    p = fma(p, t, 8.86226892e-1); <span class="comment">//  0x1.c5bf88p-1 </span></div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> p * x;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__special_html_ga33132970dd1c67785771c3af2dcad1ee"><div class="ttname"><a href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a></div><div class="ttdeci">real inv_erf_nsqrt(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:64</div></div>
+<div class="ttc" id="agroup__special_html_ga3d254497bd04ee837661a923dff361ba"><div class="ttname"><a href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a></div><div class="ttdeci">real inv_erf(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:18</div></div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Real number on [0,1] </td></tr>
+    <tr><td class="paramname">return</td><td>inverse error result </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga33132970dd1c67785771c3af2dcad1ee" name="ga33132970dd1c67785771c3af2dcad1ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga33132970dd1c67785771c3af2dcad1ee">&#9670;&nbsp;</a></span>inv_erf_nsqrt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real inv_erf_nsqrt </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
