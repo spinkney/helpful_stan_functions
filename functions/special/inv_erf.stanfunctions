@@ -1,7 +1,12 @@
-/** @ingroup special 
-* @{ 
+/** @addtogroup inverse_error Inverse error functions
+ *
+ * @include \special\inv_erf.stanfunctions
+ *
+ * \ingroup special
+ *  @{ */
 
-* Inverse error function
+/** 
+ * Inverse error function
 *
 * Copyright Sean Pinkney, Feb. 2021
 *
@@ -10,7 +15,6 @@
 * accessed Feb. 15, 2021. at
 * https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf
 *
-* @include \special\inv_erf.stanfunctions
 *
 * @param x Real number on [0,1]
 * @param return inverse error result
