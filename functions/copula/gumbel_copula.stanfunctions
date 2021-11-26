@@ -1,4 +1,7 @@
 /** @addtogroup gumbel Gumbel Copula Functions
+*
+* @include \copula\gumbel_copula.stanfunctions
+* 
  * \ingroup copula
  *  @{ */
 
@@ -12,8 +15,6 @@
   * with \f$\theta \in [1, \infty)\f$. The range of admissible Kendall’s tau, 
   * as well as that of the upper taildependence coefficient, is \f$[0,1)\f$. 
   * Note that this copula does not allow for lower tail dependence.
-  * 
-  * @include \copula\gumbel_copula.stanfunctions
   *
   * https://cran.r-project.org/web/packages/copula/copula.pdf
   * "copula" R package in the copFamilies documentation accessed Feb. 5, 2021

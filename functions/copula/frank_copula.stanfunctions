@@ -1,22 +1,22 @@
 /** @addtogroup frank Frank Copula Functions
- * The Frank copula is defined as 
+ * The Frank copula bivariate cumulative density function is defined as 
  * \f[
  *      C(u,v) = -\frac{1}{\omega}\ln \big[1 + \frac{(\exp(-\omega u) - 1)(\exp(-\omega v)-1)}{\exp(-\omega) -1} \big]
  * \f]
  * for \f$\omega \in (-\infty, \infty) \,/\ \{0\}\f$. 
  * 
- * \ingroup copula
- *  @{ */
-
-/** 
- * Frank Bivariate Copula Log Density
- *
- * The probability density function is defined as
+ *  The Frank copula bivariate probability density function is defined as
  * \f[
  *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2}
  * \f]
  *
  * @include \copula\frank_copula.stanfunctions
+ *
+ * \ingroup copula
+ *  @{ */
+
+/** 
+ * Frank Bivariate Copula Log Density
  *
  * Copyright Andre Pfeuffer, Sean Pinkney \n
  * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n

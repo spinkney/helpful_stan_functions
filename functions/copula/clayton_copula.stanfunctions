@@ -1,24 +1,24 @@
 /** @addtogroup clayton Clayton Copula Functions
  *
- * The Clayton copula is defined as 
+ * The Clayton copula bivariate cumulative density function is defined as 
  * \f[
  *      C(u,v) = (u^{-\theta} + v^{-\theta} - 1)^{-1/\theta}
  * \f]
  * for \f$0 < \theta < \infty\f$. 
+ *
+ * The Clayton copula bivariate probability density function is defined as
+ * \f[
+ *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = (\theta + 1)(uv)^{-(\theta + 1)}(u^{-\theta} + v^{-\theta} - 1)^{-\frac{2 \theta + 1}{\theta}}
+ * \f]
  * 
+ * @include \copula\clayton_copula.stanfunctions
+ *
  * \ingroup copula
  *  @{ */
 
 /** 
  * Clayton Bivariate Copula Log Density
- *
- * The probability density function is defined as
- * \f[
- *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = (\theta + 1)(uv)^{-(\theta + 1)}(u^{-\theta} + v^{-\theta} - 1)^{-\frac{2 \theta + 1}{\theta}}
- * \f]
- *
- * @include \copula\clayton_copula.stanfunctions  
- *
+ *  
  * Stan Example: [clayton_copula_example.stan](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/stan/clayton_copula_example.stan) \n
  * R: [clayton_example.R](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/R/clayton_example.R)
  *
