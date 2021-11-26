@@ -101,9 +101,21 @@ $(document).ready(function(){initNavTree('group__unit__test.html',''); initResiz
 Functions</h2></td></tr>
 <tr class="memitem:ga5b27081e465943eafe5a89d2c41bef01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__test.html#ga5b27081e465943eafe5a89d2c41bef01">expect_equal_real</a> (real expected, real actual, real tol)</td></tr>
 <tr class="separator:ga5b27081e465943eafe5a89d2c41bef01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09400a8dc4bccf8dd1d046bcfe9e4c0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__test.html#ga09400a8dc4bccf8dd1d046bcfe9e4c0b">expect_equal_vector</a> (vector expected, vector actual, real tol)</td></tr>
+<tr class="separator:ga09400a8dc4bccf8dd1d046bcfe9e4c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >Mathematical functions that have established names or notations specifically in the domains of probability and statistics. </p>
+<p >Mathematical functions that have established names or notations specifically in the domains of probability and statistics.</p>
+<p >/** Expect equal real</p>
+<p >Copyright Rok Češnovar, 2021</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expected</td><td>Real number </td></tr>
+    <tr><td class="paramname">actual</td><td>Real number </td></tr>
+    <tr><td class="paramname">tol</td><td>Real number </td></tr>
+  </table>
+  </dd>
+</dl>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ga5b27081e465943eafe5a89d2c41bef01" name="ga5b27081e465943eafe5a89d2c41bef01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5b27081e465943eafe5a89d2c41bef01">&#9670;&nbsp;</a></span>expect_equal_real()</h2>
@@ -136,12 +148,46 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Expect equal real</p>
+
+</div>
+</div>
+<a id="ga09400a8dc4bccf8dd1d046bcfe9e4c0b" name="ga09400a8dc4bccf8dd1d046bcfe9e4c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga09400a8dc4bccf8dd1d046bcfe9e4c0b">&#9670;&nbsp;</a></span>expect_equal_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void expect_equal_vector </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>expected</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>actual</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>tol</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Expect equal vector</p>
 <p >Copyright Rok Češnovar, 2021</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">expected</td><td>Real number </td></tr>
-    <tr><td class="paramname">actual</td><td>Real number </td></tr>
+    <tr><td class="paramname">expected</td><td>Vector </td></tr>
+    <tr><td class="paramname">actual</td><td>Vector </td></tr>
     <tr><td class="paramname">tol</td><td>Real number </td></tr>
   </table>
   </dd>

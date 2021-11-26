@@ -91,16 +91,30 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Special probability functions</div></div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga060fcd6515b67c752a9da49d0cc7f9e6"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a> (real x, real p, real q)</td></tr>
+<tr class="separator:ga060fcd6515b67c752a9da49d0cc7f9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3d254497bd04ee837661a923dff361ba"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a> (real x)</td></tr>
+<tr class="separator:ga3d254497bd04ee837661a923dff361ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga33132970dd1c67785771c3af2dcad1ee"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a> (real x)</td></tr>
+<tr class="separator:ga33132970dd1c67785771c3af2dcad1ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >Mathematical functions that have established names or notations specifically in the domains of probability and statistics.</p>
+<p >/** Incomplete Beta Inverse</p>
 <p >Author: Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas. C++ version by John Burkard Stan version by Sean Pinkney, July 2021</p>
 <p >Modified from the C++ version by John Burkardt at <a href="https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html">https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html</a> file asa109.cpp</p>
 <p >GW Cran, KJ Martin, GE Thomas, Remark AS R19 and Algorithm AS 109: A Remark on Algorithms AS 63: The Incomplete Beta Integral and AS 64: Inverse of the Incomplete Beta Integeral, Applied Statistics, Volume 26, Number 1, 1977, pages 111-114. <br  />
 </p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="inc__beta__inverse_8stanfunctions.html#a060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(real x, real p, real q) {</div>
+<div class="line">real <a class="code hl_function" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(real x, real p, real q) {</div>
 <div class="line">  real a;</div>
 <div class="line">  real acu;</div>
 <div class="line">  real adj;</div>
@@ -257,7 +271,7 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> value;</div>
 <div class="line">}</div>
-<div class="ttc" id="ainc__beta__inverse_8stanfunctions_html_a060fcd6515b67c752a9da49d0cc7f9e6"><div class="ttname"><a href="inc__beta__inverse_8stanfunctions.html#a060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a></div><div class="ttdeci">real inc_beta_inverse(real x, real p, real q)</div><div class="ttdef"><b>Definition:</b> inc_beta_inverse.stanfunctions:26</div></div>
+<div class="ttc" id="agroup__special_html_ga060fcd6515b67c752a9da49d0cc7f9e6"><div class="ttname"><a href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a></div><div class="ttdeci">real inc_beta_inverse(real x, real p, real q)</div><div class="ttdef"><b>Definition:</b> inc_beta_inverse.stanfunctions:30</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Real in [0, 1] </td></tr>
@@ -267,11 +281,11 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>inverse incomlete beta result</dd></dl>
-<p>/* Inverse error function</p>
+<p>/** Inverse error function</p>
 <p >Copyright Sean Pinkney, Feb. 2021</p>
 <p >Giles, Mike. (2012). "Approximating the Erfinv Function." GPU Computing Gems Jade Edition. 10.1016/B978-0-12-385963-1.00010-1. accessed Feb. 15, 2021. at <a href="https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf">https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf</a></p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="inv__erf_8stanfunctions.html#a3d254497bd04ee837661a923dff361ba">inv_erf</a>(real x) {</div>
+<div class="line">real <a class="code hl_function" href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a>(real x) {</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;inv_erf: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
 <div class="line">  </div>
@@ -316,7 +330,7 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 <div class="line"><span class="comment"> * @param x Real number on [0,1]</span></div>
 <div class="line"><span class="comment"> * @param return inverse error result</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line">real <a class="code hl_function" href="inv__erf_8stanfunctions.html#a33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
+<div class="line">real <a class="code hl_function" href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
 <div class="line">  </div>
@@ -350,8 +364,8 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> p * x;</div>
 <div class="line">}</div>
-<div class="ttc" id="ainv__erf_8stanfunctions_html_a33132970dd1c67785771c3af2dcad1ee"><div class="ttname"><a href="inv__erf_8stanfunctions.html#a33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a></div><div class="ttdeci">real inv_erf_nsqrt(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:61</div></div>
-<div class="ttc" id="ainv__erf_8stanfunctions_html_a3d254497bd04ee837661a923dff361ba"><div class="ttname"><a href="inv__erf_8stanfunctions.html#a3d254497bd04ee837661a923dff361ba">inv_erf</a></div><div class="ttdeci">real inv_erf(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:16</div></div>
+<div class="ttc" id="agroup__special_html_ga33132970dd1c67785771c3af2dcad1ee"><div class="ttname"><a href="group__special.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a></div><div class="ttdeci">real inv_erf_nsqrt(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:64</div></div>
+<div class="ttc" id="agroup__special_html_ga3d254497bd04ee837661a923dff361ba"><div class="ttname"><a href="group__special.html#ga3d254497bd04ee837661a923dff361ba">inv_erf</a></div><div class="ttdeci">real inv_erf(real x)</div><div class="ttdef"><b>Definition:</b> inv_erf.stanfunctions:19</div></div>
 </div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">x</td><td>Real number on [0,1] </td></tr>
@@ -359,6 +373,77 @@ $(document).ready(function(){initNavTree('group__special.html',''); initResizabl
   </table>
   </dd>
 </dl>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga060fcd6515b67c752a9da49d0cc7f9e6" name="ga060fcd6515b67c752a9da49d0cc7f9e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga060fcd6515b67c752a9da49d0cc7f9e6">&#9670;&nbsp;</a></span>inc_beta_inverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real inc_beta_inverse </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga3d254497bd04ee837661a923dff361ba" name="ga3d254497bd04ee837661a923dff361ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3d254497bd04ee837661a923dff361ba">&#9670;&nbsp;</a></span>inv_erf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real inv_erf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga33132970dd1c67785771c3af2dcad1ee" name="ga33132970dd1c67785771c3af2dcad1ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga33132970dd1c67785771c3af2dcad1ee">&#9670;&nbsp;</a></span>inv_erf_nsqrt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real inv_erf_nsqrt </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
