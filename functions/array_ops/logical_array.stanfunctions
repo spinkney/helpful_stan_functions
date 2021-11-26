@@ -6,6 +6,8 @@
   * Checks whether real numbers are finite and ordered. \n\n
   * Code: [logical_array.stanfunctions](https://github.com/spinkney/helpful_stan_functions/blob/main/functions/array_ops/logical_array.stanfunctions)
   * 
+  * @include logical_array.stanfunctions 
+  *
   * @copyright Ben Goodrich 2020
   * @param theta real array of numbers
   * @throws if real numbers are not finite or not ordered

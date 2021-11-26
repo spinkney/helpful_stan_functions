@@ -16,7 +16,7 @@
  *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2}
  * \f]
  *
- * Code: [frank_copula.stanfunctions](https://github.com/spinkney/helpful_stan_functions/blob/main/functions/copula/frank_copula.stanfunctions) \n
+ * Code: [frank_copula.stanfunctions](https://github.com/spinkney/helpful_stan_functions/blob/main/functions/copula/frank_copula.stanfunctions) 
  *
  * Copyright Andre Pfeuffer, Sean Pinkney \n
  * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
