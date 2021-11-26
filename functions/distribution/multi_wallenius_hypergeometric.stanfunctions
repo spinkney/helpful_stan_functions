@@ -12,6 +12,8 @@
  *     D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i). 
  * \f] 
  * 
+ * @include \distribution\multi_wallenius_hypergeometric.stanfunctions
+ *
  * \ingroup multivariate
  *  @{ */
 

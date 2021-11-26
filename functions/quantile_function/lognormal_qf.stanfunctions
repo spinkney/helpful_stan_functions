@@ -1,5 +1,5 @@
 /** @ingroup qf
- * **Lognormal Quantile Function**
+ * Lognormal Quantile Function
  * 
  * \f{aligned}{
  *  F^{-1}(p) &= \exp(\mu + \sqrt{2} \, \sigma \, \text{inv_erf}(2p - 1)) \\
@@ -12,7 +12,9 @@
  * \f}
  * implies that
  * \f$ \Phi^{-1}(x) = \sqrt{2} \, \text{inv_erf}(2x - 1) \f$.
- 
+ *
+ * @include \quantile_function\lognormal_qf.stanfunctions
+ *
  * @author Sean Pinkney
  * @param p Real on \f$[0,\,1]\f$
  * @param mu Real \f$(-\infty, +\infty)\f$

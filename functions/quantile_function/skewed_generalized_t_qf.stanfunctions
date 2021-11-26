@@ -3,7 +3,8 @@
   /** @ingroup qf
    * Skewed Generalized T Quantile Function
    *
-   * 
+   * @include \quantile_function\skewed_generalized_t_qf.stanfunctions
+   *
    * For more information, please see @ref skew_generalized_t.
    *
    * @copyright Sean Pinkney, 2021 

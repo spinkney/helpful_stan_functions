@@ -1,3 +1,4 @@
+/** @addtogroup special Inverse error function
 /* Inverse error function
 *
 * Copyright Sean Pinkney, Feb. 2021
@@ -6,6 +7,8 @@
 * GPU Computing Gems Jade Edition. 10.1016/B978-0-12-385963-1.00010-1. 
 * accessed Feb. 15, 2021. at
 * https://people.maths.ox.ac.uk/gilesm/files/gems_erfinv.pdf
+*
+* @include \special\inv_erf.stanfunctions
 *
 * @param x Real number on [0,1]
 * @param return inverse error result

@@ -1,5 +1,8 @@
 /** @addtogroup gen_pareto Generalized Pareto Distribution Functions
-    * \ingroup univariate
+*
+*  @include \distribution\gpareto.stanfunctions 
+*
+* \ingroup univariate
  *  @{ */
 
 /** Generalized Pareto log density

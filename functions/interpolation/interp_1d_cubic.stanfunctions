@@ -2,6 +2,8 @@
  *
  * These functions perform interpolation one dimension at a time.
  *
+ * @include \interpolation\interp_1d_cubic.stanfunctions
+ *
  * \ingroup interpolation
  *  @{ */
 

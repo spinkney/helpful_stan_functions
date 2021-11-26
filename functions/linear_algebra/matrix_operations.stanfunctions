@@ -1,4 +1,11 @@
-/* Lower triangular elements
+/** @addtogroup matrix_operations Matrix operation functions
+ *
+ * @include \linear_algebra\matrix_operations.stanfunctions
+ *
+ * \ingroup matrix
+ *  @{ */
+/**
+ * Lower triangular elements
  *
  * Copyright 2021, Sean Pinkney
  *

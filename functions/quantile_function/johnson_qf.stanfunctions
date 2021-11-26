@@ -4,6 +4,8 @@
  * The Generalized Johnson Quantile-Parameterized Distribution System. 
  * Decision Analysis 16 (1) 67-85 https://doi.org/10.1287/deca.2018.0376
  *
+ * @include \quantile_function\johnson_qf.stanfunctions
+ *
  * \ingroup qf
  *  @{ */
 

@@ -1,4 +1,7 @@
 /** @addtogroup 1d_interpolation 1-dimensional Interpolation Functions
+*
+* @include \interpolation\interp_1d_linear.stanfunctions
+*
  * \ingroup interpolation
  *  @{ */
 

@@ -1,4 +1,12 @@
-/* Angle matrix to Cholesky correlation
+/** @addtogroup angles Cholesky Correlation Angles Matrix Constraint functions
+ *
+ * @include \linear_algebra\correlation_angles.stanfunctions
+ *
+ * \ingroup correlation
+ *  @{ */
+
+/** 
+ * Angles matrix to Cholesky correlation
  *
  * Copyright 2021, Sean Pinkney
  *
@@ -28,7 +36,8 @@ matrix angle2chol(matrix angle_mat) {
   return inv_mat;
 }
 
-/* Angle vector to angle matrix
+/**
+ * Angle svector to angle matrix
  *
  * Copyright 2021, Sean Pinkney
  *
@@ -51,3 +60,4 @@ matrix angle_vec2angle_mat(vector angle, int K) {
   
   return mat;
 }
+/** @} */

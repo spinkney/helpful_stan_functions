@@ -1,4 +1,4 @@
-/** @addtogroup special Inverse incomplete beta bunction
+/** @addtogroup special Inverse incomplete beta function
   *
   * Author:
   * Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas.
@@ -16,6 +16,8 @@
   * Inverse of the Incomplete Beta Integeral, Applied Statistics,
   * Volume 26, Number 1, 1977, pages 111-114.  
   * 
+  * @include \special\inc_beta_inverse.stanfunctions
+  *
   * @param x Real in [0, 1]
   * @param p Real
   * @param q Real

@@ -5,6 +5,8 @@
  *  F^{-1}(p, \, \mu, \, \sigma) &= \text{inv_logit}\bigg[ \sinh\bigg(\frac{\Phi^{-1}(p) - \mu}{\sigma}\bigg) \bigg]\\
  * \f}
  *
+ * @include \quantile_function\unit_johnson_su_qf.stanfunctions
+ *
  * @author Sean Pinkney
  * @param p Real on \f$[0,\,1]\f$
  * @param mu Real \f$(-\infty, +\infty)\f$

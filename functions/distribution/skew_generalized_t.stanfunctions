@@ -25,6 +25,8 @@
   * Theodossiou, Panayioti sigma  1998, Financial Data and the Skewed Generalized T 
   * Distribution, Management Science 44, 1650-166
   *
+  * @include \distribution\skew_generalized_t.stanfunctions
+  *
   * \ingroup univariate
   *  @{ */
 

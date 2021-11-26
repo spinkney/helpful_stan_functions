@@ -3,6 +3,8 @@
  * Original code is in Stan-math 
  * https://github.com/stan-dev/math/blob/develop/stan/math/prim/fun/cholesky_corr_constrain.hpp#L48
  *
+ * @include \linear_algebra\cholesky_corr_constrain.stanfunctions
+ *
  * \ingroup correlation
  *  @{ */
 /**

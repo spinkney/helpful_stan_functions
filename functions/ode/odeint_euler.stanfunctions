@@ -3,6 +3,8 @@
 * Numerical ODE (ordinary differential equation) integration functions
 * \emoji :turtle:.
 *
+* @include \ode\odeint_euler.stanfunctions
+*
 **/
 
 /** @addtogroup fixed_step Explicit fixed-step methods

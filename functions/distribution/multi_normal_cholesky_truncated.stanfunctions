@@ -42,6 +42,8 @@
  * \f[
  *   \mathbf{r} = \mu + L \Phi^{-1}(\mathbf{v}).
  * \f]
+ *
+ * @include \distribution\multi_normal_cholesky_truncated.stanfunctions
  * 
  * \ingroup multivariate
  *  @{ */

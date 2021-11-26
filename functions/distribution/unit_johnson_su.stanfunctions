@@ -6,6 +6,8 @@
    * Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3),
    * 471-490. https://doi.org/10.18187/pjsor.v16i3.3421.
    *
+   * @include \distribution\unit_johnson_su.stanfunctions
+   *
    * \ingroup univariate
    *  @{ */
    

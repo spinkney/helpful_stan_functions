@@ -1,5 +1,7 @@
 /** @addtogroup fixed_step Explicit fixed-step methods
 *
+* @include \ode\odeint_midpoint.stanfunctions
+*
 * \ingroup odeint
 *  @{ */
 

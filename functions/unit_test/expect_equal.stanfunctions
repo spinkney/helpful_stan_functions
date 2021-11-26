@@ -1,4 +1,5 @@
-/* Expect equal real
+/** @ingroup unit_test
+ * Expect equal real
  *
  * Copyright Rok Češnovar, 2021
  *
@@ -11,7 +12,8 @@ void expect_equal_real(real expected, real actual, real tol) {
     reject("ERROR: expected value - ", expected, ", actual value - ", actual);
 }
 
-/* Expect equal vector
+/**
+ * Expect equal vector
  *
  * Copyright Rok Češnovar, 2021
  *
