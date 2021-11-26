@@ -1,11 +1,12 @@
 /** @addtogroup logical_array Logical functions for arrays
+*
+*  @include \array_ops\logical_array.stanfunctions 
+*
  * \ingroup array
  *  @{ */
 
 /**
   * Checks whether real numbers are finite and ordered. \n\n
-  *
-  * @include \array_ops\logical_array.stanfunctions 
   *
   * @copyright Ben Goodrich 2020
   * @param theta real array of numbers
