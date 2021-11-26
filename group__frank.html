@@ -103,11 +103,23 @@ Functions</h2></td></tr>
 <tr class="separator:gabe632c658443e2fa0169a2ef0dbc39cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >The Frank copula is defined as </p><p class="formulaDsp">
+<p >The Frank copula bivariate cumulative density function is defined as </p><p class="formulaDsp">
 \[ C(u,v) = -\frac{1}{\omega}\ln \big[1 + \frac{(\exp(-\omega u) - 1)(\exp(-\omega v)-1)}{\exp(-\omega) -1} \big] \]
 </p>
-<p> for \(\omega \in (-\infty, \infty) \,/\ \{0\}\). </p>
-<h2 class="groupheader">Function Documentation</h2>
+<p> for \(\omega \in (-\infty, \infty) \,/\ \{0\}\).</p>
+<p >The Frank copula bivariate probability density function is defined as </p><p class="formulaDsp">
+\[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2} \]
+</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a>(real u, real v, real theta) {</div>
+<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v)</div>
+<div class="line">         - 2</div>
+<div class="line">           * log(1 - exp(-theta)</div>
+<div class="line">                 - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__frank_html_gabe632c658443e2fa0169a2ef0dbc39cf"><div class="ttname"><a href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:32</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gabe632c658443e2fa0169a2ef0dbc39cf" name="gabe632c658443e2fa0169a2ef0dbc39cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabe632c658443e2fa0169a2ef0dbc39cf">&#9670;&nbsp;</a></span>frank_copula_lpdf()</h2>
 
@@ -140,19 +152,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Frank Bivariate Copula Log Density</p>
-<p >The probability density function is defined as </p><p class="formulaDsp">
-\[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2} \]
-</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a>(real u, real v, real theta) {</div>
-<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v)</div>
-<div class="line">         - 2</div>
-<div class="line">           * log(1 - exp(-theta)</div>
-<div class="line">                 - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="ttc" id="agroup__frank_html_gabe632c658443e2fa0169a2ef0dbc39cf"><div class="ttname"><a href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:32</div></div>
-</div><!-- fragment --><p >Copyright Andre Pfeuffer, Sean Pinkney <br  />
+<p >Copyright Andre Pfeuffer, Sean Pinkney <br  />
 <a href="https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ">https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ</a> <br  />
 Accessed and modified Feb. 5, 2021</p>
 <p >The copula is defined \(\omega \in (-\infty, \infty) \,/\ \{0\}\)</p>

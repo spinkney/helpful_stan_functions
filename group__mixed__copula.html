@@ -116,8 +116,261 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >The mixed-discrete normal copula. The method is from <br  />
- Smith, Michael &amp; Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983. </p>
-<h2 class="groupheader">Function Documentation</h2>
+ Smith, Michael &amp; Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include multi_normal_cholesky_truncated.stanfunctions</span></div>
+<div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(array[] real y, row_vector mu_glm, array[] real sigma,</div>
+<div class="line">                       <span class="keywordtype">int</span> J) {</div>
+<div class="line">  vector[J] u;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    u[j] = Phi_approx((y[j] - mu_glm[j]) / sigma[j]);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> u;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a>(array[] <span class="keywordtype">int</span> y, row_vector mu_glm, <span class="keywordtype">int</span> J) {</div>
+<div class="line">  array[2] vector[J] b;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    <span class="keywordflow">if</span> (y[j] == 0) {</div>
+<div class="line">      b[1, j] = negative_infinity();</div>
+<div class="line">      b[2, j] = inv_Phi(bernoulli_cdf(0 | mu_glm[j]));</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      b[1, j] = inv_Phi(bernoulli_cdf(0 | mu_glm[j]));</div>
+<div class="line">      b[2, j] = positive_infinity();</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> b;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a>(array[] <span class="keywordtype">int</span> y, row_vector mu_glm, <span class="keywordtype">int</span> J) {</div>
+<div class="line">  array[2] vector[J] b;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    b[2, j] = inv_Phi(poisson_cdf(y[j] | mu_glm[j]));</div>
+<div class="line">    <span class="keywordflow">if</span> (y[j] &gt; 0) {</div>
+<div class="line">      b[1, j] = inv_Phi(poisson_cdf(y[j] - 1 | mu_glm[j]));</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> b;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp,</div>
+<div class="line">                     array[] vector uraw_b, array[] vector uraw_p,</div>
+<div class="line">                     matrix mu_glm, array[] real sigma, matrix L,</div>
+<div class="line">                     array[] matrix bounds_ind, vector tmvn_mu,</div>
+<div class="line">                     array[] <span class="keywordtype">int</span> J, <span class="keywordtype">int</span> N) {</div>
+<div class="line">  real lp = 0;</div>
+<div class="line">  <span class="keywordtype">int</span> J_all = sum(J);</div>
+<div class="line">  array[2] vector[J[2]] bb;</div>
+<div class="line">  array[2] vector[J[2]] bp;</div>
+<div class="line">  </div>
+<div class="line">  vector[J_all] u; <span class="comment">// latent variables</span></div>
+<div class="line">  vector[J_all] lb;</div>
+<div class="line">  vector[J_all] ub;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// loop through independent observations</span></div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    <span class="comment">// get indicators of upper/lower bound</span></div>
+<div class="line">    vector[J_all] lb_ind = col(bounds_ind[1], i);</div>
+<div class="line">    vector[J_all] ub_ind = col(bounds_ind[2], i);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">int</span> pos = 1;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (J[1] &gt; 0) {</div>
+<div class="line">      u[pos : J[1]] = <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(Yn[i], head(mu_glm[i], J[1]), sigma,</div>
+<div class="line">                                      J[1]);</div>
+<div class="line">      lb[pos : J[1]] = rep_vector(negative_infinity(), J[1]);</div>
+<div class="line">      ub[pos : J[1]] = rep_vector(positive_infinity(), J[1]);</div>
+<div class="line">      pos += J[1];</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (J[2] &gt; 0) {</div>
+<div class="line">      bb = <a class="code hl_function" href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a>(Yb[i], segment(mu_glm[i], pos, J[2]), J[2]);</div>
+<div class="line">      u[pos : J[1] + J[2]] = to_vector(uraw_b[1 : J[2], i]);</div>
+<div class="line">      lb[pos : J[1] + J[2]] = bb[1];</div>
+<div class="line">      ub[pos : J[1] + J[2]] = bb[2];</div>
+<div class="line">      </div>
+<div class="line">      pos += J[2];</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (J[3] &gt; 0) {</div>
+<div class="line">      bp = <a class="code hl_function" href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a>(Yp[i], segment(mu_glm[i], pos, J[3]), J[3]);</div>
+<div class="line">      </div>
+<div class="line">      u[pos : J_all] = to_vector(uraw_p[1 : J[3], i]);</div>
+<div class="line">      lb[pos : J_all] = bp[1];</div>
+<div class="line">      ub[pos : J_all] = bp[2];</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    lp += <a class="code hl_function" href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a>(u | tmvn_mu, L, lb, ub, lb_ind, ub_ind);</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> lp;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp,</div>
+<div class="line">                  array[] vector uraw_b, array[] vector uraw_p,</div>
+<div class="line">                  matrix mu_glm, array[] real sigma, matrix L,</div>
+<div class="line">                  array[] matrix bounds_ind, vector tmvn_mu, array[] <span class="keywordtype">int</span> J,</div>
+<div class="line">                  <span class="keywordtype">int</span> N) {</div>
+<div class="line">  real lp = 0;</div>
+<div class="line">  <span class="keywordtype">int</span> J_all = sum(J);</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// loop through independent observations</span></div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    vector[J_all] u; <span class="comment">// latent variables</span></div>
+<div class="line">    vector[J_all] lb = rep_vector(negative_infinity(), J_all); <span class="comment">// initialize lower bounds to -inf</span></div>
+<div class="line">    vector[J_all] ub = rep_vector(positive_infinity(), J_all); <span class="comment">// initialize upper bounds to +inf</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// get indicators of upper/lower bound</span></div>
+<div class="line">    vector[J_all] lb_ind = col(bounds_ind[1], i);</div>
+<div class="line">    vector[J_all] ub_ind = col(bounds_ind[2], i);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">int</span> j = 0; <span class="comment">// counter for 1:J</span></div>
+<div class="line">    <span class="keywordtype">int</span> jn = 0; <span class="comment">// counter for 1:Jn</span></div>
+<div class="line">    <span class="keywordtype">int</span> jb = 0; <span class="comment">// counter for 1:Jb</span></div>
+<div class="line">    <span class="keywordtype">int</span> jp = 0; <span class="comment">// counter for 1:Jp</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// for normal; increment by log likelihood and obtain u|y deterministically</span></div>
+<div class="line">    <span class="keywordflow">while</span> (jn &lt; J[1]) {</div>
+<div class="line">      real z_ij;</div>
+<div class="line">      jn += 1;</div>
+<div class="line">      j += 1;</div>
+<div class="line">      z_ij = (Yn[i, jn] - mu_glm[i, j]) / sigma[jn];</div>
+<div class="line">      u[j] = Phi_approx(z_ij);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// for Bernoulli, u|y is random and must update lb and ub:</span></div>
+<div class="line">    <span class="comment">//    if y == 0, upper bound at inv_Phi( y, mu )</span></div>
+<div class="line">    <span class="comment">//    if y == 1, lower bound at inv_Phi(y-1, mu)  (y-1 == 0).</span></div>
+<div class="line">    <span class="keywordflow">while</span> (jb &lt; J[2]) {</div>
+<div class="line">      jb += 1;</div>
+<div class="line">      j += 1;</div>
+<div class="line">      u[j] = uraw_b[jb, i];</div>
+<div class="line">      <span class="keywordflow">if</span> (Yb[i, jb] == 0) {</div>
+<div class="line">        ub[j] = inv_Phi(bernoulli_cdf(0 | mu_glm[i, j]));</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        lb[j] = inv_Phi(bernoulli_cdf(0 | mu_glm[i, j]));</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// for Poisson, u|y is random and must update lb and ub:</span></div>
+<div class="line">    <span class="comment">//    Always upper bound at inv_Phi( y, mu )</span></div>
+<div class="line">    <span class="comment">//    If y != 0, lower bound at inv_Phi(y-1, mu)</span></div>
+<div class="line">    <span class="keywordflow">while</span> (jp &lt; J[3]) {</div>
+<div class="line">      <span class="keywordtype">int</span> y_ij;</div>
+<div class="line">      real mu_ij;</div>
+<div class="line">      jp += 1;</div>
+<div class="line">      j += 1;</div>
+<div class="line">      u[j] = uraw_p[jp, i];</div>
+<div class="line">      y_ij = Yp[i, jp];</div>
+<div class="line">      mu_ij = mu_glm[i, j];</div>
+<div class="line">      ub[j] = inv_Phi(poisson_cdf(y_ij | mu_ij));</div>
+<div class="line">      <span class="keywordflow">if</span> (y_ij &gt; 0) {</div>
+<div class="line">        lb[j] = inv_Phi(poisson_cdf(y_ij - 1 | mu_ij));</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    lp += <a class="code hl_function" href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a>(u | tmvn_mu, L, lb, ub, lb_ind, ub_ind);</div>
+<div class="line">  } <span class="comment">// end i loop</span></div>
+<div class="line">  <span class="keywordflow">return</span> lp;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//-----------------------------------------------------------------</span></div>
+<div class="line"><span class="comment">// Get GLM means</span></div>
+<div class="line"><span class="comment">//</span></div>
+<div class="line"><span class="comment">//    * @param beta long vector of regression coefs for all outcomes</span></div>
+<div class="line"><span class="comment">//    * @param X      concatenated design matrices</span></div>
+<div class="line"><span class="comment">//    * @param Jn     number of normal outcomes</span></div>
+<div class="line"><span class="comment">//    * @param Jb     number of bernoulli outcomes</span></div>
+<div class="line"><span class="comment">//    * @param Jp     number of poisson outcomes</span></div>
+<div class="line"><span class="comment">//    * @param J      total number of outcomes</span></div>
+<div class="line"><span class="comment">//    * @param N      number of observations</span></div>
+<div class="line"><span class="comment">//    * @param Kj     J-dim integer vector giving number of covariates per variable</span></div>
+<div class="line"><span class="comment">//    * @param Xindx  Xindx Jx2 matrix giivng start and end indices of X for design matrix</span></div>
+<div class="line"><span class="comment">//</span></div>
+<div class="line"><span class="comment">//    * @return NxJ matrix of GLM means</span></div>
+<div class="line"><span class="comment">//----------------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line">matrix <a class="code hl_function" href="group__mixed__copula.html#ga5ae538db77424f61cb17a15d32818951">get_means</a>(vector beta, matrix X, array[] <span class="keywordtype">int</span> J, array[] <span class="keywordtype">int</span> Kj) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(X);</div>
+<div class="line">  matrix[N, num_elements(J)] mu;</div>
+<div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
+<div class="line">  <span class="keywordtype">int</span> outcome = 1;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (J[1] &gt; 0) {</div>
+<div class="line">    mu[ : , outcome] = block(X, 1, 1, N, Kj[1]) * segment(beta, 1, Kj[1]);</div>
+<div class="line">    pos += Kj[1];</div>
+<div class="line">    outcome += 1;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (J[2] &gt; 0) {</div>
+<div class="line">    mu[ : , outcome] = inv_logit(block(X, 1, pos, N, Kj[2])</div>
+<div class="line">                                 * segment(beta, pos, Kj[2]));</div>
+<div class="line">    pos += Kj[2];</div>
+<div class="line">    outcome += 1;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (J[3] &gt; 0) {</div>
+<div class="line">    mu[ : , outcome] = exp(block(X, 1, pos, N, Kj[3])</div>
+<div class="line">                           * segment(beta, pos, Kj[3]));</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> mu;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb,</div>
+<div class="line">                                    array[,] <span class="keywordtype">int</span> Yp, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> Jn, <span class="keywordtype">int</span> Jb,</div>
+<div class="line">                                    <span class="keywordtype">int</span> Jp, <span class="keywordtype">int</span> J) {</div>
+<div class="line">  matrix[J, N] lb_ind = rep_matrix(0, J, N); <span class="comment">// initialize to no lower bound</span></div>
+<div class="line">  matrix[J, N] ub_ind = rep_matrix(0, J, N); <span class="comment">// initialize to no upper bound</span></div>
+<div class="line">  array[2] matrix[J, N] out; <span class="comment">// output is a 2-dim array of JxN matrices</span></div>
+<div class="line">  <span class="keywordtype">int</span> j = Jn; <span class="comment">// counter over J (normal outcomes are unbounded)</span></div>
+<div class="line">  <span class="keywordtype">int</span> jb = 0; <span class="comment">// counter over Jb</span></div>
+<div class="line">  <span class="keywordtype">int</span> jp = 0; <span class="comment">// counter over Jp</span></div>
+<div class="line">  <span class="comment">// loop over binomial variables (if any)</span></div>
+<div class="line">  <span class="comment">//     upper bound if y == 0 </span></div>
+<div class="line">  <span class="comment">//     lower bound if y == 1</span></div>
+<div class="line">  <span class="keywordflow">while</span> (jb &lt; Jb) {</div>
+<div class="line">    jb += 1;</div>
+<div class="line">    j += 1;</div>
+<div class="line">    <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">      <span class="keywordflow">if</span> (Yb[i, jb] == 0) {</div>
+<div class="line">        ub_ind[j, i] = 1;</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        lb_ind[j, i] = 1;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  <span class="comment">// loop over poisson variables (if any)</span></div>
+<div class="line">  <span class="comment">//      always upper bound</span></div>
+<div class="line">  <span class="comment">//      lower bound for y &gt; 0</span></div>
+<div class="line">  <span class="keywordflow">while</span> (jp &lt; Jp) {</div>
+<div class="line">    jp += 1;</div>
+<div class="line">    j += 1;</div>
+<div class="line">    <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">      ub_ind[j, i] = 1;</div>
+<div class="line">      <span class="keywordflow">if</span> (Yp[i, jp] &gt; 0) {</div>
+<div class="line">        lb_ind[j, i] = 1;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  out[1] = lb_ind;</div>
+<div class="line">  out[2] = ub_ind;</div>
+<div class="line">  <span class="keywordflow">return</span> out;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__mixed__copula_html_ga19af974cd9e77473e6c68dfcc1c4e3ee"><div class="ttname"><a href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a></div><div class="ttdeci">array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:89</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga4d69bc504219928b6048bd372ef23845"><div class="ttname"><a href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a></div><div class="ttdeci">array[] vector bernoulli_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:56</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga55043cabec5f27594fa55802b23aba14"><div class="ttname"><a href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a></div><div class="ttdeci">vector normal_marginal(array[] real y, row_vector mu_glm, array[] real sigma, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:28</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga59390ebb9ac59227a20800ceb30bacfa"><div class="ttname"><a href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a></div><div class="ttdeci">real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:195</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga5ae538db77424f61cb17a15d32818951"><div class="ttname"><a href="group__mixed__copula.html#ga5ae538db77424f61cb17a15d32818951">get_means</a></div><div class="ttdeci">matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:289</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_gab5b9aa81d74d233f474a3c9c419be4bc"><div class="ttname"><a href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a></div><div class="ttdeci">array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:331</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_gae6237a157853b40b1b2e33c548d5ae50"><div class="ttname"><a href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a></div><div class="ttdeci">real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:124</div></div>
+<div class="ttc" id="agroup__tmvn_html_ga410a62b317befea7a30c079292d142f0"><div class="ttname"><a href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:66</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga4d69bc504219928b6048bd372ef23845" name="ga4d69bc504219928b6048bd372ef23845"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4d69bc504219928b6048bd372ef23845">&#9670;&nbsp;</a></span>bernoulli_marginal()</h2>
 
