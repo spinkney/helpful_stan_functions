@@ -53,7 +53,7 @@ real inv_erf(real x) {
   return p * x;
 }
 
-/*
+/**
  * Inverse error function no sqrt
  *
  * Copyright njuffa, Sean Pinkney, 2021
