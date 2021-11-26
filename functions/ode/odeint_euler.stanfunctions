@@ -3,8 +3,6 @@
 * Numerical ODE (ordinary differential equation) integration functions
 * \emoji :turtle:.
 *
-* @include \ode\odeint_euler.stanfunctions
-*
 **/
 
 /** @addtogroup fixed_step Explicit fixed-step methods
@@ -19,6 +17,8 @@
 *  
 * i.e. same as what can be used with the [built-in ODE solvers](https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html
 * ) of Stan.
+*
+* @include \ode\odeint_euler.stanfunctions
 *
 * \ingroup odeint
 *  @{ */
