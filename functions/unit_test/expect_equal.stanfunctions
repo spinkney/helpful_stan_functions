@@ -1,4 +1,7 @@
-/** @ingroup unit_test
+/** @addtogroup unit_test
+  * @{
+*
+/**
  * Expect equal real
  *
  * Copyright Rok Češnovar, 2021
@@ -33,3 +36,4 @@ void expect_equal_vector(vector expected, vector actual, real tol) {
       reject("ERROR at index ", i, ": expected value - ", expected, ", actual value - ", actual);
   }
 }
+/** @}*/

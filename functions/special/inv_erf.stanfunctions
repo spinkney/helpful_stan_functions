@@ -1,5 +1,8 @@
-/** @addtogroup special Inverse error function
-/* Inverse error function
+/** @addtogroup special 
+* @{
+*
+/** 
+* Inverse error function
 *
 * Copyright Sean Pinkney, Feb. 2021
 *
@@ -92,3 +95,4 @@ real inv_erf_nsqrt(real x) {
   }
   return p * x;
 }
+/** @}*/

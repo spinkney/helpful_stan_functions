@@ -1,8 +1,8 @@
-/** @addtogroup matrix_operations Matrix operation functions
+/** @addtogroup vectorization Vectorization operations on matrices
  *
- * @include \linear_algebra\matrix_operations.stanfunctions
+ * @include \linear_algebra\vectorization.stanfunctions
  *
- * \ingroup matrix
+ * \ingroup linear_transforms
  *  @{ */
 /**
  * Lower triangular elements
@@ -29,3 +29,4 @@ vector lower_ele(matrix mat, int K) {
   
   return out;
 }
+/** @} */

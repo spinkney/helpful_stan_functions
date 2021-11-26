@@ -1,4 +1,8 @@
-/** @addtogroup special Inverse incomplete beta function
+/** @addtogroup special 
+  * @{
+  *
+  /** 
+  * Incomplete Beta Inverse
   *
   * Author:
   * Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas.
@@ -180,3 +184,4 @@ real inc_beta_inverse(real x, real p, real q) {
   
   return value;
 }
+/** @}*/
