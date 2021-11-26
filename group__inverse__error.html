@@ -140,18 +140,6 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> p * x;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">/*</span></div>
-<div class="line"><span class="comment"> * Inverse error function no sqrt</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Copyright njuffa, Sean Pinkney, 2021</span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * Compute the inverse error functions with maximum error of 2.35793 ul</span></div>
-<div class="line"><span class="comment"> * Originally implemented by njuffa and</span></div>
-<div class="line"><span class="comment"> * accessed June 11, 2021 at https://stackoverflow.com/a/49743348 </span></div>
-<div class="line"><span class="comment"> *</span></div>
-<div class="line"><span class="comment"> * @param x Real number on [0,1]</span></div>
-<div class="line"><span class="comment"> * @param return inverse error result</span></div>
-<div class="line"><span class="comment"> */</span></div>
 <div class="line">real <a class="code hl_function" href="group__inverse__error.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
@@ -232,6 +220,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >Inverse error function no sqrt</p>
+<p >Copyright njuffa, Sean Pinkney, 2021</p>
+<p >Compute the inverse error functions with maximum error of 2.35793 ul Originally implemented by njuffa and accessed June 11, 2021 at <a href="https://stackoverflow.com/a/49743348">https://stackoverflow.com/a/49743348</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Real number on [0,1] </td></tr>
+    <tr><td class="paramname">return</td><td>inverse error result </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
