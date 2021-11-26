@@ -20,7 +20,7 @@ int in_order(array[] real theta) {
       reject("bounds and quantiles are not in the right order");
   return 1;
 }
-/*
+/**
  *  @include \array_ops\logical_array.stanfunctions 
 */
 /** @} */
