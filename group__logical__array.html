@@ -134,7 +134,19 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 if real numbers are finite and ordered </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if real numbers are finite and ordered <div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>(array[] real theta) {</div>
+<div class="line">  <span class="keywordflow">if</span> (num_elements(theta) != 5) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;wrong number of elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (theta[1] == negative_infinity()) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;first element must be finite&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">for</span> (k in 2 : 5) </div>
+<div class="line">    <span class="keywordflow">if</span> (theta[k] &lt;= theta[k - 1]) </div>
+<div class="line">      reject(<span class="stringliteral">&quot;bounds and quantiles are not in the right order&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> 1;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__logical__array_html_ga2becc165c804319fd033bc82a5c13ff6"><div class="ttname"><a href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a></div><div class="ttdeci">int in_order(array[] real theta)</div><div class="ttdef"><b>Definition:</b> logical_array.stanfunctions:14</div></div>
+</div><!-- fragment --> </dd></dl>
 
 </div>
 </div>
