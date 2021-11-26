@@ -4,15 +4,12 @@
 
 /**
   * Checks whether real numbers are finite and ordered. \n\n
-  * Code: [logical_array.stanfunctions](https://github.com/spinkney/helpful_stan_functions/blob/main/functions/array_ops/logical_array.stanfunctions)
-  * 
-  * @include \array_ops\logical_array.stanfunctions 
   *
   * @copyright Ben Goodrich 2020
   * @param theta real array of numbers
   * @throws if real numbers are not finite or not ordered
   * @return 1 if real numbers are finite and ordered
-  */
+  *
 int in_order(array[] real theta) {
   if (num_elements(theta) != 5) 
     reject("wrong number of elements");
@@ -23,4 +20,7 @@ int in_order(array[] real theta) {
       reject("bounds and quantiles are not in the right order");
   return 1;
 }
+ *
+ *  @include \array_ops\logical_array.stanfunctions 
+*/
 /** @} */
