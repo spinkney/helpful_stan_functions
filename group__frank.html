@@ -143,8 +143,16 @@ Functions</h2></td></tr>
 <p >The probability density function is defined as </p><p class="formulaDsp">
 \[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2} \]
 </p>
-<p >Code: <a href="https://github.com/spinkney/helpful_stan_functions/blob/main/functions/copula/frank_copula.stanfunctions">frank_copula.stanfunctions</a></p>
-<p >Copyright Andre Pfeuffer, Sean Pinkney <br  />
+<div class="fragment"><div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a>(real u, real v, real theta) {</div>
+<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v)</div>
+<div class="line">         - 2</div>
+<div class="line">           * log(1 - exp(-theta)</div>
+<div class="line">                 - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__frank_html_gabe632c658443e2fa0169a2ef0dbc39cf"><div class="ttname"><a href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:32</div></div>
+</div><!-- fragment --><p >Copyright Andre Pfeuffer, Sean Pinkney <br  />
 <a href="https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ">https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ</a> <br  />
 Accessed and modified Feb. 5, 2021</p>
 <p >The copula is defined \(\omega \in (-\infty, \infty) \,/\ \{0\}\)</p>
