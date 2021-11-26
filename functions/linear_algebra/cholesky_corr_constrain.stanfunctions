@@ -25,6 +25,7 @@ vector corr_constrain_lp(vector x) {
   
   return tanh_x;
 }
+
 /**
  * Cholesky Correlation Matrix Constraint
  *
