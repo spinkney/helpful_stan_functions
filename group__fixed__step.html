@@ -111,6 +111,23 @@ Functions</h2></td></tr>
 <p ><code>vector derivative_fun(real t, vector y, int[] a0, vector a1)</code></p>
 <p >i.e. same as what can be used with the <a href="https://mc-stan.org/docs/2_26/stan-users-guide/coding-the-ode-system-function.html">built-in ODE solvers</a> of Stan.</p>
 <div class="fragment"><div class="line"> </div>
+<div class="line">array[] vector <a class="code hl_function" href="group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29">odeint_euler</a>(real t0, vector y0, data real h,</div>
+<div class="line">                            data <span class="keywordtype">int</span> num_steps, array[] <span class="keywordtype">int</span> a0, vector theta) {</div>
+<div class="line">  <span class="keywordtype">int</span> d = num_elements(y0);</div>
+<div class="line">  array[num_steps + 1] vector[d] y;</div>
+<div class="line">  real t = t0;</div>
+<div class="line">  y[1] = y0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Integrate at grid of time points</span></div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : num_steps) {</div>
+<div class="line">    y[i + 1] = y[i] + h * derivative_fun(t, y[i], a0, theta);</div>
+<div class="line">    t = t + h;</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">return</span> y;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__fixed__step_html_gae4c015b4a7ba0adf3040bdbfe8170a29"><div class="ttname"><a href="group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29">odeint_euler</a></div><div class="ttdeci">array[] vector odeint_euler(real t0, vector y0, data real h, data int num_steps, array[] int a0, vector theta)</div><div class="ttdef"><b>Definition:</b> odeint_euler.stanfunctions:40</div></div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">array[] vector <a class="code hl_function" href="group__fixed__step.html#ga676cf08baaa778445b8c1642e4f31535">odeint_midpoint</a>(real t0, vector y0, data real h,</div>
 <div class="line">                               data <span class="keywordtype">int</span> num_steps, array[] <span class="keywordtype">int</span> a0,</div>
 <div class="line">                               vector theta) {</div>
