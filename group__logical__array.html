@@ -122,7 +122,19 @@ Functions</h2></td></tr>
 <p >Checks whether real numbers are finite and ordered. <br  />
 <br  />
 Code: <a href="https://github.com/spinkney/helpful_stan_functions/blob/main/functions/array_ops/logical_array.stanfunctions">logical_array.stanfunctions</a></p>
-<div class="fragment"> </div><!-- fragment --><dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich 2020 </dd></dl>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>(array[] real theta) {</div>
+<div class="line">  <span class="keywordflow">if</span> (num_elements(theta) != 5) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;wrong number of elements&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">if</span> (theta[1] == negative_infinity()) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;first element must be finite&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">for</span> (k in 2 : 5) </div>
+<div class="line">    <span class="keywordflow">if</span> (theta[k] &lt;= theta[k - 1]) </div>
+<div class="line">      reject(<span class="stringliteral">&quot;bounds and quantiles are not in the right order&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">return</span> 1;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__logical__array_html_ga2becc165c804319fd033bc82a5c13ff6"><div class="ttname"><a href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a></div><div class="ttdeci">int in_order(array[] real theta)</div><div class="ttdef"><b>Definition:</b> logical_array.stanfunctions:16</div></div>
+</div><!-- fragment --><dl class="section copyright"><dt>Copyright</dt><dd>Ben Goodrich 2020 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta</td><td>real array of numbers </td></tr>
