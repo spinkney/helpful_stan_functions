@@ -4,6 +4,6 @@ var searchData=
   ['inc_5fbeta_5finverse_1',['inc_beta_inverse',['../group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6',1,'inc_beta_inverse.stanfunctions']]],
   ['interp_5f1d_5fcubic_2',['interp_1d_cubic',['../group__d__interpolation.html#ga04f55d73f3519184cb0756246c4a869e',1,'interp_1d_cubic.stanfunctions']]],
   ['interp_5f1d_5flinear_3',['interp_1d_linear',['../group__d__interpolation.html#gaf1b52e91870caffdf1766eca0c75421f',1,'interp_1d_linear.stanfunctions']]],
-  ['inv_5ferf_4',['inv_erf',['../group__special.html#ga3d254497bd04ee837661a923dff361ba',1,'inv_erf.stanfunctions']]],
-  ['inv_5ferf_5fnsqrt_5',['inv_erf_nsqrt',['../group__special.html#ga33132970dd1c67785771c3af2dcad1ee',1,'inv_erf.stanfunctions']]]
+  ['inv_5ferf_4',['inv_erf',['../group__inverse__error.html#ga3d254497bd04ee837661a923dff361ba',1,'inv_erf.stanfunctions']]],
+  ['inv_5ferf_5fnsqrt_5',['inv_erf_nsqrt',['../group__inverse__error.html#ga33132970dd1c67785771c3af2dcad1ee',1,'inv_erf.stanfunctions']]]
 ];
