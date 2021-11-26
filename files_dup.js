@@ -1,7 +1,7 @@
 var files_dup =
 [
     [ "array_ops_definition.stan", "array__ops__definition_8stan.html", null ],
-    [ "logical_array.stanfunctions", "logical__array_8stanfunctions.html", "logical__array_8stanfunctions" ],
+    [ "logical_array.stanfunctions", "logical__array_8stanfunctions.html", null ],
     [ "clayton_copula.stanfunctions", "clayton__copula_8stanfunctions.html", "clayton__copula_8stanfunctions" ],
     [ "copula_definition.stan", "copula__definition_8stan.html", null ],
     [ "frank_copula.stanfunctions", "frank__copula_8stanfunctions.html", "frank__copula_8stanfunctions" ],
