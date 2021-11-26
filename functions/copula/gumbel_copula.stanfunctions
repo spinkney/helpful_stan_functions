@@ -5,10 +5,6 @@
 /** 
   * Gumbel Copula Log Density
   *
-  * Copyright Ben Goodrich
-  * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ
-  * Accessed Feb. 5, 2021 
-  *
   * Archimedean family of Gumbel with parametric generator
   *  \f[
          \exp(-t^{1/\theta}), t \in [0, \infty] 
@@ -17,8 +13,14 @@
   * as well as that of the upper taildependence coefficient, is \f$[0,1)\f$. 
   * Note that this copula does not allow for lower tail dependence.
   * 
+  * @include \copula\gumbel_copula.stanfunctions
+  *
   * https://cran.r-project.org/web/packages/copula/copula.pdf
   * "copula" R package in the copFamilies documentation accessed Feb. 5, 2021
+  *
+  * Copyright Ben Goodrich
+  * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ
+  * Accessed Feb. 5, 2021 
   *
   * @param u Real number on (0,1], not checked but function will return NaN
   * @param v Real number on (0,1], not checked but function will return NaN
