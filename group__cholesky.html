@@ -119,7 +119,7 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">matrix <a class="code hl_function" href="group__cholesky.html#ga5c63a6cac08ee9da5756eff047c5c800">cholesky_corr_constrain_lp</a>(vector y, <span class="keywordtype">int</span> K) {</div>
-<div class="line">  <span class="keywordtype">int</span> k_choose_2 = (K * (K - 1)) / 2;</div>
+<div class="line">  <span class="keywordtype">int</span> k_choose_2 = (K * (K - 1)) %/% 2;</div>
 <div class="line">  vector[k_choose_2] z = <a class="code hl_function" href="group__cholesky.html#gadf7cbb994a238f2fd9ad6163f66ec4a6">corr_constrain_lp</a>(y);</div>
 <div class="line">  matrix[K, K] x = rep_matrix(0, K, K);</div>
 <div class="line">  <span class="keywordtype">int</span> iter = 0;</div>

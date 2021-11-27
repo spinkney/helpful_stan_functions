@@ -166,8 +166,7 @@ Functions</h2></td></tr>
 <div class="line">  real inv_k = inv(k);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (k &lt; 0 &amp;&amp; max(y - ymin) / sigma &gt; -inv_k) </div>
-<div class="line">    ;</div>
-<div class="line">  reject(<span class="stringliteral">&quot;k &lt; 0 and max(y - ymin) / sigma &gt; -1 / k; found k, sigma = &quot;</span>, k, sigma);</div>
+<div class="line">    reject(<span class="stringliteral">&quot;k &lt; 0 and max(y - ymin) / sigma &gt; -1 / k; found k, sigma = &quot;</span>, k, sigma);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
@@ -187,7 +186,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> ymin - sigma * log(uniform_rng(0, 1)); <span class="comment">// limit k-&gt;0</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__gen__pareto_html_ga883e8f1ab20e463badc20671e4e9a57c"><div class="ttname"><a href="group__gen__pareto.html#ga883e8f1ab20e463badc20671e4e9a57c">gpareto_rng</a></div><div class="ttdeci">real gpareto_rng(real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:139</div></div>
+<div class="ttc" id="agroup__gen__pareto_html_ga883e8f1ab20e463badc20671e4e9a57c"><div class="ttname"><a href="group__gen__pareto.html#ga883e8f1ab20e463badc20671e4e9a57c">gpareto_rng</a></div><div class="ttdeci">real gpareto_rng(real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:138</div></div>
 <div class="ttc" id="agroup__gen__pareto_html_gaac27cb067f0e9caf422a1cfeceb46e1e"><div class="ttname"><a href="group__gen__pareto.html#gaac27cb067f0e9caf422a1cfeceb46e1e">gpareto_lpdf</a></div><div class="ttdeci">real gpareto_lpdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:32</div></div>
 <div class="ttc" id="agroup__gen__pareto_html_gac64a24b23c765ac040774a703803d752"><div class="ttname"><a href="group__gen__pareto.html#gac64a24b23c765ac040774a703803d752">gpareto_lccdf</a></div><div class="ttdeci">real gpareto_lccdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:113</div></div>
 <div class="ttc" id="agroup__gen__pareto_html_gadb5b249ce4e98ed827f1cd9bbf9e7304"><div class="ttname"><a href="group__gen__pareto.html#gadb5b249ce4e98ed827f1cd9bbf9e7304">gpareto_cdf</a></div><div class="ttdeci">real gpareto_cdf(vector y, real ymin, real k, real sigma)</div><div class="ttdef"><b>Definition:</b> gpareto.stanfunctions:61</div></div>

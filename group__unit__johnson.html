@@ -115,36 +115,35 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >The distribution is defined for outcomes bounded between the open (0, 1) interval. It is described in detail at Gündüz, S., &amp; Korkmaz, M. Ç. (2020). A New Unit Distribution Based On The Unbounded Johnson Distribution Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3), 471-490. <a href="https://doi.org/10.18187/pjsor.v16i3.3421">https://doi.org/10.18187/pjsor.v16i3.3421</a>.</p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">  real <a class="code hl_function" href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a> (vector x, real mu, real sigma){</div>
-<div class="line">    <span class="keywordtype">int</span> N = num_elements(x);</div>
-<div class="line">    <span class="keywordflow">return</span> N * log(sigma) - </div>
-<div class="line">             sum( log(x) + log1m(x) + 0.5 * log1p(square(logit(x))) ) +</div>
-<div class="line">               std_normal_lpdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">    </div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  real <a class="code hl_function" href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a> (real x, real mu, real sigma){</div>
-<div class="line">    <span class="keywordflow">return</span> std_normal_cdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  real <a class="code hl_function" href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a> (real x, real mu, real sigma){</div>
-<div class="line">    <span class="keywordflow">return</span> std_normal_lcdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">   real <a class="code hl_function" href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a> (real x, real mu, real sigma){</div>
-<div class="line">    <span class="keywordflow">return</span> std_normal_lccdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  real <a class="code hl_function" href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a> (real mu, real sigma) {</div>
-<div class="line">    real u = uniform_rng(0, 1);</div>
-<div class="line">    real x = sinh( (inv_Phi(u) - mu) / sigma);</div>
-<div class="line">    <span class="keywordflow">return</span> inv_logit(x);</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="ttc" id="agroup__unit__johnson_html_ga64da63c0e580b34e266e085bef8c868c"><div class="ttname"><a href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a></div><div class="ttdeci">real unit_johnson_lcdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:77</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga7ac9730c4a0dc628910e7dfafb416197"><div class="ttname"><a href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a></div><div class="ttdeci">real unit_johnson_cdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:55</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga8d145db9da7348a01b8f35ca806ef3b2"><div class="ttname"><a href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a></div><div class="ttdeci">real unit_johnson_rng(real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:118</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga94e75b04828427f1c44ffe6078a7eff1"><div class="ttname"><a href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a></div><div class="ttdeci">real unit_johnson_lccdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:98</div></div>
+<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a>(vector x, real mu, real sigma) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
+<div class="line">  <span class="keywordflow">return</span> N * log(sigma)</div>
+<div class="line">         - sum(log(x) + log1m(x) + 0.5 * log1p(square(logit(x))))</div>
+<div class="line">         + std_normal_lpdf(mu + sigma * asinh(logit(x)) | );</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a>(real x, real mu, real sigma) {</div>
+<div class="line">  <span class="keywordflow">return</span> std_normal_cdf(mu + sigma * asinh(logit(x)) | );</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a>(real x, real mu, real sigma) {</div>
+<div class="line">  <span class="keywordflow">return</span> std_normal_lcdf(mu + sigma * asinh(logit(x)) | );</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a>(real x, real mu, real sigma) {</div>
+<div class="line">  <span class="keywordflow">return</span> std_normal_lccdf(mu + sigma * asinh(logit(x)) | );</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a>(real mu, real sigma) {</div>
+<div class="line">  real u = uniform_rng(0, 1);</div>
+<div class="line">  real x = sinh((inv_Phi(u) - mu) / sigma);</div>
+<div class="line">  <span class="keywordflow">return</span> inv_logit(x);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__unit__johnson_html_ga64da63c0e580b34e266e085bef8c868c"><div class="ttname"><a href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a></div><div class="ttdeci">real unit_johnson_lcdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:76</div></div>
+<div class="ttc" id="agroup__unit__johnson_html_ga7ac9730c4a0dc628910e7dfafb416197"><div class="ttname"><a href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a></div><div class="ttdeci">real unit_johnson_cdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:54</div></div>
+<div class="ttc" id="agroup__unit__johnson_html_ga8d145db9da7348a01b8f35ca806ef3b2"><div class="ttname"><a href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a></div><div class="ttdeci">real unit_johnson_rng(real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:117</div></div>
+<div class="ttc" id="agroup__unit__johnson_html_ga94e75b04828427f1c44ffe6078a7eff1"><div class="ttname"><a href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a></div><div class="ttdeci">real unit_johnson_lccdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:97</div></div>
 <div class="ttc" id="agroup__unit__johnson_html_gafe31e60738a1653fef213399c886237f"><div class="ttname"><a href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a></div><div class="ttdeci">real unit_johnson_lpdf(vector x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:30</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7ac9730c4a0dc628910e7dfafb416197" name="ga7ac9730c4a0dc628910e7dfafb416197"></a>
