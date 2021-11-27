@@ -215,7 +215,7 @@ real JQPDB_qf(real p, row_vector bounds, data real alpha, vector quantiles) {
   if (cols(bounds) != 2) 
     reject("bounds must have two elements");
   if (bounds[2] == positive_infinity()) {
-    return JQPDS2_icdf(p, alpha, bounds[1], quantiles);
+    return JQPDS2_qf(p, alpha, bounds[1], quantiles);
   }
   if (p < 0 || p > 1) 
     reject("p must be between 0 and 1");
