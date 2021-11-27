@@ -49,3 +49,4 @@ latex/
 *.stan~
 *.swo
 *.stan~
+doxygen-awesome-css
