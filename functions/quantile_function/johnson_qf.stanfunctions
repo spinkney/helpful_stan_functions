@@ -1,3 +1,5 @@
+#include array_ops/logical_array.stanfunctions
+
 /** @addtogroup johnson_qf Johnson Quantile Parameterized Distributions (J-QPD) functions
  *
  * Christopher C. Hadlock, J. Eric Bickel
