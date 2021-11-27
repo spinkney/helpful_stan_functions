@@ -116,7 +116,7 @@
    * @return realization of Unit Johhson SU with given mu and sigma
    */
   real unit_johnson_rng (real mu, real sigma) {
-    real<lower=0, upper=1> u = uniform_rng(0, 1);
+    real u = uniform_rng(0, 1);
     real x = sinh( (inv_Phi(u) - mu) / sigma);
     return inv_logit(x);
   }

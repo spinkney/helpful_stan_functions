@@ -1,4 +1,4 @@
-#include special/inc_beta_inverse.stan
+#include special/inc_beta_inverse.stanfunctions
 
   /** @ingroup qf
    * Skewed Generalized T Quantile Function
@@ -21,8 +21,8 @@
     real z1 = beta(1.0 / p, q);
     real z2 = beta(2.0 / p, q - 1.0 / p);
     real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );
-    real prob; = p > 0.5 * (1 - lambda) ? 1 - p : p;
-    real lam; =  p > 0.5 * (1 - lambda) ? -lambda : lambda;
+    real prob = p > 0.5 * (1 - lambda) ? 1 - p : p;
+    real lam =  p > 0.5 * (1 - lambda) ? -lambda : lambda;
     real out;
     
     if (sigma <= 0)
