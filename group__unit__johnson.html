@@ -136,7 +136,7 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  real <a class="code hl_function" href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a> (real mu, real sigma) {</div>
-<div class="line">    real&lt;lower=0, upper=1&gt; u = uniform_rng(0, 1);</div>
+<div class="line">    real u = uniform_rng(0, 1);</div>
 <div class="line">    real x = sinh( (inv_Phi(u) - mu) / sigma);</div>
 <div class="line">    <span class="keywordflow">return</span> inv_logit(x);</div>
 <div class="line">  }</div>

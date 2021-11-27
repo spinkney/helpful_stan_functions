@@ -240,14 +240,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Skewed Generalized T Quantile Function</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include special/inc_beta_inverse.stan</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include special/inc_beta_inverse.stanfunctions</span></div>
 <div class="line"> </div>
 <div class="line"> real <a class="code hl_function" href="group__qf.html#gabba9d4d3227b92d49fae91c3ca6c6daf">skewed_generalized_t_qf</a> (real p, real mu, real sigma, real lambda, real p, real q) {</div>
 <div class="line">    real z1 = beta(1.0 / p, q);</div>
 <div class="line">    real z2 = beta(2.0 / p, q - 1.0 / p);</div>
 <div class="line">    real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );</div>
-<div class="line">    real prob; = p &gt; 0.5 * (1 - lambda) ? 1 - p : p;</div>
-<div class="line">    real lam; =  p &gt; 0.5 * (1 - lambda) ? -lambda : lambda;</div>
+<div class="line">    real prob = p &gt; 0.5 * (1 - lambda) ? 1 - p : p;</div>
+<div class="line">    real lam =  p &gt; 0.5 * (1 - lambda) ? -lambda : lambda;</div>
 <div class="line">    real out;</div>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">if</span> (sigma &lt;= 0)</div>
