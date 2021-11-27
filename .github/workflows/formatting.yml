@@ -1,0 +1,50 @@
+name: Formatting
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/pr-fetch@master
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download stanc3
+        run: |
+          cd ..
+          wget https://github.com/stan-dev/stanc3/releases/download/nightly/linux-stanc
+          chmod +x linux-stanc
+          cd helpful_stan_functions
+      
+      - name: Auto-format
+        run: |
+          for F in `find . -type f -name "*.stanfunctions"`
+          do
+            if [ $(grep "derivative_fun\|#include" $F | wc -l) -eq "0" ]; then
+              ../linux-stanc --auto-format $F --o $F --include-paths=./functions
+            fi
+          done
+
+      - name: Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add \*.stanfunctions
+          git commit -m 'Formatting' || echo "No changes to commit"
+
+      - name: Push to main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git push
+
+      - uses: r-lib/actions/pr-push@master
+        if: github.ref != 'refs/heads/main'  
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
