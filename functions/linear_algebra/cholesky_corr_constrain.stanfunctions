@@ -38,7 +38,7 @@ vector corr_constrain_lp(vector x) {
  * @return Cholesky factor of correlation matrix
  */
 matrix cholesky_corr_constrain_lp(vector y, int K) {
-  int k_choose_2 = (K * (K - 1)) / 2;
+  int k_choose_2 = (K * (K - 1)) %/% 2;
   vector[k_choose_2] z = corr_constrain_lp(y);
   matrix[K, K] x = rep_matrix(0, K, K);
   int iter = 0;
