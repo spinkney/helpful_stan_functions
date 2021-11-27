@@ -134,7 +134,7 @@ real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles) {
   *  @throws reject if \f$ \alpha \notin [0, 1] \f$
   *  @throws reject if quantiles \f$ \ne 3\f$ 
   */
-real JQPDS2_qf(real p, real lower_bound, data real alpha, vector quantiles) {
+real JQPDS2_qf(real p, real lower_bound, real alpha, vector quantiles) {
   if (p < 0 || p > 1) 
     reject("p must be between 0 and 1");
   if (alpha < 0 || alpha > 1) 
