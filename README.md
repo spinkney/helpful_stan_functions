@@ -48,5 +48,7 @@ Tests are simpler than examples and do not contain data. The program is run with
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/p4gefau1t/trojan-go.svg)](https://starchart.cc/p4gefau1t/trojan-go)
+[![Stargazers over time](https://starchart.cc/spinkney/helpful_stan_functions.svg)](https://starchart.cc/spinkney/helpful_stan_functions)
+
+
 
