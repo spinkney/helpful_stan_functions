@@ -48,7 +48,5 @@ Tests are simpler than examples and do not contain data. The program is run with
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/spinkney/helpful_stan_functions.svg)](https://starchart.cc/spinkney/helpful_stan_functions)
-
-
+![starchart](https://user-images.githubusercontent.com/23704057/143875816-eb68e682-2a03-4d69-af1a-0a16a31f62e1.png)
 
