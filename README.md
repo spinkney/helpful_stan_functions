@@ -48,4 +48,4 @@ Tests are simpler than examples and do not contain data. The program is run with
 
 ## Stargazers over time
 
-![starchart](https://user-images.githubusercontent.com/23704057/143876874-0f6a1f2a-6466-4e4b-a1bd-99d69383a9c3.png)
+![starchart](https://user-images.githubusercontent.com/23704057/143876874-0f6a1f2a-6466-4e4b-a1bd-99d69383a9c3.png=100x20)
