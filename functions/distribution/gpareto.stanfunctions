@@ -35,7 +35,8 @@ real gpareto_lpdf(vector y, real ymin, real k, real sigma) {
   real inv_k = inv(k);
   
   if (k < 0 && max(y - ymin) / sigma > -inv_k) 
-    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
+    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k,
+           sigma);
   
   if (sigma <= 0) 
     reject("sigma <= 0; found sigma = ", sigma);
@@ -62,7 +63,8 @@ real gpareto_cdf(vector y, real ymin, real k, real sigma) {
   real inv_k = inv(k);
   
   if (k < 0 && max(y - ymin) / sigma > -inv_k) 
-    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
+    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k,
+           sigma);
   
   if (sigma <= 0) 
     reject("sigma <= 0; found sigma = ", sigma);
@@ -114,7 +116,8 @@ real gpareto_lccdf(vector y, real ymin, real k, real sigma) {
   real inv_k = inv(k);
   
   if (k < 0 && max(y - ymin) / sigma > -inv_k) 
-    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k, sigma);
+    reject("k < 0 and max(y - ymin) / sigma > -1 / k; found k, sigma = ", k,
+           sigma);
   
   if (sigma <= 0) 
     reject("sigma <= 0; found sigma = ", sigma);

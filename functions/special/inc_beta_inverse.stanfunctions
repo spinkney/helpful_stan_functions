@@ -55,7 +55,8 @@ real inc_beta_inverse(real x, real p, real q) {
   fpu = pow(10.0, sae);
   
   if (is_nan(x) || is_inf(x) || x < 0 || x > 1) 
-    reject("inc_beta_inverse: x must be finite and between 0 and 1; ", "found x = ", x);
+    reject("inc_beta_inverse: x must be finite and between 0 and 1; ",
+           "found x = ", x);
   
   if (p <= 0.0) 
     reject("inc_beta_inverse: p must be > 0; ", "found p = ", p);
