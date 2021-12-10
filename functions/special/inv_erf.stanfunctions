@@ -67,7 +67,8 @@ real inv_erf(real x) {
  */
 real inv_erf_nsqrt(real x) {
   if (is_nan(x) || is_inf(x) || x < 0 || x > 1) 
-    reject("inv_erf_nsqrt: x must be finite and between 0 and 1; ", "found x = ", x);
+    reject("inv_erf_nsqrt: x must be finite and between 0 and 1; ",
+           "found x = ", x);
   
   real p;
   real t;

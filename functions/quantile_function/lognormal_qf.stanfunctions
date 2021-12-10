@@ -28,7 +28,8 @@ real lognormal_qf(real p, real mu, real sigma) {
   if (is_nan(mu) || is_inf(mu)) 
     reject("lognormal_icdf: mu must be finite; ", "found mu = ", mu);
   if (is_nan(sigma) || is_inf(sigma) || sigma <= 0) 
-    reject("lognormal_icdf: sigma must be finite and > 0; ", "found sigma = ", sigma);
+    reject("lognormal_icdf: sigma must be finite and > 0; ",
+           "found sigma = ", sigma);
   
   return exp(mu + sigma * inv_Phi(p));
 }
