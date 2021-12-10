@@ -166,7 +166,8 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(mu) || is_inf(mu)) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;lognormal_icdf: mu must be finite; &quot;</span>, <span class="stringliteral">&quot;found mu = &quot;</span>, mu);</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(sigma) || is_inf(sigma) || sigma &lt;= 0) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;lognormal_icdf: sigma must be finite and &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found sigma = &quot;</span>, sigma);</div>
+<div class="line">    reject(<span class="stringliteral">&quot;lognormal_icdf: sigma must be finite and &gt; 0; &quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> exp(mu + sigma * inv_Phi(p));</div>
 <div class="line">}</div>
@@ -339,7 +340,8 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(mu) || is_inf(mu)) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;unit_johnson_icdf: mu must be finite; &quot;</span>, <span class="stringliteral">&quot;found mu = &quot;</span>, mu);</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(sigma) || is_inf(sigma) || sigma &lt;= 0) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;unit_johnsonl_icdf: sigma must be finite and &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found sigma = &quot;</span>, sigma);</div>
+<div class="line">    reject(<span class="stringliteral">&quot;unit_johnsonl_icdf: sigma must be finite and &gt; 0; &quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;found sigma = &quot;</span>, sigma);</div>
 <div class="line">  real x = sinh((inv_Phi(p) - mu) / sigma);</div>
 <div class="line">  <span class="keywordflow">return</span> inv_logit(x);</div>
 <div class="line">}</div>

@@ -144,7 +144,8 @@ Functions</h2></td></tr>
 <div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__inverse__error.html#ga33132970dd1c67785771c3af2dcad1ee">inv_erf_nsqrt</a>(real x) {</div>
 <div class="line">  <span class="keywordflow">if</span> (is_nan(x) || is_inf(x) || x &lt; 0 || x &gt; 1) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
+<div class="line">    reject(<span class="stringliteral">&quot;inv_erf_nsqrt: x must be finite and between 0 and 1; &quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;found x = &quot;</span>, x);</div>
 <div class="line">  </div>
 <div class="line">  real p;</div>
 <div class="line">  real t;</div>
