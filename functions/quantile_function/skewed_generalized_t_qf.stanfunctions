@@ -17,7 +17,7 @@
    * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
    * @return log probability
    */
- real skewed_generalized_t_qf (real quant, real mu, real sigma, real lambda, real r, real q) {
+ real skewed_generalized_t_qf (real quant, real mu, real sigma, real lambda, real p, real q) {
     real z1 = beta(1.0 / p, q);
     real z2 = beta(2.0 / p, q - 1.0 / p);
     real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );
