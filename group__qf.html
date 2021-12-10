@@ -241,44 +241,56 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Skewed Generalized T Quantile Function</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include special/inc_beta_inverse.stanfunctions</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="inc__beta__inverse_8stanfunctions.html">special/inc_beta_inverse.stanfunctions</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line"> real <a class="code hl_function" href="group__qf.html#ga82a3bccf3f464eb76782e6b27f24dbe3">skewed_generalized_t_qf</a> (real quant, real mu, real sigma, real lambda, real p, real q) {</div>
-<div class="line">    real z1 = beta(1.0 / p, q);</div>
-<div class="line">    real z2 = beta(2.0 / p, q - 1.0 / p);</div>
-<div class="line">    real v = sigma * q^(-1.0/p) * inv_sqrt( ( 3 * square(lambda) + 1 ) * beta(3.0/p, q - 2.0/p) / z1 - 4 * square(lambda * z2 / z1) );</div>
-<div class="line">    real prob;</div>
-<div class="line">    real lam;</div>
-<div class="line">    real out;</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (sigma &lt;= 0)</div>
-<div class="line">      reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (lambda &gt;= 1 || lambda &lt;= -1)</div>
-<div class="line">      reject(<span class="stringliteral">&quot;lambda must be between (-1, 1) found lambda = &quot;</span>, sigma);</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (p &lt;= 0)</div>
-<div class="line">      reject(<span class="stringliteral">&quot;p must be &gt; 0 found p = &quot;</span>, p);</div>
-<div class="line">      </div>
-<div class="line">    <span class="keywordflow">if</span> (q &lt;= 0)</div>
-<div class="line">      reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (quant &gt; 0.5 * (1 - lambda)) {</div>
-<div class="line">      prob = 1 - quant;</div>
-<div class="line">      lam = -lambda;</div>
-<div class="line">      out = -( v * (lam - 1) * (1 / ( q * <a class="code hl_function" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p) );</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">      prob = quant;</div>
-<div class="line">      lam = lambda;</div>
-<div class="line">     out = v * (lam - 1) * (1 / ( q * <a class="code hl_function" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(1 - 2 * prob/(1 - lam), 1/p, q ) ) - 1 / q )^(-1 / p);</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    out += mu - (2 * sigma * lambda * q^(1/p) * beta(2/p, q - 1/p) ) / beta(1/p, q);</div>
-<div class="line">    </div>
+<div class="line">real <a class="code hl_function" href="group__qf.html#ga82a3bccf3f464eb76782e6b27f24dbe3">skewed_generalized_t_qf</a>(real quant, real mu, real sigma, real lambda,</div>
+<div class="line">                             real p, real q) {</div>
+<div class="line">  real z1 = beta(1.0 / p, q);</div>
+<div class="line">  real z2 = beta(2.0 / p, q - 1.0 / p);</div>
+<div class="line">  real v = sigma * q ^ (-1.0 / p)</div>
+<div class="line">           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)</div>
+<div class="line">                      / z1 - 4 * square(lambda * z2 / z1));</div>
+<div class="line">  real prob;</div>
+<div class="line">  real lam;</div>
+<div class="line">  real out;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (lambda &gt;= 1 || lambda &lt;= -1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;lambda must be between (-1, 1) found lambda = &quot;</span>, sigma);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (p &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;p must be &gt; 0 found p = &quot;</span>, p);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (quant &gt; 0.5 * (1 - lambda)) {</div>
+<div class="line">    prob = 1 - quant;</div>
+<div class="line">    lam = -lambda;</div>
+<div class="line">    out = -(v * (lam - 1)</div>
+<div class="line">            * (1 / (q * <a class="code hl_function" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(1 - 2 * prob / (1 - lam), 1 / p, q))</div>
+<div class="line">               - 1 / q)</div>
+<div class="line">              ^ (-1 / p));</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    prob = quant;</div>
+<div class="line">    lam = lambda;</div>
+<div class="line">    out = v * (lam - 1)</div>
+<div class="line">          * (1 / (q * <a class="code hl_function" href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a>(1 - 2 * prob / (1 - lam), 1 / p, q))</div>
+<div class="line">             - 1 / q)</div>
+<div class="line">            ^ (-1 / p);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  out += mu</div>
+<div class="line">         - (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p))</div>
+<div class="line">           / beta(1 / p, q);</div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> out;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__qf_html_ga82a3bccf3f464eb76782e6b27f24dbe3"><div class="ttname"><a href="group__qf.html#ga82a3bccf3f464eb76782e6b27f24dbe3">skewed_generalized_t_qf</a></div><div class="ttdeci">real skewed_generalized_t_qf(real quant, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skewed_generalized_t_qf.stanfunctions:20</div></div>
 <div class="ttc" id="agroup__special_html_ga060fcd6515b67c752a9da49d0cc7f9e6"><div class="ttname"><a href="group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6">inc_beta_inverse</a></div><div class="ttdeci">real inc_beta_inverse(real x, real p, real q)</div><div class="ttdef"><b>Definition:</b> inc_beta_inverse.stanfunctions:29</div></div>
+<div class="ttc" id="ainc__beta__inverse_8stanfunctions_html"><div class="ttname"><a href="inc__beta__inverse_8stanfunctions.html">inc_beta_inverse.stanfunctions</a></div></div>
 </div><!-- fragment --><p >For more information, please see <a class="el" href="group__skew__generalized__t.html">Skew Generalized T distribution functions</a>.</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
