@@ -73,7 +73,7 @@ var NAVTREEINDEX0 =
 "group__odeint.html":[1,7],
 "group__qf.html":[1,8],
 "group__qf.html#ga8684adaa0838edbfa4188a918961b58c":[1,8,1],
-"group__qf.html#gabba9d4d3227b92d49fae91c3ca6c6daf":[1,8,2],
+"group__qf.html#gace14f485984c8e7c50b0d11a6c461c94":[1,8,2],
 "group__qf.html#gaecfde107e2a63c982b168c6dac4b1782":[1,8,3],
 "group__skew__generalized__t.html":[1,3,1],
 "group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562":[1,3,1,0],
