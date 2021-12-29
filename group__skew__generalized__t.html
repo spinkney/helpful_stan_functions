@@ -114,20 +114,8 @@ Functions</h2></td></tr>
 <p >McDonald, J. B. and W. K. Newey, 1988, Partially Adaptive Estimation of Regression Models via the Generalized t Distribution, Econometric Theory 4, 428-457.</p>
 <p >Theodossiou, Panayioti sigma 1998, Financial Data and the Skewed Generalized T Distribution, Management Science 44, 1650-166</p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(vector x, real mu, real sigma, real lambda,</div>
+<div class="line">  real <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(vector x, real mu, real sigma, real lambda,</div>
 <div class="line">                             real p, real q) {</div>
-<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
-<div class="line">  real z1 = beta(1.0 / p, q);</div>
-<div class="line">  real z2 = beta(2.0 / p, q - 1.0 / p);</div>
-<div class="line">  real v = q ^ (-1.0 / p)</div>
-<div class="line">           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)</div>
-<div class="line">                      / z1 - 4 * square(lambda * z2 / z1));</div>
-<div class="line">  real m = 2 * v * sigma * lambda * q ^ (1.0 / p) * z2 / z1;</div>
-<div class="line">  real out1 = N</div>
-<div class="line">              * (log(p) - log(v) - log(sigma) - lmultiply(1 / p, q)</div>
-<div class="line">                 - lbeta(1.0 / p, q));</div>
-<div class="line">  real out2 = 0;</div>
-<div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
@@ -139,15 +127,29 @@ Functions</h2></td></tr>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
+<div class="line">   </div>
+<div class="line">   <span class="keywordtype">int</span> N = num_elements(x);</div>
+<div class="line">   real r;</div>
+<div class="line">   <span class="keywordtype">int</span> sign;</div>
+<div class="line">   real out = 0;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (n in 1 : N) {</div>
-<div class="line">    real r = x[n] - mu + m;</div>
-<div class="line">    <span class="keywordflow">if</span> (r &lt; 0) </div>
-<div class="line">      out2 -= log1p((-r) ^ p / (q * (v * sigma * (1 - lambda)) ^ p));</div>
-<div class="line">    <span class="keywordflow">else</span> </div>
-<div class="line">      out2 -= log1p(r ^ p / (q * (v * sigma * (1 + lambda)) ^ p));</div>
-<div class="line">  }</div>
-<div class="line">  <span class="keywordflow">return</span> fma(out2, (1 / p + q), out1);</div>
+<div class="line">  <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; is_inf(p)) </div>
+<div class="line">    <span class="keywordflow">return</span> uniform_lpdf(x | mu - sigma, mu + sigma);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span> (n in 1:N) {</div>
+<div class="line">      r = x[n] - mu;</div>
+<div class="line">      sign = r &lt; 0 ? -1 : 1;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> ( is_inf(q) &amp;&amp; !is_inf(p) ) {</div>
+<div class="line">        out += ( sign * r / ( sigma * ( 1 + lambda * sign ) ) )^p;</div>
+<div class="line">      } <span class="keywordflow">else</span> out += log1p( (sign * r)^p / (q * sigma ^ p * ( 1 + lambda * sign^p) ) );</div>
+<div class="line">    }</div>
+<div class="line">  </div>
+<div class="line">    <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; !is_inf(p))</div>
+<div class="line">      <span class="keywordflow">return</span> log(p) - log(2) - log(sigma) - lgamma(1/p) - out;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> log(p) - log2() - log(sigma) - log(q) / p - </div>
+<div class="line">          lbeta(1 / p, q) - (1 / p + q) * out;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a>(real x, real mu, real sigma, real lambda,</div>
@@ -193,7 +195,7 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:67</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_gad2bea362601fb9aef75f73199a3b73df"><div class="ttname"><a href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a></div><div class="ttdeci">real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:115</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_gad2bea362601fb9aef75f73199a3b73df"><div class="ttname"><a href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a></div><div class="ttdeci">real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:117</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga7a1f5a71101932c511f15e1379df4562" name="ga7a1f5a71101932c511f15e1379df4562"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7a1f5a71101932c511f15e1379df4562">&#9670;&nbsp;</a></span>skew_generalized_t_lpdf()</h2>
