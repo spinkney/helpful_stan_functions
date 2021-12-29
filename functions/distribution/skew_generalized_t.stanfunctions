@@ -64,20 +64,8 @@
  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
  * @return log probability
  */
-real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda,
+  real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda,
                              real p, real q) {
-  int N = num_elements(x);
-  real z1 = beta(1.0 / p, q);
-  real z2 = beta(2.0 / p, q - 1.0 / p);
-  real v = q ^ (-1.0 / p)
-           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)
-                      / z1 - 4 * square(lambda * z2 / z1));
-  real m = 2 * v * sigma * lambda * q ^ (1.0 / p) * z2 / z1;
-  real out1 = N
-              * (log(p) - log(v) - log(sigma) - lmultiply(1 / p, q)
-                 - lbeta(1.0 / p, q));
-  real out2 = 0;
-  
   if (sigma <= 0) 
     reject("sigma must be > 0 found sigma = ", sigma);
   
@@ -89,15 +77,29 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda,
   
   if (q <= 0) 
     reject("q must be > 0 found q = ", q);
+   
+   int N = num_elements(x);
+   real r;
+   int sign;
+   real out = 0;
   
-  for (n in 1 : N) {
-    real r = x[n] - mu + m;
-    if (r < 0) 
-      out2 -= log1p((-r) ^ p / (q * (v * sigma * (1 - lambda)) ^ p));
-    else 
-      out2 -= log1p(r ^ p / (q * (v * sigma * (1 + lambda)) ^ p));
-  }
-  return fma(out2, (1 / p + q), out1);
+  if (is_inf(q) && is_inf(p)) 
+    return uniform_lpdf(x | mu - sigma, mu + sigma);
+
+  for (n in 1:N) {
+      r = x[n] - mu;
+      sign = r < 0 ? -1 : 1;
+    
+    if ( is_inf(q) && !is_inf(p) ) {
+        out += ( sign * r / ( sigma * ( 1 + lambda * sign ) ) )^p;
+      } else out += log1p( (sign * r)^p / (q * sigma ^ p * ( 1 + lambda * sign^p) ) );
+    }
+  
+    if (is_inf(q) && !is_inf(p))
+      return log(p) - log(2) - log(sigma) - lgamma(1/p) - out;
+  
+  return log(p) - log2() - log(sigma) - log(q) / p - 
+          lbeta(1 / p, q) - (1 / p + q) * out;
 }
 
 /** Skew Generalized T log cumulative density function
