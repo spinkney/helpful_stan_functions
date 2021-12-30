@@ -15,19 +15,10 @@
  * @param lambda Real \f$-1 < \lambda < 1\f$ 
  * @param r Real \f$\in (0, \infty)\f$ kurtosis parameter
  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
- * @return log probability
+ * @return quantile of skew_generalized_t
  */
-real skewed_generalized_t_qf(real quant, real mu, real sigma, real lambda,
-                             real p, real q) {
-  real z1 = beta(1.0 / p, q);
-  real z2 = beta(2.0 / p, q - 1.0 / p);
-  real v = sigma * q ^ (-1.0 / p)
-           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)
-                      / z1 - 4 * square(lambda * z2 / z1));
-  real prob;
-  real lam;
-  real out;
-  
+real skew_generalized_t_qf(real x, real mu, real sigma, real lambda,
+                             real p, real q, int mean_centered) {
   if (sigma <= 0) 
     reject("sigma must be > 0 found sigma = ", sigma);
   
@@ -40,25 +31,37 @@ real skewed_generalized_t_qf(real quant, real mu, real sigma, real lambda,
   if (q <= 0) 
     reject("q must be > 0 found q = ", q);
   
-  if (quant > 0.5 * (1 - lambda)) {
-    prob = 1 - quant;
+  real prob;
+  real lam;
+  real out;
+  
+  // needs the gamma_qf
+  if( !is_inf(p) && is_inf(q) )
+    reject("not yet implemented for infinite q") ;
+  
+  if( is_inf(p) )
+    reject("not yet implemented for infinite p") ;
+    
+  
+  if (x > 0.5 * (1 - lambda)) {
+    prob = 1 - x;
     lam = -lambda;
-    out = -(v * (lam - 1)
+    out = -(sigma * (lam - 1)
             * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q))
                - 1 / q)
               ^ (-1 / p));
   } else {
-    prob = quant;
+    prob = x;
     lam = lambda;
-    out = v * (lam - 1)
+    out = sigma * (lam - 1)
           * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q))
              - 1 / q)
             ^ (-1 / p);
   }
   
-  out += mu
-         - (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p))
+  if ( !is_nan(mean_centered) )
+    out -= (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p))
            / beta(1 / p, q);
   
-  return out;
+  return out + mu;
 }
