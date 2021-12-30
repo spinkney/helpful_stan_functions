@@ -114,18 +114,8 @@
   * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
   * @return log probability
   */
-real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda,
+real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda,
                                real p, real q) {
-  real z1 = beta(1.0 / p, q);
-  real z2 = beta(2.0 / p, q - 1.0 / p);
-  real v = q ^ (-1.0 / p)
-           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)
-                      / z1 - 4 * square(lambda * z2 / z1));
-  real m = 2 * v * sigma * lambda * q ^ (1.0 / p) * z2 / z1;
-  real r = x - mu + m;
-  real lambda_new;
-  real r_new;
-  
   if (sigma <= 0) 
     reject("sigma must be > 0 found sigma = ", sigma);
   
@@ -137,6 +127,10 @@ real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda,
   
   if (q <= 0) 
     reject("q must be > 0 found q = ", q);
+    
+  real r = x - mu;
+  real lambda_new;
+  real r_new;
   
   if (r > 0) {
     lambda_new = -lambda;
@@ -146,14 +140,70 @@ real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda,
     r_new = r;
   }
   
-  return log(0.5)
-         + log((1 - lambda_new)
-               + (lambda_new - 1)
+  if( !is_inf(p) && is_inf(q) && !is_inf(x) )
+    return log( (1-lambda_new)/2+(1+lambda_new)/2* gamma_cdf((r_new/(sigma*(1+lambda_new)))^p, p, 1) );
+  
+  if( is_inf(p) && !is_inf(x) )
+    return uniform_lcdf(x | mu, sigma);
+    
+  if(is_inf(x) && x < 0) 
+    return 0;
+  
+  if(is_inf(x) && x > 0) 
+    return 1;
+  
+  return log( (1-lambda_new) / 2 
+         + (lambda_new - 1) / 2
                  * beta_cdf(1
                             / (1
                                + q
                                  * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1
-                                                                    / p, q));
+                                                                    / p, q) );
 }
+
+/** Skew Generalized T Rescale Sigma to be Variance 
+  *
+  * @copyright Sean Pinkney, 2021 
+  * @author Sean Pinkney
+  * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+  * @param lambda Real \f$-1 < \lambda < 1\f$ 
+  * @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
+  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+  * @throws reject if \f$ pq \leq 2 \f$ 
+  * @return rescaled sigma
+  */
+  real variance_adjusted_sgt(real sigma, real lambda, real p, real q) {
+    if (p * q <= 2)
+      reject("p * q must be > 2 found p * q = ", p * q);
+    
+    if (is_inf(q))
+      return sigma * inv_sqrt((pi()*(1+3*lambda^2)* tgamma(3/p)-16^(1/p)*lambda^2*(tgamma(1/2+1/p))^2*tgamma(1/p))/(pi()*tgamma(1/p)));
+      
+    return sigma / (q^(1/p)*sqrt((3*lambda^2+1)*(beta(3/p, q-2/p)/beta(1/p,q))-4*lambda^2*(beta(2/p, q-1/p)/beta(1/p, q))^2));
+  }
+  
+  /** Skew Generalized T Center Mean
+  *
+  * Centers the mean around mu, otherwise mu is the mode.
+  *
+  * @copyright Sean Pinkney, 2021 
+  * @author Sean Pinkney
+  * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+  * @param lambda Real \f$-1 < \lambda < 1\f$ 
+  * @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
+  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+  * @throws reject if \f$ pq \leq 1 \f$ 
+  * @return rescaled sigma
+  */
+  vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
+    if (p * q <= 1)
+      reject("p * q must be > 1 found p * q = ", p * q);
+    
+    if (is_inf(q))
+      return x + (2^(2/p)*sigma*lambda*tgamma(1/2+1/p))/sqrt(pi());
+    
+    return x + (2*sigma*lambda*q^(1/p)*beta(2/p,q-1/p))/beta(1/p,q);
+  }
+  
 
 /** @} */
