@@ -204,7 +204,7 @@ real variance_adjusted_sgt(real sigma, real lambda, real p, real q) {
 * @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
 * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
 * @throws reject if \f$ pq \leq 1 \f$ 
-* @return rescaled sigma
+* @return rescaled x
 */
 vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
   if (p * q <= 1) 
