@@ -103,8 +103,12 @@ $(document).ready(function(){initNavTree('group__skew__generalized__t.html','');
 Functions</h2></td></tr>
 <tr class="memitem:ga7a1f5a71101932c511f15e1379df4562"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a> (vector x, real mu, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:ga7a1f5a71101932c511f15e1379df4562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad2bea362601fb9aef75f73199a3b73df"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a> (real x, real mu, real sigma, real lambda, real p, real q)</td></tr>
-<tr class="separator:gad2bea362601fb9aef75f73199a3b73df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6ea5a0033c7d222a2b010214e5708a8a"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a> (real x, real mu, real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:ga6ea5a0033c7d222a2b010214e5708a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f1016b68af93771d1525cf654c24df0"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a> (real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:ga2f1016b68af93771d1525cf654c24df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8f03167e434b644f63f456087af5f150"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a> (vector x, real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:ga8f03167e434b644f63f456087af5f150"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >From the sgt R package Carter Davis (2015). sgt: Skewed Generalized T Distribution Tree. R package version 2.0. <a href="https://CRAN.R-project.org/package=sgt">https://CRAN.R-project.org/package=sgt</a></p>
@@ -114,7 +118,7 @@ Functions</h2></td></tr>
 <p >McDonald, J. B. and W. K. Newey, 1988, Partially Adaptive Estimation of Regression Models via the Generalized t Distribution, Econometric Theory 4, 428-457.</p>
 <p >Theodossiou, Panayioti sigma 1998, Financial Data and the Skewed Generalized T Distribution, Management Science 44, 1650-166</p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">  real <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(vector x, real mu, real sigma, real lambda,</div>
+<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(vector x, real mu, real sigma, real lambda,</div>
 <div class="line">                             real p, real q) {</div>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
@@ -127,43 +131,34 @@ Functions</h2></td></tr>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
-<div class="line">   </div>
-<div class="line">   <span class="keywordtype">int</span> N = num_elements(x);</div>
-<div class="line">   real r;</div>
-<div class="line">   <span class="keywordtype">int</span> sign;</div>
-<div class="line">   real out = 0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
+<div class="line">  real r;</div>
+<div class="line">  <span class="keywordtype">int</span> sign;</div>
+<div class="line">  real out = 0;</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; is_inf(p)) </div>
 <div class="line">    <span class="keywordflow">return</span> uniform_lpdf(x | mu - sigma, mu + sigma);</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span> (n in 1:N) {</div>
-<div class="line">      r = x[n] - mu;</div>
-<div class="line">      sign = r &lt; 0 ? -1 : 1;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (n in 1 : N) {</div>
+<div class="line">    r = x[n] - mu;</div>
+<div class="line">    sign = r &lt; 0 ? -1 : 1;</div>
 <div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> ( is_inf(q) &amp;&amp; !is_inf(p) ) {</div>
-<div class="line">        out += ( sign * r / ( sigma * ( 1 + lambda * sign ) ) )^p;</div>
-<div class="line">      } <span class="keywordflow">else</span> out += log1p( (sign * r)^p / (q * sigma ^ p * ( 1 + lambda * sign^p) ) );</div>
-<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; !is_inf(p)) {</div>
+<div class="line">      out += (sign * r / (sigma * (1 + lambda * sign))) ^ p;</div>
+<div class="line">    } <span class="keywordflow">else</span> </div>
+<div class="line">      out += log1p((sign * r) ^ p / (q * sigma ^ p * (1 + lambda * sign ^ p)));</div>
+<div class="line">  }</div>
 <div class="line">  </div>
-<div class="line">    <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; !is_inf(p))</div>
-<div class="line">      <span class="keywordflow">return</span> log(p) - log(2) - log(sigma) - lgamma(1/p) - out;</div>
+<div class="line">  <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; !is_inf(p)) </div>
+<div class="line">    <span class="keywordflow">return</span> log(p) - log(2) - log(sigma) - lgamma(1 / p) - out;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> log(p) - log2() - log(sigma) - log(q) / p - </div>
-<div class="line">          lbeta(1 / p, q) - (1 / p + q) * out;</div>
+<div class="line">  <span class="keywordflow">return</span> log(p) - log2() - log(sigma) - log(q) / p - lbeta(1 / p, q)</div>
+<div class="line">         - (1 / p + q) * out;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a>(real x, real mu, real sigma, real lambda,</div>
+<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a>(real x, real mu, real sigma, real lambda,</div>
 <div class="line">                               real p, real q) {</div>
-<div class="line">  real z1 = beta(1.0 / p, q);</div>
-<div class="line">  real z2 = beta(2.0 / p, q - 1.0 / p);</div>
-<div class="line">  real v = q ^ (-1.0 / p)</div>
-<div class="line">           * inv_sqrt((3 * square(lambda) + 1) * beta(3.0 / p, q - 2.0 / p)</div>
-<div class="line">                      / z1 - 4 * square(lambda * z2 / z1));</div>
-<div class="line">  real m = 2 * v * sigma * lambda * q ^ (1.0 / p) * z2 / z1;</div>
-<div class="line">  real r = x - mu + m;</div>
-<div class="line">  real lambda_new;</div>
-<div class="line">  real r_new;</div>
-<div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
@@ -175,6 +170,10 @@ Functions</h2></td></tr>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
+<div class="line">    </div>
+<div class="line">  real r = x - mu;</div>
+<div class="line">  real lambda_new;</div>
+<div class="line">  real r_new;</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (r &gt; 0) {</div>
 <div class="line">    lambda_new = -lambda;</div>
@@ -184,19 +183,188 @@ Functions</h2></td></tr>
 <div class="line">    r_new = r;</div>
 <div class="line">  }</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> log(0.5)</div>
-<div class="line">         + log((1 - lambda_new)</div>
-<div class="line">               + (lambda_new - 1)</div>
+<div class="line">  <span class="keywordflow">if</span>( !is_inf(p) &amp;&amp; is_inf(q) &amp;&amp; !is_inf(x) )</div>
+<div class="line">    <span class="keywordflow">return</span> log( (1-lambda_new)/2+(1+lambda_new)/2* gamma_cdf((r_new/(sigma*(1+lambda_new)))^p, p, 1) );</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span>( is_inf(p) &amp;&amp; !is_inf(x) )</div>
+<div class="line">    <span class="keywordflow">return</span> uniform_lcdf(x | mu, sigma);</div>
+<div class="line">    </div>
+<div class="line">  <span class="keywordflow">if</span>(is_inf(x) &amp;&amp; x &lt; 0) </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span>(is_inf(x) &amp;&amp; x &gt; 0) </div>
+<div class="line">    <span class="keywordflow">return</span> 1;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> log( (1-lambda_new) / 2 </div>
+<div class="line">         + (lambda_new - 1) / 2</div>
 <div class="line">                 * beta_cdf(1</div>
 <div class="line">                            / (1</div>
 <div class="line">                               + q</div>
 <div class="line">                                 * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1</div>
-<div class="line">                                                                    / p, q));</div>
+<div class="line">                                                                    / p, q) );</div>
 <div class="line">}</div>
 <div class="line"> </div>
+<div class="line">  real <a class="code hl_function" href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a>(real sigma, real lambda, real p, real q) {</div>
+<div class="line">    <span class="keywordflow">if</span> (p * q &lt;= 2)</div>
+<div class="line">      reject(<span class="stringliteral">&quot;p * q must be &gt; 2 found p * q = &quot;</span>, p * q);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (is_inf(q))</div>
+<div class="line">      <span class="keywordflow">return</span> sigma * inv_sqrt((pi()*(1+3*lambda^2)* tgamma(3/p)-16^(1/p)*lambda^2*(tgamma(1/2+1/p))^2*tgamma(1/p))/(pi()*tgamma(1/p)));</div>
+<div class="line">      </div>
+<div class="line">    <span class="keywordflow">return</span> sigma / (q^(1/p)*sqrt((3*lambda^2+1)*(beta(3/p, q-2/p)/beta(1/p,q))-4*lambda^2*(beta(2/p, q-1/p)/beta(1/p, q))^2));</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  vector <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(vector x, real sigma, real lambda, real p, real q) {</div>
+<div class="line">    <span class="keywordflow">if</span> (p * q &lt;= 1)</div>
+<div class="line">      reject(<span class="stringliteral">&quot;p * q must be &gt; 1 found p * q = &quot;</span>, p * q);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (is_inf(q))</div>
+<div class="line">      <span class="keywordflow">return</span> x + (2^(2/p)*sigma*lambda*tgamma(1/2+1/p))/sqrt(pi());</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> x + (2*sigma*lambda*q^(1/p)*beta(2/p,q-1/p))/beta(1/p,q);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga2f1016b68af93771d1525cf654c24df0"><div class="ttname"><a href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a></div><div class="ttdeci">real variance_adjusted_sgt(real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:176</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:118</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:67</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_gad2bea362601fb9aef75f73199a3b73df"><div class="ttname"><a href="group__skew__generalized__t.html#gad2bea362601fb9aef75f73199a3b73df">skewed_generalized_t_lcdf</a></div><div class="ttdeci">real skewed_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:117</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga8f03167e434b644f63f456087af5f150"><div class="ttname"><a href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a></div><div class="ttdeci">vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:199</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<a id="ga8f03167e434b644f63f456087af5f150" name="ga8f03167e434b644f63f456087af5f150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8f03167e434b644f63f456087af5f150">&#9670;&nbsp;</a></span>mean_centered_sgt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector mean_centered_sgt </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Skew Generalized T Center Mean</p>
+<p >Centers the mean around mu, otherwise mu is the mode.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if \( pq \leq 1 \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>rescaled sigma </dd></dl>
+
+</div>
+</div>
+<a id="ga6ea5a0033c7d222a2b010214e5708a8a" name="ga6ea5a0033c7d222a2b010214e5708a8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6ea5a0033c7d222a2b010214e5708a8a">&#9670;&nbsp;</a></span>skew_generalized_t_lcdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real skew_generalized_t_lcdf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Skew Generalized T log cumulative density function</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Real </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
+
+</div>
+</div>
 <a id="ga7a1f5a71101932c511f15e1379df4562" name="ga7a1f5a71101932c511f15e1379df4562"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga7a1f5a71101932c511f15e1379df4562">&#9670;&nbsp;</a></span>skew_generalized_t_lpdf()</h2>
 
@@ -276,27 +444,15 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gad2bea362601fb9aef75f73199a3b73df" name="gad2bea362601fb9aef75f73199a3b73df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad2bea362601fb9aef75f73199a3b73df">&#9670;&nbsp;</a></span>skewed_generalized_t_lcdf()</h2>
+<a id="ga2f1016b68af93771d1525cf654c24df0" name="ga2f1016b68af93771d1525cf654c24df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2f1016b68af93771d1525cf654c24df0">&#9670;&nbsp;</a></span>variance_adjusted_sgt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">real skewed_generalized_t_lcdf </td>
+          <td class="memname">real variance_adjusted_sgt </td>
           <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">real&#160;</td>
           <td class="paramname"><em>sigma</em>, </td>
         </tr>
@@ -325,13 +481,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Skew Generalized T log cumulative density function</p>
+<p >Skew Generalized T Rescale Sigma to be Variance</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>Real </td></tr>
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
     <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
     <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
     <tr><td class="paramname">p</td><td>Real \(\in (0, \infty)\) kurtosis parameter </td></tr>
@@ -340,7 +494,13 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if \( pq \leq 2 \) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>rescaled sigma </dd></dl>
 
 </div>
 </div>
