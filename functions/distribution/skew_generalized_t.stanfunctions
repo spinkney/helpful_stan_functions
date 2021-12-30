@@ -70,7 +70,7 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda,
     reject("sigma must be > 0 found sigma = ", sigma);
   
   if (lambda >= 1 || lambda <= -1) 
-    reject("lambda must be between (-1, 1) found lambda = ", sigma);
+    reject("lambda must be between (-1, 1) found lambda = ", lambda);
   
   if (p <= 0) 
     reject("p must be > 0 found p = ", p);
