@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['skew_5fgeneralized_5ft_2estanfunctions_0',['skew_generalized_t.stanfunctions',['../skew__generalized__t_8stanfunctions.html',1,'']]],
-  ['skew_5fgeneralized_5ft_5fqf_2estanfunctions_1',['skew_generalized_t_qf.stanfunctions',['../skew__generalized__t__qf_8stanfunctions.html',1,'']]],
-  ['special_5fdefinition_2estan_2',['special_definition.stan',['../special__definition_8stan.html',1,'']]]
+  ['normal_20copula_20functions_0',['Normal Copula Functions',['../group__normal.html',1,'']]],
+  ['normal_5fcopula_2estanfunctions_1',['normal_copula.stanfunctions',['../normal__copula_8stanfunctions.html',1,'']]],
+  ['normal_5fcopula_5flpdf_2',['normal_copula_lpdf',['../group__normal.html#gaeceb683df43c85469ececa537d2e2266',1,'normal_copula.stanfunctions']]],
+  ['normal_5fcopula_5fvector_5flpdf_3',['normal_copula_vector_lpdf',['../group__normal.html#ga09447a56c60491b2e53ed77922e68ece',1,'normal_copula.stanfunctions']]],
+  ['normal_5fmarginal_4',['normal_marginal',['../group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14',1,'mixed_copula.stanfunctions']]]
 ];
