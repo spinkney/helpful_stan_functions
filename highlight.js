@@ -163,7 +163,7 @@ var hljs = (function () {
       openNode(node) {
         if (!emitsWrappingTags(node)) return;
 
-        let scope = node.kind;
+        let scope = 'stan';
         if (node.sublanguage) {
           scope = `language-${scope}`;
         } else {
@@ -2382,6 +2382,7 @@ var hljs = (function () {
        */
       function registerLanguage(languageName, languageDefinition) {
         let lang = null;
+        let languageName = 'stan';
         try {
           lang = languageDefinition(hljs);
         } catch (error$1) {
