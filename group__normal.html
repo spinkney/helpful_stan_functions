@@ -125,20 +125,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga0cfca0aba6b1049472eac7cafe169143"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >The normal copula is an elliptical copula over the unit cube \([0,\,1]^d \).</p>
-<div class="fragment"><div class="line">real <a class="code hl_function" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a>(vector u, vector v, real rho) {</div>
-<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
-<div class="line">  real rho_sq = square(rho);</div>
-<div class="line">  </div>
-<div class="line">  real a1 = 0.5 * rho;</div>
-<div class="line">  real a2 = rho_sq - 1;</div>
-<div class="line">  real a3 = 0.5 * log1m(rho_sq);</div>
-<div class="line">  real x = -2 * u<span class="stringliteral">&#39; * v + rho * (dot_self(u) + dot_self(v));</span></div>
-<div class="line"><span class="stringliteral">  </span></div>
-<div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
-<div class="line"><span class="stringliteral">}</span></div>
-<div class="ttc" id="agroup__normal_html_ga09447a56c60491b2e53ed77922e68ece"><div class="ttname"><a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a></div><div class="ttdeci">real normal_copula_vector_lpdf(vector u, vector v, real rho)</div><div class="ttdoc">[normal copula]</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:53</div></div>
-</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<p >The normal copula is an elliptical copula over the unit cube \([0,\,1]^d \). </p>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="ga0cfca0aba6b1049472eac7cafe169143" name="ga0cfca0aba6b1049472eac7cafe169143"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga0cfca0aba6b1049472eac7cafe169143">&#9670;&nbsp;</a></span>bivariate_normal_copula_cdf()</h2>
 
@@ -320,7 +308,19 @@ Accessed and modified Feb. 5, 2021</dd></dl>
 <p>[normal copula] </p>
 <p >Normal copula log density vectorized</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021</dd></dl>
-<p>Meyer, Christian. "The Bivariate Normal Copula." <br  />
+<div class="fragment"><div class="line">real <a class="code hl_function" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a>(vector u, vector v, real rho) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  real rho_sq = square(rho);</div>
+<div class="line">  </div>
+<div class="line">  real a1 = 0.5 * rho;</div>
+<div class="line">  real a2 = rho_sq - 1;</div>
+<div class="line">  real a3 = 0.5 * log1m(rho_sq);</div>
+<div class="line">  real x = -2 * u<span class="stringliteral">&#39; * v + rho * (dot_self(u) + dot_self(v));</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
+<div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
+<div class="line"><span class="stringliteral">}</span></div>
+<div class="ttc" id="agroup__normal_html_ga09447a56c60491b2e53ed77922e68ece"><div class="ttname"><a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a></div><div class="ttdeci">real normal_copula_vector_lpdf(vector u, vector v, real rho)</div><div class="ttdoc">[normal copula]</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:54</div></div>
+</div><!-- fragment --><p >Meyer, Christian. "The Bivariate Normal Copula." <br  />
 arXiv preprint arXiv:0912.2816 (2009). Eqn 3.3. <br  />
 accessed Feb. 6, 2021.</p>
 <dl class="params"><dt>Parameters</dt><dd>
