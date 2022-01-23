@@ -30,16 +30,7 @@ MathJax.Hub.Config({
 		<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
 		<script src="highlight.min.js"></script>
 		<link rel="stylesheet" href="github-dark-dimmed.min.css"> 
-		<script>
-			$(function() {
-				$(".fragment").each(function(i,node) {
-					var $node = $(node);
-					$node.html("<pre><code class='stan'>" + 
-							   $node.text()+"</code></pre>");
-					hljs.highlightBlock(node);
-				});
-			});
-			</script>
+		<script>hljs.highlightAll();</script>
 	</head>
 	<body>
 	<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
