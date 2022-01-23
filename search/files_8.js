@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['mainpage_2ecpp_0',['mainpage.cpp',['../mainpage_8cpp.html',1,'']]],
+  ['mainpage_2estan_0',['mainpage.stan',['../mainpage_8stan.html',1,'']]],
   ['mixed_5fcopula_2estanfunctions_1',['mixed_copula.stanfunctions',['../mixed__copula_8stanfunctions.html',1,'']]],
   ['multi_5fnormal_5fcholesky_5ftruncated_2estanfunctions_2',['multi_normal_cholesky_truncated.stanfunctions',['../multi__normal__cholesky__truncated_8stanfunctions.html',1,'']]],
   ['multi_5fwallenius_5fhypergeometric_2estanfunctions_3',['multi_wallenius_hypergeometric.stanfunctions',['../multi__wallenius__hypergeometric_8stanfunctions.html',1,'']]],

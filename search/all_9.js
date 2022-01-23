@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['mainpage_2ecpp_0',['mainpage.cpp',['../mainpage_8cpp.html',1,'']]],
-  ['mixed_5fcopula_2estanfunctions_1',['mixed_copula.stanfunctions',['../mixed__copula_8stanfunctions.html',1,'']]],
-  ['multi_5fnormal_5fcholesky_5ftruncated_2estanfunctions_2',['multi_normal_cholesky_truncated.stanfunctions',['../multi__normal__cholesky__truncated_8stanfunctions.html',1,'']]],
-  ['multi_5fwallenius_5fhypergeometric_2estanfunctions_3',['multi_wallenius_hypergeometric.stanfunctions',['../multi__wallenius__hypergeometric_8stanfunctions.html',1,'']]],
-  ['multivariate_5fdefinition_2estan_4',['multivariate_definition.stan',['../multivariate__definition_8stan.html',1,'']]]
+  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_0',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__qf.html',1,'']]],
+  ['johnson_5fqf_2estanfunctions_1',['johnson_qf.stanfunctions',['../johnson__qf_8stanfunctions.html',1,'']]],
+  ['jqpdb_5fqf_2',['JQPDB_qf',['../group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f',1,'johnson_qf.stanfunctions']]],
+  ['jqpds2_5fqf_3',['JQPDS2_qf',['../group__johnson__qf.html#gac1462c0f295bc99b6e18aeeed5135872',1,'johnson_qf.stanfunctions']]],
+  ['jqpds_5fqf_4',['JQPDS_qf',['../group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185',1,'johnson_qf.stanfunctions']]]
 ];

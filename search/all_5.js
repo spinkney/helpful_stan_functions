@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['how_20to_20add_20a_20new_20function_3f_0',['How to add a new function?',['../creating_new.html',1,'index']]],
-  ['how_20to_20use_20doxygen_20documentation_20for_20the_20project_3f_1',['How to use doxygen documentation for the project?',['../doxygen_doc.html',1,'index']]]
+  ['frank_20copula_20functions_0',['Frank Copula Functions',['../group__frank.html',1,'']]],
+  ['frank_5fcopula_2estanfunctions_1',['frank_copula.stanfunctions',['../frank__copula_8stanfunctions.html',1,'']]],
+  ['frank_5fcopula_5flpdf_2',['frank_copula_lpdf',['../group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf',1,'frank_copula.stanfunctions']]]
 ];
