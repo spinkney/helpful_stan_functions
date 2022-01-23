@@ -1,19 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-  <script src="highlight.min.js"></script>
-  <link rel="stylesheet" href="github-dark-dimmed.min.css">
-  <script>hljs.highlightAll();</script>
-  <script>
-  $(function() {
-	  $(".fragment").each(function(i,node) {
-		  var $node = $(node);
-		  $node.html("<pre><code class='stan'>" + 
-					 $node.text()+"</code></pre>");
-		  hljs.highlightBlock(node);
-	  });
-  });
-</script>
 		<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
@@ -41,6 +28,19 @@ MathJax.Hub.Config({
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+		<script src="highlight.min.js"></script>
+		<link rel="stylesheet" href="github-dark-dimmed.min.css">
+		<script>hljs.highlightAll();</script>
+		<script>
+		$(function() {
+			$(".fragment").each(function(i,node) {
+				var $node = $(node);
+				$node.html("<pre><code class='stan'>" + 
+						   $node.text()+"</code></pre>");
+				hljs.highlightBlock(node);
+			});
+		});
+	  </script>
 	</head>
 	<body>
 	<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
