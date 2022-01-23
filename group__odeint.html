@@ -28,9 +28,16 @@ MathJax.Hub.Config({
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
-		<link rel="stylesheet" href="github-dark-dimmed.min.css">
 		<script src="highlight.min.js"></script>
-		<script>hljs.highlightAll();</script>
+		<script>
+			$(function() {
+				hljs.configure({useBR: false});
+				$(".fragment").each(function(i,node) {
+					$(node).removeClass("fragment");
+					hljs.highlightBlock(node);
+				});
+			});
+			</script>
 	</head>
 	<body>
 	<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
