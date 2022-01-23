@@ -6,8 +6,7 @@
   $(function() {
 	  $(".fragment").each(function(i,node) {
 		  var $node = $(node);
-		  $node.html("<pre><code class='" +
-					 $node.attr("class")+"'>" + 
+		  $node.html("<pre><code class='stan'>" + 
 					 $node.text()+"</code></pre>");
 		  hljs.highlightBlock(node);
 	  });
