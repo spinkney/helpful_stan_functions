@@ -116,15 +116,29 @@ Functions</h2></td></tr>
 <tr class="memitem:gaeceb683df43c85469ececa537d2e2266"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#gaeceb683df43c85469ececa537d2e2266">normal_copula_lpdf</a> (real u, real v, real rho)</td></tr>
 <tr class="separator:gaeceb683df43c85469ececa537d2e2266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga09447a56c60491b2e53ed77922e68ece"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a> (vector u, vector v, real rho)</td></tr>
+<tr class="memdesc:ga09447a56c60491b2e53ed77922e68ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">[normal copula]  <a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">More...</a><br /></td></tr>
 <tr class="separator:ga09447a56c60491b2e53ed77922e68ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2aac932cd087e9111ca72c895ee6fbe0"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga2aac932cd087e9111ca72c895ee6fbe0">multi_normal_copula_lpdf</a> (matrix u, matrix L)</td></tr>
+<tr class="memdesc:ga2aac932cd087e9111ca72c895ee6fbe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">[normal copula]  <a href="group__normal.html#ga2aac932cd087e9111ca72c895ee6fbe0">More...</a><br /></td></tr>
 <tr class="separator:ga2aac932cd087e9111ca72c895ee6fbe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0cfca0aba6b1049472eac7cafe169143"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga0cfca0aba6b1049472eac7cafe169143">bivariate_normal_copula_cdf</a> (vector u, real rho)</td></tr>
 <tr class="separator:ga0cfca0aba6b1049472eac7cafe169143"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >The normal copula is an elliptical copula over the unit cube \([0,\,1]^d \).</p>
-<div class="fragment"></div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line">real <a class="code hl_function" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a>(vector u, vector v, real rho) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  real rho_sq = square(rho);</div>
+<div class="line">  </div>
+<div class="line">  real a1 = 0.5 * rho;</div>
+<div class="line">  real a2 = rho_sq - 1;</div>
+<div class="line">  real a3 = 0.5 * log1m(rho_sq);</div>
+<div class="line">  real x = -2 * u<span class="stringliteral">&#39; * v + rho * (dot_self(u) + dot_self(v));</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
+<div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
+<div class="line"><span class="stringliteral">}</span></div>
+<div class="ttc" id="agroup__normal_html_ga09447a56c60491b2e53ed77922e68ece"><div class="ttname"><a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a></div><div class="ttdeci">real normal_copula_vector_lpdf(vector u, vector v, real rho)</div><div class="ttdoc">[normal copula]</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:53</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga0cfca0aba6b1049472eac7cafe169143" name="ga0cfca0aba6b1049472eac7cafe169143"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga0cfca0aba6b1049472eac7cafe169143">&#9670;&nbsp;</a></span>bivariate_normal_copula_cdf()</h2>
 
@@ -191,6 +205,8 @@ accessed Feb. 6, 2021.</p>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>[normal copula] </p>
 <p >Multi-Normal Cholesky copula log density</p>
 <p class="formulaDsp">
 \begin{aligned} c(\mathbf{u}) &amp;= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\ &amp;= \frac{1}{\sqrt{\det \Sigma}} \exp \Bigg(-\frac{1}{2} \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix}^T (\Sigma^{-1} - I) \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix} \Bigg) \\ &amp;= \frac{1}{\sqrt{\det \Sigma}} \exp \bigg(-\frac{1}{2}(A^T\Sigma^{-1}A - A^TA) \bigg)\end{aligned}
@@ -300,6 +316,8 @@ Accessed and modified Feb. 5, 2021</dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>[normal copula] </p>
 <p >Normal copula log density vectorized</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021</dd></dl>
 <p>Meyer, Christian. "The Bivariate Normal Copula." <br  />
