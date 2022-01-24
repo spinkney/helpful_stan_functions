@@ -32,10 +32,10 @@ MathJax.Hub.Config({
 		<script src="highlight.min.js"></script>
 		<script>
 			$(function() {
-        $(".fragment").each(function(i,node) {
-            var without_last = $(this).clone();
-            without_last.children().last().remove();
-          var $node = $(without_last);
+			var without_last = $(this).clone();
+			without_last.children().last().remove();
+        $(without_last).each(function(i,node) {
+			var $node = $(node);
           $node.html("<pre><code class='stan'>" + 
                      $node.text()+"</code></pre>");
                      hljs.highlightAll(node);
