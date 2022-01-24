@@ -31,15 +31,13 @@ MathJax.Hub.Config({
 		<link rel="stylesheet" href="github-dark-dimmed.min.css">
 		<script src="highlight.min.js"></script>
 		<script>
-		$(function()  {
-			$(".fragment").each(function(i,node) {
-        var $node = $(node);
-        $node.html("<pre><code class='" +
-                   $node.attr("class")+"'>" + 
-                   $node.text()+"</code></pre>");
-        hljs.highlight(node);
-    });
-  });
+	$(function() {
+	hljs.configure({useBR: false});
+	$(".fragment").each(function(i,node) {
+		$(node).removeClass("fragment");
+		hljs.highlightAll(node);
+	});
+});
 	</script>
 	</head>
 	<body>
