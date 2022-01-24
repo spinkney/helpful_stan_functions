@@ -33,8 +33,10 @@ MathJax.Hub.Config({
 		<script>
 	$(function() {
 		$(".fragment").each(function(i,node) {
-		$(node).removeClass("fragment");
-		  hljs.highlightElement(node);
+		  var $node = $(node);
+		  $node.html("<pre><code class='stan'>" + 
+					 $node.text()+"</code></pre>");
+					 hljs.highlightAll(node);
 	});
 });
 	</script>
