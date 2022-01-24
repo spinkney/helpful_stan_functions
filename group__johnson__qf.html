@@ -32,10 +32,11 @@ MathJax.Hub.Config({
 		<script src="highlight.min.js"></script>
 		<script>
 	$(function() {
-	hljs.configure({useBR: false});
-	$(".fragment").each(function(i,node) {
-		$(node).removeClass("fragment");
-		hljs.highlightAll(node);
+		$(".fragment").each(function(i,node) {
+		  var $node = $(node);
+		  $node.html("<pre><code class='stan'>" + 
+					 $node.text()+"</code></pre>");
+		  hljs.highlightAll(node);
 	});
 });
 	</script>
