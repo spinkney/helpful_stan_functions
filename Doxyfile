@@ -1288,7 +1288,7 @@ HTML_STYLESHEET        =
 
 HTML_EXTRA_STYLESHEET  = ./pretty/css/doxygen-awesome.css \ 
                          ./pretty/css/doxygen-awesome-sidebar-only.css \
-                         ./pretty/css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+                         ./pretty/css/doxygen-awesome-sidebar-only-darkmode-toggle.css 
 
 #./pretty/css/custom.css \ 
 #			./pretty/css/custom_dark_theme.css
@@ -1301,7 +1301,11 @@ HTML_EXTRA_STYLESHEET  = ./pretty/css/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = ./pretty/css/doxygen-awesome-darkmode-toggle.js
+HTML_EXTRA_FILES       = ./pretty/css/doxygen-awesome-darkmode-toggle.js \
+			./pretty/css/highlight/highlight.min.js \
+			./pretty/css/highlight/highlight.js \
+			./pretty/css/highlight/styles/github-dark-dimmed.min.css \
+            ./pretty/css/sean-theme.css
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
