@@ -38,7 +38,7 @@ MathJax.Hub.Config({
           var $node = $(without_last);
           $node.html("<pre><code class='stan'>" + 
                      $node.text()+"</code></pre>");
-                     hljs.highlightAll(node);
+                     hljs.highlightAll($node);
     });
 });
 // 	$(function() {
