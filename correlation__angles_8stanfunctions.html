@@ -32,12 +32,12 @@ MathJax.Hub.Config({
 		<script src="highlight.min.js"></script>
 		<script>
 		$(function()  {
-  textblock = $("pre code").html();
+  textblock = $("<pre><code class=stan>").html();
   var lines = textblock.split("\n");
   lines.splice(0, 1);
   var newtext = lines.join("\n");
-  $("pre code").html(newtext);
-  $("pre code").each(function(i, block) {
+  $("<pre><code class=stan>").html(newtext);
+  $("<pre><code=stan>").each(function(i, block) {
     hljs.highlightBlock(block);
   });
 });
