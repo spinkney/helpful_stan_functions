@@ -33,8 +33,8 @@ MathJax.Hub.Config({
 		<script>
 			$(function() {
         $(".fragment").each(function(i,node) {
-            var without_last = $(this).clone()
-            without_last.children().last().remove()
+            var without_last = $(this).clone();
+            without_last.children().last().remove();
           var $node = $(without_last);
           $node.html("<pre><code class='stan'>" + 
                      $node.text()+"</code></pre>");
