@@ -28,7 +28,7 @@ MathJax.Hub.Config({
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
 <link href="prism.css" rel="stylesheet" type="text/css"/>
-		<link rel="stylesheet" href="github-dark-dimmed.min.css">
+		<link rel="stylesheet" href="tomorrow-night.css">
 		<script src="highlight.min.js"></script>
 		<script>
 	$(function() {
@@ -36,7 +36,7 @@ MathJax.Hub.Config({
 		  var $node = $(node);
 		  $node.html("<pre><code class='stan'>" + 
 					 $node.text()+"</code></pre>");
-		  hljs.highlightElement(node);
+		  hljs.highlightAll(node);
 	});
 });
 	</script>
