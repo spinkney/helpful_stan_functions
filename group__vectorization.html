@@ -32,15 +32,14 @@ MathJax.Hub.Config({
 		<script src="highlight.min.js"></script>
 		<script>
 		$(function()  {
-  textblock = $("<pre><code class=stan>").html();
-  var lines = textblock.split("\n");
-  lines.splice(0, 1);
-  var newtext = lines.join("\n");
-  $("<pre><code class=stan>").html(newtext);
-  $("<pre><code=stan>").each(function(i, block) {
-    hljs.highlightBlock(block);
+			$(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlight(node);
+    });
   });
-});
 	</script>
 	</head>
 	<body>
