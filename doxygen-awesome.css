@@ -992,7 +992,6 @@ div.line:after {
 }
 
 div.fragment .line, pre.fragment {
-    white-space: pre;
     word-wrap: initial;
     line-height: var(--fragment-lineheight);
 }
