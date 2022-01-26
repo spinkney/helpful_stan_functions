@@ -17,6 +17,12 @@ html {
 
 }
 
+code, div.fragment, pre.fragment {
+  border-radius: var(--border-radius-small);
+  border: none;
+  overflow: hidden;
+}
+
 .hljs {
   color: #adbac7;
   background: #2a2c2f;
