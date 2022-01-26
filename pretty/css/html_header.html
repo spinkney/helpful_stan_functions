@@ -19,24 +19,14 @@
 		<link rel="stylesheet" href="$relpath^sean-theme.css">
 		<script src="$relpath^highlight.min.js"></script>
 		<script>
-			$(function() {
-        $(".fragment").each(function(i,node) {
-            var without_last = $(node).clone();
-            var just_code = without_last.children().last().remove();
-          var $node = $(just_code);
-          $node.html("<pre><code class='stan'>" + 
-                     $node.text()+"</code></pre>");
-                     hljs.highlightAll(just_code);
-    });
+	$(function() {
+		$(".fragment").each(function(i,node) {
+		  var $node = $(node);
+		  $node.html("<pre><code class='stan'>" + 
+					 $node.text()+"</code></pre>");
+					 hljs.highlightAll(node);
+	});
 });
-// 	$(function() {
-// 		$(".fragment").each(function(i,node) {
-// 		  var $node = $(node);
-// 		  $node.html("<pre><code class='stan'>" + 
-// 					 $node.text()+"</code></pre>");
-// 					 hljs.highlightAll(node);
-// 	});
-// });
 	</script>
 	</head>
 	<body>
