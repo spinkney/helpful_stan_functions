@@ -53,7 +53,7 @@ code, div.fragment, pre.fragment {
 .hljs-meta,
 .hljs-number,
 .hljs-operator,
-.hljs-variable,
+.hljs-variable{color:#6cb6ff}.hljs-meta 
 .hljs-selector-attr,
 .hljs-selector-class,
 .hljs-selector-id {
