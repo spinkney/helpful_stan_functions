@@ -17,6 +17,11 @@ html {
 
 }
 
+code.hljs {
+  padding: 3px 5px
+}
+
+
 code, div.fragment, pre.fragment {
   border-radius: var(--border-radius-small);
   border: none;
@@ -53,7 +58,7 @@ code, div.fragment, pre.fragment {
 .hljs-meta,
 .hljs-number,
 .hljs-operator,
-.hljs-variable{color:#6cb6ff}.hljs-meta 
+.hljs-variable,
 .hljs-selector-attr,
 .hljs-selector-class,
 .hljs-selector-id {
@@ -127,13 +132,4 @@ code, div.fragment, pre.fragment {
   /* prettylights-syntax-markup-deleted */
   color: #ffd8d3;
   background-color: #78191b;
-}
-
-.hljs-char.escape_,
-.hljs-link,
-.hljs-params,
-.hljs-property,
-.hljs-punctuation,
-.hljs-tag {
-  /* purposely ignored */
 }
