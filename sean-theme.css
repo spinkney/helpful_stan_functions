@@ -134,7 +134,6 @@ code, div.fragment, pre.fragment {
 .hljs-strong {
   /* prettylights-syntax-markup-bold */
   color: #adbac7;
-  font-weight: bold;
 }
 
 .hljs-addition {
