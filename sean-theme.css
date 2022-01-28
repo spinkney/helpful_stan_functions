@@ -10,12 +10,6 @@ pre > code {
     white-space: pre-line;
 }
 
-html {
-    --font-family-monospace: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-    --code-font-size: 14.4px; /* affects code, fragment */
-
-}
-
 code.hljs {
   padding: 3px 5px
 }
@@ -26,7 +20,7 @@ code.hljs {
   border-right: 1px solid #999;
   vertical-align: top;
   padding-right: 5px;
-  font: 9px consolas;
+  font: 9px Consolas;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -43,6 +37,7 @@ code, div.fragment, pre.fragment {
   border-radius: var(--border-radius-small);
   border: none;
   overflow: hidden;
+  font: 14.4px;
 }
 
 .hljs {
