@@ -384,11 +384,19 @@
 
 }(window, document));		
 
+function removeElementsByClass(className){
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
 		$(function() {
         	$(".fragment").each(function(i,node) {
           	var $node = $(node);
-          	$node.children(":not(.line)").remove();
-          	$node.html("<pre><code class='stan'>" + $node.text().trim() + "</code></pre>");
+			  removeElementsByClass("ttc")
+			  //	$node.children(":not(.line)").remove();
+          	$node.html("<pre><code class='stan'>" + $node.text().trim().replaceAll("\<", "&lt;").replaceAll("\>", "&gt;") + "</code></pre>");
              hljs.highlightAll(node);
 		     hljs.initLineNumbersOnLoad(node);  
      		});
