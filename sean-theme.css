@@ -4,15 +4,20 @@
   Author: Sean Pinkney
   Updated: 2022-01-26
 */
+html {
+  --font-family-monospace: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  --code-font-size: 12px; /* affects code, fragment */
+
+}
+
 pre > code {
   white-space: pre-wrap;
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
 pre code.hljs {
   display: block;
   overflow-x: auto;
-  padding: 1em
+  padding: 1em;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
