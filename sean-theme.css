@@ -5,16 +5,11 @@
   Updated: 2022-01-26
 */
 
-pre > code {
+pre .code {
     font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
     white-space: pre-line;
 }
 
-html {
-    --font-family-monospace: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-    --code-font-size: 14.4px; /* affects code, fragment */
-
-}
 
 pre .line-number {
   display:block;
@@ -42,6 +37,12 @@ pre .line-number span:nth-child(even) {
 pre .cl {
   display:block;
   clear:both;
+}
+
+html {
+    --font-family-monospace: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+    --code-font-size: 14.4px; /* affects code, fragment */
+
 }
 
 code.hljs {
