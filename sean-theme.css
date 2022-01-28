@@ -5,9 +5,10 @@
   Updated: 2022-01-26
 */
 
-pre > code {
-    font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-    white-space: pre-line;
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
 }
 
 code.hljs {
