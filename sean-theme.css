@@ -35,6 +35,10 @@ code.hljs {
   user-select: none;
 }
 
+.hljs-ln-code {
+  padding-left: 10px;
+}
+
 code, div.fragment, pre.fragment {
   border-radius: var(--border-radius-small);
   border: none;
