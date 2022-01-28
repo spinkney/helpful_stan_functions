@@ -343,7 +343,7 @@ MathJax.Hub.Config({
         	$(".fragment").each(function(i,node) {
           	var $node = $(node);
           	$node.children(":not(.line)").remove();
-          	$node.html("<pre><code class='stan'>" + $node.text().replace(/^\s+|\s+$/g, "") + "</code></pre>");
+          	$node.html("<pre><code class='stan'>" + $node.text().replace(/^\s*(?!.+)\n+)|(\n+\s+(?!.+)$/gm, "") + "</code></pre>");
              hljs.highlightAll(node);
 		     hljs.initLineNumbersOnLoad(node);  
      		});
