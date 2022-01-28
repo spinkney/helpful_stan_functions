@@ -37,8 +37,8 @@ MathJax.Hub.Config({
           $node.children(":not(.line)").remove();
           $node.html("<pre><code class='stan'>" + 
                      $node.text()+"</code></pre>");
-					 $('pre code').text(function(_, t) { return $.trim(t) })
                      hljs.highlightAll(node);
+					 $('pre code').text(function(_, t) { return $.trim(t) })
     });
 });
 	</script>
