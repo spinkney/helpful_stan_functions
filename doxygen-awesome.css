@@ -263,7 +263,7 @@ body {
 }
 
 body, table, div, p, dl, #nav-tree .label, .title, .sm-dox a, .sm-dox a:hover, .sm-dox a:focus, #projectname, .SelectItem, #MSearchField, .navpath li.navelem a, .navpath li.navelem a:hover {
-    font-family: var(--font-family);
+    font-family: var(--font-family-monospace);
 }
 
 h1, h2, h3, h4, h5 {
