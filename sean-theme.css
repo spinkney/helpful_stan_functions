@@ -13,6 +13,7 @@ pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1em
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
 code.hljs {
@@ -41,6 +42,7 @@ code, div.fragment, pre.fragment {
   border-radius: var(--border-radius-small);
   border: none;
   overflow: hidden;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
 .hljs {
