@@ -39,7 +39,7 @@ MathJax.Hub.Config({
                      $node.text()+"</code></pre>");
                      hljs.highlightAll(node);
 			var pre = $node,
-				pl = pre.length;
+			pl = pre.length;
 			for (var i = 0; i < pl; i++) {
 				pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML.replace(/^(\s*\r?\n){2,}/gm, "") + '<span class="cl"></span>';
 				var num = pre[i].innerHTML.split(/\n/).length;
@@ -49,7 +49,7 @@ MathJax.Hub.Config({
 				}
 			}
     });
-});
+})();
 	</script>
 	</head>
 	<body>
