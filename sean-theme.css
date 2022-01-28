@@ -6,6 +6,7 @@
 */
 pre > code {
   white-space: pre-wrap;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
 pre code.hljs {
