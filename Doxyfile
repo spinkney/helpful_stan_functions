@@ -1304,6 +1304,7 @@ HTML_EXTRA_STYLESHEET  = ./pretty/css/doxygen-awesome.css \
 HTML_EXTRA_FILES       = ./pretty/css/doxygen-awesome-darkmode-toggle.js \
 			./pretty/css/highlight/highlight.min.js \
 			./pretty/css/highlight/highlight.js \
+            ./pretty/css/highlightjs-line-numbers.js \
 			./pretty/css/highlight/styles/github-dark-dimmed.min.css \
             ./pretty/css/sean-theme.css
 

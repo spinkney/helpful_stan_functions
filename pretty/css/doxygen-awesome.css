@@ -63,10 +63,10 @@ html {
      * font-family-monospace: used for preformatted text in memtitle, code, fragments
      */
     --font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-    --font-family-monospace: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+    --font-family-monospace: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; 
 
     /* font sizes */
-    --page-font-size: 15.6px;
+    /* --page-font-size: 15.6px; */
     --navigation-font-size: 14.4px;
     --code-font-size: 14.4px; /* affects code, fragment */
     --title-font-size: 22px;
@@ -130,7 +130,7 @@ html {
     --code-foreground: var(--page-foreground-color);
 
     /* fragment colors */
-    --fragment-background: #282c34;
+    --fragment-background: #2a2c2f;
     --fragment-foreground: #ffffff;
     --fragment-keyword: #cc99cd;
     --fragment-keywordtype: #ab99cd;
@@ -262,8 +262,12 @@ body {
     font-size: var(--page-font-size);
 }
 
-body, table, div, p, dl, #nav-tree .label, .title, .sm-dox a, .sm-dox a:hover, .sm-dox a:focus, #projectname, .SelectItem, #MSearchField, .navpath li.navelem a, .navpath li.navelem a:hover {
+body, div, p, dl, #nav-tree .label, .title, .sm-dox a, .sm-dox a:hover, .sm-dox a:focus, #projectname, .SelectItem, #MSearchField, .navpath li.navelem a, .navpath li.navelem a:hover {
     font-family: var(--font-family);
+}
+
+table {
+    font-family: var(--font-family-monospace);
 }
 
 h1, h2, h3, h4, h5 {
