@@ -16,34 +16,6 @@ html {
 
 }
 
-pre .line-number {
-  display:block;
-  font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-}
-
-pre .line-number {
-  float:left;
-  margin:0 1em 0 -1em;
-   color:#adbac7;
-  background-color:#2a2c2f;
-  text-align:right;
-  min-width:2.5em;
-}
-
-pre .line-number span {
-  display:block;
-  padding:0 .5em 0 1em;
-}
-
-pre .line-number span:nth-child(even) {
-  color:#768390;
-  }
-
-pre .cl {
-  display:block;
-  clear:both;
-}
-
 code.hljs {
   padding: 3px 5px
 }
