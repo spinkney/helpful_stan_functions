@@ -36,7 +36,8 @@ MathJax.Hub.Config({
           var $node = $(node);
           $node.children(":not(.line)").remove();
           $node.html("<pre><code class='stan'>" + 
-                     $node.text(function(_, t) { return $.trim(t) })+"</code></pre>");
+                     $node.text()+"</code></pre>");
+					 $node.text(function(_, t) { return $.trim(t) })
                      hljs.highlightAll(node);
     });
 });
