@@ -6,7 +6,7 @@
 */
 html {
   --font-family-monospace: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-  --code-font-size: 12px; /* affects code, fragment */
+  --code-font-size: 13px; /* affects code, fragment */
 
 }
 
