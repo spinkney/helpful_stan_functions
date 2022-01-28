@@ -942,7 +942,7 @@ div.toc ul li.level2, div.toc ul li.level3 {
 code, div.fragment, pre.fragment {
     border-radius: var(--border-radius-small);
     border: none;
-    overflow: hidden;
+    overflow: auto;
 }
 
 code {
