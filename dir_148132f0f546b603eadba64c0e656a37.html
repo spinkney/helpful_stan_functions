@@ -147,7 +147,7 @@ MathJax.Hub.Config({
         css.type = 'text/css';
         css.innerHTML = format(
             '.{0}{border-collapse:collapse}' +
-            '.{0} td{padding:0}' +
+            '.{0} td{padding:1}' +
             '.{1}:before{content:attr({2})}',
         [
             TABLE_NAME,
@@ -343,7 +343,7 @@ MathJax.Hub.Config({
         	$(".fragment").each(function(i,node) {
           	var $node = $(node);
           	$node.children(":not(.line)").remove();
-          	$node.html("<pre><code class='stan'>" + $node.text().trim() + "</code></pre>");
+          	$node.html("<pre><code class='stan'>" + $node.text().replace(/^\s+|\s+$/g, "") + "</code></pre>");
              hljs.highlightAll(node);
 		     hljs.initLineNumbersOnLoad(node);  
      		});
