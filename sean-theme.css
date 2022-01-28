@@ -7,7 +7,7 @@
 
 pre > code {
     font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
-    white-space: normal;
+    white-space: pre;
 }
 
 html {
