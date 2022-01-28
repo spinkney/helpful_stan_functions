@@ -6,7 +6,7 @@
 */
 pre > code {
   font-family: Consolas;
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 pre code.hljs {
@@ -41,7 +41,6 @@ code, div.fragment, pre.fragment {
   border-radius: var(--border-radius-small);
   border: none;
   overflow: hidden;
-  font: 14.4px;
 }
 
 .hljs {
