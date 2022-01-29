@@ -1,10 +1,11 @@
 functions {
- #include correlation_angles.stan
- #include triangular.stan
- vector lower_elements(matrix M, int tri_size){
+#include correlation_angles.stan
+#include triangular.stan
+ vector lower_elements(matrix M){
     int n = rows(M);
+    int k = n * (n - 1) / 2;
     int counter = 1;
-    vector[tri_size] out;
+    vector[k] out;
 
     for (i in 2:n){
       for (j in 1:(i - 1)) {
@@ -52,22 +53,33 @@ functions {
   return mat;
 }
 
- matrix zero_constrain (matrix angle_raw, int N){
-  matrix[N, N] inv_mat;
-  matrix[N, N] angle = angle_raw;
+ // set the upper triangle to 0
+ // only looking at strictly lower tri part
+ vector sparse_cholesky_lp (vector angle_raw, int[] csr_rows, int[] csr_cols, int Z, int N){
+  vector[Z + N] sparse_chol; // Z + N is the number of non-zero values in lower tri plus
+                             // the diagonal since the angles do not include the diagonal
+  int R = size(csr_rows);
+  int C = size(csr_cols);
+  int S[R, C] = append_array(csr_rows, csr_cols);
+  int count = 1;
 
-  inv_mat[1, 1] = 1;
+  sparse_chol[count] = 1;
 
-  for (i in 2:N) {
-    // constrain first column
-    // if C = BB^T then for the first column
-    // c_{i, 1} = b_{i, 1} = 0 so 
-    // if c_{i, 1} = 0 then cos(\theta_{i, 1}) = 0
-    // acos(0) = \theta_{i, 1} = pi / 2
-     if (is_nan(angle_raw[i, 1]) == 1) {
-       inv_mat[i, 1] = 0;
-       angle[i, 1] = pi() / 2;
-     } else inv_mat[i, 1] = cos(angle[i, 1]);
+  // traversing in col-major order
+  // S[2, 1]           skips S[2, 2]
+  // S[3, 1], S[3, 2]  skips S[3, 3]
+  // etc
+  for (r in S) {
+    int this_rows_column_num = 0; 
+    for (c in r) {
+      count += 1;
+      this_rows_column_num += 1;
+
+      if(this_rows_column_num == 1)
+        sparse_chol[count] = cos(angle_raw[count]); // constrain first column
+
+
+    }
 
     if (i > 2) {
       for (j in 2:(i - 1)) {
