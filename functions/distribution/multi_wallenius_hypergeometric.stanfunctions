@@ -1,0 +1,83 @@
+/** @addtogroup multi_wallenius Multivariate Wallenius' Noncentral Hypergeometric Distribution Functions
+ *
+ * The probability mass function of the multivariate Wallenius' hypergeometric distribution is given by
+ *  \f[
+ *    f(\mathbf{x} \mid \mathbf{m}, \mathbf{\omega}) = \left(\prod_{i=1}^c \binom{m_i}{x_i} \right) \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+ *  \f]
+ * where \f$ \mathbf{m} = (m_1, \ldots, m_c) \in \mathbb{N}^c \f$ is the size of each \f$c\f$ group
+ * of the population. The population is given by \f$ N = \sum_{i=1}^c m_i \f$ where the realizations
+ * from each group is given by \f$ \mathbf{x} \f$. The weights of each group are contained in the \f$c\f$-sized
+ * simplex \f$ \mathbf{\omega} \f$ and \f$ D \f$ is
+ * \f[
+ *     D = \mathbf{\omega} \cdot (\mathbf{m} - \mathbf{x})) = \sum_{i=1}^c \omega_i(m_i - x_i). 
+ * \f] 
+ * 
+ * @include \distribution\multi_wallenius_hypergeometric.stanfunctions
+ *
+ * \ingroup multivariate
+ *  @{ */
+
+/**
+* Multivariate Wallenius' Noncentral Hypergeometric Integral
+*
+* \f[
+*     I(t \mid \mathbf{\omega}, D) = \int_0^1 \prod_{i=1}^c (1-t^{\omega_i/D})^{x_i} \operatorname{d}t
+* \f]
+*
+* @copyright Sean Pinkney 2021 
+*
+* @param t Real number on [0,1]
+* @param xc 
+* @param theta Array of real parameters
+* @param x_r Array of data (real) 
+* @param x_i Array of data (integer)
+* @return integrand
+*/
+real multi_wallenius_integral(real t, // Function argument
+                              real xc, array[] real theta,
+                              // parameters
+                              array[] real x_r, // data (real)
+                              array[] int x_i) {
+  // data (integer)
+  real Dinv = 1 / theta[1];
+  int Cp1 = num_elements(x_i);
+  int n = x_i[1];
+  real v = 1;
+  
+  for (i in 2 : Cp1) 
+    v *= pow(1 - t ^ (theta[i] * Dinv), x_i[i]);
+  
+  return v;
+}
+
+/**
+  * Multivariate Wallenius' Noncentral Hypergeometric Distribution
+  *
+  * Note that Stan cannot estimate discrete parameters so the realizations
+  * k must be data. This is enforced via the integral. If one wants to estimate
+  * missing data then an approximation will have to be performed. This can
+  * be accomplished by updating the function to take in a vector instead of an
+  * array of integers. 
+  *
+  * @copyright Sean Pinkney 2021 
+  *
+  * @param k Array of integer data 
+  * @param m Vector of population margin sizes
+  * @param p Simplex of margin probabilities
+  * @param x_r Array of data (real) 
+  * @param tol Tolerance of integration function
+  * @return log probability
+  */
+real multi_wallenius_lpmf(data array[] int k, vector m, vector p,
+                          data array[] real x_r, data real tol) {
+  int C = num_elements(m);
+  real D = dot_product(to_row_vector(p), (m - to_vector(k[2 : C + 1])));
+  real lp = log(integrate_1d(multi_wallenius_integral, 0, 1,
+                             append_array({D}, to_array_1d(p)), x_r, k, tol));
+  
+  for (i in 1 : C) 
+    lp += -log1p(m[i]) - lbeta(m[i] - k[i + 1] + 1, k[i + 1] + 1);
+  
+  return lp;
+}
+/** @} */

@@ -1,0 +1,45 @@
+/** @addtogroup clayton Clayton Copula Functions
+ *
+ * The Clayton copula bivariate cumulative density function is defined as 
+ * \f[
+ *      C(u,v) = (u^{-\theta} + v^{-\theta} - 1)^{-1/\theta}
+ * \f]
+ * for \f$0 < \theta < \infty\f$. 
+ *
+ * The Clayton copula bivariate probability density function is defined as
+ * \f[
+ *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = (\theta + 1)(uv)^{-(\theta + 1)}(u^{-\theta} + v^{-\theta} - 1)^{-\frac{2 \theta + 1}{\theta}}
+ * \f]
+ * 
+ * @include \copula\clayton_copula.stanfunctions
+ *
+ * \ingroup copula
+ *  @{ */
+
+/** 
+ * Clayton Bivariate Copula Log Density
+ *  
+ * Stan Example: [clayton_copula_example.stan](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/stan/clayton_copula_example.stan) \n
+ * R: [clayton_example.R](https://github.com/spinkney/helpful_stan_functions/blob/main/examples/copula/R/clayton_example.R)
+ *
+ * Copyright Andre Pfeuffer, Sean Pinkney \n
+ * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
+ * Accessed and modified Feb. 5, 2021 
+ *
+ * The copula is defined \f$0 < \theta < \infty\f$
+ *
+ * @param u Real number on \f$(0,1]\f$, not checked but function will return NaN
+ * @param v Real number on \f$(0,1]\f$, not checked but function will return NaN
+ * @param theta Real number on (0, Inf)
+ * @return log density
+ * @throws reject if theta \f$\le 0\f$
+ */
+real clayton_copula_lpdf(real u, real v, real theta) {
+  if (theta <= 0.0) 
+    reject("clayton_copula: theta must > 0");
+  
+  return log1p(theta) - (theta + 1) * (log(u) + log(v))
+         - (1 + 2 * theta) / theta * log(pow(u, -theta) + pow(v, -theta) - 1);
+}
+
+/** @} */

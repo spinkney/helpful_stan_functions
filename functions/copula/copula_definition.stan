@@ -5,4 +5,4 @@
   * Copulas are used to describe the dependence between random variables.
   *
   **/
-  
+
