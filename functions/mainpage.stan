@@ -44,6 +44,6 @@
  
   /*! \page doxygen_doc How to use doxygen documentation for the project?
  *
- * n the process of writing, target completion Feb 20, 2022.
+ * In the process of writing, target completion Feb 20, 2022.
  *
  */
