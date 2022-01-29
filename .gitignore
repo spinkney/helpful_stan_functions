@@ -6,7 +6,10 @@
 
 # Unignore all dirs
 !*/
-
+*.R~
+*.un~
+*.swp
+doc/
 # History files
 .Rhistory
 .Rapp.history
@@ -38,3 +41,13 @@ vignettes/*.pdf
 *.exe
 data.csv
 .DS_Store
+
+# Doxygen output
+html/
+latex/
+
+
+*.stan~
+*.stan~
+*.swo
+*.stan~

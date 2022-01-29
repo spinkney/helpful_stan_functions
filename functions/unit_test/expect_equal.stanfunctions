@@ -1,0 +1,41 @@
+/** @addtogroup unit_test
+  * @{
+*
+/**
+ * Expect equal real
+ *
+ * Copyright Rok Češnovar, 2021
+ *
+ * @param expected Real number
+ * @param actual Real number 
+ * @param tol Real number 
+ */
+void expect_equal_real(real expected, real actual, real tol) {
+  if (fabs(expected - actual) > tol) 
+    reject("ERROR: expected value - ", expected, ", actual value - ", actual);
+}
+
+/**
+ * Expect equal vector
+ *
+ * Copyright Rok Češnovar, 2021
+ *
+ * @param expected Vector
+ * @param actual Vector
+ * @param tol Real number 
+ */
+void expect_equal_vector(vector expected, vector actual, real tol) {
+  int size_ex = size(expected);
+  int size_act = size(actual);
+  
+  if (size_ex != size_act) 
+    reject("ERROR: mismatch in length of vectors - ", size_ex, " vs ",
+           size_act);
+  
+  for (i in 1 : size_ex) {
+    if (fabs(expected[i] - actual[i]) > tol) 
+      reject("ERROR at index ", i, ": expected value - ", expected,
+             ", actual value - ", actual);
+  }
+}
+/** @}*/

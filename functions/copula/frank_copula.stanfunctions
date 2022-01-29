@@ -1,0 +1,39 @@
+/** @addtogroup frank Frank Copula Functions
+ * The Frank copula bivariate cumulative density function is defined as 
+ * \f[
+ *      C(u,v) = -\frac{1}{\omega}\ln \big[1 + \frac{(\exp(-\omega u) - 1)(\exp(-\omega v)-1)}{\exp(-\omega) -1} \big]
+ * \f]
+ * for \f$\omega \in (-\infty, \infty) \,/\ \{0\}\f$. 
+ * 
+ *  The Frank copula bivariate probability density function is defined as
+ * \f[
+ *     c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2}
+ * \f]
+ *
+ * @include \copula\frank_copula.stanfunctions
+ *
+ * \ingroup copula
+ *  @{ */
+
+/** 
+ * Frank Bivariate Copula Log Density
+ *
+ * Copyright Andre Pfeuffer, Sean Pinkney \n
+ * https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ \n
+ * Accessed and modified Feb. 5, 2021 
+ *
+ * The copula is defined \f$\omega \in (-\infty, \infty) \,/\ \{0\}\f$
+ *
+ * @param u Real number on \f$(0,1]\f$, not checked but function will return NaN
+ * @param v Real number on \f$(0,1]\f$, not checked but function will return NaN
+ * @param \omega Real number on (-Inf, Inf)
+ * @return log density
+ */
+real frank_copula_lpdf(real u, real v, real theta) {
+  return log(theta) + log1m(exp(-theta)) - theta * (u + v)
+         - 2
+           * log(1 - exp(-theta)
+                 - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));
+}
+
+/** @} */
