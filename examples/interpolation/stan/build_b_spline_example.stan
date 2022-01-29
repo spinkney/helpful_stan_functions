@@ -3,7 +3,7 @@
 // Accessed Feb. 9, 2021 
 // modification suggested in https://github.com/milkha/Splines_in_Stan/issues/3#issuecomment-319671070
 
-function {
+functions {
   #include build_b_spline.stan
 }
 data {
