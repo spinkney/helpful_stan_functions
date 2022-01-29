@@ -25,14 +25,26 @@
 /*! \page creating_new How to add a new function?
  *
  * This page is about how to add a new function.
- * Following sections describe circle:
- * - \ref groupCircleDefinition "Definition of Circle"
- * - \ref groupCircleClass "Circle Class"
+ * Following sections describe how to add new functions:
+ * - \ref stan_functions "Adding the Stan Code"
+ * - \ref example "Adding the Example Code"
+ * - \ref doxygen_doc "Doxygen Documentation"
  */
  
- /*! \page doxygen_doc How to use doxygen documentation for the project?
+ /*! \page stan_functions How to add Stan code to the project?
  *
- * Lorem ipsum dolor sit amet
+ * In the process of updating, target completion Feb 20, 2022.
  *
  */
-
+ 
+ /*! \page example How to add examples for the project?
+ *
+ * In the process of writing, target completion Feb 20, 2022.
+ *
+ */
+ 
+  /*! \page doxygen_doc How to use doxygen documentation for the project?
+ *
+ * n the process of writing, target completion Feb 20, 2022.
+ *
+ */
