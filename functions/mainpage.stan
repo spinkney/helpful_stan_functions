@@ -28,7 +28,6 @@
  * Following sections describe how to add new functions:
  * - \ref stan_functions "Adding the Stan Code"
  * - \ref example "Adding the Example Code"
- * - \ref doxygen_doc "Doxygen Documentation"
  */
  
  /*! \page stan_functions How to add Stan code to the project?
