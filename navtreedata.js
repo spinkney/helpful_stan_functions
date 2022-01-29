@@ -26,6 +26,8 @@ var NAVTREE =
 [
   [ "Helpful Stan Functions", "index.html", [
     [ "Stan UDF Documentation", "index.html", "index" ],
+    [ "How to add Stan code to the project?", "stan_functions.html", null ],
+    [ "How to add examples for the project?", "example.html", null ],
     [ "Functions by Group", "modules.html", "modules" ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
