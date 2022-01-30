@@ -85,7 +85,7 @@ var NAVTREEINDEX0 =
 "group__special.html":[3,9],
 "group__special.html#ga060fcd6515b67c752a9da49d0cc7f9e6":[3,9,1],
 "group__splines.html":[3,4,0],
-"group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c":[3,4,0,0],
+"group__splines.html#ga65b2062a50fd259727f9b774accfd420":[3,4,0,0],
 "group__tmvn.html":[3,2,0],
 "group__tmvn.html#ga410a62b317befea7a30c079292d142f0":[3,2,0,1],
 "group__tmvn.html#ga7c9f3672e2ad840066dae356576cb137":[3,2,0,0],
