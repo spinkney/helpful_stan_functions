@@ -1,6 +1,6 @@
 functions {
- #include correlation_angles.stanfunctions
- #include triangular.stanfunctions
+ #include correlation_angles.stan
+ #include triangular.stan
 }
 data {
   int N;
