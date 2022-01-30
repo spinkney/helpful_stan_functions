@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frank_20copula_20functions_0',['Frank Copula Functions',['../group__frank.html',1,'']]]
+  ['explicit_20fixed_2dstep_20methods_0',['Explicit fixed-step methods',['../group__fixed__step.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_0',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__qf.html',1,'']]]
+  ['interpolation_20functions_0',['Interpolation Functions',['../group__interpolation.html',1,'']]],
+  ['inverse_20error_20functions_1',['Inverse error functions',['../group__inverse__error.html',1,'']]]
 ];

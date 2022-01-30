@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['linear_20transforms_0',['Linear transforms',['../group__linear__transforms.html',1,'']]],
-  ['logical_20functions_20for_20arrays_1',['Logical functions for arrays',['../group__logical__array.html',1,'']]]
+  ['johnson_20quantile_20parameterized_20distributions_20_28j_2dqpd_29_20functions_0',['Johnson Quantile Parameterized Distributions (J-QPD) functions',['../group__johnson__qf.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ode_20solvers_0',['ODE solvers',['../group__odeint.html',1,'']]]
+  ['normal_20copula_20functions_0',['Normal Copula Functions',['../group__normal.html',1,'']]]
 ];
