@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['build_5fb_5fspline_2estan_0',['build_b_spline.stan',['../build__b__spline_8stan.html',1,'']]]
+  ['build_5fb_5fspline_2estanfunctions_0',['build_b_spline.stanfunctions',['../build__b__spline_8stanfunctions.html',1,'']]]
 ];

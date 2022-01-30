@@ -15,7 +15,7 @@ var files_dup =
     [ "skew_generalized_t.stanfunctions", "skew__generalized__t_8stanfunctions.html", "skew__generalized__t_8stanfunctions" ],
     [ "unit_johnson_su.stanfunctions", "unit__johnson__su_8stanfunctions.html", "unit__johnson__su_8stanfunctions" ],
     [ "univariate_definition.stan", "univariate__definition_8stan.html", null ],
-    [ "build_b_spline.stan", "build__b__spline_8stan.html", "build__b__spline_8stan" ],
+    [ "build_b_spline.stanfunctions", "build__b__spline_8stanfunctions.html", "build__b__spline_8stanfunctions" ],
     [ "interp_1d_cubic.stanfunctions", "interp__1d__cubic_8stanfunctions.html", "interp__1d__cubic_8stanfunctions" ],
     [ "interp_1d_linear.stanfunctions", "interp__1d__linear_8stanfunctions.html", "interp__1d__linear_8stanfunctions" ],
     [ "interpolation_definition.stan", "interpolation__definition_8stan.html", null ],

@@ -426,7 +426,37 @@ Functions</h2></td></tr>
 <tr class="separator:ga72d1d9140b63c6ecd4d5bebe60c8d86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="fragment"></div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c">build_b_spline</a>(real[] t, real[] ext_knots, <span class="keywordtype">int</span> ind, <span class="keywordtype">int</span> order);</div>
+<div class="line">  vector <a class="code hl_function" href="group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c">build_b_spline</a>(real[] t, real[] ext_knots, <span class="keywordtype">int</span> ind, <span class="keywordtype">int</span> order) {</div>
+<div class="line">    vector[size(t)] b_spline;</div>
+<div class="line">    vector[size(t)] w1 = rep_vector(0, size(t));</div>
+<div class="line">    vector[size(t)] w2 = rep_vector(0, size(t));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (order==1)</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">for</span> (i in 1:size(t)) <span class="comment">// B-splines of order 1 are piece-wise constant</span></div>
+<div class="line">        b_spline[i] = (ext_knots[ind] &lt;= t[i]) &amp;&amp; (t[i] &lt; ext_knots[ind + 1]); </div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">else</span> {</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">if</span> (ext_knots[ind] != ext_knots[ind + order - 1])</div>
+<div class="line">        w1 = (to_vector(t) - rep_vector(ext_knots[ind], size(t))) / </div>
+<div class="line">             (ext_knots[ind + order - 1] - ext_knots[ind]);</div>
+<div class="line"> </div>
+<div class="line">      <span class="keywordflow">if</span> (ext_knots[ind + 1] != ext_knots[ind + order])</div>
+<div class="line">        w2 = 1 - (to_vector(t) - rep_vector(ext_knots[ind + 1], size(t))) / </div>
+<div class="line">                 (ext_knots[ind + order] - ext_knots[ind + 1]);</div>
+<div class="line"> </div>
+<div class="line">      <span class="comment">// Calculating the B-spline recursively as linear interpolation of two lower-order splines </span></div>
+<div class="line">      b_spline = w1 .* <a class="code hl_function" href="group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c">build_b_spline</a>(t, ext_knots, ind, order - 1) + </div>
+<div class="line">                 w2 .* <a class="code hl_function" href="group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c">build_b_spline</a>(t, ext_knots, ind + 1, order - 1);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> b_spline;</div>
+<div class="line">  }</div>
+<div class="ttc" id="agroup__splines_html_ga72d1d9140b63c6ecd4d5bebe60c8d86c"><div class="ttname"><a href="group__splines.html#ga72d1d9140b63c6ecd4d5bebe60c8d86c">build_b_spline</a></div><div class="ttdeci">vector build_b_spline(real[] t, real[] ext_knots, int ind, int order)</div><div class="ttdef"><b>Definition:</b> build_b_spline.stanfunctions:26</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga72d1d9140b63c6ecd4d5bebe60c8d86c" name="ga72d1d9140b63c6ecd4d5bebe60c8d86c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga72d1d9140b63c6ecd4d5bebe60c8d86c">&#9670;&nbsp;</a></span>build_b_spline()</h2>
 

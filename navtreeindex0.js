@@ -1,7 +1,7 @@
 var NAVTREEINDEX0 =
 {
 "array__ops__definition_8stan.html":[4,0,0],
-"build__b__spline_8stan.html":[4,0,15],
+"build__b__spline_8stanfunctions.html":[4,0,15],
 "cholesky__corr__constrain_8stanfunctions.html":[4,0,19],
 "clayton__copula_8stanfunctions.html":[4,0,2],
 "copula__definition_8stan.html":[4,0,3],
