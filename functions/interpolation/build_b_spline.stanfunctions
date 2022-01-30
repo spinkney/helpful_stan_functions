@@ -22,33 +22,33 @@
 * @param order Int the order of the b-spline
 * @return vector of B-spline bases
 */
-  vector build_b_spline(array[] real t, array[] real ext_knots, int ind,
-                        int order);
-  vector build_b_spline(array[] real t, array[] real ext_knots, int ind,
-                        int order) {
-    int N = size(t);
-    vector[N] b_spline;
-    vector[N] w1 = rep_vector(0, N);
-    vector[N] w2 = w1;
+vector build_b_spline(array[] real t, array[] real ext_knots, int ind,
+                      int order);
+vector build_b_spline(array[] real t, array[] real ext_knots, int ind,
+                      int order) {
+  int N = size(t);
+  vector[N] b_spline;
+  vector[N] w1 = rep_vector(0, N);
+  vector[N] w2 = w1;
+  
+  if (order == 1) {
+    for (i in 1 : N)  // B-splines of order 1 are piece-wise constant
+      b_spline[i] = (ext_knots[ind] <= t[i]) && (t[i] < ext_knots[ind + 1]);
+  } else {
+    if (ext_knots[ind] != ext_knots[ind + order - 1]) 
+      w1 = (to_vector(t) - rep_vector(ext_knots[ind], N))
+           / (ext_knots[ind + order - 1] - ext_knots[ind]);
     
-    if (order == 1) {
-      for (i in 1 : N)  // B-splines of order 1 are piece-wise constant
-        b_spline[i] = (ext_knots[ind] <= t[i]) && (t[i] < ext_knots[ind + 1]);
-    } else {
-      if (ext_knots[ind] != ext_knots[ind + order - 1]) 
-        w1 = (to_vector(t) - rep_vector(ext_knots[ind], N))
-             / (ext_knots[ind + order - 1] - ext_knots[ind]);
-      
-      if (ext_knots[ind + 1] != ext_knots[ind + order]) 
-        w2 = 1
-             - (to_vector(t) - rep_vector(ext_knots[ind + 1], N))
-               / (ext_knots[ind + order] - ext_knots[ind + 1]);
-      
-      // Calculating the B-spline recursively as linear interpolation of two lower-order splines 
-      b_spline = w1 .* build_b_spline(t, ext_knots, ind, order - 1)
-                 + w2 .* build_b_spline(t, ext_knots, ind + 1, order - 1);
-    }
+    if (ext_knots[ind + 1] != ext_knots[ind + order]) 
+      w2 = 1
+           - (to_vector(t) - rep_vector(ext_knots[ind + 1], N))
+             / (ext_knots[ind + order] - ext_knots[ind + 1]);
     
-    return b_spline;
+    // Calculating the B-spline recursively as linear interpolation of two lower-order splines 
+    b_spline = w1 .* build_b_spline(t, ext_knots, ind, order - 1)
+               + w2 .* build_b_spline(t, ext_knots, ind + 1, order - 1);
   }
+  
+  return b_spline;
+}
 /** @} */
