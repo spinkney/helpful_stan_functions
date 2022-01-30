@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: B-Spline Basis Interpolation Functions</title>
+		<title>Helpful Stan Functions: File Members</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -395,7 +395,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__splines.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('globals_vars.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -413,135 +413,10 @@ $(document).ready(function(){initNavTree('group__splines.html',''); initResizabl
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">B-Spline Basis Interpolation Functions<div class="ingroups"><a class="el" href="group__interpolation.html">Interpolation Functions</a></div></div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga65b2062a50fd259727f9b774accfd420"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a> (array[] real t, array[] real ext_knots, int ind, int order)</td></tr>
-<tr class="separator:ga65b2062a50fd259727f9b774accfd420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga2cb6c540c07a402759bab624703ecdb2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__splines.html#ga2cb6c540c07a402759bab624703ecdb2">functions</a></td></tr>
-<tr class="separator:ga2cb6c540c07a402759bab624703ecdb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line"><a class="code hl_variable" href="group__splines.html#ga2cb6c540c07a402759bab624703ecdb2">functions</a> {</div>
-<div class="line">  vector <a class="code hl_function" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a>(array[] real t, array[] real ext_knots, <span class="keywordtype">int</span> ind,</div>
-<div class="line">                        <span class="keywordtype">int</span> order);</div>
-<div class="line">  vector <a class="code hl_function" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a>(array[] real t, array[] real ext_knots, <span class="keywordtype">int</span> ind,</div>
-<div class="line">                        <span class="keywordtype">int</span> order) {</div>
-<div class="line">    <span class="keywordtype">int</span> N = size(t);</div>
-<div class="line">    vector[N] b_spline;</div>
-<div class="line">    vector[N] w1 = rep_vector(0, N);</div>
-<div class="line">    vector[N] w2 = w1;</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (order == 1) {</div>
-<div class="line">      <span class="keywordflow">for</span> (i in 1 : N)  <span class="comment">// B-splines of order 1 are piece-wise constant</span></div>
-<div class="line">        b_spline[i] = (ext_knots[ind] &lt;= t[i]) &amp;&amp; (t[i] &lt; ext_knots[ind + 1]);</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">      <span class="keywordflow">if</span> (ext_knots[ind] != ext_knots[ind + order - 1]) </div>
-<div class="line">        w1 = (to_vector(t) - rep_vector(ext_knots[ind], N))</div>
-<div class="line">             / (ext_knots[ind + order - 1] - ext_knots[ind]);</div>
-<div class="line">      </div>
-<div class="line">      <span class="keywordflow">if</span> (ext_knots[ind + 1] != ext_knots[ind + order]) </div>
-<div class="line">        w2 = 1</div>
-<div class="line">             - (to_vector(t) - rep_vector(ext_knots[ind + 1], N))</div>
-<div class="line">               / (ext_knots[ind + order] - ext_knots[ind + 1]);</div>
-<div class="line">      </div>
-<div class="line">      <span class="comment">// Calculating the B-spline recursively as linear interpolation of two lower-order splines </span></div>
-<div class="line">      b_spline = w1 .* <a class="code hl_function" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a>(t, ext_knots, ind, order - 1)</div>
-<div class="line">                 + w2 .* <a class="code hl_function" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a>(t, ext_knots, ind + 1, order - 1);</div>
-<div class="line">    }</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">return</span> b_spline;</div>
-<div class="line">  }</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__splines_html_ga2cb6c540c07a402759bab624703ecdb2"><div class="ttname"><a href="group__splines.html#ga2cb6c540c07a402759bab624703ecdb2">functions</a></div><div class="ttdeci">functions</div><div class="ttdef"><b>Definition:</b> build_b_spline.stanfunctions:25</div></div>
-<div class="ttc" id="agroup__splines_html_ga65b2062a50fd259727f9b774accfd420"><div class="ttname"><a href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a></div><div class="ttdeci">vector build_b_spline(array[] real t, array[] real ext_knots, int ind, int order)</div><div class="ttdef"><b>Definition:</b> build_b_spline.stanfunctions:28</div></div>
-</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga65b2062a50fd259727f9b774accfd420" name="ga65b2062a50fd259727f9b774accfd420"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga65b2062a50fd259727f9b774accfd420">&#9670;&nbsp;</a></span>build_b_spline()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector build_b_spline </td>
-          <td>(</td>
-          <td class="paramtype">array[]real&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">array[]real&#160;</td>
-          <td class="paramname"><em>ext_knots</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ind</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>order</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ga2cb6c540c07a402759bab624703ecdb2" name="ga2cb6c540c07a402759bab624703ecdb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2cb6c540c07a402759bab624703ecdb2">&#9670;&nbsp;</a></span>functions</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">functions</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div>
-<div class="line">  vector <a class="code hl_function" href="group__splines.html#ga65b2062a50fd259727f9b774accfd420">build_b_spline</a>(array[] real t, array[] real ext_knots, <span class="keywordtype">int</span> ind,</div>
-<div class="line">                        <span class="keywordtype">int</span> order)</div>
-</div><!-- fragment --><p >B-Spline Basis interpolation</p>
-<p >"Splines In Stan", Milad Kharratzadeh, Oct. 23, 2017, <br  />
- <a href="https://github.com/milkha/Splines_in_Stan/blob/master/splines_in_stan.pdf">https://github.com/milkha/Splines_in_Stan/blob/master/splines_in_stan.pdf</a> <br  />
-accessed Feb. 9, 2021.</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Milad Kharratzadeh <br  />
-<a href="https://github.com/milkha/Splines_in_Stan/blob/master/b_spline.stan">https://github.com/milkha/Splines_in_Stan/blob/master/b_spline.stan</a> <br  />
-Accessed Feb. 9, 2021</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>Array of real numbers, the points at which the b_spline is calculated </td></tr>
-    <tr><td class="paramname">ext_knots</td><td>Array of real numbers, the set of extended knots </td></tr>
-    <tr><td class="paramname">ind</td><td>Int the index of the b_spline </td></tr>
-    <tr><td class="paramname">order</td><td>Int the order of the b-spline </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>vector of B-spline bases </dd></dl>
-
-</div>
-</div>
+&#160;<ul>
+<li>functions&#160;:&#160;<a class="el" href="group__splines.html#ga2cb6c540c07a402759bab624703ecdb2">build_b_spline.stanfunctions</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
