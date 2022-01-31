@@ -10,6 +10,10 @@ html {
 
 }
 
+table, div, p {
+  font: 13px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+}
+
 div.line {
   white-space: pre;
 }
