@@ -10,7 +10,7 @@ html {
 
 }
 
-table, div, p {
+table, div  {
   font: 13px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
