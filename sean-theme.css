@@ -10,8 +10,8 @@ html {
 
 }
 
-pre > code {
-  white-space: pre-wrap;
+div.line {
+  white-space: pre;
 }
 
 pre code.hljs {
