@@ -66,9 +66,9 @@ html {
     --font-family-monospace: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; 
 
     /* font sizes */
-    --page-font-size: 15.6px;
+    /* --page-font-size: 15.6px; */
     --navigation-font-size: 14.4px;
-    --code-font-size: 12x; /* affects code, fragment */
+    --code-font-size: 14.4px; /* affects code, fragment */
     --title-font-size: 22px;
 
     /* content text properties. These only affect the page content, not the navigation or any other ui elements */
@@ -276,9 +276,9 @@ h1, h2, h3, h4, h5 {
     line-height: initial;
 }
 
-p, div, table, dl {
+/* p, div, table, dl {
     font-size: var(--page-font-size);
-}
+} */
 
 a:link, a:visited, a:hover, a:focus, a:active {
     color: var(--primary-color) !important;
