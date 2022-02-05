@@ -10,10 +10,8 @@
  * people find them useful. This project attempts to gather those functions and
  * show example usage.
  * 
- * A side benefit is that users may find the code helpful in learning Stan
- * and efficient Stan programming. As attempts have been made to follow best practices,
- * though as the repository ages, updates and PRs are welcome to
- * keep the programs up-to-date.
+ * A side benefit is that users may find the code helpful in learning Stan!
+ * Updates and PRs are welcome to keep the programs up-to-date.
  * 
  * If you wish to add a function please see:
  *
