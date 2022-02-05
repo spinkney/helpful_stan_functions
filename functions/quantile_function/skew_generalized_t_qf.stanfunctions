@@ -1,4 +1,4 @@
-#include <special/inc_beta_inverse.stanfunctions>
+#include special/inc_beta_inverse.stanfunctions
 
 /** @ingroup qf
  * Skewed Generalized T Quantile Function

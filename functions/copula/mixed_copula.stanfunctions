@@ -9,7 +9,7 @@
  * \ingroup copula
  *  @{ */
 
-#include <distribution/multi_normal_cholesky_truncated.stanfunctions>
+#include distribution/multi_normal_cholesky_truncated.stanfunctions
 
 /**
   * Normal marginal
