@@ -441,7 +441,7 @@ Functions</h2></td></tr>
 <p >The mixed-discrete normal copula. The method is from <br  />
  Smith, Michael &amp; Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.</p>
 <div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="multi__normal__cholesky__truncated_8stanfunctions.html">distribution/multi_normal_cholesky_truncated.stanfunctions</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include distribution/multi_normal_cholesky_truncated.stanfunctions</span></div>
 <div class="line"> </div>
 <div class="line">vector <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(array[] real y, row_vector mu_glm, array[] real sigma,</div>
 <div class="line">                       <span class="keywordtype">int</span> J) {</div>
@@ -693,7 +693,6 @@ Functions</h2></td></tr>
 <div class="ttc" id="agroup__mixed__copula_html_gab5b9aa81d74d233f474a3c9c419be4bc"><div class="ttname"><a href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a></div><div class="ttdeci">array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:331</div></div>
 <div class="ttc" id="agroup__mixed__copula_html_gae6237a157853b40b1b2e33c548d5ae50"><div class="ttname"><a href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a></div><div class="ttdeci">real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:124</div></div>
 <div class="ttc" id="agroup__tmvn_html_ga410a62b317befea7a30c079292d142f0"><div class="ttname"><a href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:68</div></div>
-<div class="ttc" id="amulti__normal__cholesky__truncated_8stanfunctions_html"><div class="ttname"><a href="multi__normal__cholesky__truncated_8stanfunctions.html">multi_normal_cholesky_truncated.stanfunctions</a></div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga4d69bc504219928b6048bd372ef23845" name="ga4d69bc504219928b6048bd372ef23845"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4d69bc504219928b6048bd372ef23845">&#9670;&nbsp;</a></span>bernoulli_marginal()</h2>

@@ -19,6 +19,7 @@ var files_dup =
     [ "interp_1d_cubic.stanfunctions", "interp__1d__cubic_8stanfunctions.html", "interp__1d__cubic_8stanfunctions" ],
     [ "interp_1d_linear.stanfunctions", "interp__1d__linear_8stanfunctions.html", "interp__1d__linear_8stanfunctions" ],
     [ "interpolation_definition.stan", "interpolation__definition_8stan.html", null ],
+    [ "chol_kronecker_prod.stanfunctions", "chol__kronecker__prod_8stanfunctions.html", "chol__kronecker__prod_8stanfunctions" ],
     [ "cholesky_corr_constrain.stanfunctions", "cholesky__corr__constrain_8stanfunctions.html", "cholesky__corr__constrain_8stanfunctions" ],
     [ "correlation_angles.stanfunctions", "correlation__angles_8stanfunctions.html", "correlation__angles_8stanfunctions" ],
     [ "correlation_definition.stan", "correlation__definition_8stan.html", null ],
