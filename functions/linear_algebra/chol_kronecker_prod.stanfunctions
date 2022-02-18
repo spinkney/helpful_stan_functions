@@ -18,15 +18,15 @@ matrix chol_kronecker_prod(matrix A, matrix B) {
   int p = rows(B);
   int N = m * p;
   matrix[N, N] C = rep_matrix(0., N, N);
-
-  for (i in 1:m) {
-    for (j in 1:i) {
+  
+  for (i in 1 : m) {
+    for (j in 1 : i) {
       if (fabs(A[i, j]) > 1e-12) {
-      int row_start = (i - 1) * p + 1;
-      int row_end = (i - 1) * p + p;
-      int col_start = (j - 1) * p + 1;
-      int col_end = (j - 1) * p + p;
-      C[row_start:row_end, col_start:col_end] = A[i, j] * B;
+        int row_start = (i - 1) * p + 1;
+        int row_end = (i - 1) * p + p;
+        int col_start = (j - 1) * p + 1;
+        int col_end = (j - 1) * p + p;
+        C[row_start : row_end, col_start : col_end] = A[i, j] * B;
       }
     }
   }
