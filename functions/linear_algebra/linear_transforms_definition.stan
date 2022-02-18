@@ -1,3 +1,3 @@
-/** \defgroup linear_transforms Linear transforms
+/** \defgroup linear_algebra Linear algebra
   *
   **/

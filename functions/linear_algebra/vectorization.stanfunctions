@@ -2,7 +2,7 @@
  *
  * @include \linear_algebra\vectorization.stanfunctions
  *
- * \ingroup linear_transforms
+ * \ingroup linear_algebra
  *  @{ */
 /**
  * Lower triangular elements
