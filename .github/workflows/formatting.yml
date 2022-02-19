@@ -30,7 +30,7 @@ jobs:
           for F in `find . -type f -name "*.stanfunctions"`
           do
             if [ $(grep "derivative_fun" $F | wc -l) -eq "0" ]; then
-              ../linux-stanc --auto-format $F --o $F --include-paths=./functions
+              ../linux-stanc --auto-format --max-line-length 150 $F --o $F --include-paths=./functions
             fi
           done
 
