@@ -17,7 +17,8 @@
  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
  * @return quantile of skew_generalized_t
  */
-real skew_generalized_t_qf(real x, real mu, real sigma, real lambda, real p, real q, int mean_centered) {
+real skew_generalized_t_qf(real x, real mu, real sigma, real lambda, real p, real q,
+                           int mean_centered) {
   if (sigma <= 0) 
     reject("sigma must be > 0 found sigma = ", sigma);
   
@@ -44,11 +45,15 @@ real skew_generalized_t_qf(real x, real mu, real sigma, real lambda, real p, rea
   if (x > 0.5 * (1 - lambda)) {
     prob = 1 - x;
     lam = -lambda;
-    out = -(sigma * (lam - 1) * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q) ^ (-1 / p));
+    out = -(sigma * (lam - 1)
+            * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
+              ^ (-1 / p));
   } else {
     prob = x;
     lam = lambda;
-    out = sigma * (lam - 1) * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q) ^ (-1 / p);
+    out = sigma * (lam - 1)
+          * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
+            ^ (-1 / p);
   }
   
   if (!is_nan(mean_centered)) 

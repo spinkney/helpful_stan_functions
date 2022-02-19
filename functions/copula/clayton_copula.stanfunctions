@@ -38,7 +38,8 @@ real clayton_copula_lpdf(real u, real v, real theta) {
   if (theta <= 0.0) 
     reject("clayton_copula: theta must > 0");
   
-  return log1p(theta) - (theta + 1) * (log(u) + log(v)) - (1 + 2 * theta) / theta * log(pow(u, -theta) + pow(v, -theta) - 1);
+  return log1p(theta) - (theta + 1) * (log(u) + log(v))
+         - (1 + 2 * theta) / theta * log(pow(u, -theta) + pow(v, -theta) - 1);
 }
 
 /** @} */

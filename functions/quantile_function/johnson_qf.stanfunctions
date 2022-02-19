@@ -56,7 +56,8 @@ real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles) {
     reject("alpha must be between 0 and 1");
   if (rows(quantiles) != 3) 
     reject("quantiles must have three elements");
-  if (in_order({lower_bound, quantiles[1], quantiles[2], quantiles[3], positive_infinity()})) {
+  if (in_order({lower_bound, quantiles[1], quantiles[2], quantiles[3],
+                positive_infinity()})) {
     real c = inv_Phi(1 - alpha);
     vector[3] quantiles_ = quantiles - lower_bound;
     real L = log(quantiles_[1]);
@@ -88,7 +89,8 @@ real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles) {
     }
     // return lower_bound + theta * exp(lambda * sinh(asinh(delta * z) + asinh(n * numer)));
     // http://www.metalogdistributions.com/images/J-QPD_Parameterizations.pdf section 1.2
-    return lower_bound + theta * exp(lambda * delta * (k * z + n * c * sqrt(1 + square(delta * z))));
+    return lower_bound
+           + theta * exp(lambda * delta * (k * z + n * c * sqrt(1 + square(delta * z))));
   }
   return not_a_number(); // never reaches
 }
@@ -137,7 +139,8 @@ real JQPDS2_qf(real p, real lower_bound, real alpha, vector quantiles) {
     reject("alpha must be between 0 and 1");
   if (rows(quantiles) != 3) 
     reject("quantiles must have three elements");
-  if (in_order({lower_bound, quantiles[1], quantiles[2], quantiles[3], positive_infinity()})) {
+  if (in_order({lower_bound, quantiles[1], quantiles[2], quantiles[3],
+                positive_infinity()})) {
     real c = inv_Phi(1 - alpha);
     vector[3] quantiles_ = quantiles - lower_bound;
     real L = log(quantiles_[1]);

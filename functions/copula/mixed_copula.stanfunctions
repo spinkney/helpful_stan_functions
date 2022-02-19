@@ -120,7 +120,9 @@ array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J) {
 * @param N Integer number of observations
 * @return Real log-probability 
 */
-real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind,
+real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
+                     array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
+                     array[] real sigma, matrix L, array[] matrix bounds_ind,
                      vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
@@ -187,7 +189,9 @@ real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[]
  * @param N Integer number of observations
  * @return Real log-probability 
  */
-real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind,
+real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
+                  array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
+                  array[] real sigma, matrix L, array[] matrix bounds_ind,
                   vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
@@ -318,7 +322,8 @@ matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj) {
   * @param J  total number of outcomes
   * @return N x J x 2 array indicating whether there is a lower/upper bound.
   */
-array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J) {
+array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp,
+                                    int N, int Jn, int Jb, int Jp, int J) {
   matrix[J, N] lb_ind = rep_matrix(0, J, N); // initialize to no lower bound
   matrix[J, N] ub_ind = rep_matrix(0, J, N); // initialize to no upper bound
   array[2] matrix[J, N] out; // output is a 2-dim array of JxN matrices

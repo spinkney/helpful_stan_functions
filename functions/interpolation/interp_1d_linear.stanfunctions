@@ -17,7 +17,8 @@
 * @return array of D-vectors, length `N_out`, corresponding to
 * interpolated values `y_out`
 */
-array[] vector interp_1d_linear(array[] vector y, data array[] real x, data array[] real x_out) {
+array[] vector interp_1d_linear(array[] vector y, data array[] real x,
+                                data array[] real x_out) {
   int left = 1;
   int right = 1;
   real w = 1.0;

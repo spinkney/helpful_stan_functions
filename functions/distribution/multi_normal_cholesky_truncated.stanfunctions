@@ -65,7 +65,8 @@
   * @return log density
   */
 
-real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind) {
+real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb,
+                                          vector ub, vector lb_ind, vector ub_ind) {
   int K = rows(u);
   vector[K] z;
   real lp = 0;
@@ -116,7 +117,8 @@ real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector 
   * @return vector of truncated random normal variates
   */
 
-vector multi_normal_cholesky_truncated_rng(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind) {
+vector multi_normal_cholesky_truncated_rng(vector u, vector mu, matrix L, vector lb,
+                                           vector ub, vector lb_ind, vector ub_ind) {
   int K = rows(u);
   vector[K] z;
   
@@ -163,7 +165,8 @@ vector multi_normal_cholesky_truncated_rng(vector u, vector mu, matrix L, vector
 * @param lb_ind Vector indicator if there is an lower bound
 * @param ub_ind Vector indicator if there is an upper bound
 */
-void multi_normal_cholesky_truncated_lp(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind) {
+void multi_normal_cholesky_truncated_lp(vector u, vector mu, matrix L, vector lb,
+                                        vector ub, vector lb_ind, vector ub_ind) {
   int K = rows(u);
   vector[K] z;
   
