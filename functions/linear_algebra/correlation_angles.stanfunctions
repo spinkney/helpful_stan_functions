@@ -28,8 +28,7 @@ matrix angle2chol(matrix angle_mat) {
     inv_mat[i, i] = prod(sin(angle_mat[i, 1 : (i - 1)]));
     if (i > 2) {
       for (j in 2 : (i - 1)) {
-        inv_mat[i, j] = cos(angle_mat[i, j])
-                        * prod(sin(angle_mat[i, 1 : (j - 1)]));
+        inv_mat[i, j] = cos(angle_mat[i, j]) * prod(sin(angle_mat[i, 1 : (j - 1)]));
       }
     }
   }

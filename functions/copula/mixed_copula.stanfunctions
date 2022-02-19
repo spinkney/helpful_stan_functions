@@ -25,8 +25,7 @@
   * @param J Integer
   * @return Vector in [0, 1] of continuous outcome
   */
-vector normal_marginal(array[] real y, row_vector mu_glm, array[] real sigma,
-                       int J) {
+vector normal_marginal(array[] real y, row_vector mu_glm, array[] real sigma, int J) {
   vector[J] u;
   
   for (j in 1 : J) {
@@ -121,11 +120,8 @@ array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J) {
 * @param N Integer number of observations
 * @return Real log-probability 
 */
-real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
-                     array[] vector uraw_b, array[] vector uraw_p,
-                     matrix mu_glm, array[] real sigma, matrix L,
-                     array[] matrix bounds_ind, vector tmvn_mu,
-                     array[] int J, int N) {
+real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
+                     array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
   array[2] vector[J[2]] bb;
@@ -144,8 +140,7 @@ real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
     int pos = 1;
     
     if (J[1] > 0) {
-      u[pos : J[1]] = normal_marginal(Yn[i], head(mu_glm[i], J[1]), sigma,
-                                      J[1]);
+      u[pos : J[1]] = normal_marginal(Yn[i], head(mu_glm[i], J[1]), sigma, J[1]);
       lb[pos : J[1]] = rep_vector(negative_infinity(), J[1]);
       ub[pos : J[1]] = rep_vector(positive_infinity(), J[1]);
       pos += J[1];
@@ -192,11 +187,8 @@ real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
  * @param N Integer number of observations
  * @return Real log-probability 
  */
-real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp,
-                  array[] vector uraw_b, array[] vector uraw_p,
-                  matrix mu_glm, array[] real sigma, matrix L,
-                  array[] matrix bounds_ind, vector tmvn_mu, array[] int J,
-                  int N) {
+real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
+                  array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
   
@@ -299,15 +291,13 @@ matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj) {
   }
   
   if (J[2] > 0) {
-    mu[ : , outcome] = inv_logit(block(X, 1, pos, N, Kj[2])
-                                 * segment(beta, pos, Kj[2]));
+    mu[ : , outcome] = inv_logit(block(X, 1, pos, N, Kj[2]) * segment(beta, pos, Kj[2]));
     pos += Kj[2];
     outcome += 1;
   }
   
   if (J[3] > 0) {
-    mu[ : , outcome] = exp(block(X, 1, pos, N, Kj[3])
-                           * segment(beta, pos, Kj[3]));
+    mu[ : , outcome] = exp(block(X, 1, pos, N, Kj[3]) * segment(beta, pos, Kj[3]));
   }
   
   return mu;
@@ -328,9 +318,7 @@ matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj) {
   * @param J  total number of outcomes
   * @return N x J x 2 array indicating whether there is a lower/upper bound.
   */
-array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb,
-                                    array[,] int Yp, int N, int Jn, int Jb,
-                                    int Jp, int J) {
+array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J) {
   matrix[J, N] lb_ind = rep_matrix(0, J, N); // initialize to no lower bound
   matrix[J, N] ub_ind = rep_matrix(0, J, N); // initialize to no upper bound
   array[2] matrix[J, N] out; // output is a 2-dim array of JxN matrices

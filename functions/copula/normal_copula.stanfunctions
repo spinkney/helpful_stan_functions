@@ -31,8 +31,7 @@
 real normal_copula_lpdf(real u, real v, real rho) {
   real rho_sq = square(rho);
   
-  return (0.5 * rho * (-2. * u * v + square(u) * rho + square(v) * rho))
-         / (-1. + rho_sq) - 0.5 * log1m(rho_sq);
+  return (0.5 * rho * (-2. * u * v + square(u) * rho + square(v) * rho)) / (-1. + rho_sq) - 0.5 * log1m(rho_sq);
 }
 
 /**
@@ -98,8 +97,7 @@ real multi_normal_copula_lpdf(matrix u, matrix L) {
   real inv_sqrt_det_log = sum(log(diagonal(L)));
   matrix[K, N] x = mdivide_left_tri_low(L, u);
   
-  return -N * inv_sqrt_det_log
-         - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));
+  return -N * inv_sqrt_det_log - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));
 }
 
 /**

@@ -46,10 +46,8 @@ real gumbel_copula_lpdf(real u, real v, real theta) {
       return negative_infinity();
   }
   
-  return theta_m1 * log_neg_log_u + theta_m1 * log_neg_log_v + neg_log_u
-         + neg_log_v - exp(log_temp / theta)
-         + log_sum_exp(2 * theta_m1 / -theta * log_temp,
-                       log(theta_m1) + (1 - 2 * theta) / theta * log_temp);
+  return theta_m1 * log_neg_log_u + theta_m1 * log_neg_log_v + neg_log_u + neg_log_v - exp(log_temp / theta)
+         + log_sum_exp(2 * theta_m1 / -theta * log_temp, log(theta_m1) + (1 - 2 * theta) / theta * log_temp);
 }
 
 /** @} */

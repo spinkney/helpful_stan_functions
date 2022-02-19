@@ -20,8 +20,7 @@ real unit_johnson_qf(real p, real mu, real sigma) {
   if (is_nan(mu) || is_inf(mu)) 
     reject("unit_johnson_icdf: mu must be finite; ", "found mu = ", mu);
   if (is_nan(sigma) || is_inf(sigma) || sigma <= 0) 
-    reject("unit_johnsonl_icdf: sigma must be finite and > 0; ",
-           "found sigma = ", sigma);
+    reject("unit_johnsonl_icdf: sigma must be finite and > 0; ", "found sigma = ", sigma);
   real x = sinh((inv_Phi(p) - mu) / sigma);
   return inv_logit(x);
 }
