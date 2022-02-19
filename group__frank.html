@@ -435,10 +435,7 @@ Functions</h2></td></tr>
 </p>
 <div class="fragment"><div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a>(real u, real v, real theta) {</div>
-<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v)</div>
-<div class="line">         - 2</div>
-<div class="line">           * log(1 - exp(-theta)</div>
-<div class="line">                 - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
+<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v) - 2 * log(1 - exp(-theta) - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__frank_html_gabe632c658443e2fa0169a2ef0dbc39cf"><div class="ttname"><a href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:32</div></div>

@@ -445,10 +445,8 @@ Functions</h2></td></tr>
 <div class="line">      <span class="keywordflow">return</span> negative_infinity();</div>
 <div class="line">  }</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> theta_m1 * log_neg_log_u + theta_m1 * log_neg_log_v + neg_log_u</div>
-<div class="line">         + neg_log_v - exp(log_temp / theta)</div>
-<div class="line">         + log_sum_exp(2 * theta_m1 / -theta * log_temp,</div>
-<div class="line">                       log(theta_m1) + (1 - 2 * theta) / theta * log_temp);</div>
+<div class="line">  <span class="keywordflow">return</span> theta_m1 * log_neg_log_u + theta_m1 * log_neg_log_v + neg_log_u + neg_log_v - exp(log_temp / theta)</div>
+<div class="line">         + log_sum_exp(2 * theta_m1 / -theta * log_temp, log(theta_m1) + (1 - 2 * theta) / theta * log_temp);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__gumbel_html_ga6590db476c4f85fbf9040d32b3b1a353"><div class="ttname"><a href="group__gumbel.html#ga6590db476c4f85fbf9040d32b3b1a353">gumbel_copula_lpdf</a></div><div class="ttdeci">real gumbel_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> gumbel_copula.stanfunctions:31</div></div>

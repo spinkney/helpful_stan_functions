@@ -443,8 +443,7 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include distribution/multi_normal_cholesky_truncated.stanfunctions</span></div>
 <div class="line"> </div>
-<div class="line">vector <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(array[] real y, row_vector mu_glm, array[] real sigma,</div>
-<div class="line">                       <span class="keywordtype">int</span> J) {</div>
+<div class="line">vector <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(array[] real y, row_vector mu_glm, array[] real sigma, <span class="keywordtype">int</span> J) {</div>
 <div class="line">  vector[J] u;</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
@@ -483,11 +482,8 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> b;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp,</div>
-<div class="line">                     array[] vector uraw_b, array[] vector uraw_p,</div>
-<div class="line">                     matrix mu_glm, array[] real sigma, matrix L,</div>
-<div class="line">                     array[] matrix bounds_ind, vector tmvn_mu,</div>
-<div class="line">                     array[] <span class="keywordtype">int</span> J, <span class="keywordtype">int</span> N) {</div>
+<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,</div>
+<div class="line">                     array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] <span class="keywordtype">int</span> J, <span class="keywordtype">int</span> N) {</div>
 <div class="line">  real lp = 0;</div>
 <div class="line">  <span class="keywordtype">int</span> J_all = sum(J);</div>
 <div class="line">  array[2] vector[J[2]] bb;</div>
@@ -506,8 +502,7 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keywordtype">int</span> pos = 1;</div>
 <div class="line">    </div>
 <div class="line">    <span class="keywordflow">if</span> (J[1] &gt; 0) {</div>
-<div class="line">      u[pos : J[1]] = <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(Yn[i], head(mu_glm[i], J[1]), sigma,</div>
-<div class="line">                                      J[1]);</div>
+<div class="line">      u[pos : J[1]] = <a class="code hl_function" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a>(Yn[i], head(mu_glm[i], J[1]), sigma, J[1]);</div>
 <div class="line">      lb[pos : J[1]] = rep_vector(negative_infinity(), J[1]);</div>
 <div class="line">      ub[pos : J[1]] = rep_vector(positive_infinity(), J[1]);</div>
 <div class="line">      pos += J[1];</div>
@@ -535,11 +530,8 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> lp;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp,</div>
-<div class="line">                  array[] vector uraw_b, array[] vector uraw_p,</div>
-<div class="line">                  matrix mu_glm, array[] real sigma, matrix L,</div>
-<div class="line">                  array[] matrix bounds_ind, vector tmvn_mu, array[] <span class="keywordtype">int</span> J,</div>
-<div class="line">                  <span class="keywordtype">int</span> N) {</div>
+<div class="line">real <a class="code hl_function" href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,</div>
+<div class="line">                  array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] <span class="keywordtype">int</span> J, <span class="keywordtype">int</span> N) {</div>
 <div class="line">  real lp = 0;</div>
 <div class="line">  <span class="keywordtype">int</span> J_all = sum(J);</div>
 <div class="line">  </div>
@@ -631,23 +623,19 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (J[2] &gt; 0) {</div>
-<div class="line">    mu[ : , outcome] = inv_logit(block(X, 1, pos, N, Kj[2])</div>
-<div class="line">                                 * segment(beta, pos, Kj[2]));</div>
+<div class="line">    mu[ : , outcome] = inv_logit(block(X, 1, pos, N, Kj[2]) * segment(beta, pos, Kj[2]));</div>
 <div class="line">    pos += Kj[2];</div>
 <div class="line">    outcome += 1;</div>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (J[3] &gt; 0) {</div>
-<div class="line">    mu[ : , outcome] = exp(block(X, 1, pos, N, Kj[3])</div>
-<div class="line">                           * segment(beta, pos, Kj[3]));</div>
+<div class="line">    mu[ : , outcome] = exp(block(X, 1, pos, N, Kj[3]) * segment(beta, pos, Kj[3]));</div>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> mu;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line">array[] matrix <a class="code hl_function" href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb,</div>
-<div class="line">                                    array[,] <span class="keywordtype">int</span> Yp, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> Jn, <span class="keywordtype">int</span> Jb,</div>
-<div class="line">                                    <span class="keywordtype">int</span> Jp, <span class="keywordtype">int</span> J) {</div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a>(array[,] real Yn, array[,] <span class="keywordtype">int</span> Yb, array[,] <span class="keywordtype">int</span> Yp, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> Jn, <span class="keywordtype">int</span> Jb, <span class="keywordtype">int</span> Jp, <span class="keywordtype">int</span> J) {</div>
 <div class="line">  matrix[J, N] lb_ind = rep_matrix(0, J, N); <span class="comment">// initialize to no lower bound</span></div>
 <div class="line">  matrix[J, N] ub_ind = rep_matrix(0, J, N); <span class="comment">// initialize to no upper bound</span></div>
 <div class="line">  array[2] matrix[J, N] out; <span class="comment">// output is a 2-dim array of JxN matrices</span></div>
@@ -685,13 +673,13 @@ Functions</h2></td></tr>
 <div class="line">  out[2] = ub_ind;</div>
 <div class="line">  <span class="keywordflow">return</span> out;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__mixed__copula_html_ga19af974cd9e77473e6c68dfcc1c4e3ee"><div class="ttname"><a href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a></div><div class="ttdeci">array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:89</div></div>
-<div class="ttc" id="agroup__mixed__copula_html_ga4d69bc504219928b6048bd372ef23845"><div class="ttname"><a href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a></div><div class="ttdeci">array[] vector bernoulli_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:56</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga19af974cd9e77473e6c68dfcc1c4e3ee"><div class="ttname"><a href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a></div><div class="ttdeci">array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:88</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga4d69bc504219928b6048bd372ef23845"><div class="ttname"><a href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a></div><div class="ttdeci">array[] vector bernoulli_marginal(array[] int y, row_vector mu_glm, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:55</div></div>
 <div class="ttc" id="agroup__mixed__copula_html_ga55043cabec5f27594fa55802b23aba14"><div class="ttname"><a href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a></div><div class="ttdeci">vector normal_marginal(array[] real y, row_vector mu_glm, array[] real sigma, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:28</div></div>
-<div class="ttc" id="agroup__mixed__copula_html_ga59390ebb9ac59227a20800ceb30bacfa"><div class="ttname"><a href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a></div><div class="ttdeci">real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:195</div></div>
-<div class="ttc" id="agroup__mixed__copula_html_ga5ae538db77424f61cb17a15d32818951"><div class="ttname"><a href="group__mixed__copula.html#ga5ae538db77424f61cb17a15d32818951">get_means</a></div><div class="ttdeci">matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:289</div></div>
-<div class="ttc" id="agroup__mixed__copula_html_gab5b9aa81d74d233f474a3c9c419be4bc"><div class="ttname"><a href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a></div><div class="ttdeci">array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:331</div></div>
-<div class="ttc" id="agroup__mixed__copula_html_gae6237a157853b40b1b2e33c548d5ae50"><div class="ttname"><a href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a></div><div class="ttdeci">real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:124</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga59390ebb9ac59227a20800ceb30bacfa"><div class="ttname"><a href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a></div><div class="ttdeci">real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:190</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_ga5ae538db77424f61cb17a15d32818951"><div class="ttname"><a href="group__mixed__copula.html#ga5ae538db77424f61cb17a15d32818951">get_means</a></div><div class="ttdeci">matrix get_means(vector beta, matrix X, array[] int J, array[] int Kj)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:281</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_gab5b9aa81d74d233f474a3c9c419be4bc"><div class="ttname"><a href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a></div><div class="ttdeci">array[] matrix get_bounds_indicator(array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:321</div></div>
+<div class="ttc" id="agroup__mixed__copula_html_gae6237a157853b40b1b2e33c548d5ae50"><div class="ttname"><a href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a></div><div class="ttdeci">real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</div><div class="ttdef"><b>Definition:</b> mixed_copula.stanfunctions:123</div></div>
 <div class="ttc" id="agroup__tmvn_html_ga410a62b317befea7a30c079292d142f0"><div class="ttname"><a href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:68</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga4d69bc504219928b6048bd372ef23845" name="ga4d69bc504219928b6048bd372ef23845"></a>

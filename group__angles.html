@@ -439,8 +439,7 @@ Functions</h2></td></tr>
 <div class="line">    inv_mat[i, i] = prod(sin(angle_mat[i, 1 : (i - 1)]));</div>
 <div class="line">    <span class="keywordflow">if</span> (i &gt; 2) {</div>
 <div class="line">      <span class="keywordflow">for</span> (j in 2 : (i - 1)) {</div>
-<div class="line">        inv_mat[i, j] = cos(angle_mat[i, j])</div>
-<div class="line">                        * prod(sin(angle_mat[i, 1 : (j - 1)]));</div>
+<div class="line">        inv_mat[i, j] = cos(angle_mat[i, j]) * prod(sin(angle_mat[i, 1 : (j - 1)]));</div>
 <div class="line">      }</div>
 <div class="line">    }</div>
 <div class="line">  }</div>
@@ -462,7 +461,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> mat;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__angles_html_gabad0f24500b6469472e496cd95acd180"><div class="ttname"><a href="group__angles.html#gabad0f24500b6469472e496cd95acd180">angle2chol</a></div><div class="ttdeci">matrix angle2chol(matrix angle_mat)</div><div class="ttdef"><b>Definition:</b> correlation_angles.stanfunctions:21</div></div>
-<div class="ttc" id="agroup__angles_html_gabe2b8ad3b6e1a7872697a7d0ff6b2888"><div class="ttname"><a href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a></div><div class="ttdeci">matrix angle_vec2angle_mat(vector angle, int K)</div><div class="ttdef"><b>Definition:</b> correlation_angles.stanfunctions:49</div></div>
+<div class="ttc" id="agroup__angles_html_gabe2b8ad3b6e1a7872697a7d0ff6b2888"><div class="ttname"><a href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a></div><div class="ttdeci">matrix angle_vec2angle_mat(vector angle, int K)</div><div class="ttdef"><b>Definition:</b> correlation_angles.stanfunctions:48</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gabad0f24500b6469472e496cd95acd180" name="gabad0f24500b6469472e496cd95acd180"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabad0f24500b6469472e496cd95acd180">&#9670;&nbsp;</a></span>angle2chol()</h2>
