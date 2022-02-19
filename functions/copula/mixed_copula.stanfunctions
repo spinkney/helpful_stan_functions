@@ -120,8 +120,8 @@ array[] vector poisson_marginal(array[] int y, row_vector mu_glm, int J) {
 * @param N Integer number of observations
 * @return Real log-probability 
 */
-real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
-                     array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N) {
+real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind,
+                     vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
   array[2] vector[J[2]] bb;
@@ -187,8 +187,8 @@ real mixed_cop_sp_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[]
  * @param N Integer number of observations
  * @return Real log-probability 
  */
-real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm,
-                  array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N) {
+real mixed_cop_lp(array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind,
+                  vector tmvn_mu, array[] int J, int N) {
   real lp = 0;
   int J_all = sum(J);
   
