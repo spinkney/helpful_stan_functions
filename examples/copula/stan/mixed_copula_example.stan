@@ -5,7 +5,7 @@ data {
   int<lower=0> N; // number of observations
   array[3] int<lower=0> J; // total number of outcomes
   int<lower=0> K; // number of covariates for concatenated design matrices (X1, .., XK)
-  array[N, J[1]] real Yn; // normal outcomes
+  matrix[N, J[1]] Yn; // normal outcomes
   array[N, J[2]] int<lower=0, upper=1> Yb; // bernoulli outcomes
   array[N, J[3]] int<lower=0> Yp; // poisson outcomes
   matrix[N, K] X; // concatenated design matrices (X1, ..., XK)
@@ -14,52 +14,48 @@ data {
 }
 transformed data {
   int J_all = sum(J);
-  array[2] matrix[J_all, N] bounds_ind = get_bounds_indicator(Yn, Yb, Yp, N,
-                                                              J[1], J[2],
-                                                              J[3], J_all);
+  // Create separate design matrices for each outcome type
+  matrix[N, Kj[1]] Xn = X[ : , 1:Kj[1]];
+  matrix[N, Kj[2]] Xb = X[ : , (Kj[1] + 1):(Kj[1] + Kj[2])];
+  matrix[N, Kj[3]] Xp = X[ : , (Kj[2] + 1):(Kj[2] + Kj[3])];
   vector[J_all] mu_zero = rep_vector(0, J_all);
 }
 parameters {
-  vector[K] beta; // long vector of all regression coefficients
+  vector[Kj[1]] beta_n; // Vector of normal regression coefficients
+  vector[Kj[2]] beta_b; // Vector of bernoulli regression coefficients
+  vector[Kj[3]] beta_p; // Vector of poisson regression coefficients
   cholesky_factor_corr[J_all] L; // Cholesky decomposition of JxJ correlation matrix
-  array[J[1]] real<lower=0> sigmasq; // Jn-dim array of variances (may be 0-dim)
-  array[J[2]] vector<lower=0, upper=1>[N] uraw_b; // latent variables for bernoulli outcomes
-  array[J[3]] vector<lower=0, upper=1>[N] uraw_p; // latent variables for Poisson outcomes
+  vector<lower=0>[J[1]] sigmasq; // Jn-dim vector of variances (may be 0-dim)
+  matrix<lower=0, upper=1>[N, J[2]] uraw_b; // latent variables for bernoulli outcomes
+  matrix<lower=0, upper=1>[N, J[3]] uraw_p; // latent variables for Poisson outcomes
 }
 model {
   // initialize variables
-  array[J[1]] real sigma; // stdev
-  matrix[N, J_all] mu_glm = get_means(beta, X, J, Kj);
-  
-  // get standard deviations and declare prior on sigmasq if applicable
-  if (J[1] > 0) {
-    sigma = sqrt(sigmasq);
-    sigmasq ~ inv_gamma(1.0e-4, 1.0e-4);
-    
-    for (j in 1 : J[1]) 
-      to_vector(Yn[ : , j]) ~ normal(to_vector(mu_glm[ : , j]), sigma[j]);
+  vector[J[1]] sigma = sqrt(sigmasq); // stdev
+  // Calculate the means for each regression
+  matrix[N, J[1]] mu_n = Xn * rep_matrix(beta_n, J[1]);
+  matrix[N, J[2]] mu_b = Xb * rep_matrix(beta_b, J[2]);
+  matrix[N, J[3]] mu_p = Xp * rep_matrix(beta_p, J[3]);
+
+  sigmasq ~ inv_gamma(1.0e-4, 1.0e-4);
+  // priors for regression coefficients
+  beta_n ~ normal(0.0, 10.0);
+  beta_b ~ normal(0.0, 10.0);
+  beta_p ~ normal(0.0, 10.0);
+
+  for (n in 1 : N) {
+    // For each individual, construct a matrix containing all needed
+    // marginal calculations (e.g., latent variables, bounds, and indicators)
+    matrix[J_all, 5] marginals = append_row(
+      append_row(normal_marginal(Yn[n], mu_n[n], sigma),
+                 bernoulli_marginal(Yb[n], mu_b[n], uraw_b[n])),
+      poisson_marginal(Yp[n], mu_p[n], uraw_p[n])
+    );
+
+    // Increment log-likelihoo
+    marginals ~ mixed_copula_cholesky(mu_zero, L);
+    Yn[n] ~ normal(mu_n[n], sigma);
   }
-  // prior for beta
-  beta ~ normal(0.0, 10.0);
-  
-  // log target increment
-    if (special == 1) {
-        target += mixed_cop_sp_lp(Yn, Yb, Yp,
-                   uraw_b, uraw_p,
-                   mu_glm,
-                   sigma,
-                   L,
-                   bounds_ind,
-                   mu_zero,
-                   J, N);
-    } else target += mixed_cop_lp(Yn, Yb, Yp,
-                   uraw_b, uraw_p,
-                   mu_glm,
-                   sigma,
-                   L,
-                   bounds_ind,
-                   mu_zero,
-                   J, N);
 }
 generated quantities {
   corr_matrix[J_all] Gamma = multiply_lower_tri_self_transpose(L);
