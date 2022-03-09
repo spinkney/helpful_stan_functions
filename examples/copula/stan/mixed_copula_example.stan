@@ -1,5 +1,5 @@
 functions {
-  #include mixed_copula.stanfunctions
+  #include gaussian_copula.stanfunctions
 }
 data {
   int<lower=0> N; // number of observations
@@ -52,8 +52,8 @@ model {
       poisson_marginal(Yp[n], mu_p[n], uraw_p[n])
     );
 
-    // Increment log-likelihoo
-    marginals ~ mixed_copula_cholesky(mu_zero, L);
+    // Increment log-likelihoods
+    marginals ~ gaussian_copula_cholesky(mu_zero, L);
     Yn[n] ~ normal(mu_n[n], sigma);
   }
 }

@@ -1,10 +1,10 @@
-/** @addtogroup mixed_copula Mixed Discrete-Continuous Gaussian Copula Functions
+/** @addtogroup gaussian_copula Mixed Discrete-Continuous Gaussian Copula Functions
  *
  * The mixed-discrete normal copula. The method is from
  * Smith, Michael & Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation.
  * Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.
  *
- * @include \copula\mixed_copula.stanfunctions
+ * @include \copula\gaussian_copula.stanfunctions
  *
  * \ingroup copula
  *  @{ */
@@ -19,26 +19,20 @@
   *
   * @copyright Ethan Alt, Sean Pinkney 2021 \n
   *
-  * @param y Real[] Array
-  * @param mu_glm Row vector
-  * @param sigma Real[] Array
-  * @param J Integer
-  * @return Vector in [0, 1] of continuous outcome
+  * @param y row_vector of normal outcomes
+  * @param mu_glm row_vector of regression means
+  * @param sigma vector of outcome SD's
+  * @return Matrix containing continuous outcome in [0, 1],
+  *         bounds values and indicators
   */
-
-
 matrix normal_marginal(row_vector y, row_vector mu_glm, vector sigma) {
   int J = num_elements(y);
   matrix[J, 5] rtn;
-  real lb = negative_infinity();
-  real ub = positive_infinity();
-  real lb_ind = 0;
-  real ub_ind = 0;
-
-  for (j in 1 : J) {
-    real u = Phi_approx((y[j] - mu_glm[j]) / sigma[j]);
-    rtn[j] = [u, lb, ub, lb_ind, ub_ind];
-  }
+  rtn[ : , 1] = Phi_approx(transpose(y - mu_glm) ./ sigma);
+  rtn[ : , 2] = rep_vector(negative_infinity(), J);
+  rtn[ : , 3] = rep_vector(positive_infinity(), J);
+  rtn[ : , 4] = rep_vector(0, J);
+  rtn[ : , 5] = rep_vector(0, J);
 
   return rtn;
 }
@@ -55,17 +49,16 @@ matrix normal_marginal(row_vector y, row_vector mu_glm, vector sigma) {
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param y int[] Array of integers
- * @param mu_glm Row vector
- * @param J Integer
- * @return Vector in [0, 1] of continuous outcome
+ * @param y int[] Array of binary outcomes
+ * @param mu_glm row_vector of regression means
+ * @param u_raw row_vector of nuisance latent variables
+ * @return Matrix containing continuous outcome in [0, 1],
+ *         bounds values and indicators
  */
 matrix bernoulli_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
   int J = num_elements(y);
   matrix[J, 5] rtn;
   row_vector[J] mu_glm_logit = inv_logit(mu_glm);
-
-// u, lb, ub, lb_ind, ub_ind
 
   for (j in 1 : J) {
     real u = u_raw[j];
@@ -96,18 +89,17 @@ matrix bernoulli_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
  *
  * The lb and ub:
  *      Always upper bound at inv_Phi( y, mu )
- *      If y != 0, lower bound at inv_Phi(y-1, mu)
+ *      If n != 0, lower bound at inv_Phi(n-1, mu)
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
  * @param n int[] Array of numerator integers
  * @param d int[] Array of denominator integers
- * @param mu_glm Row vector
- * @param J Integer
- * @return Vector in [0, 1] of continuous outcome
+ * @param mu_glm row_vector of regression means
+ * @param u_raw row_vector of nuisance latent variables
+ * @return Matrix containing continuous outcome in [0, 1],
+ *         bounds values and indicators
  */
-
-// u, lb, ub, lb_ind, ub_ind
 matrix binomial_marginal(array[] int n, array[] int d, row_vector mu_glm, row_vector u_raw) {
   int J = num_elements(n);
   matrix[J, 5] rtn;
@@ -141,10 +133,11 @@ matrix binomial_marginal(array[] int n, array[] int d, row_vector mu_glm, row_ve
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param y int[] Array of integers
- * @param mu_glm Row vector
- * @param J Integer
- * @return Vector in [0, 1] of continuous outcome
+ * @param y int[] Array of integer counts
+ * @param mu_glm row_vector of regression means
+ * @param u_raw row_vector of nuisance latent variables
+ * @return Matrix containing continuous outcome in [0, 1],
+ *         bounds values and indicators
  */
 matrix poisson_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
   int J = num_elements(y);
@@ -173,21 +166,14 @@ matrix poisson_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param Yn real[,] 2d-Array of Normal depended variates
- * @param Yb int[,] 2d-Array of Bernoulli dependent variates
- * @param Yp int[,] 2d-Array of Poisson dependent variates
- * @param uraw_be Vector of standard uniform variates for Bernoulli margins
- * @param uraw_p Vector of standard uniform variates for Poisson margins
- * @param mu_glm Matrix of GLM means
- * @param sigma Vector of standard deviations for Gaussian variables
- * @param L Cholesky Factor Correlation
- * @param bounds_ind Matrix giving whether there is an lower([1]) or upper([2]) bound
+ *
+ * @param marginals Matrix of marginal calculations, constructed by concatenating the returns
+ *        from the _marginal functions
  * @param tmvn_mu Vector of means for the Multivariate (Truncated) Gaussian, almost always 0
- * @param J Integer array specifying the number of margins for each distribution
- * @param N Integer number of observations
+ * @param L Cholesky Factor Correlation
  * @return Real log-probability
  */
-real mixed_copula_cholesky_lpdf(matrix marginals, vector tmvn_mu, matrix L) {
+real gaussian_copula_cholesky_lpdf(matrix marginals, vector tmvn_mu, matrix L) {
   int J = num_elements(tmvn_mu);
   vector[J] u = marginals[ : , 1];
   vector[J] lb = marginals[ : , 2];
