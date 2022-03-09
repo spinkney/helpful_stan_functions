@@ -1,5 +1,5 @@
 functions {
-  #include gaussian_copula.stanfunctions
+  #include centered_gaussian_copula.stanfunctions
 }
 data {
   int<lower=0> N; // number of observations
@@ -42,20 +42,9 @@ model {
   beta_n ~ normal(0.0, 10.0);
   beta_b ~ normal(0.0, 10.0);
   beta_p ~ normal(0.0, 10.0);
-
-  for (n in 1 : N) {
-    // For each individual, construct a matrix containing all needed
-    // marginal calculations (e.g., latent variables, bounds, and indicators)
-    matrix[J_all, 5] marginals = append_row(
-      append_row(normal_marginal(Yn[n], mu_n[n], sigma),
-                 bernoulli_marginal(Yb[n], mu_b[n], uraw_b[n])),
-      poisson_marginal(Yp[n], mu_p[n], uraw_p[n])
-    );
-
-    // Increment log-likelihoods
-    marginals ~ gaussian_copula_cholesky(mu_zero, L);
-    Yn[n] ~ normal(mu_n[n], sigma);
-  }
+  { normal_marginal(Yn, mu_n, sigma),
+    bernoulli_marginal(Yb, mu_b, uraw_b),
+    poisson_marginal(Yp, mu_p, uraw_p) } ~ centered_gaussian_copula_cholesky(L);
 }
 generated quantities {
   corr_matrix[J_all] Gamma = multiply_lower_tri_self_transpose(L);

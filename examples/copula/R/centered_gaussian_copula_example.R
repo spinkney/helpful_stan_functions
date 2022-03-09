@@ -1,8 +1,10 @@
 library(cmdstanr)
 # setwd("~\helpful_stan_functions")
-fp <- file.path("./examples/copula/stan/gaussian_copula_example.stan")
-mod <- cmdstan_model(fp, include_paths = c("./functions/copula",
-                                          "./functions/distribution"))
+fp <- file.path("./examples/copula/stan/centered_gaussian_copula_example.stan")
+mod <- cmdstan_model(fp, include_paths = c("./functions",
+                                           "./functions/copula",
+                                           "./functions/distribution",
+                                           "../functions"))
 
 ## obtain non-extreme random correlation matrix
 Gamma = matrix(1, 3, 3)
@@ -140,7 +142,7 @@ stan_data[["special"]] <- 1
 # stan_data[["special"]] <- 0
 mod_out <- mod$sample(data = stan_data,
                                     seed = 908453,
-                                    # init = 0 ,
+                                    init = 0 ,
                                     chains = 2,
                                     parallel_chains = 2,
                                     iter_warmup = 400,

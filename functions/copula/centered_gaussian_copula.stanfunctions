@@ -9,7 +9,7 @@
  * \ingroup copula
  *  @{ */
 
-#include distribution/multi_normal_cholesky_truncated.stanfunctions
+#include copula/normal_copula.stanfunctions
 
 /**
   * Normal marginal
@@ -25,16 +25,15 @@
   * @return Matrix containing continuous outcome in [0, 1],
   *         bounds values and indicators
   */
-matrix normal_marginal(row_vector y, row_vector mu_glm, vector sigma) {
-  int J = num_elements(y);
-  matrix[J, 5] rtn;
-  rtn[ : , 1] = Phi_approx(transpose(y - mu_glm) ./ sigma);
-  rtn[ : , 2] = rep_vector(negative_infinity(), J);
-  rtn[ : , 3] = rep_vector(positive_infinity(), J);
-  rtn[ : , 4] = rep_vector(0, J);
-  rtn[ : , 5] = rep_vector(0, J);
+array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
+  int N = rows(mu_glm);
+  int J = cols(mu_glm);
+  matrix[N, J] adj = rep_matrix(0, N, J);
+  for (j in 1:J) {
+    adj[1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);
+  }
 
-  return rtn;
+  return {  Phi_approx((y - mu_glm) ./ rep_matrix(transpose(sigma), N)), adj };
 }
 
 /**
@@ -55,30 +54,18 @@ matrix normal_marginal(row_vector y, row_vector mu_glm, vector sigma) {
  * @return Matrix containing continuous outcome in [0, 1],
  *         bounds values and indicators
  */
-matrix bernoulli_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
-  int J = num_elements(y);
-  matrix[J, 5] rtn;
-  row_vector[J] mu_glm_logit = inv_logit(mu_glm);
+array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
+  int N = rows(mu_glm);
+  int J = cols(mu_glm);
+  matrix[N, J] mat_y = to_matrix(y);
+  matrix[N, J] mat_inv_y = fabs(mat_y - 1);
 
-  for (j in 1 : J) {
-    real u = u_raw[j];
-    real lb;
-    real ub;
-    real lb_ind = 0;
-    real ub_ind = 0;
-    if (y[j] == 0) {
-      lb = negative_infinity();
-      ub = inv_Phi(bernoulli_cdf(0 | mu_glm_logit[j]));
-      ub_ind = 1;
-    } else {
-      lb = inv_Phi(bernoulli_cdf(0 | mu_glm_logit[j]));
-      ub = positive_infinity();
-      lb_ind = 1;
-    }
-    rtn[j] = [u, lb, ub, lb_ind, ub_ind];
-  }
+  matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
+  matrix[N, J] Lbound = mat_y .* (1 - mu_glm_logit);
+  matrix[N, J] Ubound = 1 - mat_inv_y .* mu_glm_logit;
+  matrix[N, J] UmL = Ubound - Lbound;
 
-  return rtn;
+  return { Lbound + UmL .* u_raw, log(UmL) };
 }
 
 /**
@@ -100,22 +87,24 @@ matrix bernoulli_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
  * @return Matrix containing continuous outcome in [0, 1],
  *         bounds values and indicators
  */
-matrix binomial_marginal(array[] int n, array[] int d, row_vector mu_glm, row_vector u_raw) {
-  int J = num_elements(n);
-  matrix[J, 5] rtn;
-  row_vector[J] mu_glm_logit = inv_logit(mu_glm);
+array[] matrix binomial_marginal(array[,] int num, array[,] int den,
+                                 matrix mu_glm, matrix u_raw) {
+  int N = rows(mu_glm);
+  int J = cols(mu_glm);
+  matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
+  array[2] matrix[N, J] rtn;
 
-  for (j in 1 : J) {
-    real u = u_raw[j];
-    real lb = negative_infinity();
-    real ub = inv_Phi(binomial_cdf(n[j] | d[j], mu_glm_logit[j]));
-    real lb_ind = 0;
-    real ub_ind = 1;
-    if (n[j] > 0) {
-      lb_ind = 1;
-      lb = inv_Phi(binomial_cdf(n[j] - 1 | d[j], mu_glm_logit[j]));
+  for (n in 1:N) {
+    for (j in 1:J) {
+      real Ubound = binomial_cdf(num[n, j] | den[n, j], mu_glm_logit[n, j]);
+      real Lbound = 0;
+      if (num[n, j] > 0) {
+        Lbound = binomial_cdf(num[n, j] - 1 | den[n, j], mu_glm_logit[n, j]);
+      }
+      real UmL = Ubound - Lbound;
+      rtn[1][n, j] = Lbound + UmL * u_raw[n, j];
+      rtn[2][n, j] = log(UmL);
     }
-    rtn[j] = [u, lb, ub, lb_ind, ub_ind];
   }
 
   return rtn;
@@ -139,22 +128,23 @@ matrix binomial_marginal(array[] int n, array[] int d, row_vector mu_glm, row_ve
  * @return Matrix containing continuous outcome in [0, 1],
  *         bounds values and indicators
  */
-matrix poisson_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
-  int J = num_elements(y);
-  matrix[J, 5] rtn;
-  row_vector[J] mu_glm_exp = exp(mu_glm);
+array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
+  int N = rows(mu_glm);
+  int J = cols(mu_glm);
+  matrix[N, J] mu_glm_exp = exp(mu_glm);
+  array[2] matrix[N, J] rtn;
 
-  for (j in 1 : J) {
-    real u = u_raw[j];
-    real lb = negative_infinity();
-    real ub = inv_Phi(poisson_cdf(y[j] | mu_glm_exp[j]));
-    real lb_ind = 0;
-    real ub_ind = 1;
-    if (y[j] > 0) {
-      lb_ind = 1;
-      lb = inv_Phi(poisson_cdf(y[j] - 1 | mu_glm_exp[j]));
+  for (n in 1:N) {
+    for (j in 1:J) {
+      real Ubound = poisson_cdf(y[n, j] | mu_glm_exp[n, j]);
+      real Lbound = 0;
+      if (y[n, j] > 0) {
+        Lbound = poisson_cdf(y[n, j] - 1 | mu_glm_exp[n, j]);
+      }
+      real UmL = Ubound - Lbound;
+      rtn[1][n, j] = Lbound + UmL * u_raw[n, j];
+      rtn[2][n, j] = log(UmL);
     }
-    rtn[j] = [u, lb, ub, lb_ind, ub_ind];
   }
 
   return rtn;
@@ -169,19 +159,26 @@ matrix poisson_marginal(array[] int y, row_vector mu_glm, row_vector u_raw) {
  *
  * @param marginals Matrix of marginal calculations, constructed by concatenating the returns
  *        from the _marginal functions
- * @param tmvn_mu Vector of means for the Multivariate (Truncated) Gaussian, almost always 0
  * @param L Cholesky Factor Correlation
  * @return Real log-probability
  */
-real gaussian_copula_cholesky_lpdf(matrix marginals, vector tmvn_mu, matrix L) {
-  int J = num_elements(tmvn_mu);
-  vector[J] u = marginals[ : , 1];
-  vector[J] lb = marginals[ : , 2];
-  vector[J] ub = marginals[ : , 3];
-  vector[J] lb_ind = marginals[ : , 4];
-  vector[J] ub_ind = marginals[ : , 5];
+real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L) {
+  int N = rows(marginals[1][1]);
+  int J = rows(L);
+  int N_marginals = size(marginals);
+  matrix[N, J] U;
+  real adj = 0;
+  int pos = 1;
+  for (m in 1:N_marginals) {
+    int curr_cols = cols(marginals[m][1]);
+    for (c in pos:(pos + curr_cols - 1)) {
+      U[ : , c] = marginals[m][1][ : , c - (pos - 1)];
+    }
+    adj += sum(marginals[m][2]);
+    pos += curr_cols;
+  }
 
-  return multi_normal_cholesky_truncated_lpdf(u | tmvn_mu, L, lb, ub, lb_ind, ub_ind);
+  return multi_normal_cholesky_copula_lpdf(U | L) + adj;
 }
 
 /** @} */
