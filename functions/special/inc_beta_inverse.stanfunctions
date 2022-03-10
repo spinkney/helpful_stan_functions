@@ -26,7 +26,6 @@
   * @param q Real
   * @return inverse incomlete beta result
   */
-functions {
 real inc_beta_inverse(real x, real p, real q) {
   real a;
   real acu;
@@ -183,6 +182,5 @@ real inc_beta_inverse(real x, real p, real q) {
     value = 1.0 - value;
   
   return value;
-}
 }
 /** @}*/
