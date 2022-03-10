@@ -451,10 +451,12 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> v;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__multi__wallenius.html#gac1b1c12f44019e532e76219190c0d96c">multi_wallenius_lpmf</a>(data array[] <span class="keywordtype">int</span> k, vector m, vector p, data array[] real x_r, data real tol) {</div>
+<div class="line">real <a class="code hl_function" href="group__multi__wallenius.html#gac1b1c12f44019e532e76219190c0d96c">multi_wallenius_lpmf</a>(data array[] <span class="keywordtype">int</span> k, vector m, vector p, data array[] real x_r,</div>
+<div class="line">                          data real tol) {</div>
 <div class="line">  <span class="keywordtype">int</span> C = num_elements(m);</div>
 <div class="line">  real D = dot_product(to_row_vector(p), (m - to_vector(k[2 : C + 1])));</div>
-<div class="line">  real lp = log(integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1, append_array({D}, to_array_1d(p)), x_r, k, tol));</div>
+<div class="line">  real lp = log(integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1,</div>
+<div class="line">                             append_array({D}, to_array_1d(p)), x_r, k, tol));</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">for</span> (i in 1 : C) </div>
 <div class="line">    lp += -log1p(m[i]) - lbeta(m[i] - k[i + 1] + 1, k[i + 1] + 1);</div>

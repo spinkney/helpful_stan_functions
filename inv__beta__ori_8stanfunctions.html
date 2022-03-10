@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: Gumbel Copula Functions</title>
+		<title>Helpful Stan Functions: inv_beta_ori.stanfunctions File Reference</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -395,7 +395,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__gumbel.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('inv__beta__ori_8stanfunctions.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -414,101 +414,16 @@ $(document).ready(function(){initNavTree('group__gumbel.html',''); initResizable
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Gumbel Copula Functions<div class="ingroups"><a class="el" href="group__copula.html">Copula Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">inv_beta_ori.stanfunctions File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga6590db476c4f85fbf9040d32b3b1a353"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gumbel.html#ga6590db476c4f85fbf9040d32b3b1a353">gumbel_copula_lpdf</a> (real u, real v, real theta)</td></tr>
-<tr class="separator:ga6590db476c4f85fbf9040d32b3b1a353"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__gumbel.html#ga6590db476c4f85fbf9040d32b3b1a353">gumbel_copula_lpdf</a>(real u, real v, real theta) {</div>
-<div class="line">  real neg_log_u = -log(u);</div>
-<div class="line">  real log_neg_log_u = log(neg_log_u);</div>
-<div class="line">  real neg_log_v = -log(v);</div>
-<div class="line">  real log_neg_log_v = log(neg_log_v);</div>
-<div class="line">  real log_temp = log_sum_exp(theta * log_neg_log_u, theta * log_neg_log_v);</div>
-<div class="line">  real theta_m1 = theta - 1;</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (theta &lt; 1) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;theta must be &gt;= 1&quot;</span>);</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (is_inf(theta)) {</div>
-<div class="line">    <span class="keywordflow">if</span> (u == v) </div>
-<div class="line">      <span class="keywordflow">return</span> 0;</div>
-<div class="line">    <span class="keywordflow">else</span> </div>
-<div class="line">      <span class="keywordflow">return</span> negative_infinity();</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> theta_m1 * log_neg_log_u + theta_m1 * log_neg_log_v + neg_log_u + neg_log_v</div>
-<div class="line">         - exp(log_temp / theta)</div>
-<div class="line">         + log_sum_exp(2 * theta_m1 / -theta * log_temp,</div>
-<div class="line">                       log(theta_m1) + (1 - 2 * theta) / theta * log_temp);</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="ttc" id="agroup__gumbel_html_ga6590db476c4f85fbf9040d32b3b1a353"><div class="ttname"><a href="group__gumbel.html#ga6590db476c4f85fbf9040d32b3b1a353">gumbel_copula_lpdf</a></div><div class="ttdeci">real gumbel_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> gumbel_copula.stanfunctions:31</div></div>
-</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga6590db476c4f85fbf9040d32b3b1a353" name="ga6590db476c4f85fbf9040d32b3b1a353"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6590db476c4f85fbf9040d32b3b1a353">&#9670;&nbsp;</a></span>gumbel_copula_lpdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real gumbel_copula_lpdf </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>u</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>theta</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Gumbel Copula Log Density</p>
-<p >Archimedean family of Gumbel with parametric generator </p><p class="formulaDsp">
-\[ \exp(-t^{1/\theta}), t \in [0, \infty] \]
-</p>
-<p> with \(\theta \in [1, \infty)\). The range of admissible Kendall’s tau, as well as that of the upper taildependence coefficient, is \([0,1)\). Note that this copula does not allow for lower tail dependence.</p>
-<p ><a href="https://cran.r-project.org/web/packages/copula/copula.pdf">https://cran.r-project.org/web/packages/copula/copula.pdf</a> "copula" R package in the copFamilies documentation accessed Feb. 5, 2021</p>
-<p >Copyright Ben Goodrich <a href="https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ">https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/UZURBv2_AAAJ</a> Accessed Feb. 5, 2021</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">theta</td><td>Real number &gt;= 1, will throw otherwise </td></tr>
-    <tr><td class="paramname">log</td><td>density </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_35baea09d55bebfe17654fdf4bf061ce.html">functions</a></li><li class="navelem"><a class="el" href="dir_04b36ded06294d1c9b47c3ef7601393d.html">special</a></li><li class="navelem"><a class="el" href="inv__beta__ori_8stanfunctions.html">inv_beta_ori.stanfunctions</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>

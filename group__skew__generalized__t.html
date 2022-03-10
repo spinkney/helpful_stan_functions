@@ -502,7 +502,9 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (!is_inf(p) &amp;&amp; is_inf(q) &amp;&amp; !is_inf(x)) </div>
-<div class="line">    <span class="keywordflow">return</span> log((1 - lambda_new) / 2 + (1 + lambda_new) / 2 * gamma_cdf((r_new / (sigma * (1 + lambda_new))) ^ p, p, 1));</div>
+<div class="line">    <span class="keywordflow">return</span> log((1 - lambda_new) / 2</div>
+<div class="line">               + (1 + lambda_new) / 2</div>
+<div class="line">                 * gamma_cdf((r_new / (sigma * (1 + lambda_new))) ^ p, p, 1));</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(p) &amp;&amp; !is_inf(x)) </div>
 <div class="line">    <span class="keywordflow">return</span> uniform_lcdf(x | mu, sigma);</div>
@@ -513,7 +515,9 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(x) &amp;&amp; x &gt; 0) </div>
 <div class="line">    <span class="keywordflow">return</span> 1;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> log((1 - lambda_new) / 2 + (lambda_new - 1) / 2 * beta_cdf(1 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1 / p, q));</div>
+<div class="line">  <span class="keywordflow">return</span> log((1 - lambda_new) / 2</div>
+<div class="line">             + (lambda_new - 1) / 2</div>
+<div class="line">               * beta_cdf(1 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1 / p, q));</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a>(real sigma, real lambda, real p, real q) {</div>
@@ -521,9 +525,16 @@ Functions</h2></td></tr>
 <div class="line">    reject(<span class="stringliteral">&quot;p * q must be &gt; 2 found p * q = &quot;</span>, p * q);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(q)) </div>
-<div class="line">    <span class="keywordflow">return</span> sigma * inv_sqrt((pi() * (1 + 3 * lambda ^ 2) * tgamma(3 / p) - 16 ^ (1 / p) * lambda ^ 2 * (tgamma(1 / 2 + 1 / p)) ^ 2 * tgamma(1 / p)) / (pi() * tgamma(1 / p)));</div>
+<div class="line">    <span class="keywordflow">return</span> sigma</div>
+<div class="line">           * inv_sqrt((pi() * (1 + 3 * lambda ^ 2) * tgamma(3 / p)</div>
+<div class="line">                       - 16 ^ (1 / p) * lambda ^ 2 * (tgamma(1 / 2 + 1 / p)) ^ 2</div>
+<div class="line">                         * tgamma(1 / p))</div>
+<div class="line">                      / (pi() * tgamma(1 / p)));</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> sigma / (q ^ (1 / p) * sqrt((3 * lambda ^ 2 + 1) * (beta(3 / p, q - 2 / p) / beta(1 / p, q)) - 4 * lambda ^ 2 * (beta(2 / p, q - 1 / p) / beta(1 / p, q)) ^ 2));</div>
+<div class="line">  <span class="keywordflow">return</span> sigma</div>
+<div class="line">         / (q ^ (1 / p)</div>
+<div class="line">            * sqrt((3 * lambda ^ 2 + 1) * (beta(3 / p, q - 2 / p) / beta(1 / p, q))</div>
+<div class="line">                   - 4 * lambda ^ 2 * (beta(2 / p, q - 1 / p) / beta(1 / p, q)) ^ 2));</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">vector <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(vector x, real sigma, real lambda, real p, real q) {</div>
@@ -536,10 +547,10 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> x + (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p)) / beta(1 / p, q);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga2f1016b68af93771d1525cf654c24df0"><div class="ttname"><a href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a></div><div class="ttdeci">real variance_adjusted_sgt(real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:167</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga2f1016b68af93771d1525cf654c24df0"><div class="ttname"><a href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a></div><div class="ttdeci">real variance_adjusted_sgt(real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:171</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:116</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:67</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga8f03167e434b644f63f456087af5f150"><div class="ttname"><a href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a></div><div class="ttdeci">vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:190</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga8f03167e434b644f63f456087af5f150"><div class="ttname"><a href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a></div><div class="ttdeci">vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:201</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga8f03167e434b644f63f456087af5f150" name="ga8f03167e434b644f63f456087af5f150"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8f03167e434b644f63f456087af5f150">&#9670;&nbsp;</a></span>mean_centered_sgt()</h2>
