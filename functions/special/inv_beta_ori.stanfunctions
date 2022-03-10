@@ -1,33 +1,5 @@
-/** @ingroup special 
-  * @{ 
-    
-  * Incomplete Beta Inverse
-  *
-  * Author:
-  * Original FORTRAN77 version by GW Cran, KJ Martin, GE Thomas.
-  * C++ version by John Burkard
-  * Stan version by Sean Pinkney, July 2021
-  *
-  * Modified from the C++ version by John Burkardt at
-  * https://people.sc.fsu.edu/~jburkardt/cpp_src/asa109/asa109.html
-  * file asa109.cpp
-  *
-  * GW Cran, KJ Martin, GE Thomas,
-  * Remark AS R19 and Algorithm AS 109:
-  * A Remark on Algorithms AS 63: 
-  * The Incomplete Beta Integral and AS 64:
-  * Inverse of the Incomplete Beta Integeral, Applied Statistics,
-  * Volume 26, Number 1, 1977, pages 111-114.  
-  * 
-  * @include \special\inc_beta_inverse.stanfunctions
-  *
-  * @param x Real in [0, 1]
-  * @param p Real
-  * @param q Real
-  * @return inverse incomlete beta result
-  */
-functions {
-real inc_beta_inverse(real x, real p, real q) {
+functions{ 
+real inc_beta_inverse_ori(real x, real p, real q) {
   real a;
   real acu;
   real adj;
@@ -86,7 +58,7 @@ real inc_beta_inverse(real x, real p, real q) {
   
   //  Calculate the initial approximation.
   r = sqrt(-log(square(a)));
-  y = r - fma(0.27061, r, 2.30753) / fma(r, fma(0.04481, r, 0.99229), 1.0);
+  y = r - (2.30753 + 0.27061 * r) / (1.0 + (0.99229 + 0.04481 * r) * r);
   
   if (1.0 < pp && 1.0 < qq) {
     r = (square(y) - 3.0) / 6.0;
@@ -94,14 +66,14 @@ real inc_beta_inverse(real x, real p, real q) {
     t = 1.0 / (qq + qq - 1.0);
     h = 2.0 / (s + t);
     w = y * sqrt(h + r) / h - (t - s) * (r + 5.0 / 6.0 - 2.0 / (3.0 * h));
-    value = pp / fma(exp(w + w), qq, pp);
+    value = pp / (pp + qq * exp(w + w));
   } else {
     r = qq + qq;
     t = 1.0 / (9.0 * qq);
-    t = r * pow(fma(y, sqrt(t), 1.0 - t), 3);
+    t = r * pow(1.0 - t + y * sqrt(t), 3);
     
     if (t <= 0.0) {
-      value = 1.0 - exp((log(fma(-qq, a, qq)) + lbeta_val) / qq);
+      value = 1.0 - exp((log((1.0 - a) * qq) + lbeta_val) / qq);
     } else {
       t = (4.0 * pp + r - 2.0) / t;
       
@@ -137,7 +109,7 @@ real inc_beta_inverse(real x, real p, real q) {
     y = inc_beta(pp, qq, value);
     
     xin = value;
-    y = (y - a) * exp(fma(t, log1m(xin), fma(r, log(xin), lbeta_val)));
+    y = (y - a) * exp(lbeta_val + r * log(xin) + t * log(1.0 - xin));
     
     if (y * yprev <= 0.0) 
       prev = fmax(sq, fpu);
@@ -185,4 +157,3 @@ real inc_beta_inverse(real x, real p, real q) {
   return value;
 }
 }
-/** @}*/
