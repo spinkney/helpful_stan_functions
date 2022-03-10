@@ -30,7 +30,7 @@
 real unit_johnson_lpdf(vector x, real mu, real sigma) {
   int N = num_elements(x);
   return N * log(sigma) - sum(log(x) + log1m(x) + 0.5 * log1p(square(logit(x))))
-         + std_normal_lpdf(mu + sigma * asinh(logit(x)) | );
+         + std_normal_lpdf(mu + sigma * asinh(logit(x)));
 }
 
 /** Unit Johnson SU cumulative density function
@@ -51,7 +51,7 @@ real unit_johnson_lpdf(vector x, real mu, real sigma) {
   * @return cumulative density
   */
 real unit_johnson_cdf(real x, real mu, real sigma) {
-  return std_normal_cdf(mu + sigma * asinh(logit(x)) | );
+  return std_normal_cdf(mu + sigma * asinh(logit(x)));
 }
 
 /** Unit Johnson SU log cumulative density function
@@ -73,7 +73,7 @@ real unit_johnson_cdf(real x, real mu, real sigma) {
  */
 
 real unit_johnson_lcdf(real x, real mu, real sigma) {
-  return std_normal_lcdf(mu + sigma * asinh(logit(x)) | );
+  return std_normal_lcdf(mu + sigma * asinh(logit(x)));
 }
 
 /** Unit Johnson SU log complementary cumulative density function
@@ -94,7 +94,7 @@ real unit_johnson_lcdf(real x, real mu, real sigma) {
  * @return log complementary cumulative density
  */
 real unit_johnson_lccdf(real x, real mu, real sigma) {
-  return std_normal_lccdf(mu + sigma * asinh(logit(x)) | );
+  return std_normal_lccdf(mu + sigma * asinh(logit(x)));
 }
 
 /** Unit Johnson SU random number generator function
