@@ -130,11 +130,11 @@ real bivariate_normal_copula_cdf(vector u, real rho) {
 }
 
 real multi_normal_cholesky_copula_lpdf(matrix U, matrix L) {
-  int N = rows(U);
-  int J = cols(U);
-  matrix[N,J] Q = to_matrix(inv_Phi(U), N, J );
-  matrix[J,J] Gammainv = chol2inv(L);
-  return -N * sum(log(diagonal(L))) - 0.5 * sum(add_diag(Gammainv, -1.0) .* crossprod(U));
+  int N                  = rows(U);
+  int J                  = cols(U);
+  matrix[N,J] Q          = to_matrix( inv_Phi(to_vector(U)), N, J );
+  matrix[J,J] Gammainv   = chol2inv(L);
+  return -N * sum(log(diagonal(L))) - 0.5 * sum( add_diag(Gammainv, -1.0) .* crossprod(U) );
 }
 
 /** @} */

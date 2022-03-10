@@ -28,12 +28,16 @@
 array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
   int N = rows(mu_glm);
   int J = cols(mu_glm);
-  matrix[N, J] adj = rep_matrix(0, N, J);
+  array[2] matrix[N, J] rtn;
+
   for (j in 1:J) {
-    adj[1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);
+    for (n in 1:N) {
+      rtn[1][n,j] = Phi_approx((y[n,j] - mu_glm[n,j]) / sigma[j]);
+      rtn[2][n,j] = normal_lpdf(y[n,j] | mu_glm[n,j], sigma[j]);
+    }
   }
 
-  return {  Phi_approx((y - mu_glm) ./ rep_matrix(transpose(sigma), N)), adj };
+  return rtn;
 }
 
 /**
@@ -57,15 +61,25 @@ array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
 array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   int N = rows(mu_glm);
   int J = cols(mu_glm);
-  matrix[N, J] mat_y = to_matrix(y);
-  matrix[N, J] mat_inv_y = fabs(mat_y - 1);
-
   matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
-  matrix[N, J] Lbound = mat_y .* (1 - mu_glm_logit);
-  matrix[N, J] Ubound = 1 - mat_inv_y .* mu_glm_logit;
-  matrix[N, J] UmL = Ubound - Lbound;
+  array[2] matrix[N, J] rtn;
 
-  return { Lbound + UmL .* u_raw, log(UmL) };
+  for (j in 1:J) {
+    for (n in 1:N) {
+      real Lbound = 0;
+      real Ubound = 1;
+      if (y[n,j] == 0) {
+        Ubound = 1 - mu_glm_logit[n,j];
+      } else {
+        Lbound = 1 - mu_glm_logit[n,j];
+      }
+      real UmL = Ubound - Lbound;
+      rtn[1][n,j] = Lbound + UmL * u_raw[n,j];
+      rtn[2][n,j] = log(UmL);
+    }
+  }
+
+  return rtn;
 }
 
 /**
@@ -94,8 +108,8 @@ array[] matrix binomial_marginal(array[,] int num, array[,] int den,
   matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
   array[2] matrix[N, J] rtn;
 
-  for (n in 1:N) {
-    for (j in 1:J) {
+  for (j in 1:J) {
+    for (n in 1:N) {
       real Ubound = binomial_cdf(num[n, j] | den[n, j], mu_glm_logit[n, j]);
       real Lbound = 0;
       if (num[n, j] > 0) {
@@ -134,8 +148,8 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   matrix[N, J] mu_glm_exp = exp(mu_glm);
   array[2] matrix[N, J] rtn;
 
-  for (n in 1:N) {
-    for (j in 1:J) {
+  for (j in 1:J) {
+    for (n in 1:N) {
       real Ubound = poisson_cdf(y[n, j] | mu_glm_exp[n, j]);
       real Lbound = 0;
       if (y[n, j] > 0) {
@@ -168,11 +182,11 @@ real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L)
   int N_marginals = size(marginals);
   matrix[N, J] U;
   real adj = 0;
-  int pos = 1;
+  int pos = 0;
   for (m in 1:N_marginals) {
     int curr_cols = cols(marginals[m][1]);
-    for (c in pos:(pos + curr_cols - 1)) {
-      U[ : , c] = marginals[m][1][ : , c - (pos - 1)];
+    for (c in 1:curr_cols) {
+      U[ : , (c + pos)] = marginals[m][1][ : , c];
     }
     adj += sum(marginals[m][2]);
     pos += curr_cols;
