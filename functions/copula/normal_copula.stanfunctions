@@ -129,4 +129,18 @@ real bivariate_normal_copula_cdf(vector u, real rho) {
   return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;
 }
 
+/**
+  * Multivariate Normal Copula lpdf (Cholesky parameterisation)
+  *
+  * @param U Matrix of outcomes from marginal calculations
+  * @param L Cholesky factor of the correlation/covariance matrix
+  * @return log density of distribution
+  */
+real multi_normal_cholesky_copula_lpdf(matrix U, matrix L) {
+  int N = rows(U);
+  int J = cols(U);
+  matrix[J,J] Gammainv = chol2inv(L);
+  return -N * sum(log(diagonal(L))) - 0.5 * sum(add_diag(Gammainv, -1.0) .* crossprod(U));
+}
+
 /** @} */
