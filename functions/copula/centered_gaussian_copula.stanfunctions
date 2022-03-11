@@ -19,22 +19,22 @@
   *
   * @copyright Ethan Alt, Sean Pinkney 2021 \n
   *
-  * @param y row_vector of normal outcomes
+  * @param y matrix of normal outcomes
   * @param mu_glm row_vector of regression means
-  * @param sigma vector of outcome SD's
-  * @return Matrix containing continuous outcome in [0, 1],
-  *         bounds values and indicators
+  * @param matrix vector of outcome SD's
+  * @return 2D array of matrices containing the random variables
+  *         and jacobian adjustments
   */
 array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
   int N = rows(mu_glm);
   int J = cols(mu_glm);
   array[2] matrix[N, J] rtn;
+  // Initialise the jacobian adjustments to zero, as vectorised lpdf will be used
+  rtn[2] = rep_matrix(0, N, J);
 
   for (j in 1:J) {
-    for (n in 1:N) {
-      rtn[1][n,j] = Phi_approx((y[n,j] - mu_glm[n,j]) / sigma[j]);
-      rtn[2][n,j] = normal_lpdf(y[n,j] | mu_glm[n,j], sigma[j]);
-    }
+      rtn[1][ : , j] = (y[: , j] - mu_glm[ : , j]) / sigma[j];
+      rtn[2][1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);
   }
 
   return rtn;
@@ -52,34 +52,22 @@ array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param y int[] Array of binary outcomes
- * @param mu_glm row_vector of regression means
- * @param u_raw row_vector of nuisance latent variables
- * @return Matrix containing continuous outcome in [0, 1],
- *         bounds values and indicators
+ * @param y int[,] 2d array of binary outcomes
+ * @param mu_glm matrix of regression means
+ * @param u_raw matrix of nuisance latent variables
+ * @return 2D array of matrices containing the random variables
+ *         and jacobian adjustments
  */
 array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   int N = rows(mu_glm);
   int J = cols(mu_glm);
-  matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
-  array[2] matrix[N, J] rtn;
+  matrix[N, J] matrix_y = to_matrix(y);
+  matrix[N, J] mu_glm_logit = 1 - inv_logit(mu_glm);
 
-  for (j in 1:J) {
-    for (n in 1:N) {
-      real Lbound = 0;
-      real Ubound = 1;
-      if (y[n,j] == 0) {
-        Ubound = 1 - mu_glm_logit[n,j];
-      } else {
-        Lbound = 1 - mu_glm_logit[n,j];
-      }
-      real UmL = Ubound - Lbound;
-      rtn[1][n,j] = inv_Phi(Lbound + UmL * u_raw[n,j]);
-      rtn[2][n,j] = log(UmL);
-    }
-  }
+  matrix[N, J] Lbound = matrix_y .* mu_glm_logit;
+  matrix[N, J] UmL = fabs(matrix_y - mu_glm_logit);
 
-  return rtn;
+  return { inv_Phi(Lbound + UmL .* u_raw), log(UmL) };
 }
 
 /**
@@ -94,12 +82,12 @@ array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param n int[] Array of numerator integers
- * @param d int[] Array of denominator integers
- * @param mu_glm row_vector of regression means
- * @param u_raw row_vector of nuisance latent variables
- * @return Matrix containing continuous outcome in [0, 1],
- *         bounds values and indicators
+ * @param num int[,] 2D array of numerator integers
+ * @param den int[,] 2D array of denominator integers
+ * @param mu_glm matrix of regression means
+ * @param u_raw matrix of nuisance latent variables
+ * @return 2D array of matrices containing the random variables
+ *         and jacobian adjustments
  */
 array[] matrix binomial_marginal(array[,] int num, array[,] int den,
                                  matrix mu_glm, matrix u_raw) {
@@ -136,11 +124,11 @@ array[] matrix binomial_marginal(array[,] int num, array[,] int den,
  *
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
- * @param y int[] Array of integer counts
- * @param mu_glm row_vector of regression means
- * @param u_raw row_vector of nuisance latent variables
- * @return Matrix containing continuous outcome in [0, 1],
- *         bounds values and indicators
+ * @param y int[,] 2D array of integer counts
+ * @param mu_glm matrix of regression means
+ * @param u_raw matrix of nuisance latent variables
+ * @return 2D array of matrices containing the random variables
+ *         and jacobian adjustments
  */
 array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   int N = rows(mu_glm);
@@ -179,24 +167,24 @@ real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L)
   // Extract dimensions of final outcome matrix
   int N = rows(marginals[1][1]);
   int J = rows(L);
-  matrix[N, J] U;
+  matrix[J, N] U;
 
   // Iterate through marginal arrays, concatenating the outcome matrices by column
   // and aggregating the log-likelihoods (from continuous marginals) and jacobian
   // adjustments (from discrete marginals)
   real adj = 0;
-  int pos = 0;
+  int pos = 1;
   for (m in 1:size(marginals)) {
     int curr_cols = cols(marginals[m][1]);
-    for (c in 1:curr_cols) {
-      U[ : , (c + pos)] = marginals[m][1][ : , c];
-    }
+
+    U[pos:(pos + curr_cols - 1), : ] = transpose(marginals[m][1]);
+
     adj += sum(marginals[m][2]);
     pos += curr_cols;
   }
 
   // Return the sum of the log-probability for copula outcomes and jacobian adjustments
-  return multi_normal_cholesky_copula_lpdf(U | L) + adj;
+  return multi_normal_copula_lpdf(U | L) + adj;
 }
 
 /** @} */
