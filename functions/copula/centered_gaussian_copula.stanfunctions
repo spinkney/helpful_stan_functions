@@ -74,7 +74,7 @@ array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
         Lbound = 1 - mu_glm_logit[n,j];
       }
       real UmL = Ubound - Lbound;
-      rtn[1][n,j] = Lbound + UmL * u_raw[n,j];
+      rtn[1][n,j] = inv_Phi(Lbound + UmL * u_raw[n,j]);
       rtn[2][n,j] = log(UmL);
     }
   }
@@ -116,7 +116,7 @@ array[] matrix binomial_marginal(array[,] int num, array[,] int den,
         Lbound = binomial_cdf(num[n, j] - 1 | den[n, j], mu_glm_logit[n, j]);
       }
       real UmL = Ubound - Lbound;
-      rtn[1][n, j] = Lbound + UmL * u_raw[n, j];
+      rtn[1][n, j] = inv_Phi(Lbound + UmL * u_raw[n, j]);
       rtn[2][n, j] = log(UmL);
     }
   }
@@ -156,7 +156,7 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
         Lbound = poisson_cdf(y[n, j] - 1 | mu_glm_exp[n, j]);
       }
       real UmL = Ubound - Lbound;
-      rtn[1][n, j] = Lbound + UmL * u_raw[n, j];
+      rtn[1][n, j] = inv_Phi(Lbound + UmL * u_raw[n, j]);
       rtn[2][n, j] = log(UmL);
     }
   }
@@ -171,19 +171,22 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
  *
- * @param marginals Matrix of marginal calculations, constructed by concatenating the returns
- *        from the _marginal functions
+ * @param marginals Nested arrays of matrices from marginal calculations
  * @param L Cholesky Factor Correlation
  * @return Real log-probability
  */
 real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L) {
+  // Extract dimensions of final outcome matrix
   int N = rows(marginals[1][1]);
   int J = rows(L);
-  int N_marginals = size(marginals);
   matrix[N, J] U;
+
+  // Iterate through marginal arrays, concatenating the outcome matrices by column
+  // and aggregating the log-likelihoods (from continuous marginals) and jacobian
+  // adjustments (from discrete marginals)
   real adj = 0;
   int pos = 0;
-  for (m in 1:N_marginals) {
+  for (m in 1:size(marginals)) {
     int curr_cols = cols(marginals[m][1]);
     for (c in 1:curr_cols) {
       U[ : , (c + pos)] = marginals[m][1][ : , c];
@@ -192,6 +195,7 @@ real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L)
     pos += curr_cols;
   }
 
+  // Return the sum of the log-probability for copula outcomes and jacobian adjustments
   return multi_normal_cholesky_copula_lpdf(U | L) + adj;
 }
 

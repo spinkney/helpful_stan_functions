@@ -30,27 +30,14 @@ parameters {
   matrix<lower=0, upper=1>[N, J[3]] uraw_p; // latent variables for Poisson outcomes
 }
 transformed parameters {
-  array[2] matrix[N,J[1]] normal_marg;
-  array[2] matrix[N,J[2]] bernoulli_marg;
-  array[2] matrix[N,J[3]] poisson_marg;
-
-  {
-    // initialize variables
-    vector[J[1]] sigma = sqrt(sigmasq); // stdev
-    // Calculate the means for each regression
-    matrix[N, J[1]] mu_n = Xn * rep_matrix(beta_n, J[1]);
-    matrix[N, J[2]] mu_b = Xb * rep_matrix(beta_b, J[2]);
-    matrix[N, J[3]] mu_p = Xp * rep_matrix(beta_p, J[3]);
-
-    normal_marg = normal_marginal(Yn, mu_n, sigma);
-    bernoulli_marg = bernoulli_marginal(Yb, mu_b, uraw_b);
-    poisson_marg = poisson_marginal(Yp, mu_p, uraw_p);
-  }
-
-  // Append all Uniform RV's colwise
-  matrix[N,J_all] U = append_col(append_col(normal_marg[1], bernoulli_marg[1]), poisson_marg[1]);
 }
 model {
+  // initialize variables
+  vector[J[1]] sigma = sqrt(sigmasq); // stdev
+  // Calculate the means for each regression
+  matrix[N, J[1]] mu_n = Xn * rep_matrix(beta_n, J[1]);
+  matrix[N, J[2]] mu_b = Xb * rep_matrix(beta_b, J[2]);
+  matrix[N, J[3]] mu_p = Xp * rep_matrix(beta_p, J[3]);
 
   sigmasq ~ inv_gamma(1.0e-4, 1.0e-4);
   // priors for regression coefficients
@@ -60,10 +47,10 @@ model {
   L ~ lkj_corr_cholesky(1.0);
 
   // Increment LL for copula
-  U ~ multi_normal_cholesky_copula(L);
+  { normal_marginal(Yn, mu_n, sigma),
+    bernoulli_marginal(Yb, mu_b, uraw_b),
+    poisson_marginal(Yp, mu_p, uraw_p) } ~ centered_gaussian_copula_cholesky(L);
 
-  // Add jacobian adjustment
-  target += sum(normal_marg[2] + bernoulli_marg[2] + poisson_marg[2]);
 }
 generated quantities {
   corr_matrix[J_all] Gamma = multiply_lower_tri_self_transpose(L);
