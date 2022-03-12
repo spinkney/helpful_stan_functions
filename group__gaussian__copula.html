@@ -435,7 +435,112 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >The mixed-discrete normal copula. The method is from Smith, Michael &amp; Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.</p>
-<div class="fragment"></div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include copula/normal_copula.stanfunctions</span></div>
+<div class="line"> </div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__gaussian__copula.html#ga76508f4ae078a796bab782ffbc2857b1">normal_marginal</a>(matrix y, matrix mu_glm, vector sigma) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(mu_glm);</div>
+<div class="line">  <span class="keywordtype">int</span> J = cols(mu_glm);</div>
+<div class="line">  array[2] matrix[N, J] rtn;</div>
+<div class="line">  <span class="comment">// Initialise the jacobian adjustments to zero, as vectorised lpdf will be used</span></div>
+<div class="line">  rtn[2] = rep_matrix(0, N, J);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    rtn[1][ : , j] = (y[ : , j] - mu_glm[ : , j]) / sigma[j];</div>
+<div class="line">    rtn[2][1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> rtn;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__gaussian__copula.html#gad913ed577d53b14288a4143d4b9c68a7">bernoulli_marginal</a>(array[,] <span class="keywordtype">int</span> y, matrix mu_glm, matrix u_raw) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(mu_glm);</div>
+<div class="line">  <span class="keywordtype">int</span> J = cols(mu_glm);</div>
+<div class="line">  matrix[N, J] matrix_y = to_matrix(y);</div>
+<div class="line">  matrix[N, J] mu_glm_logit = 1 - inv_logit(mu_glm);</div>
+<div class="line">  </div>
+<div class="line">  matrix[N, J] Lbound = matrix_y .* mu_glm_logit;</div>
+<div class="line">  matrix[N, J] UmL = fabs(matrix_y - mu_glm_logit);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> {inv_Phi(Lbound + UmL .* u_raw), log(UmL)};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__gaussian__copula.html#ga1e1e9b2736154e0a429ec6135f020187">binomial_marginal</a>(array[,] <span class="keywordtype">int</span> num, array[,] <span class="keywordtype">int</span> den, matrix mu_glm,</div>
+<div class="line">                                 matrix u_raw) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(mu_glm);</div>
+<div class="line">  <span class="keywordtype">int</span> J = cols(mu_glm);</div>
+<div class="line">  matrix[N, J] mu_glm_logit = inv_logit(mu_glm);</div>
+<div class="line">  array[2] matrix[N, J] rtn;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    <span class="keywordflow">for</span> (n in 1 : N) {</div>
+<div class="line">      real Ubound = binomial_cdf(num[n, j] | den[n, j], mu_glm_logit[n, j]);</div>
+<div class="line">      real Lbound = 0;</div>
+<div class="line">      <span class="keywordflow">if</span> (num[n, j] &gt; 0) {</div>
+<div class="line">        Lbound = binomial_cdf(num[n, j] - 1 | den[n, j], mu_glm_logit[n, j]);</div>
+<div class="line">      }</div>
+<div class="line">      real UmL = Ubound - Lbound;</div>
+<div class="line">      rtn[1][n, j] = inv_Phi(Lbound + UmL * u_raw[n, j]);</div>
+<div class="line">      rtn[2][n, j] = log(UmL);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> rtn;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">array[] matrix <a class="code hl_function" href="group__gaussian__copula.html#gae452287a9c4a3fe729e7fbdd5d9b8d55">poisson_marginal</a>(array[,] <span class="keywordtype">int</span> y, matrix mu_glm, matrix u_raw) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(mu_glm);</div>
+<div class="line">  <span class="keywordtype">int</span> J = cols(mu_glm);</div>
+<div class="line">  matrix[N, J] mu_glm_exp = exp(mu_glm);</div>
+<div class="line">  array[2] matrix[N, J] rtn;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">    <span class="keywordflow">for</span> (n in 1 : N) {</div>
+<div class="line">      real Ubound = poisson_cdf(y[n, j] | mu_glm_exp[n, j]);</div>
+<div class="line">      real Lbound = 0;</div>
+<div class="line">      <span class="keywordflow">if</span> (y[n, j] &gt; 0) {</div>
+<div class="line">        Lbound = poisson_cdf(y[n, j] - 1 | mu_glm_exp[n, j]);</div>
+<div class="line">      }</div>
+<div class="line">      real UmL = Ubound - Lbound;</div>
+<div class="line">      rtn[1][n, j] = inv_Phi(Lbound + UmL * u_raw[n, j]);</div>
+<div class="line">      rtn[2][n, j] = log(UmL);</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> rtn;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__gaussian__copula.html#ga49e09a7e08c40b5693f46c30072fdc70">centered_gaussian_copula_cholesky_lpdf</a>(array[,] matrix marginals, matrix L) {</div>
+<div class="line">  <span class="comment">// Extract dimensions of final outcome matrix</span></div>
+<div class="line">  <span class="keywordtype">int</span> N = rows(marginals[1][1]);</div>
+<div class="line">  <span class="keywordtype">int</span> J = rows(L);</div>
+<div class="line">  matrix[N, J] U;</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Iterate through marginal arrays, concatenating the outcome matrices by column</span></div>
+<div class="line">  <span class="comment">// and aggregating the log-likelihoods (from continuous marginals) and jacobian</span></div>
+<div class="line">  <span class="comment">// adjustments (from discrete marginals)</span></div>
+<div class="line">  real adj = 0;</div>
+<div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
+<div class="line">  <span class="keywordflow">for</span> (m in 1 : size(marginals)) {</div>
+<div class="line">    <span class="keywordtype">int</span> curr_cols = cols(marginals[m][1]);</div>
+<div class="line">    </div>
+<div class="line">    U[ : , pos : (pos + curr_cols - 1)] = marginals[m][1];</div>
+<div class="line">    </div>
+<div class="line">    adj += sum(marginals[m][2]);</div>
+<div class="line">    pos += curr_cols;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="comment">// Return the sum of the log-probability for copula outcomes and jacobian adjustments</span></div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_function" href="group__normal.html#ga53b0ac15ddf226fa86c96800014d89fc">multi_normal_cholesky_copula_lpdf</a>(U | L) + adj;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__gaussian__copula_html_ga1e1e9b2736154e0a429ec6135f020187"><div class="ttname"><a href="group__gaussian__copula.html#ga1e1e9b2736154e0a429ec6135f020187">binomial_marginal</a></div><div class="ttdeci">array[] matrix binomial_marginal(array[,] int num, array[,] int den, matrix mu_glm, matrix u_raw)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:92</div></div>
+<div class="ttc" id="agroup__gaussian__copula_html_ga49e09a7e08c40b5693f46c30072fdc70"><div class="ttname"><a href="group__gaussian__copula.html#ga49e09a7e08c40b5693f46c30072fdc70">centered_gaussian_copula_cholesky_lpdf</a></div><div class="ttdeci">real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:164</div></div>
+<div class="ttc" id="agroup__gaussian__copula_html_ga76508f4ae078a796bab782ffbc2857b1"><div class="ttname"><a href="group__gaussian__copula.html#ga76508f4ae078a796bab782ffbc2857b1">normal_marginal</a></div><div class="ttdeci">array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:28</div></div>
+<div class="ttc" id="agroup__gaussian__copula_html_gad913ed577d53b14288a4143d4b9c68a7"><div class="ttname"><a href="group__gaussian__copula.html#gad913ed577d53b14288a4143d4b9c68a7">bernoulli_marginal</a></div><div class="ttdeci">array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:61</div></div>
+<div class="ttc" id="agroup__gaussian__copula_html_gae452287a9c4a3fe729e7fbdd5d9b8d55"><div class="ttname"><a href="group__gaussian__copula.html#gae452287a9c4a3fe729e7fbdd5d9b8d55">poisson_marginal</a></div><div class="ttdeci">array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:133</div></div>
+<div class="ttc" id="agroup__normal_html_ga53b0ac15ddf226fa86c96800014d89fc"><div class="ttname"><a href="group__normal.html#ga53b0ac15ddf226fa86c96800014d89fc">multi_normal_cholesky_copula_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_copula_lpdf(matrix U, matrix L)</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:119</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gad913ed577d53b14288a4143d4b9c68a7" name="gad913ed577d53b14288a4143d4b9c68a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad913ed577d53b14288a4143d4b9c68a7">&#9670;&nbsp;</a></span>bernoulli_marginal()</h2>
 
