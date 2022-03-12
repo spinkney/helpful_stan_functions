@@ -107,7 +107,7 @@ real bivariate_normal_copula_cdf(vector u, real rho) {
   * \f[
   *    Q_{n \times d} = \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots  \\ \mathbf{\Phi}^{-1}(u_d)  \end{pmatrix}
   *  \f] 
-  * and \f$ \odot \f$ is the elementwise multiplication operator.
+  * and \f$ \odot \f$ is the elementwise multiplication operator. \n
   * Note that \f$\det \Sigma  = |LL^T| = |L |^2 = \big(\prod_{i=1}^d L_{i,i}\big)^2\f$ so \f$\sqrt{\det \Sigma} = \prod_{i=1}^d L_{i,i}\f$.
   *
   * @copyright Ethan Alt, Sean Pinkney 2021
