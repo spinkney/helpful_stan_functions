@@ -4,7 +4,7 @@
  * Smith, Michael & Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation.
  * Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.
  *
- * @include \copula\gaussian_copula.stanfunctions
+ * @include \copula\centered_gaussian_copula.stanfunctions
  *
  * \ingroup copula
  *  @{ */
