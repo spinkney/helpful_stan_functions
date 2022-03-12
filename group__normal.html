@@ -438,7 +438,7 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__normal.html#gaeceb683df43c85469ececa537d2e2266">normal_copula_lpdf</a>(real u, real v, real rho) {</div>
 <div class="line">  real rho_sq = square(rho);</div>
-<div class="line"> </div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> (0.5 * rho * (-2. * u * v + square(u) * rho + square(v) * rho)) / (-1. + rho_sq)</div>
 <div class="line">         - 0.5 * log1m(rho_sq);</div>
 <div class="line">}</div>
@@ -446,12 +446,12 @@ Functions</h2></td></tr>
 <div class="line">real <a class="code hl_function" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a>(vector u, vector v, real rho) {</div>
 <div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
 <div class="line">  real rho_sq = square(rho);</div>
-<div class="line"> </div>
+<div class="line">  </div>
 <div class="line">  real a1 = 0.5 * rho;</div>
 <div class="line">  real a2 = rho_sq - 1;</div>
 <div class="line">  real a3 = 0.5 * log1m(rho_sq);</div>
 <div class="line">  real x = -2 * u<span class="stringliteral">&#39; * v + rho * (dot_self(u) + dot_self(v));</span></div>
-<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">  </span></div>
 <div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
@@ -460,7 +460,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="stringliteral">  int N = cols(u);</span></div>
 <div class="line"><span class="stringliteral">  real inv_sqrt_det_log = sum(log(diagonal(L)));</span></div>
 <div class="line"><span class="stringliteral">  matrix[K, N] x = mdivide_left_tri_low(L, u);</span></div>
-<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">  </span></div>
 <div class="line"><span class="stringliteral">  return -N * inv_sqrt_det_log - 0.5 * sum(columns_dot_self(x) - columns_dot_self(u));</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
@@ -472,17 +472,17 @@ Functions</h2></td></tr>
 <div class="line"><span class="stringliteral">  real alpha_u = a * (pv / pu - rho);</span></div>
 <div class="line"><span class="stringliteral">  real alpha_v = a * (pu / pv - rho);</span></div>
 <div class="line"><span class="stringliteral">  real d = 0;</span></div>
-<div class="line"><span class="stringliteral"></span> </div>
-<div class="line"><span class="stringliteral">  if (u[1] &lt; 0.5 &amp;&amp; u[2] &gt;= 0.5 || u[1] &gt;= 0.5 &amp;&amp; u[2] &lt; 0.5)</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
+<div class="line"><span class="stringliteral">  if (u[1] &lt; 0.5 &amp;&amp; u[2] &gt;= 0.5 || u[1] &gt;= 0.5 &amp;&amp; u[2] &lt; 0.5) </span></div>
 <div class="line"><span class="stringliteral">    d = 0.5;</span></div>
-<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">  </span></div>
 <div class="line"><span class="stringliteral">  return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
 <div class="line"><span class="stringliteral">real multi_normal_cholesky_copula_lpdf(matrix U, matrix L) {</span></div>
 <div class="line"><span class="stringliteral">  int N = rows(U);</span></div>
 <div class="line"><span class="stringliteral">  int J = cols(U);</span></div>
-<div class="line"><span class="stringliteral">  matrix[J,J] Gammainv = chol2inv(L);</span></div>
+<div class="line"><span class="stringliteral">  matrix[J, J] Gammainv = chol2inv(L);</span></div>
 <div class="line"><span class="stringliteral">  return -N * sum(log(diagonal(L))) - 0.5 * sum(add_diag(Gammainv, -1.0) .* crossprod(U));</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="ttc" id="agroup__normal_html_ga09447a56c60491b2e53ed77922e68ece"><div class="ttname"><a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a></div><div class="ttdeci">real normal_copula_vector_lpdf(vector u, vector v, real rho)</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:52</div></div>
@@ -556,7 +556,7 @@ accessed Feb. 6, 2021.</p>
 </div><div class="memdoc">
 <p >Multivariate Normal Copula log density (Cholesky parameterisation)</p>
 <p class="formulaDsp">
-\begin{aligned} c(\mathbf{u}) &amp;= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\ &amp;= \prod_{i=1}^{n} \lvert \Sigma \rvert^{-1/2} \exp \left\{-\frac{1}{2} \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix}^T (\Sigma^{-1} - I) \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix} \right\} \\ &amp;= \lvert \Sigma \rvert^{-n/2} \exp\left\{ -\frac{1}{2} \text{tr}\left( \left[ \Sigma^{-1} - I \right] \sum_{i=1}^n \Phi^{-1}(u_i) \Phi^{-1}(u_i)&#39; \right) \right\} \hspace{0.5cm} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( \left[ L^{-T}L^{-1}- I \right] Q&#39;Q \right) \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( L^{-T}L^{-1} Q&#39;Q - Q&#39;Q \right) \right\} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( QL^{-T}L^{-1}Q&#39; \right) + \text{tr} \left( Q&#39;Q \right) \right\} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \left[ \text{tr}\left( [L^{-1}Q&#39;][L^{-1}Q&#39;]&#39; \right) + \text{tr} \left( Q&#39;Q \right) \right]\right\} \end{aligned}
+\begin{aligned} c(\mathbf{u}) &amp;= \frac{\partial^d C}{\partial \mathbf{\Phi_1}\cdots \partial \mathbf{\Phi_d}} \\ &amp;= \prod_{i=1}^{n} \lvert \Sigma \rvert^{-1/2} \exp \left\{-\frac{1}{2} \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix}^T (\Sigma^{-1} - I) \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix} \right\} \\ &amp;= \lvert \Sigma \rvert^{-n/2} \exp\left\{ -\frac{1}{2} \text{tr}\left( \left[ \Sigma^{-1} - I \right] \sum_{i=1}^n \Phi^{-1}(u_i) \Phi^{-1}(u_i)&#39; \right) \right\} \hspace{0.5cm} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( \left[ L^{-T}L^{-1}- I \right] Q&#39;Q \right) \right\} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( L^{-T}L^{-1} Q&#39;Q - Q&#39;Q \right) \right\} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \text{tr}\left( QL^{-T}L^{-1}Q&#39; \right) + \text{tr} \left( Q&#39;Q \right) \right\} \\ &amp;= \lvert L \rvert^{-n} \exp\left\{ -\frac{1}{2} \left[ \text{tr}\left( [L^{-1}Q&#39;][L^{-1}Q&#39;]&#39; \right) + \text{tr} \left( Q&#39;Q \right) \right]\right\} \end{aligned}
 </p>
 <p> where </p><p class="formulaDsp">
 \[ Q_{n \times d} = \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix}. \]
