@@ -18,7 +18,7 @@
   * copula.
   *
   * @copyright Ethan Alt, Sean Pinkney 2021 \n
-  *
+  * 
   * @param y matrix of normal outcomes
   * @param mu_glm row_vector of regression means
   * @param matrix vector of outcome SD's
@@ -118,10 +118,10 @@ array[] matrix binomial_marginal(array[,] int num, array[,] int den,
  * Poisson marginal for mixed continuous-discrete Gaussian
  * copula.
  *
- * The lb and ub:
- *      Always upper bound at inv_Phi( y, mu )
- *      If y != 0, lower bound at inv_Phi(y-1, mu)
- *
+ * The lower-bound and upper-bound: \n
+ *      The upper-bound is always at \code{.cpp} inv_Phi( y, mu ) \endcode \n
+ *      If \f$y \ne 0\f$, lower-bound at \code{.cpp} inv_Phi(y-1, mu) \endcode. \n
+ *      At \f$y = 0\f$ the lower-bound is \f$ 0 \f$.
  * @copyright Ethan Alt, Sean Pinkney 2021 \n
  *
  * @param y int[,] 2D array of integer counts
@@ -156,8 +156,7 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
 /**
  * Mixed Copula Log-Probability Function
  *
- * @copyright Ethan Alt, Sean Pinkney 2021 \n
- *
+ * @copyright Andrew Johnson 2022 \n
  *
  * @param marginals Nested arrays of matrices from marginal calculations
  * @param L Cholesky Factor Correlation

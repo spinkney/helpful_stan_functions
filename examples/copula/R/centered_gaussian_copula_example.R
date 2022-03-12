@@ -111,26 +111,8 @@ get_data = function(formula.list, family.list, data) {
     'Xindx' = Xindx,
     'Kj'    = Kj
   )
-
-  ## fit stan model
-  # fit           = rstan::sampling(stanmod, data = standat, ...)
-  # fit = stanmod$sample(data = standat,
-  #                      parallel_chains = 4,
-  #                      iter_warmup = 1000,
-  #                      iter_sampling = 1000)
-  # ## rename betas for clarity about which equation each comes from, e.g., beta[j][0:(Kj-1)]
-  # beta.old.indx = which(grepl('beta', names(fit)))
-  # beta.new      = character()
-  # for( j in 1:J ) {
-  #   beta.new = c(beta.new, paste0(distnames[j], '[', seq(0,Kj[j] - 1), ']') )
-  # }
-  # names(fit)[beta.old.indx] = beta.new
-  #
-  ## return stan object
   return(standat)
 }
-
-
 
 stan_data <- get_data(formula.list[1:3], family.list[1:3], data)
 stan_data[["J"]] <- rep(1, 3)
@@ -146,4 +128,3 @@ mod_out <- mod$sample(data = stan_data,
                                     parallel_chains = 2,
                                     iter_warmup = 400,
                                     iter_sampling = 400)
-
