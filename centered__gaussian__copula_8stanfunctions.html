@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: Unit Johnson SU distribution functions</title>
+		<title>Helpful Stan Functions: centered_gaussian_copula.stanfunctions File Reference</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -395,7 +395,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__unit__johnson.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('centered__gaussian__copula_8stanfunctions.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -416,304 +416,30 @@ $(document).ready(function(){initNavTree('group__unit__johnson.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Unit Johnson SU distribution functions<div class="ingroups"><a class="el" href="group__univariate.html">Univariate Distribution Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">centered_gaussian_copula.stanfunctions File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gafe31e60738a1653fef213399c886237f"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a> (vector x, real mu, real sigma)</td></tr>
-<tr class="separator:gafe31e60738a1653fef213399c886237f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7ac9730c4a0dc628910e7dfafb416197"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a> (real x, real mu, real sigma)</td></tr>
-<tr class="separator:ga7ac9730c4a0dc628910e7dfafb416197"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga64da63c0e580b34e266e085bef8c868c"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a> (real x, real mu, real sigma)</td></tr>
-<tr class="separator:ga64da63c0e580b34e266e085bef8c868c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94e75b04828427f1c44ffe6078a7eff1"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a> (real x, real mu, real sigma)</td></tr>
-<tr class="separator:ga94e75b04828427f1c44ffe6078a7eff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8d145db9da7348a01b8f35ca806ef3b2"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a> (real mu, real sigma)</td></tr>
-<tr class="separator:ga8d145db9da7348a01b8f35ca806ef3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76508f4ae078a796bab782ffbc2857b1"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga76508f4ae078a796bab782ffbc2857b1">normal_marginal</a> (matrix y, matrix mu_glm, vector sigma)</td></tr>
+<tr class="separator:ga76508f4ae078a796bab782ffbc2857b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad913ed577d53b14288a4143d4b9c68a7"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#gad913ed577d53b14288a4143d4b9c68a7">bernoulli_marginal</a> (array[,] int y, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:gad913ed577d53b14288a4143d4b9c68a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e1e9b2736154e0a429ec6135f020187"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga1e1e9b2736154e0a429ec6135f020187">binomial_marginal</a> (array[,] int num, array[,] int den, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:ga1e1e9b2736154e0a429ec6135f020187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae452287a9c4a3fe729e7fbdd5d9b8d55"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#gae452287a9c4a3fe729e7fbdd5d9b8d55">poisson_marginal</a> (array[,] int y, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:gae452287a9c4a3fe729e7fbdd5d9b8d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga49e09a7e08c40b5693f46c30072fdc70"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga49e09a7e08c40b5693f46c30072fdc70">centered_gaussian_copula_cholesky_lpdf</a> (array[,] matrix marginals, matrix L)</td></tr>
+<tr class="separator:ga49e09a7e08c40b5693f46c30072fdc70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p >The distribution is defined for outcomes bounded between the open (0, 1) interval. It is described in detail at Gündüz, S., &amp; Korkmaz, M. Ç. (2020). A New Unit Distribution Based On The Unbounded Johnson Distribution Rule: The Unit Johnson SU Distribution. Pakistan Journal of Statistics and Operation Research, 16(3), 471-490. <a href="https://doi.org/10.18187/pjsor.v16i3.3421">https://doi.org/10.18187/pjsor.v16i3.3421</a>.</p>
-<div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a>(vector x, real mu, real sigma) {</div>
-<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
-<div class="line">  <span class="keywordflow">return</span> N * log(sigma) - sum(log(x) + log1m(x) + 0.5 * log1p(square(logit(x))))</div>
-<div class="line">         + std_normal_lpdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a>(real x, real mu, real sigma) {</div>
-<div class="line">  <span class="keywordflow">return</span> std_normal_cdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a>(real x, real mu, real sigma) {</div>
-<div class="line">  <span class="keywordflow">return</span> std_normal_lcdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a>(real x, real mu, real sigma) {</div>
-<div class="line">  <span class="keywordflow">return</span> std_normal_lccdf(mu + sigma * asinh(logit(x)));</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a>(real mu, real sigma) {</div>
-<div class="line">  real u = uniform_rng(0, 1);</div>
-<div class="line">  real x = sinh((inv_Phi(u) - mu) / sigma);</div>
-<div class="line">  <span class="keywordflow">return</span> inv_logit(x);</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="ttc" id="agroup__unit__johnson_html_ga64da63c0e580b34e266e085bef8c868c"><div class="ttname"><a href="group__unit__johnson.html#ga64da63c0e580b34e266e085bef8c868c">unit_johnson_lcdf</a></div><div class="ttdeci">real unit_johnson_lcdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:75</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga7ac9730c4a0dc628910e7dfafb416197"><div class="ttname"><a href="group__unit__johnson.html#ga7ac9730c4a0dc628910e7dfafb416197">unit_johnson_cdf</a></div><div class="ttdeci">real unit_johnson_cdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:53</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga8d145db9da7348a01b8f35ca806ef3b2"><div class="ttname"><a href="group__unit__johnson.html#ga8d145db9da7348a01b8f35ca806ef3b2">unit_johnson_rng</a></div><div class="ttdeci">real unit_johnson_rng(real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:116</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_ga94e75b04828427f1c44ffe6078a7eff1"><div class="ttname"><a href="group__unit__johnson.html#ga94e75b04828427f1c44ffe6078a7eff1">unit_johnson_lccdf</a></div><div class="ttdeci">real unit_johnson_lccdf(real x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:96</div></div>
-<div class="ttc" id="agroup__unit__johnson_html_gafe31e60738a1653fef213399c886237f"><div class="ttname"><a href="group__unit__johnson.html#gafe31e60738a1653fef213399c886237f">unit_johnson_lpdf</a></div><div class="ttdeci">real unit_johnson_lpdf(vector x, real mu, real sigma)</div><div class="ttdef"><b>Definition:</b> unit_johnson_su.stanfunctions:30</div></div>
-</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga7ac9730c4a0dc628910e7dfafb416197" name="ga7ac9730c4a0dc628910e7dfafb416197"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7ac9730c4a0dc628910e7dfafb416197">&#9670;&nbsp;</a></span>unit_johnson_cdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real unit_johnson_cdf </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Unit Johnson SU cumulative density function</p>
-<p >The Unit Johnson SU distribution is defined as </p><p class="formulaDsp">
-\[ F(y \mid \mu,\sigma) = \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) ) \]
-</p>
-<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathbb{R}^+\).</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Vector </td></tr>
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0,Inf) scale parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>cumulative density </dd></dl>
-
-</div>
-</div>
-<a id="ga94e75b04828427f1c44ffe6078a7eff1" name="ga94e75b04828427f1c44ffe6078a7eff1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga94e75b04828427f1c44ffe6078a7eff1">&#9670;&nbsp;</a></span>unit_johnson_lccdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real unit_johnson_lccdf </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Unit Johnson SU log complementary cumulative density function</p>
-<p >The Unit Johnson SU complementary cumulative distribution is defined as </p><p class="formulaDsp">
-\[ S(y \mid \mu,\sigma) = 1 - \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) ) \]
-</p>
-<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathbb{R}^+\).</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Vector </td></tr>
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0,Inf) scale parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>log complementary cumulative density </dd></dl>
-
-</div>
-</div>
-<a id="ga64da63c0e580b34e266e085bef8c868c" name="ga64da63c0e580b34e266e085bef8c868c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga64da63c0e580b34e266e085bef8c868c">&#9670;&nbsp;</a></span>unit_johnson_lcdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real unit_johnson_lcdf </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Unit Johnson SU log cumulative density function</p>
-<p >The Unit Johnson SU cumulative is defined as </p><p class="formulaDsp">
-\[ F(y \mid \mu,\sigma) = \Phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) ) \]
-</p>
-<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathbb{R}^+\).</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Vector </td></tr>
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0,Inf) scale parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>log cumulative density </dd></dl>
-
-</div>
-</div>
-<a id="gafe31e60738a1653fef213399c886237f" name="gafe31e60738a1653fef213399c886237f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafe31e60738a1653fef213399c886237f">&#9670;&nbsp;</a></span>unit_johnson_lpdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real unit_johnson_lpdf </td>
-          <td>(</td>
-          <td class="paramtype">vector&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >The Unit Johnson SU distribution is defined as </p><p class="formulaDsp">
-\[ p(y \mid \mu,\sigma) = \frac{\sigma}{y (1 - y) \sqrt{1 + \text{logit}(y)^2}}\phi(\mu + \sigma \sinh^{-1}(\text{logit}(y)) ) \]
-</p>
-<p> where \(\mu\) is the location parameter defined on the \(\mathbb{R}\) and \(\sigma\) is a scale parameter, restricted to the positive reals, \(\mathbb{R}^+\).</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">x</td><td>Vector </td></tr>
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0, Inf) scale parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
-
-</div>
-</div>
-<a id="ga8d145db9da7348a01b8f35ca806ef3b2" name="ga8d145db9da7348a01b8f35ca806ef3b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8d145db9da7348a01b8f35ca806ef3b2">&#9670;&nbsp;</a></span>unit_johnson_rng()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real unit_johnson_rng </td>
-          <td>(</td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>mu</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>sigma</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Unit Johnson SU random number generator function</p>
-<p >A unit Johnson SU can be generated by </p><p class="formulaDsp">
-\begin{aligned} u &amp;\sim \mathcal{U}(0,\,1) \\ x &amp;= \sinh^{-1}\bigg(\frac{\Phi^{-1}(u) - \mu}{\sigma}\bigg) \\ y &amp;= \text{inv_logit}(x) \end{aligned}
-</p>
-<p> where \( x \sim \text{Johnson }S_U(\mu, \sigma)\) and \( y \sim UJS_U(\mu, \sigma)\).</p>
-<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mu</td><td>Real </td></tr>
-    <tr><td class="paramname">sigma</td><td>Real (0, Inf) scale parameter </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>realization of Unit Johhson SU with given mu and sigma </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_35baea09d55bebfe17654fdf4bf061ce.html">functions</a></li><li class="navelem"><a class="el" href="dir_70efb7386e83efb4d3e9494317c4c92f.html">copula</a></li><li class="navelem"><a class="el" href="centered__gaussian__copula_8stanfunctions.html">centered_gaussian_copula.stanfunctions</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>

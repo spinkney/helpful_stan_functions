@@ -2,11 +2,11 @@ var files_dup =
 [
     [ "array_ops_definition.stan", "array__ops__definition_8stan.html", null ],
     [ "logical_array.stanfunctions", "logical__array_8stanfunctions.html", "logical__array_8stanfunctions" ],
+    [ "centered_gaussian_copula.stanfunctions", "centered__gaussian__copula_8stanfunctions.html", "centered__gaussian__copula_8stanfunctions" ],
     [ "clayton_copula.stanfunctions", "clayton__copula_8stanfunctions.html", "clayton__copula_8stanfunctions" ],
     [ "copula_definition.stan", "copula__definition_8stan.html", null ],
     [ "frank_copula.stanfunctions", "frank__copula_8stanfunctions.html", "frank__copula_8stanfunctions" ],
     [ "gumbel_copula.stanfunctions", "gumbel__copula_8stanfunctions.html", "gumbel__copula_8stanfunctions" ],
-    [ "mixed_copula.stanfunctions", "mixed__copula_8stanfunctions.html", "mixed__copula_8stanfunctions" ],
     [ "normal_copula.stanfunctions", "normal__copula_8stanfunctions.html", "normal__copula_8stanfunctions" ],
     [ "gpareto.stanfunctions", "gpareto_8stanfunctions.html", "gpareto_8stanfunctions" ],
     [ "multi_normal_cholesky_truncated.stanfunctions", "multi__normal__cholesky__truncated_8stanfunctions.html", "multi__normal__cholesky__truncated_8stanfunctions" ],

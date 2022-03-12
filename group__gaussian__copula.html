@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: mixed_copula.stanfunctions File Reference</title>
+		<title>Helpful Stan Functions: Mixed Discrete-Continuous Gaussian Copula Functions</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -395,7 +395,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mixed__copula_8stanfunctions.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__gaussian__copula.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -416,34 +416,273 @@ $(document).ready(function(){initNavTree('mixed__copula_8stanfunctions.html','')
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">mixed_copula.stanfunctions File Reference</div></div>
+  <div class="headertitle"><div class="title">Mixed Discrete-Continuous Gaussian Copula Functions<div class="ingroups"><a class="el" href="group__copula.html">Copula Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga55043cabec5f27594fa55802b23aba14"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#ga55043cabec5f27594fa55802b23aba14">normal_marginal</a> (array[] real y, row_vector mu_glm, array[] real sigma, int J)</td></tr>
-<tr class="separator:ga55043cabec5f27594fa55802b23aba14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d69bc504219928b6048bd372ef23845"><td class="memItemLeft" align="right" valign="top">array[] vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#ga4d69bc504219928b6048bd372ef23845">bernoulli_marginal</a> (array[] int y, row_vector mu_glm, int J)</td></tr>
-<tr class="separator:ga4d69bc504219928b6048bd372ef23845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga19af974cd9e77473e6c68dfcc1c4e3ee"><td class="memItemLeft" align="right" valign="top">array[] vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#ga19af974cd9e77473e6c68dfcc1c4e3ee">poisson_marginal</a> (array[] int y, row_vector mu_glm, int J)</td></tr>
-<tr class="separator:ga19af974cd9e77473e6c68dfcc1c4e3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae6237a157853b40b1b2e33c548d5ae50"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#gae6237a157853b40b1b2e33c548d5ae50">mixed_cop_sp_lp</a> (array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</td></tr>
-<tr class="separator:gae6237a157853b40b1b2e33c548d5ae50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga59390ebb9ac59227a20800ceb30bacfa"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#ga59390ebb9ac59227a20800ceb30bacfa">mixed_cop_lp</a> (array[,] real Yn, array[,] int Yb, array[,] int Yp, array[] vector uraw_b, array[] vector uraw_p, matrix mu_glm, array[] real sigma, matrix L, array[] matrix bounds_ind, vector tmvn_mu, array[] int J, int N)</td></tr>
-<tr class="separator:ga59390ebb9ac59227a20800ceb30bacfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5ae538db77424f61cb17a15d32818951"><td class="memItemLeft" align="right" valign="top">matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#ga5ae538db77424f61cb17a15d32818951">get_means</a> (vector beta, matrix X, array[] int J, array[] int Kj)</td></tr>
-<tr class="separator:ga5ae538db77424f61cb17a15d32818951"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab5b9aa81d74d233f474a3c9c419be4bc"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mixed__copula.html#gab5b9aa81d74d233f474a3c9c419be4bc">get_bounds_indicator</a> (array[,] real Yn, array[,] int Yb, array[,] int Yp, int N, int Jn, int Jb, int Jp, int J)</td></tr>
-<tr class="separator:gab5b9aa81d74d233f474a3c9c419be4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga76508f4ae078a796bab782ffbc2857b1"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga76508f4ae078a796bab782ffbc2857b1">normal_marginal</a> (matrix y, matrix mu_glm, vector sigma)</td></tr>
+<tr class="separator:ga76508f4ae078a796bab782ffbc2857b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad913ed577d53b14288a4143d4b9c68a7"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#gad913ed577d53b14288a4143d4b9c68a7">bernoulli_marginal</a> (array[,] int y, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:gad913ed577d53b14288a4143d4b9c68a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e1e9b2736154e0a429ec6135f020187"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga1e1e9b2736154e0a429ec6135f020187">binomial_marginal</a> (array[,] int num, array[,] int den, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:ga1e1e9b2736154e0a429ec6135f020187"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae452287a9c4a3fe729e7fbdd5d9b8d55"><td class="memItemLeft" align="right" valign="top">array[] matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#gae452287a9c4a3fe729e7fbdd5d9b8d55">poisson_marginal</a> (array[,] int y, matrix mu_glm, matrix u_raw)</td></tr>
+<tr class="separator:gae452287a9c4a3fe729e7fbdd5d9b8d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga49e09a7e08c40b5693f46c30072fdc70"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__gaussian__copula.html#ga49e09a7e08c40b5693f46c30072fdc70">centered_gaussian_copula_cholesky_lpdf</a> (array[,] matrix marginals, matrix L)</td></tr>
+<tr class="separator:ga49e09a7e08c40b5693f46c30072fdc70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p >The mixed-discrete normal copula. The method is from Smith, Michael &amp; Khaled, Mohamad. (2011). Estimation of Copula Models With Discrete Margins via Bayesian Data Augmentation. Journal of the American Statistical Association. 107. 10.2139/ssrn.1937983.</p>
+<div class="fragment"></div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<a id="gad913ed577d53b14288a4143d4b9c68a7" name="gad913ed577d53b14288a4143d4b9c68a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad913ed577d53b14288a4143d4b9c68a7">&#9670;&nbsp;</a></span>bernoulli_marginal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array[] matrix bernoulli_marginal </td>
+          <td>(</td>
+          <td class="paramtype">array int&#160;</td>
+          <td class="paramname"><em>y</em>[,], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>mu_glm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>u_raw</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Bernoulli marginal</p>
+<p >Bernoulli marginal for mixed continuous-discrete Gaussian copula.</p>
+<p >The lb and ub: if y == 0, upper bound at inv_Phi( y, mu ) if y == 1, lower bound at inv_Phi( y - 1, mu )</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ethan Alt, Sean Pinkney 2021 <br  />
+ </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>int[,] 2d array of binary outcomes </td></tr>
+    <tr><td class="paramname">mu_glm</td><td>matrix of regression means </td></tr>
+    <tr><td class="paramname">u_raw</td><td>matrix of nuisance latent variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>2D array of matrices containing the random variables and jacobian adjustments </dd></dl>
+
+</div>
+</div>
+<a id="ga1e1e9b2736154e0a429ec6135f020187" name="ga1e1e9b2736154e0a429ec6135f020187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e1e9b2736154e0a429ec6135f020187">&#9670;&nbsp;</a></span>binomial_marginal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array[] matrix binomial_marginal </td>
+          <td>(</td>
+          <td class="paramtype">array int&#160;</td>
+          <td class="paramname"><em>num</em>[,], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">array int&#160;</td>
+          <td class="paramname"><em>den</em>[,], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>mu_glm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>u_raw</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Binomial marginal</p>
+<p >Binomial marginal for mixed continuous-discrete Gaussian copula.</p>
+<p >The lb and ub: Always upper bound at inv_Phi( y, mu ) If n != 0, lower bound at inv_Phi(n-1, mu)</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ethan Alt, Sean Pinkney 2021 <br  />
+ </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">num</td><td>int[,] 2D array of numerator integers </td></tr>
+    <tr><td class="paramname">den</td><td>int[,] 2D array of denominator integers </td></tr>
+    <tr><td class="paramname">mu_glm</td><td>matrix of regression means </td></tr>
+    <tr><td class="paramname">u_raw</td><td>matrix of nuisance latent variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>2D array of matrices containing the random variables and jacobian adjustments </dd></dl>
+
+</div>
+</div>
+<a id="ga49e09a7e08c40b5693f46c30072fdc70" name="ga49e09a7e08c40b5693f46c30072fdc70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga49e09a7e08c40b5693f46c30072fdc70">&#9670;&nbsp;</a></span>centered_gaussian_copula_cholesky_lpdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real centered_gaussian_copula_cholesky_lpdf </td>
+          <td>(</td>
+          <td class="paramtype">array matrix&#160;</td>
+          <td class="paramname"><em>marginals</em>[,], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>L</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Mixed Copula Log-Probability Function</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Andrew Johnson 2022 <br  />
+ </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">marginals</td><td>Nested arrays of matrices from marginal calculations </td></tr>
+    <tr><td class="paramname">L</td><td>Cholesky Factor Correlation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Real log-probability </dd></dl>
+
+</div>
+</div>
+<a id="ga76508f4ae078a796bab782ffbc2857b1" name="ga76508f4ae078a796bab782ffbc2857b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga76508f4ae078a796bab782ffbc2857b1">&#9670;&nbsp;</a></span>normal_marginal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array[] matrix normal_marginal </td>
+          <td>(</td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>mu_glm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>sigma</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Normal marginal</p>
+<p >Standardized normal marginal for mixed continuous-discrete Gaussian copula.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Ethan Alt, Sean Pinkney 2021 <br  />
+ </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>matrix of normal outcomes </td></tr>
+    <tr><td class="paramname">mu_glm</td><td>row_vector of regression means </td></tr>
+    <tr><td class="paramname">matrix</td><td>vector of outcome SD's </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>2D array of matrices containing the random variables and jacobian adjustments </dd></dl>
+
+</div>
+</div>
+<a id="gae452287a9c4a3fe729e7fbdd5d9b8d55" name="gae452287a9c4a3fe729e7fbdd5d9b8d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae452287a9c4a3fe729e7fbdd5d9b8d55">&#9670;&nbsp;</a></span>poisson_marginal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array[] matrix poisson_marginal </td>
+          <td>(</td>
+          <td class="paramtype">array int&#160;</td>
+          <td class="paramname"><em>y</em>[,], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>mu_glm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">matrix&#160;</td>
+          <td class="paramname"><em>u_raw</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Poisson marginal</p>
+<p >Poisson marginal for mixed continuous-discrete Gaussian copula.</p>
+<p >The lower-bound and upper-bound: <br  />
+ The upper-bound is always at </p><div class="fragment"><div class="line">inv_Phi( y, mu ) </div>
+</div><!-- fragment --><p> <br  />
+ If \(y \ne 0\), lower-bound at </p><div class="fragment"><div class="line">inv_Phi(y-1, mu) </div>
+</div><!-- fragment --><p>. <br  />
+ At \(y = 0\) the lower-bound is \( 0 \). </p><dl class="section copyright"><dt>Copyright</dt><dd>Ethan Alt, Sean Pinkney 2021 <br  />
+ </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>int[,] 2D array of integer counts </td></tr>
+    <tr><td class="paramname">mu_glm</td><td>matrix of regression means </td></tr>
+    <tr><td class="paramname">u_raw</td><td>matrix of nuisance latent variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>2D array of matrices containing the random variables and jacobian adjustments </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_35baea09d55bebfe17654fdf4bf061ce.html">functions</a></li><li class="navelem"><a class="el" href="dir_70efb7386e83efb4d3e9494317c4c92f.html">copula</a></li><li class="navelem"><a class="el" href="mixed__copula_8stanfunctions.html">mixed_copula.stanfunctions</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
   </ul>
 </div>
