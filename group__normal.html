@@ -561,12 +561,7 @@ accessed Feb. 6, 2021.</p>
 <p> where </p><p class="formulaDsp">
 \[ Q_{n \times d} = \begin{pmatrix} \mathbf{\Phi}^{-1}(u_1) \\ \vdots \\ \mathbf{\Phi}^{-1}(u_d) \end{pmatrix}. \]
 </p>
-<p> Note that \(\det \Sigma = |LL^T| = |L |^2 = \big(\prod_{i=1}^d L_{i,i}\big)^2\) so \(\sqrt{\det \Sigma} = \prod_{i=1}^d L_{i,i}\) and</p>
-<p class="formulaDsp">
-\begin{aligned} c(\mathbf{u}) &amp;= \Bigg(\prod_{i=1}^d L_{i,i}\Bigg)^{-1} \exp \bigg(-\frac{1}{2}(A^T(LL^T)^{-1}A - A^TA)\bigg) \\ &amp;= \Bigg(\prod_{i=1}^d L_{i,i}\Bigg)^{-1} \exp \bigg(-\frac{1}{2}\big((L^{-1}A)^TL^{-1}A - A^TA\big)\bigg) \end{aligned}
-</p>
-<p> where \(X = L^{-1}A\) can be solved with </p><div class="fragment"><div class="line">X = mdivide_left_tri_low(L, A)</div>
-</div><!-- fragment --><p>.</p>
+<p> Note that \(\det \Sigma = |LL^T| = |L |^2 = \big(\prod_{i=1}^d L_{i,i}\big)^2\) so \(\sqrt{\det \Sigma} = \prod_{i=1}^d L_{i,i}\)</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>Ethan Alt, Sean Pinkney 2021</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
