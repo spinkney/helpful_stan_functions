@@ -31,12 +31,12 @@ array[] matrix normal_marginal(matrix y, matrix mu_glm, vector sigma) {
   array[2] matrix[N, J] rtn;
   // Initialise the jacobian adjustments to zero, as vectorised lpdf will be used
   rtn[2] = rep_matrix(0, N, J);
-
-  for (j in 1:J) {
-      rtn[1][ : , j] = (y[: , j] - mu_glm[ : , j]) / sigma[j];
-      rtn[2][1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);
+  
+  for (j in 1 : J) {
+    rtn[1][ : , j] = (y[ : , j] - mu_glm[ : , j]) / sigma[j];
+    rtn[2][1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);
   }
-
+  
   return rtn;
 }
 
@@ -63,11 +63,11 @@ array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   int J = cols(mu_glm);
   matrix[N, J] matrix_y = to_matrix(y);
   matrix[N, J] mu_glm_logit = 1 - inv_logit(mu_glm);
-
+  
   matrix[N, J] Lbound = matrix_y .* mu_glm_logit;
   matrix[N, J] UmL = fabs(matrix_y - mu_glm_logit);
-
-  return { inv_Phi(Lbound + UmL .* u_raw), log(UmL) };
+  
+  return {inv_Phi(Lbound + UmL .* u_raw), log(UmL)};
 }
 
 /**
@@ -89,15 +89,15 @@ array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
  * @return 2D array of matrices containing the random variables
  *         and jacobian adjustments
  */
-array[] matrix binomial_marginal(array[,] int num, array[,] int den,
-                                 matrix mu_glm, matrix u_raw) {
+array[] matrix binomial_marginal(array[,] int num, array[,] int den, matrix mu_glm,
+                                 matrix u_raw) {
   int N = rows(mu_glm);
   int J = cols(mu_glm);
   matrix[N, J] mu_glm_logit = inv_logit(mu_glm);
   array[2] matrix[N, J] rtn;
-
-  for (j in 1:J) {
-    for (n in 1:N) {
+  
+  for (j in 1 : J) {
+    for (n in 1 : N) {
       real Ubound = binomial_cdf(num[n, j] | den[n, j], mu_glm_logit[n, j]);
       real Lbound = 0;
       if (num[n, j] > 0) {
@@ -108,7 +108,7 @@ array[] matrix binomial_marginal(array[,] int num, array[,] int den,
       rtn[2][n, j] = log(UmL);
     }
   }
-
+  
   return rtn;
 }
 
@@ -135,9 +135,9 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   int J = cols(mu_glm);
   matrix[N, J] mu_glm_exp = exp(mu_glm);
   array[2] matrix[N, J] rtn;
-
-  for (j in 1:J) {
-    for (n in 1:N) {
+  
+  for (j in 1 : J) {
+    for (n in 1 : N) {
       real Ubound = poisson_cdf(y[n, j] | mu_glm_exp[n, j]);
       real Lbound = 0;
       if (y[n, j] > 0) {
@@ -148,10 +148,9 @@ array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
       rtn[2][n, j] = log(UmL);
     }
   }
-
+  
   return rtn;
 }
-
 
 /**
  * Mixed Copula Log-Probability Function
@@ -167,21 +166,21 @@ real centered_gaussian_copula_cholesky_lpdf(array[,] matrix marginals, matrix L)
   int N = rows(marginals[1][1]);
   int J = rows(L);
   matrix[N, J] U;
-
+  
   // Iterate through marginal arrays, concatenating the outcome matrices by column
   // and aggregating the log-likelihoods (from continuous marginals) and jacobian
   // adjustments (from discrete marginals)
   real adj = 0;
   int pos = 1;
-  for (m in 1:size(marginals)) {
+  for (m in 1 : size(marginals)) {
     int curr_cols = cols(marginals[m][1]);
-
-    U[ : , pos:(pos + curr_cols - 1)] = marginals[m][1];
-
+    
+    U[ : , pos : (pos + curr_cols - 1)] = marginals[m][1];
+    
     adj += sum(marginals[m][2]);
     pos += curr_cols;
   }
-
+  
   // Return the sum of the log-probability for copula outcomes and jacobian adjustments
   return multi_normal_cholesky_copula_lpdf(U | L) + adj;
 }
