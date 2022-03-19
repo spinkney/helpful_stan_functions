@@ -25,7 +25,7 @@ model {
       y[3, n] = inv_Phi(lognormal_cdf(x[n, 3] | mu[3], sigma[3]));
       y[4, n] = inv_Phi(weibull_cdf(x[n, 4] | sigma[4], sigma[5]));
     }
-    // y ~ multi_normal_copula(L);
+     y ~ multi_normal_cholesky_copula(L);
   }
 }
 generated quantities {
