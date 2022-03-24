@@ -74,19 +74,29 @@ real normal_copula_vector_lpdf(vector u, vector v, real rho) {
   * @param rho Real on (-1, 1)
   * @return cumulative density
   */
-real bivariate_normal_copula_cdf(vector u, real rho) {
-  real a = 1 / sqrt(1 - square(rho));
-  real avg_uv = mean(u);
-  real pu = inv_Phi(u[1]);
-  real pv = inv_Phi(u[2]);
-  real alpha_u = a * (pv / pu - rho);
-  real alpha_v = a * (pu / pv - rho);
-  real d = 0;
+ real bivariate_normal_copula_cdf(real u, real v, real rho){
+   real a = 1 / sqrt(1 - square(rho));
+   real avg_uv = mean([u, v]);
+   real pu = inv_Phi(u);
+   real pv = inv_Phi(v);
+   real alpha_u = a * (pv / pu - rho);
+   real alpha_v = a * (pu / pv - rho);
+   real d = 0;
+   
+  if (v == 0.5 || u == 0.5 && v != u) {
+    real x = u == 0.5 ? v : u;
+    if (rho < 0) return 0.5 *  bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);
+    else return u - 0.5 * bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);
+  } 
+   
+  if ( v == u )
+    return u - 2 * owens_t(inv_Phi(u), sqrt((1 - rho) / (1 + rho)));
   
-  if (u[1] < 0.5 && u[2] >= 0.5 || u[1] >= 0.5 && u[2] < 0.5) 
-    d = 0.5;
-  
-  return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;
+   
+   if ( u < 0.5 && v >= 0.5 || u >= 0.5 && v < 0.5 )
+      d = 0.5;
+   
+   return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;
 }
 
 /**
