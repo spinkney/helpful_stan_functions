@@ -426,8 +426,8 @@ Functions</h2></td></tr>
 <tr class="separator:gaeceb683df43c85469ececa537d2e2266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga09447a56c60491b2e53ed77922e68ece"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a> (vector u, vector v, real rho)</td></tr>
 <tr class="separator:ga09447a56c60491b2e53ed77922e68ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0cfca0aba6b1049472eac7cafe169143"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga0cfca0aba6b1049472eac7cafe169143">bivariate_normal_copula_cdf</a> (vector u, real rho)</td></tr>
-<tr class="separator:ga0cfca0aba6b1049472eac7cafe169143"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf774c87e4771d60525a50a5d94391516"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#gaf774c87e4771d60525a50a5d94391516">bivariate_normal_copula_cdf</a> (real u, real v, real rho)</td></tr>
+<tr class="separator:gaf774c87e4771d60525a50a5d94391516"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga53b0ac15ddf226fa86c96800014d89fc"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__normal.html#ga53b0ac15ddf226fa86c96800014d89fc">multi_normal_cholesky_copula_lpdf</a> (matrix U, matrix L)</td></tr>
 <tr class="separator:ga53b0ac15ddf226fa86c96800014d89fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -453,19 +453,29 @@ Functions</h2></td></tr>
 <div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
-<div class="line"><span class="stringliteral">real bivariate_normal_copula_cdf(vector u, real rho) {</span></div>
-<div class="line"><span class="stringliteral">  real a = 1 / sqrt(1 - square(rho));</span></div>
-<div class="line"><span class="stringliteral">  real avg_uv = mean(u);</span></div>
-<div class="line"><span class="stringliteral">  real pu = inv_Phi(u[1]);</span></div>
-<div class="line"><span class="stringliteral">  real pv = inv_Phi(u[2]);</span></div>
-<div class="line"><span class="stringliteral">  real alpha_u = a * (pv / pu - rho);</span></div>
-<div class="line"><span class="stringliteral">  real alpha_v = a * (pu / pv - rho);</span></div>
-<div class="line"><span class="stringliteral">  real d = 0;</span></div>
+<div class="line"><span class="stringliteral"> real bivariate_normal_copula_cdf(real u, real v, real rho){</span></div>
+<div class="line"><span class="stringliteral">   real a = 1 / sqrt(1 - square(rho));</span></div>
+<div class="line"><span class="stringliteral">   real avg_uv = mean([u, v]);</span></div>
+<div class="line"><span class="stringliteral">   real pu = inv_Phi(u);</span></div>
+<div class="line"><span class="stringliteral">   real pv = inv_Phi(v);</span></div>
+<div class="line"><span class="stringliteral">   real alpha_u = a * (pv / pu - rho);</span></div>
+<div class="line"><span class="stringliteral">   real alpha_v = a * (pu / pv - rho);</span></div>
+<div class="line"><span class="stringliteral">   real d = 0;</span></div>
+<div class="line"><span class="stringliteral">   </span></div>
+<div class="line"><span class="stringliteral">  if (v == 0.5 || u == 0.5 &amp;&amp; v != u) {</span></div>
+<div class="line"><span class="stringliteral">    real x = u == 0.5 ? v : u;</span></div>
+<div class="line"><span class="stringliteral">    if (rho &lt; 0) return 0.5 *  bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);</span></div>
+<div class="line"><span class="stringliteral">    else return u - 0.5 * bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);</span></div>
+<div class="line"><span class="stringliteral">  } </span></div>
+<div class="line"><span class="stringliteral">   </span></div>
+<div class="line"><span class="stringliteral">  if ( v == u )</span></div>
+<div class="line"><span class="stringliteral">    return u - 2 * owens_t(inv_Phi(u), sqrt((1 - rho) / (1 + rho)));</span></div>
 <div class="line"><span class="stringliteral">  </span></div>
-<div class="line"><span class="stringliteral">  if (u[1] &lt; 0.5 &amp;&amp; u[2] &gt;= 0.5 || u[1] &gt;= 0.5 &amp;&amp; u[2] &lt; 0.5) </span></div>
-<div class="line"><span class="stringliteral">    d = 0.5;</span></div>
-<div class="line"><span class="stringliteral">  </span></div>
-<div class="line"><span class="stringliteral">  return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;</span></div>
+<div class="line"><span class="stringliteral">   </span></div>
+<div class="line"><span class="stringliteral">   if ( u &lt; 0.5 &amp;&amp; v &gt;= 0.5 || u &gt;= 0.5 &amp;&amp; v &lt; 0.5 )</span></div>
+<div class="line"><span class="stringliteral">      d = 0.5;</span></div>
+<div class="line"><span class="stringliteral">   </span></div>
+<div class="line"><span class="stringliteral">   return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
 <div class="line"><span class="stringliteral">real multi_normal_cholesky_copula_lpdf(matrix U, matrix L) {</span></div>
@@ -477,8 +487,8 @@ Functions</h2></td></tr>
 <div class="ttc" id="agroup__normal_html_ga09447a56c60491b2e53ed77922e68ece"><div class="ttname"><a href="group__normal.html#ga09447a56c60491b2e53ed77922e68ece">normal_copula_vector_lpdf</a></div><div class="ttdeci">real normal_copula_vector_lpdf(vector u, vector v, real rho)</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:52</div></div>
 <div class="ttc" id="agroup__normal_html_gaeceb683df43c85469ececa537d2e2266"><div class="ttname"><a href="group__normal.html#gaeceb683df43c85469ececa537d2e2266">normal_copula_lpdf</a></div><div class="ttdeci">real normal_copula_lpdf(real u, real v, real rho)</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:31</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga0cfca0aba6b1049472eac7cafe169143" name="ga0cfca0aba6b1049472eac7cafe169143"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0cfca0aba6b1049472eac7cafe169143">&#9670;&nbsp;</a></span>bivariate_normal_copula_cdf()</h2>
+<a id="gaf774c87e4771d60525a50a5d94391516" name="gaf774c87e4771d60525a50a5d94391516"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf774c87e4771d60525a50a5d94391516">&#9670;&nbsp;</a></span>bivariate_normal_copula_cdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -486,8 +496,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">real bivariate_normal_copula_cdf </td>
           <td>(</td>
-          <td class="paramtype">vector&#160;</td>
+          <td class="paramtype">real&#160;</td>
           <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
