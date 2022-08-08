@@ -449,13 +449,13 @@ Functions</h2></td></tr>
 <div class="line">matrix <a class="code hl_function" href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a>(vector angle, <span class="keywordtype">int</span> K) {</div>
 <div class="line">  <span class="keywordtype">int</span> N = num_elements(angle);</div>
 <div class="line">  matrix[K, K] mat = add_diag(identity_matrix(K), rep_vector(-1, K));</div>
-<div class="line">  <span class="keywordtype">int</span> count = K;</div>
+<div class="line">  <span class="keywordtype">int</span> count = K - 1;</div>
 <div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
-<div class="line">  </div>
+<div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span> (k in 1 : K - 1) {</div>
-<div class="line">    count -= 1;</div>
-<div class="line">    mat[k + 1 : K, k] = segment(angle, pos, count);</div>
+<div class="line">    mat[k + 1:K, k] = segment(angle, pos, count);</div>
 <div class="line">    pos += count;</div>
+<div class="line">    count -= 1;</div>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> mat;</div>

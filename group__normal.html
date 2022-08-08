@@ -453,29 +453,30 @@ Functions</h2></td></tr>
 <div class="line"><span class="stringliteral">  return a1 * x / a2 - N * a3;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
-<div class="line"><span class="stringliteral"> real bivariate_normal_copula_cdf(real u, real v, real rho){</span></div>
-<div class="line"><span class="stringliteral">   real a = 1 / sqrt(1 - square(rho));</span></div>
-<div class="line"><span class="stringliteral">   real avg_uv = mean([u, v]);</span></div>
-<div class="line"><span class="stringliteral">   real pu = inv_Phi(u);</span></div>
-<div class="line"><span class="stringliteral">   real pv = inv_Phi(v);</span></div>
-<div class="line"><span class="stringliteral">   real alpha_u = a * (pv / pu - rho);</span></div>
-<div class="line"><span class="stringliteral">   real alpha_v = a * (pu / pv - rho);</span></div>
-<div class="line"><span class="stringliteral">   real d = 0;</span></div>
-<div class="line"><span class="stringliteral">   </span></div>
+<div class="line"><span class="stringliteral">real bivariate_normal_copula_cdf(real u, real v, real rho) {</span></div>
+<div class="line"><span class="stringliteral">  real a = 1 / sqrt(1 - square(rho));</span></div>
+<div class="line"><span class="stringliteral">  real avg_uv = mean([u, v]);</span></div>
+<div class="line"><span class="stringliteral">  real pu = inv_Phi(u);</span></div>
+<div class="line"><span class="stringliteral">  real pv = inv_Phi(v);</span></div>
+<div class="line"><span class="stringliteral">  real alpha_u = a * (pv / pu - rho);</span></div>
+<div class="line"><span class="stringliteral">  real alpha_v = a * (pu / pv - rho);</span></div>
+<div class="line"><span class="stringliteral">  real d = 0;</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
 <div class="line"><span class="stringliteral">  if (v == 0.5 || u == 0.5 &amp;&amp; v != u) {</span></div>
 <div class="line"><span class="stringliteral">    real x = u == 0.5 ? v : u;</span></div>
-<div class="line"><span class="stringliteral">    if (rho &lt; 0) return 0.5 *  bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);</span></div>
-<div class="line"><span class="stringliteral">    else return u - 0.5 * bivariate_normal_copula_cdf(x | x, 1 - 2 * rho^2);</span></div>
-<div class="line"><span class="stringliteral">  } </span></div>
-<div class="line"><span class="stringliteral">   </span></div>
-<div class="line"><span class="stringliteral">  if ( v == u )</span></div>
+<div class="line"><span class="stringliteral">    if (rho &lt; 0) </span></div>
+<div class="line"><span class="stringliteral">      return 0.5 * bivariate_normal_copula_cdf(x | x, 1 - 2 * rho ^ 2);</span></div>
+<div class="line"><span class="stringliteral">    else </span></div>
+<div class="line"><span class="stringliteral">      return u - 0.5 * bivariate_normal_copula_cdf(x | x, 1 - 2 * rho ^ 2);</span></div>
+<div class="line"><span class="stringliteral">  }</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
+<div class="line"><span class="stringliteral">  if (v == u) </span></div>
 <div class="line"><span class="stringliteral">    return u - 2 * owens_t(inv_Phi(u), sqrt((1 - rho) / (1 + rho)));</span></div>
 <div class="line"><span class="stringliteral">  </span></div>
-<div class="line"><span class="stringliteral">   </span></div>
-<div class="line"><span class="stringliteral">   if ( u &lt; 0.5 &amp;&amp; v &gt;= 0.5 || u &gt;= 0.5 &amp;&amp; v &lt; 0.5 )</span></div>
-<div class="line"><span class="stringliteral">      d = 0.5;</span></div>
-<div class="line"><span class="stringliteral">   </span></div>
-<div class="line"><span class="stringliteral">   return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;</span></div>
+<div class="line"><span class="stringliteral">  if (u &lt; 0.5 &amp;&amp; v &gt;= 0.5 || u &gt;= 0.5 &amp;&amp; v &lt; 0.5) </span></div>
+<div class="line"><span class="stringliteral">    d = 0.5;</span></div>
+<div class="line"><span class="stringliteral">  </span></div>
+<div class="line"><span class="stringliteral">  return avg_uv - owens_t(pu, alpha_u) - owens_t(pv, alpha_v) - d;</span></div>
 <div class="line"><span class="stringliteral">}</span></div>
 <div class="line"><span class="stringliteral"></span> </div>
 <div class="line"><span class="stringliteral">real multi_normal_cholesky_copula_lpdf(matrix U, matrix L) {</span></div>
