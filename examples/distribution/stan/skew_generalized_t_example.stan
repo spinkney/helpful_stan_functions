@@ -9,8 +9,8 @@ parameters {
   real mu;
   real<lower=0> sigma;
   real<lower=-1, upper=1> lambda;
-  real<lower=0> p;
   real<lower=0> q;
+  real<lower=2.0/q> p;
 }
 model {
   mu ~ normal(0, 4);

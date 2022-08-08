@@ -29,6 +29,57 @@
   *
   * \ingroup univariate
   *  @{ */
+  
+/** Skew Generalized T Rescale Sigma to be Variance 
+  *
+  * @copyright Sean Pinkney, 2021 
+  * @author Sean Pinkney
+  * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+  * @param lambda Real \f$-1 < \lambda < 1\f$ 
+  * @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
+  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+  * @throws reject if \f$ pq \leq 2 \f$ 
+  * @return rescaled sigma
+  */
+real variance_adjusted_sgt(real sigma, real lambda, real p, real q) {
+  if (p * q <= 2) 
+    reject("p * q must be > 2 found p * q = ", p * q);
+  
+  if (is_inf(q)) 
+    return sigma
+           * inv_sqrt((pi() * (1 + 3 * lambda ^ 2) * tgamma(3.0 / p)
+                       - 16 ^ (1.0 / p) * lambda ^ 2 * (tgamma(1.0 / 2 + 1.0 / p)) ^ 2
+                         * tgamma(1.0 / p))
+                      / (pi() * tgamma(1.0 / p)));
+  
+  return sigma
+         / (q ^ (1.0 / p)
+            * sqrt((3 * lambda ^ 2 + 1) * (beta(3.0 / p, q - 2.0 / p) / beta(1.0 / p, q))
+                   - 4 * lambda ^ 2 * (beta(2.0 / p, q - 1.0 / p) / beta(1.0 / p, q)) ^ 2));
+}
+
+/** Skew Generalized T Center Mean
+*
+* Centers the mean around mu, otherwise mu is the mode.
+*
+* @copyright Sean Pinkney, 2021 
+* @author Sean Pinkney
+* @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+* @param lambda Real \f$-1 < \lambda < 1\f$ 
+* @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
+* @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+* @throws reject if \f$ pq \leq 1 \f$ 
+* @return rescaled x
+*/
+vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
+  if (p * q <= 1) 
+    reject("p * q must be > 1 found p * q = ", p * q);
+  
+  if (is_inf(q)) 
+    return x + (2 ^ (2.0 / p) * sigma * lambda * tgamma(1.0 / 2 + 1.0 / p)) / sqrt(pi());
+  
+  return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
+}
 
 /**
  * The Skewed Generalized T distribution is defined as
@@ -78,27 +129,26 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
     reject("q must be > 0 found q = ", q);
   
   int N = num_elements(x);
-  real r;
-  int sign;
   real out = 0;
+  real sigma_adj = variance_adjusted_sgt(sigma, lambda, p, q);
   
   if (is_inf(q) && is_inf(p)) 
-    return uniform_lpdf(x | mu - sigma, mu + sigma);
+    return uniform_lpdf(x | mu - sigma_adj, mu + sigma_adj);
   
-  for (n in 1 : N) {
-    r = x[n] - mu;
-    sign = r < 0 ? -1 : 1;
-    
-    if (is_inf(q) && !is_inf(p)) {
-      out += (sign * r / (sigma * (1 + lambda * sign))) ^ p;
-    } else 
-      out += log1p((sign * r) ^ p / (q * sigma ^ p * (1 + lambda * sign ^ p)));
+  vector[N] r = mean_centered_sgt(x, sigma_adj, lambda, p, q) - mu;
+  vector[N] s;
+  
+  for (n in 1:N) s[n] = r[n] < 0 ? -1 : 1;
+  
+  if (is_inf(q) && !is_inf(p)) {
+      
+    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) ^ p );
+    return log(p) - log(2) - log(sigma_adj) - lgamma(1.0 / p) - out;
+  } else {
+    out = sum(log1p( abs(r) ^ p ./ (q * sigma_adj ^ p * pow(1 + lambda * s, p))));
   }
   
-  if (is_inf(q) && !is_inf(p)) 
-    return log(p) - log(2) - log(sigma) - lgamma(1 / p) - out;
-  
-  return log(p) - log2() - log(sigma) - log(q) / p - lbeta(1 / p, q) - (1 / p + q) * out;
+  return N * (log(p) - log2() - log(sigma_adj) - log(q) / p - lbeta(1.0 / p, q)) - (1.0 / p + q) * out;
 }
 
 /** Skew Generalized T log cumulative density function
@@ -139,9 +189,12 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   }
   
   if (!is_inf(p) && is_inf(q) && !is_inf(x)) 
-    return log((1 - lambda_new) / 2
-               + (1 + lambda_new) / 2
-                 * gamma_cdf((r_new / (sigma * (1 + lambda_new))) ^ p, p, 1));
+    return   log_sum_exp([
+    log1m(lambda_new) + log2(),
+    log(lambda_new - 1) + log2() + beta_lcdf((r_new / (sigma * (1 + lambda_new))) ^ p | p, 1)]);
+    // return log((1 - lambda_new) / 2
+    //            + (1 + lambda_new) / 2
+    //              * gamma_cdf((r_new / (sigma * (1 + lambda_new))) ^ p, p, 1));
   
   if (is_inf(p) && !is_inf(x)) 
     return uniform_lcdf(x | mu, sigma);
@@ -152,60 +205,13 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   if (is_inf(x) && x > 0) 
     return 1;
   
-  return log((1 - lambda_new) / 2
-             + (lambda_new - 1) / 2
-               * beta_cdf(1 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1 / p, q));
-}
-
-/** Skew Generalized T Rescale Sigma to be Variance 
-  *
-  * @copyright Sean Pinkney, 2021 
-  * @author Sean Pinkney
-  * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
-  * @param lambda Real \f$-1 < \lambda < 1\f$ 
-  * @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
-  * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
-  * @throws reject if \f$ pq \leq 2 \f$ 
-  * @return rescaled sigma
-  */
-real variance_adjusted_sgt(real sigma, real lambda, real p, real q) {
-  if (p * q <= 2) 
-    reject("p * q must be > 2 found p * q = ", p * q);
-  
-  if (is_inf(q)) 
-    return sigma
-           * inv_sqrt((pi() * (1 + 3 * lambda ^ 2) * tgamma(3 / p)
-                       - 16 ^ (1 / p) * lambda ^ 2 * (tgamma(1 / 2 + 1 / p)) ^ 2
-                         * tgamma(1 / p))
-                      / (pi() * tgamma(1 / p)));
-  
-  return sigma
-         / (q ^ (1 / p)
-            * sqrt((3 * lambda ^ 2 + 1) * (beta(3 / p, q - 2 / p) / beta(1 / p, q))
-                   - 4 * lambda ^ 2 * (beta(2 / p, q - 1 / p) / beta(1 / p, q)) ^ 2));
-}
-
-/** Skew Generalized T Center Mean
-*
-* Centers the mean around mu, otherwise mu is the mode.
-*
-* @copyright Sean Pinkney, 2021 
-* @author Sean Pinkney
-* @param sigma Real \f$\in (0, \infty)\f$ scale parameter
-* @param lambda Real \f$-1 < \lambda < 1\f$ 
-* @param p Real \f$\in (0, \infty)\f$ kurtosis parameter
-* @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
-* @throws reject if \f$ pq \leq 1 \f$ 
-* @return rescaled x
-*/
-vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
-  if (p * q <= 1) 
-    reject("p * q must be > 1 found p * q = ", p * q);
-  
-  if (is_inf(q)) 
-    return x + (2 ^ (2 / p) * sigma * lambda * tgamma(1 / 2 + 1 / p)) / sqrt(pi());
-  
-  return x + (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p)) / beta(1 / p, q);
+  // log((1 - lambda_new) / 2
+  //            + (lambda_new - 1) / 2
+  //              * beta_cdf(1 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1 / p, q))
+  return  log_sum_exp([
+    log1m(lambda_new) + log2(),
+    log(lambda_new - 1) + log2() + beta_lcdf(1.0 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1.0 / p, q)
+    ]);
 }
 
 /** @} */
