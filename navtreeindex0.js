@@ -77,7 +77,7 @@ var NAVTREEINDEX0 =
 "group__odeint.html":[3,7],
 "group__qf.html":[3,8],
 "group__qf.html#ga8684adaa0838edbfa4188a918961b58c":[3,8,1],
-"group__qf.html#ga98a5ed8a7654fd264dfbaffa31e932eb":[3,8,2],
+"group__qf.html#gadf18b34d74e9c3bbb2be8de8fd65e047":[3,8,2],
 "group__qf.html#gaecfde107e2a63c982b168c6dac4b1782":[3,8,3],
 "group__skew__generalized__t.html":[3,3,1],
 "group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0":[3,3,1,4],
