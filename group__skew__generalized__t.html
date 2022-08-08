@@ -426,6 +426,8 @@ Functions</h2></td></tr>
 <tr class="separator:ga2f1016b68af93771d1525cf654c24df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8f03167e434b644f63f456087af5f150"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a> (vector x, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:ga8f03167e434b644f63f456087af5f150"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4492987a953344d6399268686734a9eb"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga4492987a953344d6399268686734a9eb">mean_centered_sgt</a> (real x, real sigma, real lambda, real p, real q)</td></tr>
+<tr class="separator:ga4492987a953344d6399268686734a9eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7a1f5a71101932c511f15e1379df4562"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a> (vector x, real mu, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:ga7a1f5a71101932c511f15e1379df4562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6ea5a0033c7d222a2b010214e5708a8a"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a> (real x, real mu, real sigma, real lambda, real p, real q)</td></tr>
@@ -457,6 +459,16 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">vector <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(vector x, real sigma, real lambda, real p, real q) {</div>
+<div class="line">  <span class="keywordflow">if</span> (p * q &lt;= 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;p * q must be &gt; 1 found p * q = &quot;</span>, p * q);</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (is_inf(q)) </div>
+<div class="line">    <span class="keywordflow">return</span> x + (2 ^ (2.0 / p) * sigma * lambda * tgamma(1.0 / 2 + 1.0 / p)) / sqrt(pi());</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(real x, real sigma, real lambda, real p, real q) {</div>
 <div class="line">  <span class="keywordflow">if</span> (p * q &lt;= 1) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;p * q must be &gt; 1 found p * q = &quot;</span>, p * q);</div>
 <div class="line">  </div>
@@ -514,7 +526,15 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
 <div class="line">  </div>
-<div class="line">  real r = x - mu;</div>
+<div class="line">  <span class="keywordflow">if</span> (is_inf(x) &amp;&amp; x &lt; 0) </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (is_inf(x) &amp;&amp; x &gt; 0) </div>
+<div class="line">    <span class="keywordflow">return</span> 1;</div>
+<div class="line">  </div>
+<div class="line">  real sigma_adj = <a class="code hl_function" href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a>(sigma, lambda, p, q);</div>
+<div class="line">  real x_cent = <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(x, sigma_adj, lambda, p, q);</div>
+<div class="line">  real r = x_cent - mu;</div>
 <div class="line">  real lambda_new;</div>
 <div class="line">  real r_new;</div>
 <div class="line">  </div>
@@ -546,12 +566,58 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga2f1016b68af93771d1525cf654c24df0"><div class="ttname"><a href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a></div><div class="ttdeci">real variance_adjusted_sgt(real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:44</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:165</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:118</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:175</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:128</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga8f03167e434b644f63f456087af5f150"><div class="ttname"><a href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a></div><div class="ttdeci">vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:74</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<a id="ga4492987a953344d6399268686734a9eb" name="ga4492987a953344d6399268686734a9eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4492987a953344d6399268686734a9eb">&#9670;&nbsp;</a></span>mean_centered_sgt() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real mean_centered_sgt </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>lambda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ga8f03167e434b644f63f456087af5f150" name="ga8f03167e434b644f63f456087af5f150"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8f03167e434b644f63f456087af5f150">&#9670;&nbsp;</a></span>mean_centered_sgt()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8f03167e434b644f63f456087af5f150">&#9670;&nbsp;</a></span>mean_centered_sgt() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
