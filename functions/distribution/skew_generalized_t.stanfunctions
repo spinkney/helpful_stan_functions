@@ -91,6 +91,16 @@ real mean_centered_sgt(real x, real sigma, real lambda, real p, real q) {
   return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
 }
 
+real mean_centered_sgt(real x, real sigma, real lambda, real q) {
+  if (q <= 1) 
+    reject("q must be > 1 found q = ", q);
+  
+  if (is_inf(q)) 
+    return x + (4 * sigma * lambda * tgamma(1.0 / 2 + 1.0)) / sqrt(pi());
+  
+  return x + (2 * sigma * lambda * q * beta(2, q - 1.0)) / beta(1.0, q);
+}
+
 /**
  * The Skewed Generalized T distribution is defined as
  *
@@ -158,6 +168,48 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
   }
   
   return N * (log(p) - log2() - log(sigma_adj) - log(q) / p - lbeta(1.0 / p, q)) - (1.0 / p + q) * out;
+}
+
+
+ * @copyright Sean Pinkney, 2021 
+ * @author Sean Pinkney
+ * @param x Vector 
+ * @param mu Real 
+ * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+ * @param lambda Real \f$-1 < \lambda < 1\f$ 
+ * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+ * @return log probability
+ */
+real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
+  if (sigma <= 0) 
+    reject("sigma must be > 0 found sigma = ", sigma);
+  
+  if (lambda >= 1 || lambda <= -1) 
+    reject("lambda must be between (-1, 1) found lambda = ", lambda);
+
+  if (q <= 0) 
+    reject("q must be > 0 found q = ", q);
+  
+  int N = num_elements(x);
+  real out = 0;
+  real sigma_adj = variance_adjusted_sgt(sigma, lambda, p, q);
+  
+  if (is_inf(q) && is_inf(p)) 
+    return uniform_lpdf(x | mu - sigma_adj, mu + sigma_adj);
+  
+  vector[N] r = mean_centered_sgt(x, sigma_adj, lambda, q) - mu;
+  vector[N] s;
+  
+  for (n in 1:N) s[n] = r[n] < 0 ? -1 : 1;
+  
+  if (is_inf(q)) {
+    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) );
+    return -log(2) - log(sigma_adj) - out;
+  } else {
+    out = sum(log1p( abs(r) ./ (q * sigma_adj * (1 + lambda * s)));
+  }
+  
+  return N * (-log2() - log(sigma_adj) - log(q) - lbeta(1.0, q)) - (1.0 + q) * out;
 }
 
 /** Skew Generalized T log cumulative density function
