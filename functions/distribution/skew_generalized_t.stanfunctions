@@ -141,7 +141,6 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
   for (n in 1:N) s[n] = r[n] < 0 ? -1 : 1;
   
   if (is_inf(q) && !is_inf(p)) {
-      
     out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) ^ p );
     return log(p) - log(2) - log(sigma_adj) - lgamma(1.0 / p) - out;
   } else {
@@ -192,10 +191,6 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
     return   log_sum_exp([
     log1m(lambda_new) + log2(),
     log(lambda_new - 1) + log2() + beta_lcdf((r_new / (sigma * (1 + lambda_new))) ^ p | p, 1)]);
-    // return log((1 - lambda_new) / 2
-    //            + (1 + lambda_new) / 2
-    //              * gamma_cdf((r_new / (sigma * (1 + lambda_new))) ^ p, p, 1));
-  
   if (is_inf(p) && !is_inf(x)) 
     return uniform_lcdf(x | mu, sigma);
   
@@ -204,10 +199,7 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   
   if (is_inf(x) && x > 0) 
     return 1;
-  
-  // log((1 - lambda_new) / 2
-  //            + (lambda_new - 1) / 2
-  //              * beta_cdf(1 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1 / p, q))
+
   return  log_sum_exp([
     log1m(lambda_new) + log2(),
     log(lambda_new - 1) + log2() + beta_lcdf(1.0 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1.0 / p, q)
