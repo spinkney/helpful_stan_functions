@@ -81,6 +81,16 @@ vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
   return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
 }
 
+real mean_centered_sgt(real x, real sigma, real lambda, real p, real q) {
+  if (p * q <= 1) 
+    reject("p * q must be > 1 found p * q = ", p * q);
+  
+  if (is_inf(q)) 
+    return x + (2 ^ (2.0 / p) * sigma * lambda * tgamma(1.0 / 2 + 1.0 / p)) / sqrt(pi());
+  
+  return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
+}
+
 /**
  * The Skewed Generalized T distribution is defined as
  *
@@ -175,7 +185,15 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   if (q <= 0) 
     reject("q must be > 0 found q = ", q);
   
-  real r = x - mu;
+  if (is_inf(x) && x < 0) 
+    return 0;
+  
+  if (is_inf(x) && x > 0) 
+    return 1;
+  
+  real sigma_adj = variance_adjusted_sgt(sigma, lambda, p, q);
+  real x_cent = mean_centered_sgt(x, sigma_adj, lambda, p, q);
+  real r = x_cent - mu;
   real lambda_new;
   real r_new;
   

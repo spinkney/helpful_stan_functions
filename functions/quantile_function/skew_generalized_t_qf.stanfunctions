@@ -1,4 +1,6 @@
 #include special/inc_beta_inverse.stanfunctions
+#include distribution/skew_generalized_t.stanfunctions
+
 
 /** @ingroup qf
  * Skewed Generalized T Quantile Function
@@ -31,33 +33,34 @@ real skew_generalized_t_qf(real x, real mu, real sigma, real lambda, real p, rea
   if (q <= 0) 
     reject("q must be > 0 found q = ", q);
   
-  real prob;
-  real lam;
-  real out;
-  
   // needs the gamma_qf
   if (!is_inf(p) && is_inf(q)) 
     reject("not yet implemented for infinite q");
   
   if (is_inf(p)) 
     reject("not yet implemented for infinite p");
+    
+  real prob;
+  real lam;
+  real out;
+  real sigma_adj = variance_adjusted_sgt(sigma, lambda, p, q);
   
   if (x > 0.5 * (1 - lambda)) {
     prob = 1 - x;
     lam = -lambda;
-    out = -(sigma * (lam - 1)
-            * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
+    out = -(sigma_adj * (lam - 1)
+            * (1 / (q * inv_inc_beta(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
               ^ (-1 / p));
   } else {
     prob = x;
     lam = lambda;
-    out = sigma * (lam - 1)
-          * (1 / (q * inc_beta_inverse(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
+    out = sigma_adj * (lam - 1)
+          * (1 / (q * inv_inc_beta(1 - 2 * prob / (1 - lam), 1 / p, q)) - 1 / q)
             ^ (-1 / p);
   }
   
   if (!is_nan(mean_centered)) 
-    out -= (2 * sigma * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p)) / beta(1 / p, q);
+    out -= (2 * sigma_adj * lambda * q ^ (1 / p) * beta(2 / p, q - 1 / p)) / beta(1 / p, q);
   
   return out + mu;
 }
