@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: Cholesky Correlation Angles Matrix Constraint functions</title>
+		<title>Helpful Stan Functions: File Members</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -395,7 +395,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__angles.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('globals_vars.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -413,122 +413,10 @@ $(document).ready(function(){initNavTree('group__angles.html',''); initResizable
 </iframe>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Cholesky Correlation Angles Matrix Constraint functions<div class="ingroups"><a class="el" href="group__correlation.html">Correlation Matrix Functions</a></div></div></div>
-</div><!--header-->
 <div class="contents">
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gabad0f24500b6469472e496cd95acd180"><td class="memItemLeft" align="right" valign="top">matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__angles.html#gabad0f24500b6469472e496cd95acd180">angle2chol</a> (matrix angle_mat)</td></tr>
-<tr class="separator:gabad0f24500b6469472e496cd95acd180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabe2b8ad3b6e1a7872697a7d0ff6b2888"><td class="memItemLeft" align="right" valign="top">matrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a> (vector angle, int K)</td></tr>
-<tr class="separator:gabe2b8ad3b6e1a7872697a7d0ff6b2888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line">matrix <a class="code hl_function" href="group__angles.html#gabad0f24500b6469472e496cd95acd180">angle2chol</a>(matrix angle_mat) {</div>
-<div class="line">  <span class="keywordtype">int</span> N = rows(angle_mat);</div>
-<div class="line">  matrix[N, N] inv_mat = identity_matrix(N);</div>
-<div class="line">  </div>
-<div class="line">  inv_mat[ : , 1] = cos(angle_mat[ : , 1]);</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : N) {</div>
-<div class="line">    inv_mat[i, i] = prod(sin(angle_mat[i, 1 : (i - 1)]));</div>
-<div class="line">    <span class="keywordflow">if</span> (i &gt; 2) {</div>
-<div class="line">      <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : (i - 1)) {</div>
-<div class="line">        inv_mat[i, j] = cos(angle_mat[i, j]) * prod(sin(angle_mat[i, 1 : (j - 1)]));</div>
-<div class="line">      }</div>
-<div class="line">    }</div>
-<div class="line">  }</div>
-<div class="line">  <span class="keywordflow">return</span> inv_mat;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">matrix <a class="code hl_function" href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a>(vector angle, <span class="keywordtype">int</span> K) {</div>
-<div class="line">  <span class="keywordtype">int</span> N = num_elements(angle);</div>
-<div class="line">  matrix[K, K] mat = add_diag(identity_matrix(K), rep_vector(-1, K));</div>
-<div class="line">  <span class="keywordtype">int</span> count = K - 1;</div>
-<div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span> (k <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : K - 1) {</div>
-<div class="line">    mat[k + 1:K, k] = segment(angle, pos, count);</div>
-<div class="line">    pos += count;</div>
-<div class="line">    count -= 1;</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> mat;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__angles_html_gabad0f24500b6469472e496cd95acd180"><div class="ttname"><a href="group__angles.html#gabad0f24500b6469472e496cd95acd180">angle2chol</a></div><div class="ttdeci">matrix angle2chol(matrix angle_mat)</div><div class="ttdef"><b>Definition:</b> correlation_angles.stanfunctions:21</div></div>
-<div class="ttc" id="agroup__angles_html_gabe2b8ad3b6e1a7872697a7d0ff6b2888"><div class="ttname"><a href="group__angles.html#gabe2b8ad3b6e1a7872697a7d0ff6b2888">angle_vec2angle_mat</a></div><div class="ttdeci">matrix angle_vec2angle_mat(vector angle, int K)</div><div class="ttdef"><b>Definition:</b> correlation_angles.stanfunctions:48</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
-</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="gabad0f24500b6469472e496cd95acd180" name="gabad0f24500b6469472e496cd95acd180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabad0f24500b6469472e496cd95acd180">&#9670;&nbsp;</a></span>angle2chol()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">matrix angle2chol </td>
-          <td>(</td>
-          <td class="paramtype">matrix&#160;</td>
-          <td class="paramname"><em>angle_mat</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Angles matrix to Cholesky correlation</p>
-<p >Copyright 2021, Sean Pinkney</p>
-<p >Peter J. Rousseeuw &amp; Geert Molenberghs (1993) Transformation of non positive semidefinite correlation matrices, Communications in Statistics - Theory and Methods, 22:4, 965-984, DOI: 10.1080/03610928308831068</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">angle_mat</td><td>Matrix of angles </td></tr>
-    <tr><td class="paramname">Cholesky</td><td>factor of correlation matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="gabe2b8ad3b6e1a7872697a7d0ff6b2888" name="gabe2b8ad3b6e1a7872697a7d0ff6b2888"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabe2b8ad3b6e1a7872697a7d0ff6b2888">&#9670;&nbsp;</a></span>angle_vec2angle_mat()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">matrix angle_vec2angle_mat </td>
-          <td>(</td>
-          <td class="paramtype">vector&#160;</td>
-          <td class="paramname"><em>angle</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>K</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Angle svector to angle matrix</p>
-<p >Copyright 2021, Sean Pinkney</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">angle</td><td>Vector of angles length of the number of elements of the lower triangle elemements n/ of the output angle matrix. If the size of the output matrix is K x K then the n/ length is K * (K - 1) / 2 </td></tr>
-    <tr><td class="paramname">angle</td><td>matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
+&#160;<ul>
+<li>Pinkney&#160;:&#160;<a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">skew_generalized_t.stanfunctions</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.9.1-->

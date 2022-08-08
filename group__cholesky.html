@@ -447,13 +447,13 @@ Functions</h2></td></tr>
 <div class="line">  </div>
 <div class="line">  x[1, 1] = 1;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (i in 2 : K) {</div>
+<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : K) {</div>
 <div class="line">    real sum_sqs;</div>
 <div class="line">    iter += 1;</div>
 <div class="line">    x[i, 1] = z[iter];</div>
 <div class="line">    sum_sqs = square(x[i, 1]);</div>
 <div class="line">    <span class="keywordflow">if</span> (i &gt; 2) {</div>
-<div class="line">      <span class="keywordflow">for</span> (j in 2 : i - 1) {</div>
+<div class="line">      <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : i - 1) {</div>
 <div class="line">        iter += 1;</div>
 <div class="line">        target += 0.5 * log1m(sum_sqs);</div>
 <div class="line">        x[i, j] = z[iter] * sqrt(1.0 - sum_sqs);</div>
@@ -466,6 +466,7 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="ttc" id="agroup__cholesky_html_ga5c63a6cac08ee9da5756eff047c5c800"><div class="ttname"><a href="group__cholesky.html#ga5c63a6cac08ee9da5756eff047c5c800">cholesky_corr_constrain_lp</a></div><div class="ttdeci">matrix cholesky_corr_constrain_lp(vector y, int K)</div><div class="ttdef"><b>Definition:</b> cholesky_corr_constrain.stanfunctions:40</div></div>
 <div class="ttc" id="agroup__cholesky_html_gadf7cbb994a238f2fd9ad6163f66ec4a6"><div class="ttname"><a href="group__cholesky.html#gadf7cbb994a238f2fd9ad6163f66ec4a6">corr_constrain_lp</a></div><div class="ttdeci">vector corr_constrain_lp(vector x)</div><div class="ttdef"><b>Definition:</b> cholesky_corr_constrain.stanfunctions:20</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga5c63a6cac08ee9da5756eff047c5c800" name="ga5c63a6cac08ee9da5756eff047c5c800"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5c63a6cac08ee9da5756eff047c5c800">&#9670;&nbsp;</a></span>cholesky_corr_constrain_lp()</h2>

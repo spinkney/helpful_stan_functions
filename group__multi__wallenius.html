@@ -445,7 +445,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> n = x_i[1];</div>
 <div class="line">  real v = 1;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (i in 2 : Cp1) </div>
+<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : Cp1) </div>
 <div class="line">    v *= pow(1 - t ^ (theta[i] * Dinv), x_i[i]);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> v;</div>
@@ -458,13 +458,14 @@ Functions</h2></td></tr>
 <div class="line">  real lp = log(integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1,</div>
 <div class="line">                             append_array({D}, to_array_1d(p)), x_r, k, tol));</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (i in 1 : C) </div>
+<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : C) </div>
 <div class="line">    lp += -log1p(m[i]) - lbeta(m[i] - k[i + 1] + 1, k[i + 1] + 1);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> lp;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__multi__wallenius_html_gaad1c6d45dab33e14585efdd01a763f85"><div class="ttname"><a href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a></div><div class="ttdeci">real multi_wallenius_integral(real t, real xc, array[] real theta, array[] real x_r, array[] int x_i)</div><div class="ttdef"><b>Definition:</b> multi_wallenius_hypergeometric.stanfunctions:36</div></div>
 <div class="ttc" id="agroup__multi__wallenius_html_gac1b1c12f44019e532e76219190c0d96c"><div class="ttname"><a href="group__multi__wallenius.html#gac1b1c12f44019e532e76219190c0d96c">multi_wallenius_lpmf</a></div><div class="ttdeci">real multi_wallenius_lpmf(data array[] int k, vector m, vector p, data array[] real x_r, data real tol)</div><div class="ttdef"><b>Definition:</b> multi_wallenius_hypergeometric.stanfunctions:70</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gaad1c6d45dab33e14585efdd01a763f85" name="gaad1c6d45dab33e14585efdd01a763f85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaad1c6d45dab33e14585efdd01a763f85">&#9670;&nbsp;</a></span>multi_wallenius_integral()</h2>

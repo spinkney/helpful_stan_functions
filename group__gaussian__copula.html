@@ -445,7 +445,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="comment">// Initialise the jacobian adjustments to zero, as vectorised lpdf will be used</span></div>
 <div class="line">  rtn[2] = rep_matrix(0, N, J);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
+<div class="line">  <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : J) {</div>
 <div class="line">    rtn[1][ : , j] = (y[ : , j] - mu_glm[ : , j]) / sigma[j];</div>
 <div class="line">    rtn[2][1, j] = normal_lpdf(y[ : , j] | mu_glm[ : , j], sigma[j]);</div>
 <div class="line">  }</div>
@@ -472,8 +472,8 @@ Functions</h2></td></tr>
 <div class="line">  matrix[N, J] mu_glm_logit = inv_logit(mu_glm);</div>
 <div class="line">  array[2] matrix[N, J] rtn;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
-<div class="line">    <span class="keywordflow">for</span> (n in 1 : N) {</div>
+<div class="line">  <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : J) {</div>
+<div class="line">    <span class="keywordflow">for</span> (n <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : N) {</div>
 <div class="line">      real Ubound = binomial_cdf(num[n, j] | den[n, j], mu_glm_logit[n, j]);</div>
 <div class="line">      real Lbound = 0;</div>
 <div class="line">      <span class="keywordflow">if</span> (num[n, j] &gt; 0) {</div>
@@ -494,8 +494,8 @@ Functions</h2></td></tr>
 <div class="line">  matrix[N, J] mu_glm_exp = exp(mu_glm);</div>
 <div class="line">  array[2] matrix[N, J] rtn;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (j in 1 : J) {</div>
-<div class="line">    <span class="keywordflow">for</span> (n in 1 : N) {</div>
+<div class="line">  <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : J) {</div>
+<div class="line">    <span class="keywordflow">for</span> (n <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : N) {</div>
 <div class="line">      real Ubound = poisson_cdf(y[n, j] | mu_glm_exp[n, j]);</div>
 <div class="line">      real Lbound = 0;</div>
 <div class="line">      <span class="keywordflow">if</span> (y[n, j] &gt; 0) {</div>
@@ -521,7 +521,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="comment">// adjustments (from discrete marginals)</span></div>
 <div class="line">  real adj = 0;</div>
 <div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
-<div class="line">  <span class="keywordflow">for</span> (m in 1 : size(marginals)) {</div>
+<div class="line">  <span class="keywordflow">for</span> (m <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : size(marginals)) {</div>
 <div class="line">    <span class="keywordtype">int</span> curr_cols = cols(marginals[m][1]);</div>
 <div class="line">    </div>
 <div class="line">    U[ : , pos : (pos + curr_cols - 1)] = marginals[m][1];</div>
@@ -540,6 +540,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="agroup__gaussian__copula_html_gad913ed577d53b14288a4143d4b9c68a7"><div class="ttname"><a href="group__gaussian__copula.html#gad913ed577d53b14288a4143d4b9c68a7">bernoulli_marginal</a></div><div class="ttdeci">array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:61</div></div>
 <div class="ttc" id="agroup__gaussian__copula_html_gae452287a9c4a3fe729e7fbdd5d9b8d55"><div class="ttname"><a href="group__gaussian__copula.html#gae452287a9c4a3fe729e7fbdd5d9b8d55">poisson_marginal</a></div><div class="ttdeci">array[] matrix poisson_marginal(array[,] int y, matrix mu_glm, matrix u_raw)</div><div class="ttdef"><b>Definition:</b> centered_gaussian_copula.stanfunctions:133</div></div>
 <div class="ttc" id="agroup__normal_html_ga53b0ac15ddf226fa86c96800014d89fc"><div class="ttname"><a href="group__normal.html#ga53b0ac15ddf226fa86c96800014d89fc">multi_normal_cholesky_copula_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_copula_lpdf(matrix U, matrix L)</div><div class="ttdef"><b>Definition:</b> normal_copula.stanfunctions:130</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="gad913ed577d53b14288a4143d4b9c68a7" name="gad913ed577d53b14288a4143d4b9c68a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad913ed577d53b14288a4143d4b9c68a7">&#9670;&nbsp;</a></span>bernoulli_marginal()</h2>
