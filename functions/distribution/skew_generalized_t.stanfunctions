@@ -29,7 +29,7 @@
   *
   * \ingroup univariate
   *  @{ */
-  
+
 /** Skew Generalized T Rescale Sigma to be Variance 
   *
   * @copyright Sean Pinkney, 2021 
@@ -78,7 +78,9 @@ vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q) {
   if (is_inf(q)) 
     return x + (2 ^ (2.0 / p) * sigma * lambda * tgamma(1.0 / 2 + 1.0 / p)) / sqrt(pi());
   
-  return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
+  return x
+         + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p))
+           / beta(1.0 / p, q);
 }
 
 real mean_centered_sgt(real x, real sigma, real lambda, real p, real q) {
@@ -88,7 +90,9 @@ real mean_centered_sgt(real x, real sigma, real lambda, real p, real q) {
   if (is_inf(q)) 
     return x + (2 ^ (2.0 / p) * sigma * lambda * tgamma(1.0 / 2 + 1.0 / p)) / sqrt(pi());
   
-  return x + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p)) / beta(1.0 / p, q);
+  return x
+         + (2 * sigma * lambda * q ^ (1.0 / p) * beta(2 / p, q - 1.0 / p))
+           / beta(1.0 / p, q);
 }
 
 real mean_centered_sgt(real x, real sigma, real lambda, real q) {
@@ -158,18 +162,19 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
   vector[N] r = mean_centered_sgt(x, sigma_adj, lambda, p, q) - mu;
   vector[N] s;
   
-  for (n in 1:N) s[n] = r[n] < 0 ? -1 : 1;
+  for (n in 1 : N) 
+    s[n] = r[n] < 0 ? -1 : 1;
   
   if (is_inf(q) && !is_inf(p)) {
-    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) ^ p );
+    out = sum((abs(r) ./ (sigma_adj * (1 + lambda * s))) ^ p);
     return log(p) - log(2) - log(sigma_adj) - lgamma(1.0 / p) - out;
   } else {
-    out = sum(log1p( abs(r) ^ p ./ (q * sigma_adj ^ p * pow(1 + lambda * s, p))));
+    out = sum(log1p(abs(r) ^ p ./ (q * sigma_adj ^ p * pow(1 + lambda * s, p))));
   }
   
-  return N * (log(p) - log2() - log(sigma_adj) - log(q) / p - lbeta(1.0 / p, q)) - (1.0 / p + q) * out;
+  return N * (log(p) - log2() - log(sigma_adj) - log(q) / p - lbeta(1.0 / p, q))
+         - (1.0 / p + q) * out;
 }
-
 
 /**
  * The Skewed T distribution 
@@ -184,7 +189,7 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
  * @return log probability
  */
 real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
- return skew_generalized_t_lpdf(x | mu, sigma, lambda, 2, q);
+  return skew_generalized_t_lpdf(x | mu, sigma, lambda, 2, q);
 }
 
 /**
@@ -199,7 +204,7 @@ real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
  * @return log probability
  */
 real generalized_t_lpdf(vector x, real mu, real sigma, real p, real q) {
- return skew_generalized_t_lpdf(x | mu, sigma, 0, p, q);
+  return skew_generalized_t_lpdf(x | mu, sigma, 0, p, q);
 }
 
 /** Skew Generalized T log cumulative density function
@@ -248,9 +253,9 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   }
   
   if (!is_inf(p) && is_inf(q) && !is_inf(x)) 
-    return   log_sum_exp([
-    log1m(lambda_new) + log2(),
-    log(lambda_new - 1) + log2() + beta_lcdf((r_new / (sigma * (1 + lambda_new))) ^ p | p, 1)]);
+    return log_sum_exp([log1m(lambda_new) + log2(),
+                        log(lambda_new - 1) + log2()
+                        + beta_lcdf((r_new / (sigma * (1 + lambda_new))) ^ p | p, 1)]);
   if (is_inf(p) && !is_inf(x)) 
     return uniform_lcdf(x | mu, sigma);
   
@@ -259,11 +264,12 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   
   if (is_inf(x) && x > 0) 
     return 1;
-
-  return  log_sum_exp([
-    log1m(lambda_new) + log2(),
-    log(lambda_new - 1) + log2() + beta_lcdf(1.0 / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1.0 / p, q)
-    ]);
+  
+  return log_sum_exp([log1m(lambda_new) + log2(),
+                      log(lambda_new - 1) + log2()
+                      + beta_lcdf(1.0
+                                  / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1.0
+                                                                    / p, q)]);
 }
 
 /** @} */
