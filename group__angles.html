@@ -451,9 +451,9 @@ Functions</h2></td></tr>
 <div class="line">  matrix[K, K] mat = add_diag(identity_matrix(K), rep_vector(-1, K));</div>
 <div class="line">  <span class="keywordtype">int</span> count = K - 1;</div>
 <div class="line">  <span class="keywordtype">int</span> pos = 1;</div>
-<div class="line"> </div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">for</span> (k in 1 : K - 1) {</div>
-<div class="line">    mat[k + 1:K, k] = segment(angle, pos, count);</div>
+<div class="line">    mat[k + 1 : K, k] = segment(angle, pos, count);</div>
 <div class="line">    pos += count;</div>
 <div class="line">    count -= 1;</div>
 <div class="line">  }</div>
