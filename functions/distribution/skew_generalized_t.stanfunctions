@@ -171,6 +171,9 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
 }
 
 
+/**
+ * The Skewed T distribution 
+ *
  * @copyright Sean Pinkney, 2021 
  * @author Sean Pinkney
  * @param x Vector 
@@ -181,35 +184,22 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
  * @return log probability
  */
 real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
-  if (sigma <= 0) 
-    reject("sigma must be > 0 found sigma = ", sigma);
-  
-  if (lambda >= 1 || lambda <= -1) 
-    reject("lambda must be between (-1, 1) found lambda = ", lambda);
+ return skew_generalized_t_lpdf(x, mu, sigma, lambda, 2, q);
+}
 
-  if (q <= 0) 
-    reject("q must be > 0 found q = ", q);
-  
-  int N = num_elements(x);
-  real out = 0;
-  real sigma_adj = variance_adjusted_sgt(sigma, lambda, p, q);
-  
-  if (is_inf(q) && is_inf(p)) 
-    return uniform_lpdf(x | mu - sigma_adj, mu + sigma_adj);
-  
-  vector[N] r = mean_centered_sgt(x, sigma_adj, lambda, q) - mu;
-  vector[N] s;
-  
-  for (n in 1:N) s[n] = r[n] < 0 ? -1 : 1;
-  
-  if (is_inf(q)) {
-    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) );
-    return -log(2) - log(sigma_adj) - out;
-  } else {
-    out = sum(log1p( abs(r) ./ (q * sigma_adj * (1 + lambda * s)));
-  }
-  
-  return N * (-log2() - log(sigma_adj) - log(q) - lbeta(1.0, q)) - (1.0 + q) * out;
+/**
+ * The Generalized T distribution 
+ *
+ * @copyright Sean Pinkney, 2021 
+ * @author Sean Pinkney
+ * @param x Vector 
+ * @param mu Real 
+ * @param sigma Real \f$\in (0, \infty)\f$ scale parameter
+ * @param q Real \f$\in (0, \infty)\f$ kurtosis parameter  
+ * @return log probability
+ */
+real generalized_t_lpdf(vector x, real mu, real sigma, real p, real q) {
+ return skew_generalized_t_lpdf(x, mu, sigma, 0, p, q);
 }
 
 /** Skew Generalized T log cumulative density function
