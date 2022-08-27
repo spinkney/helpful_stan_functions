@@ -442,7 +442,7 @@ Functions</h2></td></tr>
 <div class="line">  y[1] = y0;</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// Integrate at grid of time points</span></div>
-<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : num_steps) {</div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : num_steps) {</div>
 <div class="line">    y[i + 1] = y[i] + h * derivative_fun(t, y[i], a0, theta);</div>
 <div class="line">    t = t + h;</div>
 <div class="line">  }</div>
@@ -450,7 +450,6 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__fixed__step_html_gae4c015b4a7ba0adf3040bdbfe8170a29"><div class="ttname"><a href="group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29">odeint_euler</a></div><div class="ttdeci">array[] vector odeint_euler(real t0, vector y0, data real h, data int num_steps, array[] int a0, vector theta)</div><div class="ttdef"><b>Definition:</b> odeint_euler.stanfunctions:40</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">array[] vector <a class="code hl_function" href="group__fixed__step.html#ga676cf08baaa778445b8c1642e4f31535">odeint_midpoint</a>(real t0, vector y0, data real h,</div>
 <div class="line">                               data <span class="keywordtype">int</span> num_steps, array[] <span class="keywordtype">int</span> a0,</div>
@@ -462,7 +461,7 @@ Functions</h2></td></tr>
 <div class="line">  y[1] = y0;</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// Integrate at grid of time points</span></div>
-<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : num_steps) {</div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : num_steps) {</div>
 <div class="line">    <span class="comment">// Half-Euler step</span></div>
 <div class="line">    y_mid = y[i] + 0.5 * h * derivative_fun(t, y[i], a0, theta);</div>
 <div class="line">    </div>
@@ -487,7 +486,7 @@ Functions</h2></td></tr>
 <div class="line">  y[1] = y0;</div>
 <div class="line">  </div>
 <div class="line">  <span class="comment">// Integrate at grid of time points</span></div>
-<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : num_steps) {</div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : num_steps) {</div>
 <div class="line">    k1 = h * derivative_fun(t, y[i], a0, theta);</div>
 <div class="line">    k2 = h * derivative_fun(t + 0.5 * h, y[i] + 0.5 * k1, a0, theta);</div>
 <div class="line">    k3 = h * derivative_fun(t + 0.5 * h, y[i] + 0.5 * k2, a0, theta);</div>

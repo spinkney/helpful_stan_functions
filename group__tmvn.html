@@ -458,7 +458,7 @@ Functions</h2></td></tr>
 <div class="line">  vector[K] z;</div>
 <div class="line">  real lp = 0;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (k <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : K) {</div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
 <div class="line">    <span class="comment">// if kth u is unbounded</span></div>
 <div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
 <div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
@@ -492,7 +492,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> K = rows(u);</div>
 <div class="line">  vector[K] z;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (k <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : K) {</div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
 <div class="line">    <span class="comment">// if kth u is unbounded</span></div>
 <div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
 <div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
@@ -525,7 +525,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> K = rows(u);</div>
 <div class="line">  vector[K] z;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (k <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : K) {</div>
+<div class="line">  <span class="keywordflow">for</span> (k in 1 : K) {</div>
 <div class="line">    <span class="comment">// if kth u is unbounded</span></div>
 <div class="line">    <span class="comment">// else kth u has at least one bound</span></div>
 <div class="line">    <span class="keywordflow">if</span> (lb_ind[k] == 0 &amp;&amp; ub_ind[k] == 0) </div>
@@ -553,7 +553,6 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 <div class="ttc" id="agroup__tmvn_html_ga410a62b317befea7a30c079292d142f0"><div class="ttname"><a href="group__tmvn.html#ga410a62b317befea7a30c079292d142f0">multi_normal_cholesky_truncated_lpdf</a></div><div class="ttdeci">real multi_normal_cholesky_truncated_lpdf(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:68</div></div>
 <div class="ttc" id="agroup__tmvn_html_ga7c9f3672e2ad840066dae356576cb137"><div class="ttname"><a href="group__tmvn.html#ga7c9f3672e2ad840066dae356576cb137">multi_normal_cholesky_truncated_lp</a></div><div class="ttdeci">void multi_normal_cholesky_truncated_lp(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:168</div></div>
 <div class="ttc" id="agroup__tmvn_html_gaa5f97f79d524abf4ecf3e532a3dfb812"><div class="ttname"><a href="group__tmvn.html#gaa5f97f79d524abf4ecf3e532a3dfb812">multi_normal_cholesky_truncated_rng</a></div><div class="ttdeci">vector multi_normal_cholesky_truncated_rng(vector u, vector mu, matrix L, vector lb, vector ub, vector lb_ind, vector ub_ind)</div><div class="ttdef"><b>Definition:</b> multi_normal_cholesky_truncated.stanfunctions:120</div></div>

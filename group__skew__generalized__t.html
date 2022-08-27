@@ -415,8 +415,7 @@ $(document).ready(function(){initNavTree('group__skew__generalized__t.html','');
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Skew Generalized T distribution functions<div class="ingroups"><a class="el" href="group__univariate.html">Univariate Distribution Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -433,17 +432,12 @@ Functions</h2></td></tr>
 <tr class="separator:gae0af454f2b5c7d668a629e72e49e56ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7a1f5a71101932c511f15e1379df4562"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a> (vector x, real mu, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:ga7a1f5a71101932c511f15e1379df4562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0ed1715add0b9b023fb0bb3bd7c173cd"><td class="memItemLeft" align="right" valign="top">*copyright Sean *author Sean <a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a> *param x Vector *param mu Real *param sigma Real f$&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> (0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</td></tr>
-<tr class="separator:ga0ed1715add0b9b023fb0bb3bd7c173cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1b2d2ed192a9ea7aa46d7d4762300b28"><td class="memItemLeft" align="right" valign="top">*copyright Sean *author Sean <a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a> *param x Vector *param mu Real *param sigma Real f$ infty f$ kurtosis parameter *return log probability *real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga1b2d2ed192a9ea7aa46d7d4762300b28">skew_t_lpdf</a> (vector x, real mu, real sigma, real lambda, real q)</td></tr>
-<tr class="separator:ga1b2d2ed192a9ea7aa46d7d4762300b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaad175afb894127617418e51f6a351905"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#gaad175afb894127617418e51f6a351905">skew_t_lpdf</a> (vector x, real mu, real sigma, real lambda, real q)</td></tr>
+<tr class="separator:gaad175afb894127617418e51f6a351905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga60340bf03ee5e4293a76945c1accc3a9"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga60340bf03ee5e4293a76945c1accc3a9">generalized_t_lpdf</a> (vector x, real mu, real sigma, real p, real q)</td></tr>
+<tr class="separator:ga60340bf03ee5e4293a76945c1accc3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6ea5a0033c7d222a2b010214e5708a8a"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a> (real x, real mu, real sigma, real lambda, real p, real q)</td></tr>
 <tr class="separator:ga6ea5a0033c7d222a2b010214e5708a8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:gaec01ef0c9773df8d9a4e311a204a4549"><td class="memItemLeft" align="right" valign="top">*copyright Sean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a></td></tr>
-<tr class="separator:gaec01ef0c9773df8d9a4e311a204a4549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >From the sgt R package Carter Davis (2015). sgt: Skewed Generalized T Distribution Tree. R package version 2.0. <a href="https://CRAN.R-project.org/package=sgt">https://CRAN.R-project.org/package=sgt</a></p>
@@ -523,7 +517,7 @@ Variables</h2></td></tr>
 <div class="line">  vector[N] r = <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(x, sigma_adj, lambda, p, q) - mu;</div>
 <div class="line">  vector[N] s;</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (n <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1:N) s[n] = r[n] &lt; 0 ? -1 : 1;</div>
+<div class="line">  <span class="keywordflow">for</span> (n in 1:N) s[n] = r[n] &lt; 0 ? -1 : 1;</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; !is_inf(p)) {</div>
 <div class="line">    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) ^ p );</div>
@@ -536,45 +530,12 @@ Variables</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"> * @copyright Sean <a class="code hl_variable" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a>, 2021 </div>
-<div class="line"> * @author Sean <a class="code hl_variable" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a></div>
-<div class="line"> * @param x Vector </div>
-<div class="line"> * @param mu Real </div>
-<div class="line"> * @param sigma <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">Real \f$\in</a> (0, \infty)\f$ scale parameter</div>
-<div class="line"> * @param lambda Real \f$-1 &lt; \lambda &lt; 1\f$ </div>
-<div class="line"> * @param q <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">Real \f$\in</a> (0, \infty)\f$ kurtosis parameter  </div>
-<div class="line"> * @<span class="keywordflow">return</span> log probability</div>
-<div class="line"> */</div>
-<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga1b2d2ed192a9ea7aa46d7d4762300b28">skew_t_lpdf</a>(vector x, real mu, real sigma, real lambda, real q) {</div>
-<div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;sigma must be &gt; 0 found sigma = &quot;</span>, sigma);</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (lambda &gt;= 1 || lambda &lt;= -1) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;lambda must be between (-1, 1) found lambda = &quot;</span>, lambda);</div>
+<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#gaad175afb894127617418e51f6a351905">skew_t_lpdf</a>(vector x, real mu, real sigma, real lambda, real q) {</div>
+<div class="line"> <span class="keywordflow">return</span> <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(x, mu, sigma, lambda, 2, q);</div>
+<div class="line">}</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">if</span> (q &lt;= 0) </div>
-<div class="line">    reject(<span class="stringliteral">&quot;q must be &gt; 0 found q = &quot;</span>, q);</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordtype">int</span> N = num_elements(x);</div>
-<div class="line">  real out = 0;</div>
-<div class="line">  real sigma_adj = <a class="code hl_function" href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a>(sigma, lambda, p, q);</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (is_inf(q) &amp;&amp; is_inf(p)) </div>
-<div class="line">    <span class="keywordflow">return</span> uniform_lpdf(x | mu - sigma_adj, mu + sigma_adj);</div>
-<div class="line">  </div>
-<div class="line">  vector[N] r = <a class="code hl_function" href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a>(x, sigma_adj, lambda, q) - mu;</div>
-<div class="line">  vector[N] s;</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (n <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1:N) s[n] = r[n] &lt; 0 ? -1 : 1;</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (is_inf(q)) {</div>
-<div class="line">    out = sum( ( abs(r) ./ (sigma_adj * (1 + lambda * s))) );</div>
-<div class="line">    <span class="keywordflow">return</span> -log(2) - log(sigma_adj) - out;</div>
-<div class="line">  } <span class="keywordflow">else</span> {</div>
-<div class="line">    out = sum(log1p( abs(r) ./ (q * sigma_adj * (1 + lambda * s)));</div>
-<div class="line">  }</div>
-<div class="line">  </div>
-<div class="line">  <span class="keywordflow">return</span> N * (-log2() - log(sigma_adj) - log(q) - lbeta(1.0, q)) - (1.0 + q) * out;</div>
+<div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga60340bf03ee5e4293a76945c1accc3a9">generalized_t_lpdf</a>(vector x, real mu, real sigma, real p, real q) {</div>
+<div class="line"> <span class="keywordflow">return</span> <a class="code hl_function" href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a>(x, mu, sigma, 0, p, q);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a>(real x, real mu, real sigma, real lambda, real p, real q) {</div>
@@ -629,31 +590,48 @@ Variables</h2></td></tr>
 <div class="line">    ]);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga1b2d2ed192a9ea7aa46d7d4762300b28"><div class="ttname"><a href="group__skew__generalized__t.html#ga1b2d2ed192a9ea7aa46d7d4762300b28">skew_t_lpdf</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ infty f$ kurtosis parameter *return log probability *real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:183</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga2f1016b68af93771d1525cf654c24df0"><div class="ttname"><a href="group__skew__generalized__t.html#ga2f1016b68af93771d1525cf654c24df0">variance_adjusted_sgt</a></div><div class="ttdeci">real variance_adjusted_sgt(real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:44</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:227</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga60340bf03ee5e4293a76945c1accc3a9"><div class="ttname"><a href="group__skew__generalized__t.html#ga60340bf03ee5e4293a76945c1accc3a9">generalized_t_lpdf</a></div><div class="ttdeci">real generalized_t_lpdf(vector x, real mu, real sigma, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:201</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_ga6ea5a0033c7d222a2b010214e5708a8a"><div class="ttname"><a href="group__skew__generalized__t.html#ga6ea5a0033c7d222a2b010214e5708a8a">skew_generalized_t_lcdf</a></div><div class="ttdeci">real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:217</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga7a1f5a71101932c511f15e1379df4562"><div class="ttname"><a href="group__skew__generalized__t.html#ga7a1f5a71101932c511f15e1379df4562">skew_generalized_t_lpdf</a></div><div class="ttdeci">real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:138</div></div>
 <div class="ttc" id="agroup__skew__generalized__t_html_ga8f03167e434b644f63f456087af5f150"><div class="ttname"><a href="group__skew__generalized__t.html#ga8f03167e434b644f63f456087af5f150">mean_centered_sgt</a></div><div class="ttdeci">vector mean_centered_sgt(vector x, real sigma, real lambda, real p, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:74</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_gaec01ef0c9773df8d9a4e311a204a4549"><div class="ttname"><a href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a></div><div class="ttdeci">*copyright Sean Pinkney</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:174</div></div>
+<div class="ttc" id="agroup__skew__generalized__t_html_gaad175afb894127617418e51f6a351905"><div class="ttname"><a href="group__skew__generalized__t.html#gaad175afb894127617418e51f6a351905">skew_t_lpdf</a></div><div class="ttdeci">real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q)</div><div class="ttdef"><b>Definition:</b> skew_generalized_t.stanfunctions:186</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga0ed1715add0b9b023fb0bb3bd7c173cd" name="ga0ed1715add0b9b023fb0bb3bd7c173cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0ed1715add0b9b023fb0bb3bd7c173cd">&#9670;&nbsp;</a></span>in()</h2>
+<a id="ga60340bf03ee5e4293a76945c1accc3a9" name="ga60340bf03ee5e4293a76945c1accc3a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60340bf03ee5e4293a76945c1accc3a9">&#9670;&nbsp;</a></span>generalized_t_lpdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">*copyright Sean *author Sean <a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a> *param x Vector *param mu Real *param sigma Real f$ in </td>
+          <td class="memname">real generalized_t_lpdf </td>
           <td>(</td>
-          <td class="paramtype">0&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">\&#160;</td>
-          <td class="paramname"><em>infty</em>&#160;</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>mu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>q</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -662,6 +640,20 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The Generalized T distribution</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Vector </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
 
 </div>
 </div>
@@ -965,14 +957,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1b2d2ed192a9ea7aa46d7d4762300b28" name="ga1b2d2ed192a9ea7aa46d7d4762300b28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1b2d2ed192a9ea7aa46d7d4762300b28">&#9670;&nbsp;</a></span>skew_t_lpdf()</h2>
+<a id="gaad175afb894127617418e51f6a351905" name="gaad175afb894127617418e51f6a351905"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad175afb894127617418e51f6a351905">&#9670;&nbsp;</a></span>skew_t_lpdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">*copyright Sean *author Sean <a class="el" href="group__skew__generalized__t.html#gaec01ef0c9773df8d9a4e311a204a4549">Pinkney</a> *param x Vector *param mu Real *param sigma Real f$ infty f$ kurtosis parameter *return log probability *real skew_t_lpdf </td>
+          <td class="memname">real skew_t_lpdf </td>
           <td>(</td>
           <td class="paramtype">vector&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -1008,6 +1000,21 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The Skewed T distribution</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Sean Pinkney, 2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Vector </td></tr>
+    <tr><td class="paramname">mu</td><td>Real </td></tr>
+    <tr><td class="paramname">sigma</td><td>Real \(\in (0, \infty)\) scale parameter </td></tr>
+    <tr><td class="paramname">lambda</td><td>Real \(-1 &lt; \lambda &lt; 1\) </td></tr>
+    <tr><td class="paramname">q</td><td>Real \(\in (0, \infty)\) kurtosis parameter <br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>log probability </dd></dl>
 
 </div>
 </div>
@@ -1068,21 +1075,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>rescaled sigma </dd></dl>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="gaec01ef0c9773df8d9a4e311a204a4549" name="gaec01ef0c9773df8d9a4e311a204a4549"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaec01ef0c9773df8d9a4e311a204a4549">&#9670;&nbsp;</a></span>Pinkney</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">* copyright Sean Pinkney</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>

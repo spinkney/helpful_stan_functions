@@ -431,13 +431,12 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> K = num_elements(theta);</div>
 <div class="line">  <span class="keywordflow">if</span> (theta[1] == negative_infinity()) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;first element must be finite&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">for</span> (k <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 2 : K) </div>
+<div class="line">  <span class="keywordflow">for</span> (k in 2 : K) </div>
 <div class="line">    <span class="keywordflow">if</span> (theta[k] &lt;= theta[k - 1]) </div>
 <div class="line">      reject(<span class="stringliteral">&quot;bounds and quantiles are not in the right order&quot;</span>);</div>
 <div class="line">  <span class="keywordflow">return</span> 1;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__logical__array_html_ga2becc165c804319fd033bc82a5c13ff6"><div class="ttname"><a href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a></div><div class="ttdeci">int in_order(array[] real theta)</div><div class="ttdef"><b>Definition:</b> logical_array.stanfunctions:16</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga2becc165c804319fd033bc82a5c13ff6" name="ga2becc165c804319fd033bc82a5c13ff6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga2becc165c804319fd033bc82a5c13ff6">&#9670;&nbsp;</a></span>in_order()</h2>

@@ -433,8 +433,8 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> N = m * p;</div>
 <div class="line">  matrix[N, N] C = rep_matrix(0., N, N);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">for</span> (i <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : m) {</div>
-<div class="line">    <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : i) {</div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : m) {</div>
+<div class="line">    <span class="keywordflow">for</span> (j in 1 : i) {</div>
 <div class="line">      <span class="keywordflow">if</span> (fabs(A[i, j]) &gt; 1e-12) {</div>
 <div class="line">        <span class="keywordtype">int</span> row_start = (i - 1) * p + 1;</div>
 <div class="line">        <span class="keywordtype">int</span> row_end = (i - 1) * p + p;</div>
@@ -447,7 +447,6 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">return</span> C;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__matrix_html_ga189b348ea54eb5593f2c7bf98d4e4000"><div class="ttname"><a href="group__matrix.html#ga189b348ea54eb5593f2c7bf98d4e4000">chol_kronecker_prod</a></div><div class="ttdeci">matrix chol_kronecker_prod(matrix A, matrix B)</div><div class="ttdef"><b>Definition:</b> chol_kronecker_prod.stanfunctions:16</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga189b348ea54eb5593f2c7bf98d4e4000" name="ga189b348ea54eb5593f2c7bf98d4e4000"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga189b348ea54eb5593f2c7bf98d4e4000">&#9670;&nbsp;</a></span>chol_kronecker_prod()</h2>

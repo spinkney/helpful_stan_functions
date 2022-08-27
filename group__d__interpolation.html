@@ -447,7 +447,7 @@ Functions</h2></td></tr>
 <div class="line">  real h01;</div>
 <div class="line">  real h11;</div>
 <div class="line">  array[N_out] vector[D] y_out;</div>
-<div class="line">  <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : N_out) {</div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : N_out) {</div>
 <div class="line">    <span class="comment">// Find left and right point indices</span></div>
 <div class="line">    <span class="keywordflow">while</span> (x[right] &lt; x_out[j]) {</div>
 <div class="line">      right = right + 1;</div>
@@ -476,7 +476,6 @@ Functions</h2></td></tr>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__d__interpolation_html_ga04f55d73f3519184cb0756246c4a869e"><div class="ttname"><a href="group__d__interpolation.html#ga04f55d73f3519184cb0756246c4a869e">interp_1d_cubic</a></div><div class="ttdeci">array[] vector interp_1d_cubic(array[] vector y, data array[] real x, data array[] real x_out, array[] int a0, vector theta)</div><div class="ttdef"><b>Definition:</b> interp_1d_cubic.stanfunctions:39</div></div>
-<div class="ttc" id="agroup__skew__generalized__t_html_ga0ed1715add0b9b023fb0bb3bd7c173cd"><div class="ttname"><a href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a></div><div class="ttdeci">*copyright Sean *author Sean Pinkney *param x Vector *param mu Real *param sigma Real f$ in(0, \infty)\f$ scale parameter * @param lambda Real \f$-1&lt; \lambda&lt; 1\f$ * @param q Real \f$\in(0</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">array[] vector <a class="code hl_function" href="group__d__interpolation.html#gaf1b52e91870caffdf1766eca0c75421f">interp_1d_linear</a>(array[] vector y, data array[] real x,</div>
 <div class="line">                                data array[] real x_out) {</div>
@@ -487,7 +486,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordtype">int</span> N_out = size(x_out);</div>
 <div class="line">  <span class="keywordtype">int</span> D = size(y[1]);</div>
 <div class="line">  array[N_out] vector[D] y_out;</div>
-<div class="line">  <span class="keywordflow">for</span> (j <a class="code hl_function" href="group__skew__generalized__t.html#ga0ed1715add0b9b023fb0bb3bd7c173cd">in</a> 1 : N_out) {</div>
+<div class="line">  <span class="keywordflow">for</span> (j in 1 : N_out) {</div>
 <div class="line">    <span class="keywordflow">while</span> (x[right] &lt; x_out[j]) {</div>
 <div class="line">      right = right + 1;</div>
 <div class="line">    }</div>
