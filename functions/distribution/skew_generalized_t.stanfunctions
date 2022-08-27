@@ -184,7 +184,7 @@ real skew_generalized_t_lpdf(vector x, real mu, real sigma, real lambda, real p,
  * @return log probability
  */
 real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
- return skew_generalized_t_lpdf(x, mu, sigma, lambda, 2, q);
+ return skew_generalized_t_lpdf(x | mu, sigma, lambda, 2, q);
 }
 
 /**
@@ -199,7 +199,7 @@ real skew_t_lpdf(vector x, real mu, real sigma, real lambda, real q) {
  * @return log probability
  */
 real generalized_t_lpdf(vector x, real mu, real sigma, real p, real q) {
- return skew_generalized_t_lpdf(x, mu, sigma, 0, p, q);
+ return skew_generalized_t_lpdf(x | mu, sigma, 0, p, q);
 }
 
 /** Skew Generalized T log cumulative density function
