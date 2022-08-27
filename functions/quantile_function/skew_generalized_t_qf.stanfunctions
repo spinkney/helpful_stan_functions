@@ -1,7 +1,6 @@
 #include special/inc_beta_inverse.stanfunctions
 #include distribution/skew_generalized_t.stanfunctions
 
-
 /** @ingroup qf
  * Skewed Generalized T Quantile Function
  *
@@ -38,7 +37,7 @@ real skew_generalized_t_qf(real x, real mu, real sigma, real lambda, real p, rea
   
   if (is_inf(p)) 
     reject("not yet implemented for infinite p");
-    
+  
   real prob;
   real lam;
   real out;

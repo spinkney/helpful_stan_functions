@@ -50,9 +50,9 @@ matrix angle_vec2angle_mat(vector angle, int K) {
   matrix[K, K] mat = add_diag(identity_matrix(K), rep_vector(-1, K));
   int count = K - 1;
   int pos = 1;
-
+  
   for (k in 1 : K - 1) {
-    mat[k + 1:K, k] = segment(angle, pos, count);
+    mat[k + 1 : K, k] = segment(angle, pos, count);
     pos += count;
     count -= 1;
   }
