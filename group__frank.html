@@ -434,25 +434,19 @@ Functions</h2></td></tr>
 \[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2} \]
 </p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">  real <a class="code hl_function" href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a>(vector u, vector v, real theta) {</div>
-<div class="line">    <span class="keywordtype">int</span> N = num_elements(u);</div>
-<div class="line">    real log_lik;</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">if</span> (theta &lt; 0) </div>
-<div class="line">      log_lik = N * log(theta * (1 - exp(-theta)))</div>
-<div class="line">                - theta * sum(append_col(u, v))</div>
-<div class="line">                - sum(log((-expm1(-theta)</div>
-<div class="line">                           - (expm1(-theta * u)) .* (expm1(-theta * v)))</div>
-<div class="line">                          ^ 2));</div>
-<div class="line">    <span class="keywordflow">else</span> </div>
-<div class="line">      log_lik = N * (log(theta) + log1m_exp(-theta))</div>
-<div class="line">                - theta * sum(append_col(u, v))</div>
-<div class="line">                - 2</div>
-<div class="line">                  * sum(log(-expm1(-theta)</div>
-<div class="line">                            - (expm1(-theta * u)) .* (expm1(-theta * v))));</div>
-<div class="line">    </div>
-<div class="line">    <span class="keywordflow">return</span> log_lik;</div>
-<div class="line">  }</div>
+<div class="line">real <a class="code hl_function" href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a>(vector u, vector v, real theta) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  real log_lik;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (theta &lt; 0) </div>
+<div class="line">    log_lik = N * log(theta * (1 - exp(-theta))) - theta * sum(append_col(u, v))</div>
+<div class="line">              - sum(log((-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))) ^ 2));</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    log_lik = N * (log(theta) + log1m_exp(-theta)) - theta * sum(append_col(u, v))</div>
+<div class="line">              - 2 * sum(log(-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))));</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> log_lik;</div>
+<div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__frank_html_ga587e3637a336b57652e0d4add29cbbe5"><div class="ttname"><a href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(vector u, vector v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:30</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
