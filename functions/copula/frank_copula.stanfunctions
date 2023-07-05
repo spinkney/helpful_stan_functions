@@ -27,24 +27,18 @@
  * @param \omega Real number on (-Inf, Inf) / {0}, values of \omega greater than 37 will result in overflow
  * @return log density
  */
-  real frank_copula_lpdf(vector u, vector v, real theta) {
-    int N = num_elements(u);
-    real log_lik;
-    
-    if (theta < 0) 
-      log_lik = N * log(theta * (1 - exp(-theta)))
-                - theta * sum(append_col(u, v))
-                - sum(log((-expm1(-theta)
-                           - (expm1(-theta * u)) .* (expm1(-theta * v)))
-                          ^ 2));
-    else 
-      log_lik = N * (log(theta) + log1m_exp(-theta))
-                - theta * sum(append_col(u, v))
-                - 2
-                  * sum(log(-expm1(-theta)
-                            - (expm1(-theta * u)) .* (expm1(-theta * v))));
-    
-    return log_lik;
-  }
+real frank_copula_lpdf(vector u, vector v, real theta) {
+  int N = num_elements(u);
+  real log_lik;
+  
+  if (theta < 0) 
+    log_lik = N * log(theta * (1 - exp(-theta))) - theta * sum(append_col(u, v))
+              - sum(log((-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))) ^ 2));
+  else 
+    log_lik = N * (log(theta) + log1m_exp(-theta)) - theta * sum(append_col(u, v))
+              - 2 * sum(log(-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))));
+  
+  return log_lik;
+}
 
 /** @} */
