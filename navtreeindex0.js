@@ -37,7 +37,7 @@ var NAVTREEINDEX0 =
 "group__fixed__step.html#gac62e1c8e21449a30cfe5ce6988958936":[3,7,0,2],
 "group__fixed__step.html#gae4c015b4a7ba0adf3040bdbfe8170a29":[3,7,0,0],
 "group__frank.html":[3,1,2],
-"group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf":[3,1,2,0],
+"group__frank.html#ga587e3637a336b57652e0d4add29cbbe5":[3,1,2,0],
 "group__gaussian__copula.html":[3,1,0],
 "group__gaussian__copula.html#ga1e1e9b2736154e0a429ec6135f020187":[3,1,0,1],
 "group__gaussian__copula.html#ga49e09a7e08c40b5693f46c30072fdc70":[3,1,0,2],

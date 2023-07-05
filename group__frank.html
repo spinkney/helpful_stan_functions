@@ -422,8 +422,8 @@ $(document).ready(function(){initNavTree('group__frank.html',''); initResizable(
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gabe632c658443e2fa0169a2ef0dbc39cf"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a> (real u, real v, real theta)</td></tr>
-<tr class="separator:gabe632c658443e2fa0169a2ef0dbc39cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga587e3637a336b57652e0d4add29cbbe5"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a> (vector u, vector v, real theta)</td></tr>
+<tr class="separator:ga587e3637a336b57652e0d4add29cbbe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >The Frank copula bivariate cumulative density function is defined as </p><p class="formulaDsp">
@@ -434,15 +434,30 @@ Functions</h2></td></tr>
 \[ c(u, v) = \frac{ \partial^2 C(u, v) }{ \partial u \partial v} = \frac{\omega (1 - \exp(-\omega))(\exp(-\omega(u + v)))}{[ (1 - \exp(-\omega)) - (1 - \exp(-\omega u))(1 - \exp(-\omega v))]^2} \]
 </p>
 <div class="fragment"><div class="line"> </div>
-<div class="line">real <a class="code hl_function" href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a>(real u, real v, real theta) {</div>
-<div class="line">  <span class="keywordflow">return</span> log(theta) + log1m(exp(-theta)) - theta * (u + v)</div>
-<div class="line">         - 2 * log(1 - exp(-theta) - (1 - exp(-theta * u)) * (1 - exp(-theta * v)));</div>
-<div class="line">}</div>
+<div class="line">  real <a class="code hl_function" href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a>(vector u, vector v, real theta) {</div>
+<div class="line">    <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">    real log_lik;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (theta &lt; 0) </div>
+<div class="line">      log_lik = N * log(theta * (1 - exp(-theta)))</div>
+<div class="line">                - theta * sum(append_col(u, v))</div>
+<div class="line">                - sum(log((-expm1(-theta)</div>
+<div class="line">                           - (expm1(-theta * u)) .* (expm1(-theta * v)))</div>
+<div class="line">                          ^ 2));</div>
+<div class="line">    <span class="keywordflow">else</span> </div>
+<div class="line">      log_lik = N * (log(theta) + log1m_exp(-theta))</div>
+<div class="line">                - theta * sum(append_col(u, v))</div>
+<div class="line">                - 2</div>
+<div class="line">                  * sum(log(-expm1(-theta)</div>
+<div class="line">                            - (expm1(-theta * u)) .* (expm1(-theta * v))));</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> log_lik;</div>
+<div class="line">  }</div>
 <div class="line"> </div>
-<div class="ttc" id="agroup__frank_html_gabe632c658443e2fa0169a2ef0dbc39cf"><div class="ttname"><a href="group__frank.html#gabe632c658443e2fa0169a2ef0dbc39cf">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(real u, real v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:32</div></div>
+<div class="ttc" id="agroup__frank_html_ga587e3637a336b57652e0d4add29cbbe5"><div class="ttname"><a href="group__frank.html#ga587e3637a336b57652e0d4add29cbbe5">frank_copula_lpdf</a></div><div class="ttdeci">real frank_copula_lpdf(vector u, vector v, real theta)</div><div class="ttdef"><b>Definition:</b> frank_copula.stanfunctions:30</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="gabe632c658443e2fa0169a2ef0dbc39cf" name="gabe632c658443e2fa0169a2ef0dbc39cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabe632c658443e2fa0169a2ef0dbc39cf">&#9670;&nbsp;</a></span>frank_copula_lpdf()</h2>
+<a id="ga587e3637a336b57652e0d4add29cbbe5" name="ga587e3637a336b57652e0d4add29cbbe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga587e3637a336b57652e0d4add29cbbe5">&#9670;&nbsp;</a></span>frank_copula_lpdf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -450,13 +465,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">real frank_copula_lpdf </td>
           <td>(</td>
-          <td class="paramtype">real&#160;</td>
+          <td class="paramtype">vector&#160;</td>
           <td class="paramname"><em>u</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">real&#160;</td>
+          <td class="paramtype">vector&#160;</td>
           <td class="paramname"><em>v</em>, </td>
         </tr>
         <tr>
@@ -473,19 +488,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Frank Bivariate Copula Log Density</p>
-<p >Copyright Andre Pfeuffer, Sean Pinkney <br  />
-<a href="https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ">https://groups.google.com/g/stan-users/c/hnUtkMYlLhQ/m/XdX3u1vDAAAJ</a> <br  />
-Accessed and modified Feb. 5, 2021</p>
-<p >The copula is defined \(\omega \in (-\infty, \infty) \,/\ \{0\}\)</p>
+<p >Sean Pinkney <br  />
+ The copula is defined \(\omega \in (-\infty, \infty) \,/\ \{0\}\)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on \((0,1]\), not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on \((0,1]\), not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">u</td><td>Vector with elements in \((0,1]\), not checked but function will return NaN </td></tr>
+    <tr><td class="paramname">v</td><td>Vector with elements in \((0,1]\), not checked but function will return NaN </td></tr>
     <tr><td class="paramname"></td><td></td></tr>
   </table>
   </dd>
 </dl>
-<p>omega Real number on (-Inf, Inf) </p><dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
+<p>omega Real number on (-Inf, Inf) / {0}, values of \omega greater than 37 will result in overflow </p><dl class="section return"><dt>Returns</dt><dd>log density </dd></dl>
 
 </div>
 </div>
