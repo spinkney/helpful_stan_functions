@@ -46,7 +46,7 @@ jobs:
         run: |
           git push
 
-      - uses: r-lib/actions/pr-push@master
+      - uses: r-lib/actions/pr-push@v2-branch
         if: github.ref != 'refs/heads/main'  
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
