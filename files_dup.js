@@ -8,6 +8,7 @@ var files_dup =
     [ "frank_copula.stanfunctions", "frank__copula_8stanfunctions.html", "frank__copula_8stanfunctions" ],
     [ "gumbel_copula.stanfunctions", "gumbel__copula_8stanfunctions.html", "gumbel__copula_8stanfunctions" ],
     [ "normal_copula.stanfunctions", "normal__copula_8stanfunctions.html", "normal__copula_8stanfunctions" ],
+    [ "student_t_copula.stanfunctions", "student__t__copula_8stanfunctions.html", "student__t__copula_8stanfunctions" ],
     [ "gpareto.stanfunctions", "gpareto_8stanfunctions.html", "gpareto_8stanfunctions" ],
     [ "multi_normal_cholesky_truncated.stanfunctions", "multi__normal__cholesky__truncated_8stanfunctions.html", "multi__normal__cholesky__truncated_8stanfunctions" ],
     [ "multi_wallenius_hypergeometric.stanfunctions", "multi__wallenius__hypergeometric_8stanfunctions.html", "multi__wallenius__hypergeometric_8stanfunctions" ],

@@ -10,6 +10,8 @@ var searchData=
   ['special_20probability_20functions_7',['Special probability functions',['../group__special.html',1,'']]],
   ['special_5fdefinition_2estan_8',['special_definition.stan',['../special__definition_8stan.html',1,'']]],
   ['stan_20udf_20documentation_9',['Stan UDF Documentation',['../index.html',1,'']]],
-  ['student_5ft_5fqf_10',['student_t_qf',['../group__qf.html#ga7da42d84850fcc52125648bc9e2bc127',1,'student_t_qf(real p, real ndf):&#160;student_t_qf.stanfunctions'],['../student__t__qf_8stanfunctions.html#a05fb6c8a3d9709f3ec799fa2f914ed52',1,'student_t_qf(vector u, real nu):&#160;student_t_qf.stanfunctions']]],
-  ['student_5ft_5fqf_2estanfunctions_11',['student_t_qf.stanfunctions',['../student__t__qf_8stanfunctions.html',1,'']]]
+  ['student_20t_20copula_20functions_10',['Student T Copula Functions',['../group__student__t.html',1,'']]],
+  ['student_5ft_5fcopula_2estanfunctions_11',['student_t_copula.stanfunctions',['../student__t__copula_8stanfunctions.html',1,'']]],
+  ['student_5ft_5fqf_12',['student_t_qf',['../group__qf.html#ga7da42d84850fcc52125648bc9e2bc127',1,'student_t_qf(real p, real ndf):&#160;student_t_qf.stanfunctions'],['../student__t__qf_8stanfunctions.html#a05fb6c8a3d9709f3ec799fa2f914ed52',1,'student_t_qf(vector u, real nu):&#160;student_t_qf.stanfunctions']]],
+  ['student_5ft_5fqf_2estanfunctions_13',['student_t_qf.stanfunctions',['../student__t__qf_8stanfunctions.html',1,'']]]
 ];
