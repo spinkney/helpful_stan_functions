@@ -1,0 +1,37 @@
+  /** @addtogroup student_t Student T Copula Functions
+*
+* @include \copula\student_t_copula.stanfunctions
+* 
+ * \ingroup copula
+ *  @{ */
+
+#include quantile_function/student_t_qf.stanfunctions
+
+/** 
+  * Bivariate Student T Copula Log Density
+  *
+  * @param u Real number on (0,1], not checked but function will return NaN
+  * @param v Real number on (0,1], not checked but function will return NaN
+  * @param rho Real number [-1, 1]
+  * @param nu Real \f$(0, +\infty)\f$
+  */
+  
+  real bivariate_t_copula_lpdf(vector u, vector v, real rho, real nu) {
+    int N = num_elements(u);
+    vector[N] t1 = student_t_qf(u, nu);
+    vector[N] t2 = student_t_qf(v, nu);
+    vector[N] t1_sq = square(t1);
+    vector[N] t2_sq = square(t2);
+    
+    real lpdf = N
+                * (-0.5 * log1m(rho ^ 2) + lgamma(0.5 * (nu + 2))
+                   + lgamma(0.5 * nu) - 2 * lgamma(0.5 * (nu + 1)));
+    lpdf += 0.5 * (nu + 1)
+            * sum(log1p(t1_sq / nu) + log1p(t2_sq / nu));
+    lpdf += -0.5 * (nu + 2)
+            * sum(log1p((t1_sq - 2 * t1 .* t2 * rho + t2_sq)
+                        / (nu * (1 - rho ^ 2))));
+    return lpdf;
+  }
+
+  /** @} */
