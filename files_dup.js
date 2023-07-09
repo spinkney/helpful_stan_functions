@@ -33,6 +33,7 @@ var files_dup =
     [ "lognormal_qf.stanfunctions", "lognormal__qf_8stanfunctions.html", "lognormal__qf_8stanfunctions" ],
     [ "qf_definition.stan", "qf__definition_8stan.html", null ],
     [ "skew_generalized_t_qf.stanfunctions", "skew__generalized__t__qf_8stanfunctions.html", "skew__generalized__t__qf_8stanfunctions" ],
+    [ "student_t_qf.stanfunctions", "student__t__qf_8stanfunctions.html", "student__t__qf_8stanfunctions" ],
     [ "unit_johnson_su_qf.stanfunctions", "unit__johnson__su__qf_8stanfunctions.html", "unit__johnson__su__qf_8stanfunctions" ],
     [ "inc_beta_inverse.stanfunctions", "inc__beta__inverse_8stanfunctions.html", "inc__beta__inverse_8stanfunctions" ],
     [ "inv_erf.stanfunctions", "inv__erf_8stanfunctions.html", "inv__erf_8stanfunctions" ],
