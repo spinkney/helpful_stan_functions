@@ -1,4 +1,4 @@
-  /** @addtogroup student_t Student T Copula Functions
+  /** @addtogroup student_t_copula Student T Copula Functions
 *
 * @include \copula\student_t_copula.stanfunctions
 * 
