@@ -9,6 +9,8 @@
  * @return inverse CDF value
  * @throws reject if \f$ p \notin [0, 1] \f$ 
  */
+#include univariate/student_t.stanfunctions
+
 real student_t_qf(real p, real ndf) {
   if (is_nan(p) || p < 0 || p > 1) 
     reject("student_t_qf: p must be between 0 and 1; ", "found p = ", p);
@@ -39,12 +41,12 @@ real student_t_qf(real p, real ndf) {
     }
     real pp = min({1 - d_epsilon, p * (1 + Eps)});
     real ux = 1;
-    while (student_t_cdf(ux | ndf, 0., 1.) < pp) {
+    while (exp(student_t_lcdf_stan(ux, ndf)) < pp) {
       ux = ux * 2;
     }
     pp = p * (1 - Eps);
     real lx = -1;
-    while (student_t_cdf(lx | ndf, 0., 1.) > pp) {
+    while (exp(student_t_lcdf_stan(lx, ndf)) > pp) {
       lx = lx * 2;
     }
     
@@ -53,7 +55,7 @@ real student_t_qf(real p, real ndf) {
     int iter = 0;
     while ((ux - lx) / abs(nx) > accu && iter < 1000) {
       iter += 1;
-      if (student_t_cdf(nx | ndf, 0., 1.) > p) {
+      if (exp(student_t_lcdf_stan(nx, ndf)) > p) {
         ux = nx;
       } else {
         lx = nx;
@@ -147,7 +149,7 @@ real student_t_qf(real p, real ndf) {
           break;
         }
         
-        real t = (exp(student_t_lccdf(q | ndf, 0., 1.)) - P / 2) / y;
+        real t = (exp(student_t_lccdf_stan(q, ndf)) - P / 2) / y;
         if (abs(t) <= 1e-14 * abs(q)) {
           break;
         }
@@ -172,6 +174,157 @@ vector student_t_qf(vector u, real nu) {
   
   for (i in 1 : N) {
     x[i] = student_t_qf(u[i], nu);
+  }
+  
+  return x;
+}
+
+ /* Student T Log Quantile Function
+ *
+ * @include \quantile_function\student_t_qf.stanfunctions
+ *
+ * @author Sean Pinkney
+ * @param logp Real
+ * @param df Real \f$(0, +\infty)\f$
+ * @return inverse CDF value
+ * @throws reject if \f$ p \notin [0, 1] \f$ 
+ */
+ real student_t_log_qf(real log_p, real ndf) {
+    real eps = 1e-12;
+    real d_epsilon = 2.220446e-16;
+    real d_max = 1.797693e+308;
+    real d_min = 2.225074e-308;
+    int d_mant_dig = 53;
+    real q;
+    real p = exp(log_p);
+    
+    if (is_nan(p) || is_nan(ndf)) {
+      return p + ndf;
+    }
+    
+    if (ndf <= 0) {
+      reject("Invalid value for ndf");
+    }
+    
+    if (ndf < 1) {
+      // Find the upper and lower bounds
+      real accu = 1e-13;
+      real Eps = 1e-11;
+       if (p > 1 - d_epsilon) {
+        return positive_infinity();
+      }
+      // real pp = min({1 - d_epsilon, p * (1 + Eps)});
+      real log_pp = min({log1m(d_epsilon), log_p + log1p(Eps)});
+      real ux = 1;
+      while (student_t_lcdf_stan(ux , ndf) < log_pp) {
+        ux *= 2;
+      }
+      log_pp = log_p - Eps;
+      real lx = -1;
+      while (student_t_lcdf_stan(lx , ndf) > log_pp) {
+        lx *= 2;
+      }
+      
+      // Find the quantile using interval halving
+      real nx = 0.5 * (lx + ux);
+      int iter = 0;
+      while ((ux - lx) / abs(nx) > accu && iter < 1000) {
+        iter = iter + 1;
+        if (student_t_lcdf_stan(nx , ndf) > log_p) {
+          ux = nx;
+        } else {
+          lx = nx;
+        }
+        nx = 0.5 * (lx + ux);
+      }
+      return 0.5 * (lx + ux);
+    }
+    
+    if (ndf > 1e20) {
+      return std_normal_log_qf(log_p);
+    }
+    
+    int neg = log_p < -0.6931472 ? 1 : 0;
+    int is_neg_lower = neg;
+     real P = neg == 1 ? 2 * p : 2 * (0.5 - p + 0.5);
+    
+      P = min({max({P, 0}), 1});
+    
+    
+    if (abs(ndf - 2) < eps) {
+      if (P > d_min) {
+        if (3 * P < d_epsilon) {
+          q = 1 / sqrt(P);
+        } else if (P > 0.9) {
+          q = (1 - P) * sqrt(2 / (P * (2 - P)));
+        } else {
+          q = sqrt(2 / (P * (2 - P)) - 2);
+        }
+      } else {
+        q = positive_infinity();
+      }
+    } else if (ndf < 1. + eps) {
+      if (P == 1.) {
+        q = 0;
+      } else if (P > 0) {
+        q = 1 / tan(pi() * p / 2);
+      } else {
+        q = negative_infinity();
+      }
+    } else {
+      real x = 0;
+      real y = 0;
+      real log_P2 = 0;
+      real a = 1 / (ndf - 0.5);
+      real b = 48 / (a * a);
+      real c = ((20700 * a / b - 98) * a - 16) * a + 96.36;
+      real d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * pi() / 2) * ndf;
+      
+      y = pow((d * P), (2.0 / ndf));
+      int P_ok = 0;
+      log_P2 = is_neg_lower == 1 ? log_p : log1m_exp(p);
+        x = (log(d) + log2() + log_P2) / ndf;
+        y = exp(2 * x);
+  
+      if ((ndf < 2.1 && P > 0.5) || y > 0.05 + a) {
+          x = inv_Phi(log_P2);
+          y = square(x);
+        
+        if (ndf < 5) {
+          c += 0.3 * (ndf - 4.5) * (x + 0.6);
+        }
+        
+        c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;
+        y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1)
+            * x;
+        y = expm1(a * square(y));
+        q = sqrt(ndf * y);
+      } else if (x < -log2() * d_mant_dig) {
+        q = sqrt(ndf) * exp(-x);
+      } else {
+        y = ((1
+              / (((ndf + 6) / (ndf * y) - 0.089 * d - 0.822) * (ndf + 2) * 3)
+              + 0.5 / (ndf + 4))
+             * y - 1)
+            * (ndf + 1) / (ndf + 2) + 1 / y;
+        
+        q = sqrt(ndf * y);
+      }
+    }
+    
+    if (neg) {
+      q = -q;
+    }
+    
+    return q;
+  }
+
+  vector student_t_log_qf(vector u, real nu) {
+  int N = num_elements(u);
+  vector[N] x;
+  
+  for (i in 1 : N) {
+    x[i] = student_t_log_qf(u[i], nu);
   }
   
   return x;
