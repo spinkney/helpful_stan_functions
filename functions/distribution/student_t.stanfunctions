@@ -17,8 +17,8 @@
 real student_t_lcdf_stan(real x, real df) {
   int lower_tail = 1;
   real lval;
-
- if (df <= 0) {
+  
+  if (df <= 0) {
     reject("df must be > 0. Found df = ", df);
   }
   
@@ -26,25 +26,25 @@ real student_t_lcdf_stan(real x, real df) {
     return not_a_number();
   }
   if (is_inf(df)) 
-      return normal_lcdf(x | 0, 1);
-
+    return normal_lcdf(x | 0, 1);
+  
   real nx = 1 + (x / df) * x;
   if (nx > 1e100) 
     lval = -0.5 * df * (2 * log(abs(x)) - log(df)) - lbeta(0.5 * df, 0.5) - log(0.5 * df);
-   else 
-    lval = df > x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2) : beta_lcdf(1 / nx | df / 2, 0.5);
+  else 
+    lval = df > x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2)
+           : beta_lcdf(1 / nx | df / 2, 0.5);
   
-
   if (x <= 0) {
     lower_tail = 0;
   }
-
-    if (lower_tail == 1) {
-      return log1m(0.5 * exp(lval));
-    } else {
-      return lval - log2();
-    }
-
+  
+  if (lower_tail == 1) {
+    return log1m(0.5 * exp(lval));
+  } else {
+    return lval - log2();
+  }
+  
   return lval;
 }
 
@@ -59,7 +59,7 @@ real student_t_lcdf_stan(real x, real df) {
   */
 real student_t_lccdf_stan(real x, real df) {
   real lval;
-
+  
   if (df <= 0) {
     reject("df must be > 0. Found df = ", df);
   }
@@ -69,14 +69,15 @@ real student_t_lccdf_stan(real x, real df) {
   }
   
   if (is_inf(df)) 
-      return normal_lccdf(x | 0, 1);
-
+    return normal_lccdf(x | 0, 1);
+  
   real nx = 1 + (x / df) * x;
   if (nx > 1e100) 
     lval = -0.5 * df * (2 * log(abs(x)) - log(df)) - lbeta(0.5 * df, 0.5) - log(0.5 * df);
-   else 
-    lval = df > x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2) : beta_lcdf(1 / nx | df / 2, 0.5);
-
+  else 
+    lval = df > x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2)
+           : beta_lcdf(1 / nx | df / 2, 0.5);
+  
   return x < 0 ? log1m(0.5 * exp(lval)) : lval - log2();
 }
 
