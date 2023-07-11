@@ -14,6 +14,7 @@ var files_dup =
     [ "multi_wallenius_hypergeometric.stanfunctions", "multi__wallenius__hypergeometric_8stanfunctions.html", "multi__wallenius__hypergeometric_8stanfunctions" ],
     [ "multivariate_definition.stan", "multivariate__definition_8stan.html", null ],
     [ "skew_generalized_t.stanfunctions", "skew__generalized__t_8stanfunctions.html", "skew__generalized__t_8stanfunctions" ],
+    [ "student_t.stanfunctions", "student__t_8stanfunctions.html", "student__t_8stanfunctions" ],
     [ "unit_johnson_su.stanfunctions", "unit__johnson__su_8stanfunctions.html", "unit__johnson__su_8stanfunctions" ],
     [ "univariate_definition.stan", "univariate__definition_8stan.html", null ],
     [ "build_b_spline.stanfunctions", "build__b__spline_8stanfunctions.html", "build__b__spline_8stanfunctions" ],
