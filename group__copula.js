@@ -5,5 +5,5 @@ var group__copula =
     [ "Frank Copula Functions", "group__frank.html", "group__frank" ],
     [ "Gumbel Copula Functions", "group__gumbel.html", "group__gumbel" ],
     [ "Normal Copula Functions", "group__normal.html", "group__normal" ],
-    [ "Student T Copula Functions", "group__student__t.html", "group__student__t" ]
+    [ "Student T Copula Functions", "group__student__t__copula.html", "group__student__t__copula" ]
 ];

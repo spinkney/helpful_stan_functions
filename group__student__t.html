@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.2"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Helpful Stan Functions: Student T Copula Functions</title>
+		<title>Helpful Stan Functions: Student T distribution functions</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -416,14 +416,12 @@ $(document).ready(function(){initNavTree('group__student__t.html',''); initResiz
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Student T Copula Functions<div class="ingroups"><a class="el" href="group__copula.html">Copula Functions</a> &#124; <a class="el" href="group__univariate.html">Univariate Distribution Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">Student T distribution functions<div class="ingroups"><a class="el" href="group__univariate.html">Univariate Distribution Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga79da47f97d6ee7039dee8d26b6bae523"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a> (vector u, vector v, real rho, real nu)</td></tr>
-<tr class="separator:ga79da47f97d6ee7039dee8d26b6bae523"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacb23f25d9c57a04aafef8fb036adf0bc"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a> (real x, real df)</td></tr>
 <tr class="separator:gacb23f25d9c57a04aafef8fb036adf0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga20b2af4feab814cb367f2909f42726b4"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a> (real x, real df)</td></tr>
@@ -431,29 +429,6 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include quantile_function/student_t_qf.stanfunctions</span></div>
-<div class="line"> </div>
-<div class="line">  real <a class="code hl_function" href="group__student__t.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a>(vector u, vector v, real rho, real nu) {</div>
-<div class="line">    <span class="keywordtype">int</span> N = num_elements(u);</div>
-<div class="line">    vector[N] t1 = <a class="code hl_function" href="group__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(u, nu);</div>
-<div class="line">    vector[N] t2 = <a class="code hl_function" href="group__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(v, nu);</div>
-<div class="line">    vector[N] t1_sq = square(t1);</div>
-<div class="line">    vector[N] t2_sq = square(t2);</div>
-<div class="line">    </div>
-<div class="line">    real lpdf = N</div>
-<div class="line">                * (-0.5 * log1m(rho ^ 2) + lgamma(0.5 * (nu + 2))</div>
-<div class="line">                   + lgamma(0.5 * nu) - 2 * lgamma(0.5 * (nu + 1)));</div>
-<div class="line">    lpdf += 0.5 * (nu + 1)</div>
-<div class="line">            * sum(log1p(t1_sq / nu) + log1p(t2_sq / nu));</div>
-<div class="line">    lpdf += -0.5 * (nu + 2)</div>
-<div class="line">            * sum(log1p((t1_sq - 2 * t1 .* t2 * rho + t2_sq)</div>
-<div class="line">                        / (nu * (1 - rho ^ 2))));</div>
-<div class="line">    <span class="keywordflow">return</span> lpdf;</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="ttc" id="agroup__qf_html_ga7da42d84850fcc52125648bc9e2bc127"><div class="ttname"><a href="group__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a></div><div class="ttdeci">real student_t_qf(real p, real ndf)</div><div class="ttdef"><b>Definition:</b> student_t_qf.stanfunctions:14</div></div>
-<div class="ttc" id="agroup__student__t_html_ga79da47f97d6ee7039dee8d26b6bae523"><div class="ttname"><a href="group__student__t.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a></div><div class="ttdeci">real bivariate_t_copula_lpdf(vector u, vector v, real rho, real nu)</div><div class="ttdef"><b>Definition:</b> student_t_copula.stanfunctions:19</div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(real x, real df) {</div>
 <div class="line">  <span class="keywordtype">int</span> lower_tail = 1;</div>
 <div class="line">  real lval;</div>
@@ -514,56 +489,6 @@ Functions</h2></td></tr>
 <div class="ttc" id="agroup__student__t_html_ga20b2af4feab814cb367f2909f42726b4"><div class="ttname"><a href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a></div><div class="ttdeci">real student_t_lccdf_stan(real x, real df)</div><div class="ttdef"><b>Definition:</b> student_t.stanfunctions:60</div></div>
 <div class="ttc" id="agroup__student__t_html_gacb23f25d9c57a04aafef8fb036adf0bc"><div class="ttname"><a href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a></div><div class="ttdeci">real student_t_lcdf_stan(real x, real df)</div><div class="ttdef"><b>Definition:</b> student_t.stanfunctions:17</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
-<a id="ga79da47f97d6ee7039dee8d26b6bae523" name="ga79da47f97d6ee7039dee8d26b6bae523"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga79da47f97d6ee7039dee8d26b6bae523">&#9670;&nbsp;</a></span>bivariate_t_copula_lpdf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">real bivariate_t_copula_lpdf </td>
-          <td>(</td>
-          <td class="paramtype">vector&#160;</td>
-          <td class="paramname"><em>u</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&#160;</td>
-          <td class="paramname"><em>v</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>rho</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">real&#160;</td>
-          <td class="paramname"><em>nu</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p >Bivariate Student T Copula Log Density</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">u</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">v</td><td>Real number on (0,1], not checked but function will return NaN </td></tr>
-    <tr><td class="paramname">rho</td><td>Real number [-1, 1] </td></tr>
-    <tr><td class="paramname">nu</td><td>Real \((0, +\infty)\) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ga20b2af4feab814cb367f2909f42726b4" name="ga20b2af4feab814cb367f2909f42726b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga20b2af4feab814cb367f2909f42726b4">&#9670;&nbsp;</a></span>student_t_lccdf_stan()</h2>
 
