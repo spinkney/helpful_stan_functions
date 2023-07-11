@@ -1,0 +1,1232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+		<meta name="generator" content="Doxygen 1.9.2"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Helpful Stan Functions: Student T Quantile functions</title>
+		<link href="tabs.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="dynsections.js"></script>
+		<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+		<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+		<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+		<link href="doxygen.css" rel="stylesheet" type="text/css" />
+		<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+		<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+		<link rel="stylesheet" href="sean-theme.css">
+		<script src="highlight.min.js"></script>
+		<script>
+		(function (w, d) {
+    'use strict';
+    var TABLE_NAME = 'hljs-ln',
+        LINE_NAME = 'hljs-ln-line',
+        CODE_BLOCK_NAME = 'hljs-ln-code',
+        NUMBERS_BLOCK_NAME = 'hljs-ln-numbers',
+        NUMBER_LINE_NAME = 'hljs-ln-n',
+        DATA_ATTR_NAME = 'data-line-number',
+        BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
+    if (w.hljs) {
+        w.hljs.initLineNumbersOnLoad = initLineNumbersOnLoad;
+        w.hljs.lineNumbersBlock = lineNumbersBlock;
+        w.hljs.lineNumbersValue = lineNumbersValue;
+        addStyles();
+    } else {
+        w.console.error('highlight.js not detected!');
+    }
+    function isHljsLnCodeDescendant(domElt) {
+        var curElt = domElt;
+        while (curElt) {
+            if (curElt.className && curElt.className.indexOf('hljs-ln-code') !== -1) {
+                return true;
+            }
+            curElt = curElt.parentNode;
+        }
+        return false;
+    }
+    function getHljsLnTable(hljsLnDomElt) {
+        var curElt = hljsLnDomElt;
+        while (curElt.nodeName !== 'TABLE') {
+            curElt = curElt.parentNode;
+        }
+        return curElt;
+    }
+    // Function to workaround a copy issue with Microsoft Edge.
+    // Due to hljs-ln wrapping the lines of code inside a <table> element,
+    // itself wrapped inside a <pre> element, window.getSelection().toString()
+    // does not contain any line breaks. So we need to get them back using the
+    // rendered code in the DOM as reference.
+    function edgeGetSelectedCodeLines(selection) {
+        // current selected text without line breaks
+        var selectionText = selection.toString();
+        // get the <td> element wrapping the first line of selected code
+        var tdAnchor = selection.anchorNode;
+        while (tdAnchor.nodeName !== 'TD') {
+            tdAnchor = tdAnchor.parentNode;
+        }
+        // get the <td> element wrapping the last line of selected code
+        var tdFocus = selection.focusNode;
+        while (tdFocus.nodeName !== 'TD') {
+            tdFocus = tdFocus.parentNode;
+        }
+        // extract line numbers
+        var firstLineNumber = parseInt(tdAnchor.dataset.lineNumber);
+        var lastLineNumber = parseInt(tdFocus.dataset.lineNumber);
+        // multi-lines copied case
+        if (firstLineNumber != lastLineNumber) {
+            var firstLineText = tdAnchor.textContent;
+            var lastLineText = tdFocus.textContent;
+            // if the selection was made backward, swap values
+            if (firstLineNumber > lastLineNumber) {
+                var tmp = firstLineNumber;
+                firstLineNumber = lastLineNumber;
+                lastLineNumber = tmp;
+                tmp = firstLineText;
+                firstLineText = lastLineText;
+                lastLineText = tmp;
+            }
+            // discard not copied characters in first line
+            while (selectionText.indexOf(firstLineText) !== 0) {
+                firstLineText = firstLineText.slice(1);
+            }
+            // discard not copied characters in last line
+            while (selectionText.lastIndexOf(lastLineText) === -1) {
+                lastLineText = lastLineText.slice(0, -1);
+            }
+            // reconstruct and return the real copied text
+            var selectedText = firstLineText;
+            var hljsLnTable = getHljsLnTable(tdAnchor);
+            for (var i = firstLineNumber + 1 ; i < lastLineNumber ; ++i) {
+                var codeLineSel = format('.{0}[{1}="{2}"]', [CODE_BLOCK_NAME, DATA_ATTR_NAME, i]);
+                var codeLineElt = hljsLnTable.querySelector(codeLineSel);
+                selectedText += '\n' + codeLineElt.textContent;
+            }
+            selectedText += '\n' + lastLineText;
+            return selectedText;
+        // single copied line case
+        } else {
+            return selectionText;
+        }
+    }
+    // ensure consistent code copy/paste behavior across all browsers
+    // (see https://github.com/wcoder/highlightjs-line-numbers.js/issues/51)
+    document.addEventListener('copy', function(e) {
+        // get current selection
+        var selection = window.getSelection();
+        // override behavior when one wants to copy line of codes
+        if (isHljsLnCodeDescendant(selection.anchorNode)) {
+            var selectionText;
+            // workaround an issue with Microsoft Edge as copied line breaks
+            // are removed otherwise from the selection string
+            if (window.navigator.userAgent.indexOf('Edge') !== -1) {
+                selectionText = edgeGetSelectedCodeLines(selection);
+            } else {
+                // other browsers can directly use the selection string
+                selectionText = selection.toString();
+            }
+            e.clipboardData.setData('text/plain', selectionText);
+            e.preventDefault();
+        }
+    });
+    function addStyles () {
+        var css = d.createElement('style');
+        css.type = 'text/css';
+        css.innerHTML = format(
+            '.{0}{border-collapse:collapse}' +
+            '.{0} td{padding:1}' +
+            '.{1}:before{content:attr({2})}',
+        [
+            TABLE_NAME,
+            NUMBER_LINE_NAME,
+            DATA_ATTR_NAME
+        ]);
+        d.getElementsByTagName('head')[0].appendChild(css);
+    }
+    function initLineNumbersOnLoad (options) {
+        if (d.readyState === 'interactive' || d.readyState === 'complete') {
+            documentReady(options);
+        } else {
+            w.addEventListener('DOMContentLoaded', function () {
+                documentReady(options);
+            });
+        }
+    }
+    function documentReady (options) {
+        try {
+            var blocks = d.querySelectorAll('code.hljs,code.nohighlight');
+            for (var i in blocks) {
+                if (blocks.hasOwnProperty(i)) {
+                    if (!isPluginDisabledForBlock(blocks[i])) {
+                        lineNumbersBlock(blocks[i], options);
+                    }
+                }
+            }
+        } catch (e) {
+            w.console.error('LineNumbers error: ', e);
+        }
+    }
+    function isPluginDisabledForBlock(element) {
+        return element.classList.contains('nohljsln');
+    }
+    function lineNumbersBlock (element, options) {
+        if (typeof element !== 'object') return;
+        async(function () {
+            element.innerHTML = lineNumbersInternal(element, options);
+        });
+    }
+    function lineNumbersValue (value, options) {
+        if (typeof value !== 'string') return;
+        var element = document.createElement('code')
+        element.innerHTML = value
+        return lineNumbersInternal(element, options);
+    }
+    function lineNumbersInternal (element, options) {
+        var internalOptions = mapOptions(element, options);
+        duplicateMultilineNodes(element);
+        return addLineNumbersBlockFor(element.innerHTML, internalOptions);
+    }
+    function addLineNumbersBlockFor (inputHtml, options) {
+        var lines = getLines(inputHtml);
+        // if last line contains only carriage return remove it
+        if (lines[lines.length-1].trim() === '') {
+            lines.pop();
+        }
+        if (lines.length > 1 || options.singleLine) {
+            var html = '';
+            for (var i = 0, l = lines.length; i < l; i++) {
+                html += format(
+                    '<tr>' +
+                        '<td class="{0} {1}" {3}="{5}">' +
+                            '<div class="{2}" {3}="{5}"></div>' +
+                        '</td>' +
+                        '<td class="{0} {4}" {3}="{5}">' +
+                            '{6}' +
+                        '</td>' +
+                    '</tr>',
+                [
+                    LINE_NAME,
+                    NUMBERS_BLOCK_NAME,
+                    NUMBER_LINE_NAME,
+                    DATA_ATTR_NAME,
+                    CODE_BLOCK_NAME,
+                    i + options.startFrom,
+                    lines[i].length > 0 ? lines[i] : ' '
+                ]);
+            }
+            return format('<table class="{0}">{1}</table>', [ TABLE_NAME, html ]);
+        }
+        return inputHtml;
+    }
+    /**
+     * @param {HTMLElement} element Code block.
+     * @param {Object} options External API options.
+     * @returns {Object} Internal API options.
+     */
+    function mapOptions (element, options) {
+        options = options || {};
+        return {
+            singleLine: getSingleLineOption(options),
+            startFrom: getStartFromOption(element, options)
+        };
+    }
+    function getSingleLineOption (options) {
+        var defaultValue = false;
+        if (!!options.singleLine) {
+            return options.singleLine;
+        }
+        return defaultValue;
+    }
+    function getStartFromOption (element, options) {
+        var defaultValue = 1;
+        var startFrom = defaultValue;
+        if (isFinite(options.startFrom)) {
+            startFrom = options.startFrom;
+        }
+        // can be overridden because local option is priority
+        var value = getAttribute(element, 'data-ln-start-from');
+        if (value !== null) {
+            startFrom = toNumber(value, defaultValue);
+        }
+        return startFrom;
+    }
+    /**
+     * Recursive method for fix multi-line elements implementation in highlight.js
+     * Doing deep passage on child nodes.
+     * @param {HTMLElement} element
+     */
+    function duplicateMultilineNodes (element) {
+        var nodes = element.childNodes;
+        for (var node in nodes) {
+            if (nodes.hasOwnProperty(node)) {
+                var child = nodes[node];
+                if (getLinesCount(child.textContent) > 0) {
+                    if (child.childNodes.length > 0) {
+                        duplicateMultilineNodes(child);
+                    } else {
+                        duplicateMultilineNode(child.parentNode);
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * Method for fix multi-line elements implementation in highlight.js
+     * @param {HTMLElement} element
+     */
+    function duplicateMultilineNode (element) {
+        var className = element.className;
+        if ( ! /hljs-/.test(className)) return;
+        var lines = getLines(element.innerHTML);
+        for (var i = 0, result = ''; i < lines.length; i++) {
+            var lineText = lines[i].length > 0 ? lines[i] : ' ';
+            result += format('<span class="{0}">{1}</span>\n', [ className,  lineText ]);
+        }
+        element.innerHTML = result.trim();
+    }
+    function getLines (text) {
+        if (text.length === 0) return [];
+        return text.split(BREAK_LINE_REGEXP);
+    }
+    function getLinesCount (text) {
+        return (text.trim().match(BREAK_LINE_REGEXP) || []).length;
+    }
+    ///
+    /// HELPERS
+    ///
+    function async (func) {
+        w.setTimeout(func, 0);
+    }
+    /**
+     * {@link https://wcoder.github.io/notes/string-format-for-string-formating-in-javascript}
+     * @param {string} format
+     * @param {array} args
+     */
+    function format (format, args) {
+        return format.replace(/\{(\d+)\}/g, function(m, n){
+            return args[n] !== undefined ? args[n] : m;
+        });
+    }
+    /**
+     * @param {HTMLElement} element Code block.
+     * @param {String} attrName Attribute name.
+     * @returns {String} Attribute value or empty.
+     */
+    function getAttribute (element, attrName) {
+        return element.hasAttribute(attrName) ? element.getAttribute(attrName) : null;
+    }
+    /**
+     * @param {String} str Source string.
+     * @param {Number} fallback Fallback value.
+     * @returns Parsed number or fallback value.
+     */
+    function toNumber (str, fallback) {
+        if (!str) return fallback;
+        var number = Number(str);
+        return isFinite(number) ? number : fallback;
+    }
+}(window, document));		
+		$(function() {
+        	$(".fragment").each(function(i,node) {
+          	var $node = $(node);
+			$node.children(":not(.line)").remove();
+          	$node.html("<pre><code class='stan'>" + $node.text().trim().replaceAll("\<", "&lt;").replaceAll("\>", "&gt;") + "</code></pre>");
+             hljs.highlightAll(node);
+		     hljs.initLineNumbersOnLoad(node);  
+     		});
+		});
+	</script>
+	</head>
+	<body>
+	<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+		<div id="titlearea">
+			<table cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr style="height: 56px;">
+						<td id="projectlogo"><img alt="Logo" src="helpful_logo2_crop.png"/></td>
+						<td id="projectalign" style="padding-left: 0.5em;">
+							<div id="projectname">Helpful Stan Functions
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- end header part --><!-- Generated by Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('group__student__t__qf.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">Student T Quantile functions<div class="ingroups"><a class="el" href="group__qf.html">Quantile Functions also known as Inverse Cumulative Distribution Functions</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga7da42d84850fcc52125648bc9e2bc127"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a> (real p, real ndf)</td></tr>
+<tr class="separator:ga7da42d84850fcc52125648bc9e2bc127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga05fb6c8a3d9709f3ec799fa2f914ed52"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t__qf.html#ga05fb6c8a3d9709f3ec799fa2f914ed52">student_t_qf</a> (vector u, real nu)</td></tr>
+<tr class="separator:ga05fb6c8a3d9709f3ec799fa2f914ed52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac6417ca5028b0aaf9376d00c6a89d526"><td class="memItemLeft" align="right" valign="top">real&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a> (real log_p, real ndf)</td></tr>
+<tr class="separator:gac6417ca5028b0aaf9376d00c6a89d526"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0925b797ef332b9b77c97e41bebbc44"><td class="memItemLeft" align="right" valign="top">vector&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__student__t__qf.html#gac0925b797ef332b9b77c97e41bebbc44">student_t_log_qf</a> (vector u, real nu)</td></tr>
+<tr class="separator:gac0925b797ef332b9b77c97e41bebbc44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include univariate/student_t.stanfunctions</span></div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(real p, real ndf) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(p) || p &lt; 0 || p &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;student_t_qf: p must be between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found p = &quot;</span>, p);</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(ndf) || is_inf(ndf) || ndf &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;student_t_qf: ndf must be finite and &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found ndf = &quot;</span>, ndf);</div>
+<div class="line">  </div>
+<div class="line">  real eps = 1e-12;</div>
+<div class="line">  real d_epsilon = 2.220446e-16;</div>
+<div class="line">  real d_max = 1.797693e+308;</div>
+<div class="line">  real d_min = 2.225074e-308;</div>
+<div class="line">  <span class="keywordtype">int</span> d_mant_dig = 53;</div>
+<div class="line">  real q;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(p) || is_nan(ndf)) {</div>
+<div class="line">    <span class="keywordflow">return</span> p + ndf;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &lt;= 0) {</div>
+<div class="line">    reject(<span class="stringliteral">&quot;Invalid value for ndf&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &lt; 1) {</div>
+<div class="line">    <span class="comment">// Find the upper and lower bounds</span></div>
+<div class="line">    real accu = 1e-13;</div>
+<div class="line">    real Eps = 1e-11;</div>
+<div class="line">    <span class="keywordflow">if</span> (p &gt; 1 - d_epsilon) {</div>
+<div class="line">      <span class="keywordflow">return</span> positive_infinity();</div>
+<div class="line">    }</div>
+<div class="line">    real pp = min({1 - d_epsilon, p * (1 + Eps)});</div>
+<div class="line">    real ux = 1;</div>
+<div class="line">    <span class="keywordflow">while</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(ux, ndf)) &lt; pp) {</div>
+<div class="line">      ux = ux * 2;</div>
+<div class="line">    }</div>
+<div class="line">    pp = p * (1 - Eps);</div>
+<div class="line">    real lx = -1;</div>
+<div class="line">    <span class="keywordflow">while</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(lx, ndf)) &gt; pp) {</div>
+<div class="line">      lx = lx * 2;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Find the quantile using interval halving</span></div>
+<div class="line">    real nx = 0.5 * (lx + ux);</div>
+<div class="line">    <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line">    <span class="keywordflow">while</span> ((ux - lx) / abs(nx) &gt; accu &amp;&amp; iter &lt; 1000) {</div>
+<div class="line">      iter += 1;</div>
+<div class="line">      <span class="keywordflow">if</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(nx, ndf)) &gt; p) {</div>
+<div class="line">        ux = nx;</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        lx = nx;</div>
+<div class="line">      }</div>
+<div class="line">      nx = 0.5 * (lx + ux);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> 0.5 * (lx + ux);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &gt; 1e20) {</div>
+<div class="line">    <span class="keywordflow">return</span> inv_Phi(p);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">int</span> neg = p &lt; 0.5 ? 1 : 0;</div>
+<div class="line">  <span class="keywordtype">int</span> is_neg_lower = neg;</div>
+<div class="line">  real P = neg == 1 ? 2 * p : 2 * (0.5 - p + 0.5);</div>
+<div class="line">  </div>
+<div class="line">  P = min({max({P, 0}), 1});</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(ndf - 2) &lt; eps) {</div>
+<div class="line">    <span class="keywordflow">if</span> (P &gt; d_min) {</div>
+<div class="line">      <span class="keywordflow">if</span> (3 * P &lt; d_epsilon) {</div>
+<div class="line">        q = 1 / sqrt(P);</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0.9) {</div>
+<div class="line">        q = (1 - P) * sqrt(2 / (P * (2 - P)));</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = sqrt(2 / (P * (2 - P)) - 2);</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      q = positive_infinity();</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ndf &lt; 1. + eps) {</div>
+<div class="line">    <span class="keywordflow">if</span> (P == 1.) {</div>
+<div class="line">      q = 0;</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0) {</div>
+<div class="line">      q = 1 / tan(pi() * p / 2);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      q = negative_infinity();</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    real x = 0;</div>
+<div class="line">    real y;</div>
+<div class="line">    real log_P2 = 0;</div>
+<div class="line">    real a = 1 / (ndf - 0.5);</div>
+<div class="line">    real b = 48 / (a * a);</div>
+<div class="line">    real c = ((20700 * a / b - 98) * a - 16) * a + 96.36;</div>
+<div class="line">    real d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * pi() / 2) * ndf;</div>
+<div class="line">    </div>
+<div class="line">    y = pow((d * P), (2.0 / ndf));</div>
+<div class="line">    <span class="keywordtype">int</span> P_ok = y &gt;= d_epsilon ? 1 : 0;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (P_ok != 1) {</div>
+<div class="line">      log_P2 = is_neg_lower == 1 ? log(p) : log1m_exp(p);</div>
+<div class="line">      x = (log(d) + log2() + log_P2) / ndf;</div>
+<div class="line">      y = exp(2 * x);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> ((ndf &lt; 2.1 &amp;&amp; P &gt; 0.5) || y &gt; 0.05 + a) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P_ok == 1) {</div>
+<div class="line">        x = inv_Phi(0.5 * P);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        x = inv_Phi(log_P2);</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      y = square(x);</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">if</span> (ndf &lt; 5) {</div>
+<div class="line">        c += 0.3 * (ndf - 4.5) * (x + 0.6);</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;</div>
+<div class="line">      y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1) * x;</div>
+<div class="line">      y = expm1(a * square(y));</div>
+<div class="line">      q = sqrt(ndf * y);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P_ok != 1 &amp;&amp; x &lt; -log2() * d_mant_dig) {</div>
+<div class="line">      q = sqrt(ndf) * exp(-x);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      y = ((1 / (((ndf + 6) / (ndf * y) - 0.089 * d - 0.822) * (ndf + 2) * 3)</div>
+<div class="line">            + 0.5 / (ndf + 4))</div>
+<div class="line">           * y - 1)</div>
+<div class="line">          * (ndf + 1) / (ndf + 2) + 1 / y;</div>
+<div class="line">      </div>
+<div class="line">      q = sqrt(ndf * y);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (P_ok == 1) {</div>
+<div class="line">      <span class="keywordtype">int</span> it = 0;</div>
+<div class="line">      <span class="keywordflow">while</span> (it &lt; 10) {</div>
+<div class="line">        y = exp(student_t_lpdf(q | ndf, 0., 1.));</div>
+<div class="line">        <span class="keywordflow">if</span> (y &lt;= 0 || is_inf(y)) {</div>
+<div class="line">          <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        real t = (exp(<a class="code hl_function" href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a>(q, ndf)) - P / 2) / y;</div>
+<div class="line">        <span class="keywordflow">if</span> (abs(t) &lt;= 1e-14 * abs(q)) {</div>
+<div class="line">          <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        q = q + t * (1. + t * q * (ndf + 1) / (2 * (q * q + ndf)));</div>
+<div class="line">        </div>
+<div class="line">        it += 1;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (neg) {</div>
+<div class="line">    q = -q;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> q;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(vector u, real nu) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  vector[N] x;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    x[i] = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(u[i], nu);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> x;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">/* Student T Log Quantile Function</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @include \quantile_function\student_t_qf.stanfunctions</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @author Sean Pinkney</span></div>
+<div class="line"><span class="comment"> * @param logp Real</span></div>
+<div class="line"><span class="comment"> * @param df Real \f$(0, +\infty)\f$</span></div>
+<div class="line"><span class="comment"> * @return inverse CDF value</span></div>
+<div class="line"><span class="comment"> * @throws reject if \f$ p \notin [0, 1] \f$ </span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"> real <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(real log_p, real ndf) {</div>
+<div class="line">    real eps = 1e-12;</div>
+<div class="line">    real d_epsilon = 2.220446e-16;</div>
+<div class="line">    real d_max = 1.797693e+308;</div>
+<div class="line">    real d_min = 2.225074e-308;</div>
+<div class="line">    <span class="keywordtype">int</span> d_mant_dig = 53;</div>
+<div class="line">    real q;</div>
+<div class="line">    real p = exp(log_p);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (is_nan(p) || is_nan(ndf)) {</div>
+<div class="line">      <span class="keywordflow">return</span> p + ndf;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &lt;= 0) {</div>
+<div class="line">      reject(<span class="stringliteral">&quot;Invalid value for ndf&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &lt; 1) {</div>
+<div class="line">      <span class="comment">// Find the upper and lower bounds</span></div>
+<div class="line">      real accu = 1e-13;</div>
+<div class="line">      real Eps = 1e-11;</div>
+<div class="line">       <span class="keywordflow">if</span> (p &gt; 1 - d_epsilon) {</div>
+<div class="line">        <span class="keywordflow">return</span> positive_infinity();</div>
+<div class="line">      }</div>
+<div class="line">      <span class="comment">// real pp = min({1 - d_epsilon, p * (1 + Eps)});</span></div>
+<div class="line">      real log_pp = min({log1m(d_epsilon), log_p + log1p(Eps)});</div>
+<div class="line">      real ux = 1;</div>
+<div class="line">      <span class="keywordflow">while</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(ux , ndf) &lt; log_pp) {</div>
+<div class="line">        ux *= 2;</div>
+<div class="line">      }</div>
+<div class="line">      log_pp = log_p - Eps;</div>
+<div class="line">      real lx = -1;</div>
+<div class="line">      <span class="keywordflow">while</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(lx , ndf) &gt; log_pp) {</div>
+<div class="line">        lx *= 2;</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Find the quantile using interval halving</span></div>
+<div class="line">      real nx = 0.5 * (lx + ux);</div>
+<div class="line">      <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line">      <span class="keywordflow">while</span> ((ux - lx) / abs(nx) &gt; accu &amp;&amp; iter &lt; 1000) {</div>
+<div class="line">        iter = iter + 1;</div>
+<div class="line">        <span class="keywordflow">if</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(nx , ndf) &gt; log_p) {</div>
+<div class="line">          ux = nx;</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          lx = nx;</div>
+<div class="line">        }</div>
+<div class="line">        nx = 0.5 * (lx + ux);</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">return</span> 0.5 * (lx + ux);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &gt; 1e20) {</div>
+<div class="line">      <span class="keywordflow">return</span> std_normal_log_qf(log_p);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">int</span> neg = log_p &lt; -0.6931472 ? 1 : 0;</div>
+<div class="line">    <span class="keywordtype">int</span> is_neg_lower = neg;</div>
+<div class="line">     real P = neg == 1 ? 2 * p : 2 * (0.5 - p + 0.5);</div>
+<div class="line">    </div>
+<div class="line">      P = min({max({P, 0}), 1});</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (abs(ndf - 2) &lt; eps) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P &gt; d_min) {</div>
+<div class="line">        <span class="keywordflow">if</span> (3 * P &lt; d_epsilon) {</div>
+<div class="line">          q = 1 / sqrt(P);</div>
+<div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0.9) {</div>
+<div class="line">          q = (1 - P) * sqrt(2 / (P * (2 - P)));</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          q = sqrt(2 / (P * (2 - P)) - 2);</div>
+<div class="line">        }</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = positive_infinity();</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ndf &lt; 1. + eps) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P == 1.) {</div>
+<div class="line">        q = 0;</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0) {</div>
+<div class="line">        q = 1 / tan(pi() * p / 2);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = negative_infinity();</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      real x = 0;</div>
+<div class="line">      real y = 0;</div>
+<div class="line">      real log_P2 = 0;</div>
+<div class="line">      real a = 1 / (ndf - 0.5);</div>
+<div class="line">      real b = 48 / (a * a);</div>
+<div class="line">      real c = ((20700 * a / b - 98) * a - 16) * a + 96.36;</div>
+<div class="line">      real d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * pi() / 2) * ndf;</div>
+<div class="line">      </div>
+<div class="line">      y = pow((d * P), (2.0 / ndf));</div>
+<div class="line">      <span class="keywordtype">int</span> P_ok = 0;</div>
+<div class="line">      log_P2 = is_neg_lower == 1 ? log_p : log1m_exp(p);</div>
+<div class="line">        x = (log(d) + log2() + log_P2) / ndf;</div>
+<div class="line">        y = exp(2 * x);</div>
+<div class="line">  </div>
+<div class="line">      <span class="keywordflow">if</span> ((ndf &lt; 2.1 &amp;&amp; P &gt; 0.5) || y &gt; 0.05 + a) {</div>
+<div class="line">          x = inv_Phi(log_P2);</div>
+<div class="line">          y = square(x);</div>
+<div class="line">        </div>
+<div class="line">        <span class="keywordflow">if</span> (ndf &lt; 5) {</div>
+<div class="line">          c += 0.3 * (ndf - 4.5) * (x + 0.6);</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;</div>
+<div class="line">        y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1)</div>
+<div class="line">            * x;</div>
+<div class="line">        y = expm1(a * square(y));</div>
+<div class="line">        q = sqrt(ndf * y);</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x &lt; -log2() * d_mant_dig) {</div>
+<div class="line">        q = sqrt(ndf) * exp(-x);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        y = ((1</div>
+<div class="line">              / (((ndf + 6) / (ndf * y) - 0.089 * d - 0.822) * (ndf + 2) * 3)</div>
+<div class="line">              + 0.5 / (ndf + 4))</div>
+<div class="line">             * y - 1)</div>
+<div class="line">            * (ndf + 1) / (ndf + 2) + 1 / y;</div>
+<div class="line">        </div>
+<div class="line">        q = sqrt(ndf * y);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (neg) {</div>
+<div class="line">      q = -q;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> q;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  vector <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(vector u, real nu) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  vector[N] x;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    x[i] = <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(u[i], nu);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> x;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__student__t__qf_html_ga7da42d84850fcc52125648bc9e2bc127"><div class="ttname"><a href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a></div><div class="ttdeci">real student_t_qf(real p, real ndf)</div><div class="ttdef"><b>Definition:</b> student_t_qf.stanfunctions:21</div></div>
+<div class="ttc" id="agroup__student__t__qf_html_gac6417ca5028b0aaf9376d00c6a89d526"><div class="ttname"><a href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a></div><div class="ttdeci">real student_t_log_qf(real log_p, real ndf)</div><div class="ttdef"><b>Definition:</b> student_t_qf.stanfunctions:199</div></div>
+<div class="ttc" id="agroup__student__t_html_ga20b2af4feab814cb367f2909f42726b4"><div class="ttname"><a href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a></div><div class="ttdeci">real student_t_lccdf_stan(real x, real df)</div><div class="ttdef"><b>Definition:</b> student_t.stanfunctions:60</div></div>
+<div class="ttc" id="agroup__student__t_html_gacb23f25d9c57a04aafef8fb036adf0bc"><div class="ttname"><a href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a></div><div class="ttdeci">real student_t_lcdf_stan(real x, real df)</div><div class="ttdef"><b>Definition:</b> student_t.stanfunctions:17</div></div>
+</div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
+<a id="gac6417ca5028b0aaf9376d00c6a89d526" name="gac6417ca5028b0aaf9376d00c6a89d526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac6417ca5028b0aaf9376d00c6a89d526">&#9670;&nbsp;</a></span>student_t_log_qf() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real student_t_log_qf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>log_p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>ndf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gac0925b797ef332b9b77c97e41bebbc44" name="gac0925b797ef332b9b77c97e41bebbc44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0925b797ef332b9b77c97e41bebbc44">&#9670;&nbsp;</a></span>student_t_log_qf() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector student_t_log_qf </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>nu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga7da42d84850fcc52125648bc9e2bc127" name="ga7da42d84850fcc52125648bc9e2bc127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7da42d84850fcc52125648bc9e2bc127">&#9670;&nbsp;</a></span>student_t_qf() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real student_t_qf </td>
+          <td>(</td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>ndf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Student T Quantile Function</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include univariate/student_t.stanfunctions</span></div>
+<div class="line"> </div>
+<div class="line">real <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(real p, real ndf) {</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(p) || p &lt; 0 || p &gt; 1) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;student_t_qf: p must be between 0 and 1; &quot;</span>, <span class="stringliteral">&quot;found p = &quot;</span>, p);</div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(ndf) || is_inf(ndf) || ndf &lt;= 0) </div>
+<div class="line">    reject(<span class="stringliteral">&quot;student_t_qf: ndf must be finite and &gt; 0; &quot;</span>, <span class="stringliteral">&quot;found ndf = &quot;</span>, ndf);</div>
+<div class="line">  </div>
+<div class="line">  real eps = 1e-12;</div>
+<div class="line">  real d_epsilon = 2.220446e-16;</div>
+<div class="line">  real d_max = 1.797693e+308;</div>
+<div class="line">  real d_min = 2.225074e-308;</div>
+<div class="line">  <span class="keywordtype">int</span> d_mant_dig = 53;</div>
+<div class="line">  real q;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (is_nan(p) || is_nan(ndf)) {</div>
+<div class="line">    <span class="keywordflow">return</span> p + ndf;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &lt;= 0) {</div>
+<div class="line">    reject(<span class="stringliteral">&quot;Invalid value for ndf&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &lt; 1) {</div>
+<div class="line">    <span class="comment">// Find the upper and lower bounds</span></div>
+<div class="line">    real accu = 1e-13;</div>
+<div class="line">    real Eps = 1e-11;</div>
+<div class="line">    <span class="keywordflow">if</span> (p &gt; 1 - d_epsilon) {</div>
+<div class="line">      <span class="keywordflow">return</span> positive_infinity();</div>
+<div class="line">    }</div>
+<div class="line">    real pp = min({1 - d_epsilon, p * (1 + Eps)});</div>
+<div class="line">    real ux = 1;</div>
+<div class="line">    <span class="keywordflow">while</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(ux, ndf)) &lt; pp) {</div>
+<div class="line">      ux = ux * 2;</div>
+<div class="line">    }</div>
+<div class="line">    pp = p * (1 - Eps);</div>
+<div class="line">    real lx = -1;</div>
+<div class="line">    <span class="keywordflow">while</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(lx, ndf)) &gt; pp) {</div>
+<div class="line">      lx = lx * 2;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// Find the quantile using interval halving</span></div>
+<div class="line">    real nx = 0.5 * (lx + ux);</div>
+<div class="line">    <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line">    <span class="keywordflow">while</span> ((ux - lx) / abs(nx) &gt; accu &amp;&amp; iter &lt; 1000) {</div>
+<div class="line">      iter += 1;</div>
+<div class="line">      <span class="keywordflow">if</span> (exp(<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(nx, ndf)) &gt; p) {</div>
+<div class="line">        ux = nx;</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        lx = nx;</div>
+<div class="line">      }</div>
+<div class="line">      nx = 0.5 * (lx + ux);</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">return</span> 0.5 * (lx + ux);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (ndf &gt; 1e20) {</div>
+<div class="line">    <span class="keywordflow">return</span> inv_Phi(p);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordtype">int</span> neg = p &lt; 0.5 ? 1 : 0;</div>
+<div class="line">  <span class="keywordtype">int</span> is_neg_lower = neg;</div>
+<div class="line">  real P = neg == 1 ? 2 * p : 2 * (0.5 - p + 0.5);</div>
+<div class="line">  </div>
+<div class="line">  P = min({max({P, 0}), 1});</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(ndf - 2) &lt; eps) {</div>
+<div class="line">    <span class="keywordflow">if</span> (P &gt; d_min) {</div>
+<div class="line">      <span class="keywordflow">if</span> (3 * P &lt; d_epsilon) {</div>
+<div class="line">        q = 1 / sqrt(P);</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0.9) {</div>
+<div class="line">        q = (1 - P) * sqrt(2 / (P * (2 - P)));</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = sqrt(2 / (P * (2 - P)) - 2);</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      q = positive_infinity();</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ndf &lt; 1. + eps) {</div>
+<div class="line">    <span class="keywordflow">if</span> (P == 1.) {</div>
+<div class="line">      q = 0;</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0) {</div>
+<div class="line">      q = 1 / tan(pi() * p / 2);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      q = negative_infinity();</div>
+<div class="line">    }</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    real x = 0;</div>
+<div class="line">    real y;</div>
+<div class="line">    real log_P2 = 0;</div>
+<div class="line">    real a = 1 / (ndf - 0.5);</div>
+<div class="line">    real b = 48 / (a * a);</div>
+<div class="line">    real c = ((20700 * a / b - 98) * a - 16) * a + 96.36;</div>
+<div class="line">    real d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * pi() / 2) * ndf;</div>
+<div class="line">    </div>
+<div class="line">    y = pow((d * P), (2.0 / ndf));</div>
+<div class="line">    <span class="keywordtype">int</span> P_ok = y &gt;= d_epsilon ? 1 : 0;</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (P_ok != 1) {</div>
+<div class="line">      log_P2 = is_neg_lower == 1 ? log(p) : log1m_exp(p);</div>
+<div class="line">      x = (log(d) + log2() + log_P2) / ndf;</div>
+<div class="line">      y = exp(2 * x);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> ((ndf &lt; 2.1 &amp;&amp; P &gt; 0.5) || y &gt; 0.05 + a) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P_ok == 1) {</div>
+<div class="line">        x = inv_Phi(0.5 * P);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        x = inv_Phi(log_P2);</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      y = square(x);</div>
+<div class="line">      </div>
+<div class="line">      <span class="keywordflow">if</span> (ndf &lt; 5) {</div>
+<div class="line">        c += 0.3 * (ndf - 4.5) * (x + 0.6);</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;</div>
+<div class="line">      y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1) * x;</div>
+<div class="line">      y = expm1(a * square(y));</div>
+<div class="line">      q = sqrt(ndf * y);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P_ok != 1 &amp;&amp; x &lt; -log2() * d_mant_dig) {</div>
+<div class="line">      q = sqrt(ndf) * exp(-x);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      y = ((1 / (((ndf + 6) / (ndf * y) - 0.089 * d - 0.822) * (ndf + 2) * 3)</div>
+<div class="line">            + 0.5 / (ndf + 4))</div>
+<div class="line">           * y - 1)</div>
+<div class="line">          * (ndf + 1) / (ndf + 2) + 1 / y;</div>
+<div class="line">      </div>
+<div class="line">      q = sqrt(ndf * y);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (P_ok == 1) {</div>
+<div class="line">      <span class="keywordtype">int</span> it = 0;</div>
+<div class="line">      <span class="keywordflow">while</span> (it &lt; 10) {</div>
+<div class="line">        y = exp(student_t_lpdf(q | ndf, 0., 1.));</div>
+<div class="line">        <span class="keywordflow">if</span> (y &lt;= 0 || is_inf(y)) {</div>
+<div class="line">          <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        real t = (exp(<a class="code hl_function" href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a>(q, ndf)) - P / 2) / y;</div>
+<div class="line">        <span class="keywordflow">if</span> (abs(t) &lt;= 1e-14 * abs(q)) {</div>
+<div class="line">          <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        q = q + t * (1. + t * q * (ndf + 1) / (2 * (q * q + ndf)));</div>
+<div class="line">        </div>
+<div class="line">        it += 1;</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (neg) {</div>
+<div class="line">    q = -q;</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> q;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">vector <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(vector u, real nu) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  vector[N] x;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    x[i] = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(u[i], nu);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> x;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"> <span class="comment">/* Student T Log Quantile Function</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @include \quantile_function\student_t_qf.stanfunctions</span></div>
+<div class="line"><span class="comment"> *</span></div>
+<div class="line"><span class="comment"> * @author Sean Pinkney</span></div>
+<div class="line"><span class="comment"> * @param logp Real</span></div>
+<div class="line"><span class="comment"> * @param df Real \f$(0, +\infty)\f$</span></div>
+<div class="line"><span class="comment"> * @return inverse CDF value</span></div>
+<div class="line"><span class="comment"> * @throws reject if \f$ p \notin [0, 1] \f$ </span></div>
+<div class="line"><span class="comment"> */</span></div>
+<div class="line"> real <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(real log_p, real ndf) {</div>
+<div class="line">    real eps = 1e-12;</div>
+<div class="line">    real d_epsilon = 2.220446e-16;</div>
+<div class="line">    real d_max = 1.797693e+308;</div>
+<div class="line">    real d_min = 2.225074e-308;</div>
+<div class="line">    <span class="keywordtype">int</span> d_mant_dig = 53;</div>
+<div class="line">    real q;</div>
+<div class="line">    real p = exp(log_p);</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (is_nan(p) || is_nan(ndf)) {</div>
+<div class="line">      <span class="keywordflow">return</span> p + ndf;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &lt;= 0) {</div>
+<div class="line">      reject(<span class="stringliteral">&quot;Invalid value for ndf&quot;</span>);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &lt; 1) {</div>
+<div class="line">      <span class="comment">// Find the upper and lower bounds</span></div>
+<div class="line">      real accu = 1e-13;</div>
+<div class="line">      real Eps = 1e-11;</div>
+<div class="line">       <span class="keywordflow">if</span> (p &gt; 1 - d_epsilon) {</div>
+<div class="line">        <span class="keywordflow">return</span> positive_infinity();</div>
+<div class="line">      }</div>
+<div class="line">      <span class="comment">// real pp = min({1 - d_epsilon, p * (1 + Eps)});</span></div>
+<div class="line">      real log_pp = min({log1m(d_epsilon), log_p + log1p(Eps)});</div>
+<div class="line">      real ux = 1;</div>
+<div class="line">      <span class="keywordflow">while</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(ux , ndf) &lt; log_pp) {</div>
+<div class="line">        ux *= 2;</div>
+<div class="line">      }</div>
+<div class="line">      log_pp = log_p - Eps;</div>
+<div class="line">      real lx = -1;</div>
+<div class="line">      <span class="keywordflow">while</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(lx , ndf) &gt; log_pp) {</div>
+<div class="line">        lx *= 2;</div>
+<div class="line">      }</div>
+<div class="line">      </div>
+<div class="line">      <span class="comment">// Find the quantile using interval halving</span></div>
+<div class="line">      real nx = 0.5 * (lx + ux);</div>
+<div class="line">      <span class="keywordtype">int</span> iter = 0;</div>
+<div class="line">      <span class="keywordflow">while</span> ((ux - lx) / abs(nx) &gt; accu &amp;&amp; iter &lt; 1000) {</div>
+<div class="line">        iter = iter + 1;</div>
+<div class="line">        <span class="keywordflow">if</span> (<a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(nx , ndf) &gt; log_p) {</div>
+<div class="line">          ux = nx;</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          lx = nx;</div>
+<div class="line">        }</div>
+<div class="line">        nx = 0.5 * (lx + ux);</div>
+<div class="line">      }</div>
+<div class="line">      <span class="keywordflow">return</span> 0.5 * (lx + ux);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (ndf &gt; 1e20) {</div>
+<div class="line">      <span class="keywordflow">return</span> std_normal_log_qf(log_p);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">int</span> neg = log_p &lt; -0.6931472 ? 1 : 0;</div>
+<div class="line">    <span class="keywordtype">int</span> is_neg_lower = neg;</div>
+<div class="line">     real P = neg == 1 ? 2 * p : 2 * (0.5 - p + 0.5);</div>
+<div class="line">    </div>
+<div class="line">      P = min({max({P, 0}), 1});</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (abs(ndf - 2) &lt; eps) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P &gt; d_min) {</div>
+<div class="line">        <span class="keywordflow">if</span> (3 * P &lt; d_epsilon) {</div>
+<div class="line">          q = 1 / sqrt(P);</div>
+<div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0.9) {</div>
+<div class="line">          q = (1 - P) * sqrt(2 / (P * (2 - P)));</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">          q = sqrt(2 / (P * (2 - P)) - 2);</div>
+<div class="line">        }</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = positive_infinity();</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ndf &lt; 1. + eps) {</div>
+<div class="line">      <span class="keywordflow">if</span> (P == 1.) {</div>
+<div class="line">        q = 0;</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (P &gt; 0) {</div>
+<div class="line">        q = 1 / tan(pi() * p / 2);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        q = negative_infinity();</div>
+<div class="line">      }</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">      real x = 0;</div>
+<div class="line">      real y = 0;</div>
+<div class="line">      real log_P2 = 0;</div>
+<div class="line">      real a = 1 / (ndf - 0.5);</div>
+<div class="line">      real b = 48 / (a * a);</div>
+<div class="line">      real c = ((20700 * a / b - 98) * a - 16) * a + 96.36;</div>
+<div class="line">      real d = ((94.5 / (b + c) - 3) / b + 1) * sqrt(a * pi() / 2) * ndf;</div>
+<div class="line">      </div>
+<div class="line">      y = pow((d * P), (2.0 / ndf));</div>
+<div class="line">      <span class="keywordtype">int</span> P_ok = 0;</div>
+<div class="line">      log_P2 = is_neg_lower == 1 ? log_p : log1m_exp(p);</div>
+<div class="line">        x = (log(d) + log2() + log_P2) / ndf;</div>
+<div class="line">        y = exp(2 * x);</div>
+<div class="line">  </div>
+<div class="line">      <span class="keywordflow">if</span> ((ndf &lt; 2.1 &amp;&amp; P &gt; 0.5) || y &gt; 0.05 + a) {</div>
+<div class="line">          x = inv_Phi(log_P2);</div>
+<div class="line">          y = square(x);</div>
+<div class="line">        </div>
+<div class="line">        <span class="keywordflow">if</span> (ndf &lt; 5) {</div>
+<div class="line">          c += 0.3 * (ndf - 4.5) * (x + 0.6);</div>
+<div class="line">        }</div>
+<div class="line">        </div>
+<div class="line">        c = (((0.05 * d * x - 5) * x - 7) * x - 2) * x + b + c;</div>
+<div class="line">        y = (((((0.4 * y + 6.3) * y + 36) * y + 94.5) / c - y - 3) / b + 1)</div>
+<div class="line">            * x;</div>
+<div class="line">        y = expm1(a * square(y));</div>
+<div class="line">        q = sqrt(ndf * y);</div>
+<div class="line">      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x &lt; -log2() * d_mant_dig) {</div>
+<div class="line">        q = sqrt(ndf) * exp(-x);</div>
+<div class="line">      } <span class="keywordflow">else</span> {</div>
+<div class="line">        y = ((1</div>
+<div class="line">              / (((ndf + 6) / (ndf * y) - 0.089 * d - 0.822) * (ndf + 2) * 3)</div>
+<div class="line">              + 0.5 / (ndf + 4))</div>
+<div class="line">             * y - 1)</div>
+<div class="line">            * (ndf + 1) / (ndf + 2) + 1 / y;</div>
+<div class="line">        </div>
+<div class="line">        q = sqrt(ndf * y);</div>
+<div class="line">      }</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span> (neg) {</div>
+<div class="line">      q = -q;</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> q;</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  vector <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(vector u, real nu) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  vector[N] x;</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">for</span> (i in 1 : N) {</div>
+<div class="line">    x[i] = <a class="code hl_function" href="group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526">student_t_log_qf</a>(u[i], nu);</div>
+<div class="line">  }</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">return</span> x;</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section author"><dt>Author</dt><dd>Sean Pinkney </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Real on \([0,\,1]\) </td></tr>
+    <tr><td class="paramname">df</td><td>Real \((0, +\infty)\) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>inverse CDF value </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">reject</td><td>if \( p \notin [0, 1] \) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga05fb6c8a3d9709f3ec799fa2f914ed52" name="ga05fb6c8a3d9709f3ec799fa2f914ed52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga05fb6c8a3d9709f3ec799fa2f914ed52">&#9670;&nbsp;</a></span>student_t_qf() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector student_t_qf </td>
+          <td>(</td>
+          <td class="paramtype">vector&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real&#160;</td>
+          <td class="paramname"><em>nu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
+<script type="text/javascript">
+  $(function() {
+     toggleButton = document.createElement('doxygen-awesome-dark-mode-toggle')
+     toggleButton.title = "Toggle Light/Dark Mode"
+     $(document).ready(function(){
+       document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+     })
+     $(window).resize(function(){
+       document.getElementById("MSearchBox").parentNode.appendChild(toggleButton)
+     })
+   })
+</script>
+</body>
+</html>

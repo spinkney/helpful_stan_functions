@@ -1,4 +1,4 @@
-var student__t__qf_8stanfunctions =
+var group__student__t__qf =
 [
     [ "student_t_log_qf", "group__student__t__qf.html#gac6417ca5028b0aaf9376d00c6a89d526", null ],
     [ "student_t_log_qf", "group__student__t__qf.html#gac0925b797ef332b9b77c97e41bebbc44", null ],
