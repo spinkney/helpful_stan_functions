@@ -432,8 +432,8 @@ Functions</h2></td></tr>
 <div class="line">real <a class="code hl_function" href="group__student__t.html#gacb23f25d9c57a04aafef8fb036adf0bc">student_t_lcdf_stan</a>(real x, real df) {</div>
 <div class="line">  <span class="keywordtype">int</span> lower_tail = 1;</div>
 <div class="line">  real lval;</div>
-<div class="line"> </div>
-<div class="line"> <span class="keywordflow">if</span> (df &lt;= 0) {</div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (df &lt;= 0) {</div>
 <div class="line">    reject(<span class="stringliteral">&quot;df must be &gt; 0. Found df = &quot;</span>, df);</div>
 <div class="line">  }</div>
 <div class="line">  </div>
@@ -441,31 +441,31 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keywordflow">return</span> not_a_number();</div>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(df)) </div>
-<div class="line">      <span class="keywordflow">return</span> normal_lcdf(x | 0, 1);</div>
-<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> normal_lcdf(x | 0, 1);</div>
+<div class="line">  </div>
 <div class="line">  real nx = 1 + (x / df) * x;</div>
 <div class="line">  <span class="keywordflow">if</span> (nx &gt; 1e100) </div>
 <div class="line">    lval = -0.5 * df * (2 * log(abs(x)) - log(df)) - lbeta(0.5 * df, 0.5) - log(0.5 * df);</div>
-<div class="line">   <span class="keywordflow">else</span> </div>
-<div class="line">    lval = df &gt; x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2) : beta_lcdf(1 / nx | df / 2, 0.5);</div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    lval = df &gt; x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2)</div>
+<div class="line">           : beta_lcdf(1 / nx | df / 2, 0.5);</div>
 <div class="line">  </div>
-<div class="line"> </div>
 <div class="line">  <span class="keywordflow">if</span> (x &lt;= 0) {</div>
 <div class="line">    lower_tail = 0;</div>
 <div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (lower_tail == 1) {</div>
-<div class="line">      <span class="keywordflow">return</span> log1m(0.5 * exp(lval));</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">      <span class="keywordflow">return</span> lval - log2();</div>
-<div class="line">    }</div>
-<div class="line"> </div>
+<div class="line">  </div>
+<div class="line">  <span class="keywordflow">if</span> (lower_tail == 1) {</div>
+<div class="line">    <span class="keywordflow">return</span> log1m(0.5 * exp(lval));</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">return</span> lval - log2();</div>
+<div class="line">  }</div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> lval;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">real <a class="code hl_function" href="group__student__t.html#ga20b2af4feab814cb367f2909f42726b4">student_t_lccdf_stan</a>(real x, real df) {</div>
 <div class="line">  real lval;</div>
-<div class="line"> </div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (df &lt;= 0) {</div>
 <div class="line">    reject(<span class="stringliteral">&quot;df must be &gt; 0. Found df = &quot;</span>, df);</div>
 <div class="line">  }</div>
@@ -475,14 +475,15 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (is_inf(df)) </div>
-<div class="line">      <span class="keywordflow">return</span> normal_lccdf(x | 0, 1);</div>
-<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> normal_lccdf(x | 0, 1);</div>
+<div class="line">  </div>
 <div class="line">  real nx = 1 + (x / df) * x;</div>
 <div class="line">  <span class="keywordflow">if</span> (nx &gt; 1e100) </div>
 <div class="line">    lval = -0.5 * df * (2 * log(abs(x)) - log(df)) - lbeta(0.5 * df, 0.5) - log(0.5 * df);</div>
-<div class="line">   <span class="keywordflow">else</span> </div>
-<div class="line">    lval = df &gt; x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2) : beta_lcdf(1 / nx | df / 2, 0.5);</div>
-<div class="line"> </div>
+<div class="line">  <span class="keywordflow">else</span> </div>
+<div class="line">    lval = df &gt; x * x ? beta_lccdf(x * x / (df + x * x) | 0.5, df / 2)</div>
+<div class="line">           : beta_lcdf(1 / nx | df / 2, 0.5);</div>
+<div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> x &lt; 0 ? log1m(0.5 * exp(lval)) : lval - log2();</div>
 <div class="line">}</div>
 <div class="line"> </div>

@@ -429,23 +429,21 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include quantile_function/student_t_qf.stanfunctions</span></div>
 <div class="line"> </div>
-<div class="line">  real <a class="code hl_function" href="group__student__t__copula.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a>(vector u, vector v, real rho, real nu) {</div>
-<div class="line">    <span class="keywordtype">int</span> N = num_elements(u);</div>
-<div class="line">    vector[N] t1 = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(u, nu);</div>
-<div class="line">    vector[N] t2 = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(v, nu);</div>
-<div class="line">    vector[N] t1_sq = square(t1);</div>
-<div class="line">    vector[N] t2_sq = square(t2);</div>
-<div class="line">    </div>
-<div class="line">    real lpdf = N</div>
-<div class="line">                * (-0.5 * log1m(rho ^ 2) + lgamma(0.5 * (nu + 2))</div>
-<div class="line">                   + lgamma(0.5 * nu) - 2 * lgamma(0.5 * (nu + 1)));</div>
-<div class="line">    lpdf += 0.5 * (nu + 1)</div>
-<div class="line">            * sum(log1p(t1_sq / nu) + log1p(t2_sq / nu));</div>
-<div class="line">    lpdf += -0.5 * (nu + 2)</div>
-<div class="line">            * sum(log1p((t1_sq - 2 * t1 .* t2 * rho + t2_sq)</div>
-<div class="line">                        / (nu * (1 - rho ^ 2))));</div>
-<div class="line">    <span class="keywordflow">return</span> lpdf;</div>
-<div class="line">  }</div>
+<div class="line">real <a class="code hl_function" href="group__student__t__copula.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a>(vector u, vector v, real rho, real nu) {</div>
+<div class="line">  <span class="keywordtype">int</span> N = num_elements(u);</div>
+<div class="line">  vector[N] t1 = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(u, nu);</div>
+<div class="line">  vector[N] t2 = <a class="code hl_function" href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a>(v, nu);</div>
+<div class="line">  vector[N] t1_sq = square(t1);</div>
+<div class="line">  vector[N] t2_sq = square(t2);</div>
+<div class="line">  </div>
+<div class="line">  real lpdf = N</div>
+<div class="line">              * (-0.5 * log1m(rho ^ 2) + lgamma(0.5 * (nu + 2)) + lgamma(0.5 * nu)</div>
+<div class="line">                 - 2 * lgamma(0.5 * (nu + 1)));</div>
+<div class="line">  lpdf += 0.5 * (nu + 1) * sum(log1p(t1_sq / nu) + log1p(t2_sq / nu));</div>
+<div class="line">  lpdf += -0.5 * (nu + 2)</div>
+<div class="line">          * sum(log1p((t1_sq - 2 * t1 .* t2 * rho + t2_sq) / (nu * (1 - rho ^ 2))));</div>
+<div class="line">  <span class="keywordflow">return</span> lpdf;</div>
+<div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__student__t__copula_html_ga79da47f97d6ee7039dee8d26b6bae523"><div class="ttname"><a href="group__student__t__copula.html#ga79da47f97d6ee7039dee8d26b6bae523">bivariate_t_copula_lpdf</a></div><div class="ttdeci">real bivariate_t_copula_lpdf(vector u, vector v, real rho, real nu)</div><div class="ttdef"><b>Definition:</b> student_t_copula.stanfunctions:19</div></div>
 <div class="ttc" id="agroup__student__t__qf_html_ga7da42d84850fcc52125648bc9e2bc127"><div class="ttname"><a href="group__student__t__qf.html#ga7da42d84850fcc52125648bc9e2bc127">student_t_qf</a></div><div class="ttdeci">real student_t_qf(real p, real ndf)</div><div class="ttdef"><b>Definition:</b> student_t_qf.stanfunctions:21</div></div>
