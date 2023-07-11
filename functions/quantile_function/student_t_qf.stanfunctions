@@ -16,7 +16,7 @@
  * @return inverse CDF value
  * @throws reject if \f$ p \notin [0, 1] \f$ 
  */
-#include univariate/student_t.stanfunctions
+#include distribution/student_t.stanfunctions
 
 real student_t_qf(real p, real ndf) {
   if (is_nan(p) || p < 0 || p > 1) 
