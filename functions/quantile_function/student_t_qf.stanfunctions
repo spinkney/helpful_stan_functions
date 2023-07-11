@@ -1,4 +1,11 @@
-/** @ingroup qf
+/** @addtogroup student_t_qf Student T Quantile functions
+ *
+ * @include \quantile_function\student_t_qf.stanfunctions
+ *
+ * \ingroup qf
+ *  @{ */
+
+/**
  * Student T Quantile Function
  *
  * @include \quantile_function\student_t_qf.stanfunctions
@@ -329,3 +336,4 @@ vector student_t_qf(vector u, real nu) {
   
   return x;
 }
+/** @} */
