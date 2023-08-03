@@ -293,7 +293,7 @@ real student_t_log_qf(real log_p, real ndf) {
     y = exp(2 * x);
     
     if ((ndf < 2.1 && P > 0.5) || y > 0.05 + a) {
-      x = inv_Phi(log_P2);
+      x = inv_Phi(0.5 * P);
       y = square(x);
       
       if (ndf < 5) {
