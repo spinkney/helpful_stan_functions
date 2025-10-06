@@ -440,7 +440,9 @@ Functions</h2></td></tr>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">if</span> (theta &lt; 0) </div>
 <div class="line">    log_lik = N * log(theta * (1 - exp(-theta))) - theta * sum(append_col(u, v))</div>
-<div class="line">              - sum(log((-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))) ^ 2));</div>
+<div class="line">              - sum(</div>
+<div class="line">                    log(</div>
+<div class="line">                        (-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))) ^ 2));</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    log_lik = N * (log(theta) + log1m_exp(-theta)) - theta * sum(append_col(u, v))</div>
 <div class="line">              - 2 * sum(log(-expm1(-theta) - (expm1(-theta * u)) .* (expm1(-theta * v))));</div>

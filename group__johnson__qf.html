@@ -440,7 +440,8 @@ Functions</h2></td></tr>
 <div class="line">    reject(<span class="stringliteral">&quot;alpha must be between 0 and 1&quot;</span>);</div>
 <div class="line">  <span class="keywordflow">if</span> (rows(quantiles) != 3) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;quantiles must have three elements&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>({lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>(</div>
+<div class="line">               {lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
 <div class="line">                positive_infinity()})) {</div>
 <div class="line">    real c = inv_Phi(1 - alpha);</div>
 <div class="line">    vector[3] quantiles_ = quantiles - lower_bound;</div>
@@ -486,7 +487,8 @@ Functions</h2></td></tr>
 <div class="line">    reject(<span class="stringliteral">&quot;alpha must be between 0 and 1&quot;</span>);</div>
 <div class="line">  <span class="keywordflow">if</span> (rows(quantiles) != 3) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;quantiles must have three elements&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>({lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
+<div class="line">  <span class="keywordflow">if</span> (<a class="code hl_function" href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a>(</div>
+<div class="line">               {lower_bound, quantiles[1], quantiles[2], quantiles[3],</div>
 <div class="line">                positive_infinity()})) {</div>
 <div class="line">    real c = inv_Phi(1 - alpha);</div>
 <div class="line">    vector[3] quantiles_ = quantiles - lower_bound;</div>
@@ -556,9 +558,9 @@ Functions</h2></td></tr>
 <div class="line">  }</div>
 <div class="line">  <span class="keywordflow">return</span> not_a_number(); <span class="comment">// never reached</span></div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__johnson__qf_html_ga567ad93bd48cee2a78cf584e0f15d01f"><div class="ttname"><a href="group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f">JQPDB_qf</a></div><div class="ttdeci">real JQPDB_qf(real p, row_vector bounds, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:210</div></div>
+<div class="ttc" id="agroup__johnson__qf_html_ga567ad93bd48cee2a78cf584e0f15d01f"><div class="ttname"><a href="group__johnson__qf.html#ga567ad93bd48cee2a78cf584e0f15d01f">JQPDB_qf</a></div><div class="ttdeci">real JQPDB_qf(real p, row_vector bounds, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:212</div></div>
 <div class="ttc" id="agroup__johnson__qf_html_ga6bad55952d6cd49a96fed15ef4b60185"><div class="ttname"><a href="group__johnson__qf.html#ga6bad55952d6cd49a96fed15ef4b60185">JQPDS_qf</a></div><div class="ttdeci">real JQPDS_qf(real p, real lower_bound, data real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:52</div></div>
-<div class="ttc" id="agroup__johnson__qf_html_gac1462c0f295bc99b6e18aeeed5135872"><div class="ttname"><a href="group__johnson__qf.html#gac1462c0f295bc99b6e18aeeed5135872">JQPDS2_qf</a></div><div class="ttdeci">real JQPDS2_qf(real p, real lower_bound, real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:135</div></div>
+<div class="ttc" id="agroup__johnson__qf_html_gac1462c0f295bc99b6e18aeeed5135872"><div class="ttname"><a href="group__johnson__qf.html#gac1462c0f295bc99b6e18aeeed5135872">JQPDS2_qf</a></div><div class="ttdeci">real JQPDS2_qf(real p, real lower_bound, real alpha, vector quantiles)</div><div class="ttdef"><b>Definition:</b> johnson_qf.stanfunctions:136</div></div>
 <div class="ttc" id="agroup__logical__array_html_ga2becc165c804319fd033bc82a5c13ff6"><div class="ttname"><a href="group__logical__array.html#ga2becc165c804319fd033bc82a5c13ff6">in_order</a></div><div class="ttdeci">int in_order(array[] real theta)</div><div class="ttdef"><b>Definition:</b> logical_array.stanfunctions:16</div></div>
 </div><!-- fragment --> <h2 class="groupheader">Function Documentation</h2>
 <a id="ga567ad93bd48cee2a78cf584e0f15d01f" name="ga567ad93bd48cee2a78cf584e0f15d01f"></a>

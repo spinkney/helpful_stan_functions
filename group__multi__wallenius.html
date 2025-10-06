@@ -455,7 +455,8 @@ Functions</h2></td></tr>
 <div class="line">                          data real tol) {</div>
 <div class="line">  <span class="keywordtype">int</span> C = num_elements(m);</div>
 <div class="line">  real D = dot_product(to_row_vector(p), (m - to_vector(k[2 : C + 1])));</div>
-<div class="line">  real lp = log(integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1,</div>
+<div class="line">  real lp = log(</div>
+<div class="line">                integrate_1d(<a class="code hl_function" href="group__multi__wallenius.html#gaad1c6d45dab33e14585efdd01a763f85">multi_wallenius_integral</a>, 0, 1,</div>
 <div class="line">                             append_array({D}, to_array_1d(p)), x_r, k, tol));</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">for</span> (i in 1 : C) </div>
