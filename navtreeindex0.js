@@ -117,7 +117,7 @@ var NAVTREEINDEX0 =
 "group__unit__test.html#ga5b27081e465943eafe5a89d2c41bef01":[3,10,0],
 "group__univariate.html":[3,3],
 "group__vectorization.html":[3,6,1],
-"group__vectorization.html#gaffec613f8198505bcdf91ee4284be1e1":[3,6,1,0],
+"group__vectorization.html#ga9d9b728053c9bfd3d95a4168d8fe1b8e":[3,6,1,0],
 "gumbel__copula_8stanfunctions.html":[4,0,6],
 "inc__beta__inverse_8stanfunctions.html":[4,0,37],
 "index.html":[],
