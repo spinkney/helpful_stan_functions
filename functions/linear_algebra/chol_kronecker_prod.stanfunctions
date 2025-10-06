@@ -21,7 +21,7 @@ matrix chol_kronecker_prod(matrix A, matrix B) {
   
   for (i in 1 : m) {
     for (j in 1 : i) {
-      if (fabs(A[i, j]) > 1e-12) {
+      if (abs(A[i, j]) > 1e-12) {
         int row_start = (i - 1) * p + 1;
         int row_end = (i - 1) * p + p;
         int col_start = (j - 1) * p + 1;

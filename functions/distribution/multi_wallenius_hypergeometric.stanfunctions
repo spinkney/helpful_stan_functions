@@ -71,7 +71,8 @@ real multi_wallenius_lpmf(data array[] int k, vector m, vector p, data array[] r
                           data real tol) {
   int C = num_elements(m);
   real D = dot_product(to_row_vector(p), (m - to_vector(k[2 : C + 1])));
-  real lp = log(integrate_1d(multi_wallenius_integral, 0, 1,
+  real lp = log(
+                integrate_1d(multi_wallenius_integral, 0, 1,
                              append_array({D}, to_array_1d(p)), x_r, k, tol));
   
   for (i in 1 : C) 
