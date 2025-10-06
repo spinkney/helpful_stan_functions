@@ -65,7 +65,7 @@ array[] matrix bernoulli_marginal(array[,] int y, matrix mu_glm, matrix u_raw) {
   matrix[N, J] mu_glm_logit = 1 - inv_logit(mu_glm);
   
   matrix[N, J] Lbound = matrix_y .* mu_glm_logit;
-  matrix[N, J] UmL = fabs(matrix_y - mu_glm_logit);
+  matrix[N, J] UmL = abs(matrix_y - mu_glm_logit);
   
   return {inv_Phi(Lbound + UmL .* u_raw), log(UmL)};
 }
