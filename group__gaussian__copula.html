@@ -460,7 +460,7 @@ Functions</h2></td></tr>
 <div class="line">  matrix[N, J] mu_glm_logit = 1 - inv_logit(mu_glm);</div>
 <div class="line">  </div>
 <div class="line">  matrix[N, J] Lbound = matrix_y .* mu_glm_logit;</div>
-<div class="line">  matrix[N, J] UmL = fabs(matrix_y - mu_glm_logit);</div>
+<div class="line">  matrix[N, J] UmL = abs(matrix_y - mu_glm_logit);</div>
 <div class="line">  </div>
 <div class="line">  <span class="keywordflow">return</span> {inv_Phi(Lbound + UmL .* u_raw), log(UmL)};</div>
 <div class="line">}</div>

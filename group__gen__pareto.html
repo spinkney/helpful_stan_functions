@@ -446,7 +446,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(k) &gt; 1e-15) </div>
 <div class="line">    <span class="keywordflow">return</span> -(1 + inv_k) * sum(log1p((y - ymin) * (k / sigma))) - N * log(sigma);</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> -sum(y - ymin) / sigma - N * log(sigma); <span class="comment">// limit k-&gt;0</span></div>
@@ -461,7 +461,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(k) &gt; 1e-15) </div>
 <div class="line">    <span class="keywordflow">return</span> exp(sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma))))));</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> exp(sum(log1m_exp(-(y - ymin) / sigma))); <span class="comment">// limit k-&gt;0</span></div>
@@ -476,7 +476,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma&lt;=0; found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(k) &gt; 1e-15) </div>
 <div class="line">    <span class="keywordflow">return</span> sum(log1m_exp((-inv_k) * (log1p((y - ymin) * (k / sigma)))));</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> sum(log1m_exp(-(y - ymin) / sigma)); <span class="comment">// limit k-&gt;0</span></div>
@@ -491,7 +491,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(k) &gt; 1e-15) </div>
 <div class="line">    <span class="keywordflow">return</span> (-inv_k) * sum(log1p((y - ymin) * (k / sigma)));</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> -sum(y - ymin) / sigma; <span class="comment">// limit k-&gt;0</span></div>
@@ -501,7 +501,7 @@ Functions</h2></td></tr>
 <div class="line">  <span class="keywordflow">if</span> (sigma &lt;= 0) </div>
 <div class="line">    reject(<span class="stringliteral">&quot;sigma &lt;= 0; found sigma = &quot;</span>, sigma);</div>
 <div class="line">  </div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(k) &gt; 1e-15) </div>
+<div class="line">  <span class="keywordflow">if</span> (abs(k) &gt; 1e-15) </div>
 <div class="line">    <span class="keywordflow">return</span> ymin + (uniform_rng(0, 1) ^ -k - 1) * sigma / k;</div>
 <div class="line">  <span class="keywordflow">else</span> </div>
 <div class="line">    <span class="keywordflow">return</span> ymin - sigma * log(uniform_rng(0, 1)); <span class="comment">// limit k-&gt;0</span></div>
