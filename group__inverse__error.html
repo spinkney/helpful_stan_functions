@@ -471,7 +471,7 @@ Functions</h2></td></tr>
 <div class="line">  real t;</div>
 <div class="line">  t = fma(x, -x, 1.0);</div>
 <div class="line">  t = log(t);</div>
-<div class="line">  <span class="keywordflow">if</span> (fabs(t) &gt; 6.125) {</div>
+<div class="line">  <span class="keywordflow">if</span> (abs(t) &gt; 6.125) {</div>
 <div class="line">    <span class="comment">// maximum ulp error = 2.35793</span></div>
 <div class="line">    p = 3.03697567e-10; <span class="comment">//  0x1.4deb44p-32 </span></div>
 <div class="line">    p = fma(p, t, 2.93243101e-8); <span class="comment">//  0x1.f7c9aep-26 </span></div>
