@@ -47,14 +47,16 @@ real variance_adjusted_sgt(real sigma, real lambda, real p, real q) {
   
   if (is_inf(q)) 
     return sigma
-           * inv_sqrt((pi() * (1 + 3 * lambda ^ 2) * tgamma(3.0 / p)
+           * inv_sqrt(
+                      (pi() * (1 + 3 * lambda ^ 2) * tgamma(3.0 / p)
                        - 16 ^ (1.0 / p) * lambda ^ 2 * (tgamma(1.0 / 2 + 1.0 / p)) ^ 2
                          * tgamma(1.0 / p))
                       / (pi() * tgamma(1.0 / p)));
   
   return sigma
          / (q ^ (1.0 / p)
-            * sqrt((3 * lambda ^ 2 + 1) * (beta(3.0 / p, q - 2.0 / p) / beta(1.0 / p, q))
+            * sqrt(
+                   (3 * lambda ^ 2 + 1) * (beta(3.0 / p, q - 2.0 / p) / beta(1.0 / p, q))
                    - 4 * lambda ^ 2 * (beta(2.0 / p, q - 1.0 / p) / beta(1.0 / p, q)) ^ 2));
 }
 
@@ -253,7 +255,8 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   }
   
   if (!is_inf(p) && is_inf(q) && !is_inf(x)) 
-    return log_sum_exp([log1m(lambda_new) + log2(),
+    return log_sum_exp(
+                       [log1m(lambda_new) + log2(),
                         log(lambda_new - 1) + log2()
                         + beta_lcdf((r_new / (sigma * (1 + lambda_new))) ^ p | p, 1)]);
   if (is_inf(p) && !is_inf(x)) 
@@ -265,11 +268,13 @@ real skew_generalized_t_lcdf(real x, real mu, real sigma, real lambda, real p, r
   if (is_inf(x) && x > 0) 
     return 1;
   
-  return log_sum_exp([log1m(lambda_new) + log2(),
+  return log_sum_exp(
+                     [log1m(lambda_new) + log2(),
                       log(lambda_new - 1) + log2()
-                      + beta_lcdf(1.0
-                                  / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) | 1.0
-                                                                    / p, q)]);
+                      + beta_lcdf(
+                                  1.0
+                                  / (1 + q * (sigma * (1 - lambda_new) / (-r_new)) ^ p) |
+                                  1.0 / p, q)]);
 }
 
 /** @} */
