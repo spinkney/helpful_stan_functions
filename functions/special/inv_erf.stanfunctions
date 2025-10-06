@@ -73,7 +73,7 @@ real inv_erf_nsqrt(real x) {
   real t;
   t = fma(x, -x, 1.0);
   t = log(t);
-  if (fabs(t) > 6.125) {
+  if (abs(t) > 6.125) {
     // maximum ulp error = 2.35793
     p = 3.03697567e-10; //  0x1.4deb44p-32 
     p = fma(p, t, 2.93243101e-8); //  0x1.f7c9aep-26 
